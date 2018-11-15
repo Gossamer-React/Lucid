@@ -1,22 +1,34 @@
 console.log("content script running!")
 
-// chrome.runtime.onMessage.addListener(gotMessage);
-// function gotMessage(message, sender, sendResponse) {
-//   if (message.txt === 'hi') {
-//     let paragraphs = document.getElementsByTagName('p');
-//     for (el of paragraphs) {
-//       el.style['background-color'] = '#FF0000';
-//     }
-//   }
-// }
+chrome.runtime.onMessage.addListener(gotMessage);
+function gotMessage(message, sender, sendResponse) {
+  if (message.txt === 'hi') {
+    let paragraphs = document.getElementsByTagName('body');
+    for (el of paragraphs) {
+      el.style['background-color'] = '#FF0000';
+    }
+  }
+}
 
-// var G_reactLucidRunning; 
+function injectScript(file, node) {
+  const body = document.getElementsByTagName(node)[0];
+  console.log('***********THIS IS THE BODY', body)
+  const scriptFile = document.createElement('script');
+  scriptFile.setAttribute('type', 'text/javascript');
+  scriptFile.setAttribute('src', file);
+  body.appendChild(scriptFile);
+  //this adds <script type='text/javascript' src='hook.js'></script> to the DOM's body
+}
 
-// if(!G_reactLucidRunning){
-//   if(!window._REACT_DEVTOOLS_GLOBAL_HOOK_) console.warn('React Dev Tools are required to be installed');
+window.addEventListener('message', (e) => {
+  if (e.source !== window) return;
+  chrome.extension.sendMessage(e.data);
+});
 
-//   console.log(window);
-//   const rInstance = window._REACT_DEVTOOLS_GLOBAL_HOOK_;
+chrome.extension.onMessage.addListener(() => {
+  const newEvent = new Event('lucid');
+  window.dispatchEvent(newEvent);
+});
 
-//   console.log(rInstance);
-// }
+
+injectScript(chrome.extension.getURL('hook.js'), 'body');
