@@ -14,7 +14,6 @@ function gotMessage(message, sender, sendResponse) {
 function injectScript(file) {
   //this adds <script type='text/javascript' src='hook.js'></script> to the DOM's body
   const body = document.getElementsByTagName('body')[0];
-  console.log('***********THIS IS THE BODY', body)
   const scriptFile = document.createElement('script');
   scriptFile.setAttribute('type', 'text/javascript');
   scriptFile.setAttribute('src', file);
