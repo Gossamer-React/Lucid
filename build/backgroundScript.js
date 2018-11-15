@@ -19,7 +19,6 @@ const connections = {};
 //   var devToolsListener = function(message, sender, sendResponse) {
 //       // Inject a content script into the identified tab
 //       chrome.tabs.executeScript(message.tabId,
-//           // { file: message.scriptToInject });
 //           { file: 'contentScript.js' })
 //   }
 //   // add the listener
