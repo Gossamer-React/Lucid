@@ -4,7 +4,7 @@ export default class Server extends Component {
   render() {
     return (
       <div>
-        Server tab
+        {Server}
       </div>
     )
   }
