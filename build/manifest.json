@@ -7,5 +7,15 @@
     "*://*/*"
   ],
   "devtools_page": "./devtools/devtools.html",
-  "homepage_url": "https://github.com/Gossamer-React/React-Lucid"
+  "homepage_url": "https://github.com/Gossamer-React/React-Lucid",
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["contentScript.js"]
+  }],
+  "background": {
+    "scripts": ["backgroundScript.js"]
+  },
+  "browser_action": {
+    "default_icon": "logo.png"
+  }
 }
