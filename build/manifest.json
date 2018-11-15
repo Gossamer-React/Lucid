@@ -6,6 +6,6 @@
   "permissions": [
     "*://*/*"
   ],
-  "devtools_page": "./devtools/devtools.html",
+  "devtools_page": "devtools.html",
   "homepage_url": "https://github.com/Gossamer-React/React-Lucid"
 }
