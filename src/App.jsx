@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import LogContainer from './containers/LogContainer.jsx';
+import styles from './../public/app.css';
 
 const App = () => {
     return (
-        <div>
+        <div id="app-container">
+            <LogContainer />
             <h1>Welcome to React-Lucid</h1>
         </div>
     )
