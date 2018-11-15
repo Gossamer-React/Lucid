@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "copy-webpack-plugin": "^4.6.0",
+    "fetch-graphql-schema": "^0.2.1",
     "path": "^0.12.7",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
