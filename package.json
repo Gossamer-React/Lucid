@@ -10,6 +10,7 @@
   "author": "Gossamer",
   "license": "ISC",
   "dependencies": {
+    "copy-webpack-plugin": "^4.6.0",
     "path": "^0.12.7",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
