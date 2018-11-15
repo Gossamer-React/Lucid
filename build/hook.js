@@ -1,17 +1,13 @@
-console.log('hook file was injected')
+const reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+console.log('this is the reactglobalhook', reactGlobalHook);
+const getVirtualDom = reactGlobalHook.onCommitFiberRoot;
+console.log('this is the virtualdom', getVirtualDom);
 
-// const reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+let x = function (z) {
+	return function (...args) {
+	  console.log(args[1]); 
+	  return z(...args);
+	};
+}
 
-// reactGlobalHook.onCommitFiberRoot = (function (onCommitFiberRoot) {
-//           return function (...args) {
-//           console.log(args[1])
-//           return onCommitFiberRoot(...args);
-//           };
-//         })(reactGlobalHook.onCommitFiberRoot)()
-
-// let x = function (z) {
-// 	return function (...args) {
-// 	  console.log(args[1]); 
-// 	  return z(...args);
-// 	};
-//     }
+x(reactGlobalHook.onCommitFiberRoot)
