@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "react-lucid",
+  "description": "A devtool for react developers.",
+  "version": "1.0",
+  "permissions": [
+    "*://*/*"
+  ],
+  "devtools_page": "./devtools/devtools.html",
+  "homepage_url": "https://github.com/Gossamer-React/React-Lucid"
+}
