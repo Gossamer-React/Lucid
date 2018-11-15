@@ -3,3 +3,7 @@
   padding: 10px;
   width: 20%;
 }
+.logs{
+  padding: 5px;
+  border-bottom: 1px solid grey;
+}

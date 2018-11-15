@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 
