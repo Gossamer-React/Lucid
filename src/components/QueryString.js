@@ -4,7 +4,7 @@ export default class QueryString extends Component {
   render() {
     return (
       <div>
-        {QueryString}
+        QueryString tab
       </div>
     )
   }

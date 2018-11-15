@@ -4,7 +4,7 @@ export default class QueryResult extends Component {
   render() {
     return (
       <div>
-        {QueryResult}
+        QueryResult tab
       </div>
     )
   }
