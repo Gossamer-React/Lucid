@@ -15,6 +15,9 @@
   "background": {
     "scripts": ["backgroundScript.js"]
   },
+  "web_accessible_resources": [
+    "hook.js"
+  ],
   "browser_action": {
     "default_icon": "logo.png"
   }
