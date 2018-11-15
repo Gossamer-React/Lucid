@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import LogContainer from './containers/LogContainer.jsx';
+import styles from './../public/app.css';
 import Effects from './containers/Effects';
 
 const App = () => {
     return (
-        <div>
+        <div id="app-container">
+            <LogContainer />
             <h1>Welcome to React-Lucid</h1>
             <Effects />
         </div>
