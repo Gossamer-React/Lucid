@@ -6,8 +6,8 @@ export default class Effects extends Component {
   render() {
     return (
       <div>
-        <Server/>
-        <GraphQL/>
+        <Server />
+        <GraphQL />
       </div>
     )
   }

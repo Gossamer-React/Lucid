@@ -5,6 +5,7 @@ const App = () => {
     return (
         <div>
             <h1>Welcome to React-Lucid</h1>
+            <Effects />
         </div>
     )
 }
