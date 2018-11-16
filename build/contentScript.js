@@ -22,6 +22,9 @@ function injectScript(file) {
 
 injectScript(chrome.extension.getURL('hook.js'));
 
+
+
+// TODO: Check if this code is needed
 // window.addEventListener('message', (e) => {
 //   if (e.source !== window) return;
 //   chrome.extension.sendMessage(e.data);

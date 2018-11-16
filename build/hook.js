@@ -10,4 +10,4 @@ let x = function (z) {
 	};
 }
 
-x(reactGlobalHook.onCommitFiberRoot)
+x(reactGlobalHook.onCommitFiberRoot);
