@@ -1,15 +1,15 @@
-console.log('Background script running')
+console.log('Background script running');
 
 // * Will listent to webrequest before they have been made
 chrome.webRequest.onBeforeRequest.addListener((e) => {
-  console.log(e);
   if(e.requestBody){
     if(e.requestBody.raw){
       let raw = e.requestBody.raw;
       let enc = new TextDecoder("utf-8");
       let arr = new Uint8Array(raw[0].bytes);
 
-      const data = JSON.parse(enc.decode(arr));
+      let data = JSON.parse(enc.decode(arr));
+
       console.log("DATA:", data);
     }
   }
