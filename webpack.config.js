@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/devtools.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'webpack-bundle.js'
