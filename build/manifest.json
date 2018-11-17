@@ -26,5 +26,8 @@
   ],
   "browser_action": {
     "default_icon": "logo.png"
+  },
+  "externally_connectable": {
+    "ids": ["*"]
   }
 }

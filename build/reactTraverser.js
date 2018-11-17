@@ -10,8 +10,8 @@ if (reactGlobalHook) {
       traverse(nodeToTraverse);
       console.log(documentObj);
 
-      chrome.runtime.sendMessage("react-lucid", 'Yo this is the reacttraverser', () => {
-        alert('message sent');
+      chrome.runtime.sendMessage('lucid', {greeting: "react-lucid"}, (response) => {
+        alert('message sent'); console.log('response:', response)
       });
 
       // var event = new CustomEvent('traverseComplete', { test: ['hi', documentObj] });
@@ -23,7 +23,6 @@ if (reactGlobalHook) {
       //   if (msg.question == "Who's there?") {
       //     alert('received whos there')
       //     port.postMessage({answer: "Madame"});
-
       //   }
       //   else if (msg.question == "Madame who?")
       //     port.postMessage({answer: "Madame... Bovary"});

@@ -10,22 +10,21 @@ chrome.devtools.panels.create(
     // })
 
     //const port = chrome.extension.connect({ name: 'knockknock' });
-    chrome.runtime.onConnect.addListener(function(port) {;
-      alert('portname:', port.name);
-      
-      // port.onMessage.addListener(function(msg) {
-      //   console.log('devtools-listener activated')
-      //   if (msg.joke == "Knock knock") {
-      //     alert('knock knock received')
-      //     port.postMessage({question: "Who's there?"});
-      //     alert('asked whosthere?')
-      //   }
-      //   else if (msg.answer == "Madame")
-      //   port.postMessage({question: "Madame who?"});
-      //   else if (msg.answer == "Madame... Bovary")
-      //   port.postMessage({question: "I don't get it."});
-      // });
-    });
+    // chrome.runtime.onConnect.addListener(function(port) {;
+    //   alert('portname:', port.name);
+    //   port.onMessage.addListener(function(msg) {
+    //     console.log('devtools-listener activated')
+    //     if (msg.joke == "Knock knock") {
+    //       alert('knock knock received')
+    //       port.postMessage({question: "Who's there?"});
+    //       alert('asked whosthere?')
+    //     }
+    //     else if (msg.answer == "Madame")
+    //     port.postMessage({question: "Madame who?"});
+    //     else if (msg.answer == "Madame... Bovary")
+    //     port.postMessage({question: "I don't get it."});
+    //   });
+    // });
                               // port.postMessage({
                               //   name: 'connect',
                               //   tabId: chrome.devtools.inspectedWindow.tabId,
@@ -58,6 +57,15 @@ chrome.devtools.panels.create(
 //   scriptToInject: "contentScript.js"
 // });
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  alert('MSG: ', message, 'SENDER: ', sender);
-});
+// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//   alert('MSG: ', message, 'SENDER: ', sender);
+// });
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    alert('hi the addlistener on devtools was hit', sender.tab.url)
+    if (request.greeting == 'react-lucid') {
+      sendResponse({farewell: 'goodbye'})
+    }
+  }
+)
