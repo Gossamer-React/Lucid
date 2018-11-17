@@ -1,4 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Server from '../components/Server';
+import GraphQL from '../components/GraphQL';
+
 const {
   introspect,
   introspectURL,
@@ -8,8 +11,7 @@ const {
 // import fetchSchema from 'fetch-graphql-schema';
 // import { HttpLink } from 'apollo-link-http';
 // import fetch from 'node-fetch';
-import Server from '../components/Server'
-import GraphQL from '../components/GraphQL'
+
 
 // import 'isomorphic-fetch';
 // import { parse, introspectionQuery } from 'graphql';
