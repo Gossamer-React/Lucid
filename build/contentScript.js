@@ -3,16 +3,17 @@ console.log("content script running!")
 chrome.runtime.onMessage.addListener(gotMessage);
 function gotMessage(message, sender, sendResponse) {
   if (message.txt === 'hi') {
-    let paragraphs = document.getElementsByTagName('body');
-    for (el of paragraphs) {
+    let body = document.getElementsByTagName('body');
+    console.log('this is document body... [0]?', body)
+    for (el of body) {
       el.style['background-color'] = '#FF0000';
     }
   }
 }
 
-//To access the DOM & reactDevToolsGlobalHook, inject the hook script into the document body:
+//To access the DOM & reactDevToolsGlobalHook, inject the script into the document body:
 function injectScript(file) {
-  //this adds <script type='text/javascript' src='hook.js'></script> to the DOM's body
+  //this adds <script type='text/javascript' src='reactTraverser.js'></script> to the DOM's body
   const body = document.getElementsByTagName('body')[0];
   const scriptFile = document.createElement('script');
   scriptFile.setAttribute('type', 'text/javascript');
@@ -20,7 +21,7 @@ function injectScript(file) {
   body.appendChild(scriptFile);
 }
 
-injectScript(chrome.extension.getURL('hook.js'));
+injectScript(chrome.extension.getURL('reactTraverser.js'));
 
 // window.addEventListener('message', (e) => {
 //   if (e.source !== window) return;
