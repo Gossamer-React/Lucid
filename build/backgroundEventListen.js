@@ -1,6 +1,6 @@
 console.log('Background event listening script running')
 
-chrome.browserAction.onClicked.addListener(eventEmitted);
+chrome.runtime.onInstalled.addListener(eventEmitted);
 
 function eventEmitted(tab) {
   console.log(tab)
