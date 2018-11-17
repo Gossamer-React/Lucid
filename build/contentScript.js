@@ -22,15 +22,3 @@ function injectScript(file) {
 
 injectScript(chrome.extension.getURL('hook.js'));
 
-
-
-// TODO: Check if this code is needed
-// window.addEventListener('message', (e) => {
-//   if (e.source !== window) return;
-//   chrome.extension.sendMessage(e.data);
-// });
-
-// chrome.extension.onMessage.addListener(() => {
-//   const newEvent = new Event('lucid');
-//   window.dispatchEvent(newEvent);
-// });
