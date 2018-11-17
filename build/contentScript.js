@@ -23,12 +23,3 @@ function injectScript(file) {
 
 injectScript(chrome.extension.getURL('reactTraverser.js'));
 
-// window.addEventListener('message', (e) => {
-//   if (e.source !== window) return;
-//   chrome.extension.sendMessage(e.data);
-// });
-
-// chrome.extension.onMessage.addListener(() => {
-//   const newEvent = new Event('lucid');
-//   window.dispatchEvent(newEvent);
-// });

@@ -4,6 +4,7 @@
   "description": "A devtool for react developers.",
   "version": "1.0",
   "permissions": [
+    "webRequest",
     "*://*/*"
   ],
   "devtools_page": "./devtools/devtools.html",
