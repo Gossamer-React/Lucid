@@ -20,7 +20,7 @@
     "persistent": false
   },
   "web_accessible_resources": [
-    "hook.js"
+    "reactTraverser.js"
   ],
   "browser_action": {
     "default_icon": "logo.png"
