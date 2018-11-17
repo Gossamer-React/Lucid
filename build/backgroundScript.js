@@ -10,7 +10,7 @@ function buttonClicked(tab) {
   chrome.tabs.sendMessage(tab.id, msg)
 }
 
-const connections = {};
+// const connections = {};
 
 // chrome.runtime.onConnect.addListener(function(devToolsConnection) {
 //   console.log('devToolsConnection up');
