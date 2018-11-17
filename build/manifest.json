@@ -9,10 +9,9 @@
     "http://*/*",
     "https://*/*",
     "file:///*",
-    "webRequest",
-    "*://*/*"
+    "webRequest"
   ],
-  "devtools_page": "./devtools/devtools.html",
+  "devtools_page": "devtools.html",
   "homepage_url": "https://github.com/Gossamer-React/React-Lucid",
   "content_scripts": [{
     "matches": ["<all_urls>"],
