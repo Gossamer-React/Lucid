@@ -1,6 +1,45 @@
 import React from 'react';
 import Tree from 'react-d3-tree';
 
+// this.state = {
+//   test: '',
+//   documentObj: {
+//     Provider: {
+//       State: 'providerstate',
+//       Props: 'providerprop',
+//       Children: [{
+//         App: {
+//           State: 'appstate',
+//           Props: 'appprop',
+//           Children: [{
+//             MainContainer: {
+//               State: 'mcstate',
+//               Props: 'mcprops',
+//               Children: [{
+//                 TotalsDisplay: {
+//                   State: 'totalsdisplaystate',
+//                   Props: 'totalsdisplayprops',
+//                   Children: []  
+//                 },
+//                 MarketsContainer: {
+//                   State: 'marketscontainerstate',
+//                   Props: 'marketscontainerprops',
+//                   Children: []
+//                 }
+//               }
+//               ]
+//             }
+//           }
+            
+//           ]
+//         }
+//       }
+//       ]
+//     }
+//   }
+// }
+
+
 const myTreeData = [
   {
     name: 'Top Level',

@@ -4,6 +4,11 @@
   "description": "A devtool for react developers.",
   "version": "1.0",
   "permissions": [
+    "*://*/*",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "file:///*",
     "webRequest",
     "*://*/*"
   ],
@@ -11,7 +16,7 @@
   "homepage_url": "https://github.com/Gossamer-React/React-Lucid",
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": ["contentScript.js"]
+    "js": ["contentScript.js", "reactTraverser.js"]
   }],
   "background": {
     "scripts": [
@@ -23,5 +28,8 @@
   ],
   "browser_action": {
     "default_icon": "logo.png"
+  },
+  "externally_connectable": {
+    "ids": ["*"]
   }
 }
