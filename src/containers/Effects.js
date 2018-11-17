@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Server from '../components/Server';
 import GraphQL from '../components/GraphQL';
-
-const {
-  introspect,
-  introspectURL,
-  introspectFile
-} = require('graphql-introspect')
+// import {
+//   introspect,
+//   introspectURL,
+//   introspectFile
+// } from 'graphql-introspect';
 
 // import fetchSchema from 'fetch-graphql-schema';
 // import { HttpLink } from 'apollo-link-http';
@@ -71,7 +70,7 @@ export default class Effects extends Component {
 
   getSchema() {
     
-    introspectURL('http://example.com/graphql')
+    introspectURL('http://localhost:4000/graphql')
       .then(result => { 
         const schema = JSON.stringify(result, null, '  ');
         console.log(schema);
