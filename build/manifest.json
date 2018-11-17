@@ -14,7 +14,11 @@
     "js": ["contentScript.js"]
   }],
   "background": {
-    "scripts": ["backgroundScript.js"]
+    "scripts": [
+      "backgroundScript.js",
+      "backgroundEventListen.js"
+    ],
+    "persistent": false
   },
   "web_accessible_resources": [
     "hook.js"

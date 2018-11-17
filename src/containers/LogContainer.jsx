@@ -3,7 +3,7 @@ import Log from './../components/Log/Log.jsx';
 import styles from '../../public/log-container.css';
 
 class LogContainer extends Component {
-  constructor(props) {
+  constructor(props) { 
     super(props);
     this.state = {
       logs: _Logs
