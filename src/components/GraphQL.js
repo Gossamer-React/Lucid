@@ -6,8 +6,8 @@ export default class GraphQL extends Component {
   render() {
     return (
       <div>
-        <QueryString/>
-        <QueryResult/>
+        <QueryString />
+        <QueryResult />
       </div>
     )
   }
