@@ -14,10 +14,8 @@
   }],
   "background": {
     "scripts": [
-      "backgroundScript.js",
-      "backgroundEventListen.js"
-    ],
-    "persistent": false
+      "backgroundScript.js"
+    ]
   },
   "web_accessible_resources": [
     "reactTraverser.js"
