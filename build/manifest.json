@@ -15,7 +15,7 @@
   "homepage_url": "https://github.com/Gossamer-React/React-Lucid",
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": ["contentScript.js", "reactTraverser.js"]
+    "js": ["contentScript.js"]
   }],
   "background": {
     "scripts": [
