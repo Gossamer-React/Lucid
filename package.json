@@ -2,7 +2,7 @@
   "name": "react-lucid",
   "version": "1.0.0",
   "description": "A devtool for react developers",
-  "main": "index.js",
+  "main": "devtools.js",
   "scripts": {
     "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map"
