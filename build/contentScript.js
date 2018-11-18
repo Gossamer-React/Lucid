@@ -1,16 +1,5 @@
 console.log("content script running!")
 
-// chrome.runtime.onMessage.addListener(gotMessage);
-// function gotMessage(message, sender, sendResponse) {
-//   if (message.txt === 'hi') {
-//     let body = document.getElementsByTagName('body');
-//     console.log('this is document body... [0]?', body)
-//     for (el of body) {
-//       el.style['background-color'] = '#FF0000';
-//     }
-//   }
-// }
-
 //To access the DOM & reactDevToolsGlobalHook, inject the script into the document body:
 function injectScript(file) {
   //this adds <script type='text/javascript' src='reactTraverser.js'></script> to the DOM's body
@@ -20,9 +9,34 @@ function injectScript(file) {
   scriptFile.setAttribute('src', file);
   body.appendChild(scriptFile);
 }
-
 injectScript(chrome.extension.getURL('reactTraverser.js'));
 
+//listen for docObj data from reactTraverser
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    alert('the addlistener on contentScript was hit', sender.tab.url)
+    if (request.greeting === 'traverse-complete') {
+      alert('docObj received')
+      sendResponse({farewell: 'DocumentObj was received'})
+      // let body = document.getElementsByTagName('body');
+    }
+  }
+)
+  //attempt 2 using window
+  ('traverseComplete', (e) => {
+    alert('docObj received!!!')
+    console.log('data:', e.data)
+    console.log('obj:', e.obj)
+    //if (e.source !== window) return;
+    console.log(e)
+    // chrome.extension.sendMessage(e.data);
+  });
+
+  //tell reactTraverser.js to traverse
+  chrome.extension.onMessage.addListener(() => {
+    const newEvent = new Event('traverse');
+    window.dispatchEvent(newEvent);
+  });
 
 // //listen 
 // chrome.extension.onMessage.addListener(() => {
@@ -31,10 +45,6 @@ injectScript(chrome.extension.getURL('reactTraverser.js'));
 //     console.log('runTraverseDispatched')
 // })
 
-// window.addEventListener('message', (e) => {
-//   if (e.source !== window) return;
-//   chrome.extension.sendMessage(e.data);
-// });
 
 // chrome.runtime.sendMessage('Yo this is the contentscript')
 
