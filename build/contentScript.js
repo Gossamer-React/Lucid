@@ -11,32 +11,43 @@ function injectScript(file) {
 }
 injectScript(chrome.extension.getURL('reactTraverser.js'));
 
-//listen for docObj data from reactTraverser
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    alert('the addlistener on contentScript was hit', sender.tab.url)
-    if (request.greeting === 'traverse-complete') {
-      alert('docObj received')
-      sendResponse({farewell: 'DocumentObj was received'})
-      // let body = document.getElementsByTagName('body');
-    }
-  }
-)
-  //attempt 2 using window
-  ('traverseComplete', (e) => {
-    alert('docObj received!!!')
-    console.log('data:', e.data)
-    console.log('obj:', e.obj)
-    //if (e.source !== window) return;
-    console.log(e)
-    // chrome.extension.sendMessage(e.data);
-  });
+var _DevtoolPort;
 
-  //tell reactTraverser.js to traverse
-  chrome.extension.onMessage.addListener(() => {
-    const newEvent = new Event('traverse');
-    window.dispatchEvent(newEvent);
-  });
+// * listens to ports being connected
+chrome.runtime.onConnect.addListener((port) => {
+  console.log('content script connected to devtool port');
+  _DevtoolPort = port;
+});
+
+console.log(_DevtoolPort);
+
+
+//listen for docObj data from reactTraverser
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     alert('the addlistener on contentScript was hit', sender.tab.url)
+//     if (request.greeting === 'traverse-complete') {
+//       alert('docObj received')
+//       sendResponse({farewell: 'DocumentObj was received'})
+//       // let body = document.getElementsByTagName('body');
+//     }
+//   }
+// )
+  // //attempt 2 using window
+  // ('traverseComplete', (e) => {
+  //   alert('docObj received!!!')
+  //   console.log('data:', e.data)
+  //   console.log('obj:', e.obj)
+  //   //if (e.source !== window) return;
+  //   console.log(e)
+  //   // chrome.extension.sendMessage(e.data);
+  // });
+
+  // //tell reactTraverser.js to traverse
+  // chrome.extension.onMessage.addListener(() => {
+  //   const newEvent = new Event('traverse');
+  //   window.dispatchEvent(newEvent);
+  // });
 
 // //listen 
 // chrome.extension.onMessage.addListener(() => {
