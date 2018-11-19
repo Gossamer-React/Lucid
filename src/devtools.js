@@ -4,53 +4,36 @@ import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 import Effects from './containers/Effects';
 import TreeDiagram from './components/TreeDiagram.jsx';
+import { networkInterfaces } from 'os';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      state: 'HELLO'
+      logs: []
     };
     chrome.devtools.panels.create(
       'Lucid',
       null,
       'devtools.html',
       () => {
-        console.log('Panel was created!!');
+        let state = this.state;
+        const port = chrome.extension.connect({name: 'lucid'});
 
-        // chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
-        //   alert('devtools:', response)
-        // })
+        console.log(port);
 
-        //const port = chrome.extension.connect({ name: 'knockknock' });
-        // chrome.runtime.onConnect.addListener(function(port) {;
-        //   alert('portname:', port.name);
-        //   port.onMessage.addListener(function(msg) {
-        //     console.log('devtools-listener activated')
-        //     if (msg.joke == "Knock knock") {
-        //       alert('knock knock received')
-        //       port.postMessage({question: "Who's there?"});
-        //       alert('asked whosthere?')
-        //     }
-        //     else if (msg.answer == "Madame")
-        //     port.postMessage({question: "Madame who?"});
-        //     else if (msg.answer == "Madame... Bovary")
-        //     port.postMessage({question: "I don't get it."});
-        //   });
-        // });
-        // port.postMessage({
-        //   name: 'connect',
-        //   tabId: chrome.devtools.inspectedWindow.tabId,
-        // });
-        // port.onMessage.addListener((msg) => {
-        //   if (!msg.data) return; // abort if data not present, or if not of type object
-        //   if (typeof msg !== 'object') return;
-        //   if(JSON.stringify(curData) !== JSON.stringify(msg)) {
-        //     curData = msg;
-        //     logMode = false;
-        //     clearInterval(this.update);
-        //     this.update = 0;    
-        //     this.update = setInterval( () => this.updateTree(), 100);
+        port.onMessage.addListener((req) => {
+          console.log('state!!', state);
+          console.log(req.msg);
+          const newLogs = req.msg;
+          state.setState({logs: newLogs});
+        });
+        
+        // chrome.runtime.onMessage.addlistener((msg, sender, sendResponse) => {
+        //   if(msg.types === 'logs'){
+        //     console.log(`Hey i got a from ${sender} it says ${msg}`);
+        //     console.log("-STATE-", this.state);
+        //     sendResponse({msg: 'Hello background script'});
         //   }
         // });
       }
@@ -58,6 +41,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.logs);
     return (
       <div id="app-container">
         <LogContainer />

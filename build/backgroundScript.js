@@ -1,6 +1,13 @@
 console.log('Background script running');
-
 const _Logs = [];
+
+var _DevtoolPort;
+
+chrome.runtime.onConnect.addListener((port) => {
+  console.log('I got the port');
+  _DevtoolPort = port;
+});
+
 // * Will listen to webrequest before they have been made
 chrome.webRequest.onBeforeRequest.addListener((e) => {
   if (e.initiator !== "http://localhost:3000") {
@@ -20,17 +27,18 @@ chrome.webRequest.onBeforeRequest.addListener((e) => {
     }
   }
 
-}, { urls: ["<all_urls>"], types: ["xmlhttprequest"] }, ["requestBody"]);
+  _DevtoolPort.postMessage({msg: _Logs});
+}, {urls: ["<all_urls>"], types: ["xmlhttprequest"] }, ["requestBody"]);
 
-chrome.browserAction.onClicked.addListener(buttonClicked);
+// chrome.browserAction.onClicked.addListener(buttonClicked);
 
-function buttonClicked(tab) {
-  // console.log(tab)
-  let msg = {
-    txt: 'hi'
-  }
-  chrome.tabs.sendMessage(tab.id, msg)
-}
+// function buttonClicked(tab) {
+//   // console.log(tab)
+//   let msg = {
+//     txt: 'hi'
+//   }
+//   chrome.tabs.sendMessage(tab.id, msg)
+// }
 
 // const connections = {};
 
