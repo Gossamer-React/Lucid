@@ -31,6 +31,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     } else {
       if (e.requestBody) {
         console.log(e);
+        // TODO: if e.requestBody is formdata send it through without parsing it
         if (e.requestBody.raw) {
           let raw = e.requestBody.raw;
           let enc = new TextDecoder('utf-8');
