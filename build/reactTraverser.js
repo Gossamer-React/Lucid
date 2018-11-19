@@ -11,26 +11,15 @@ if (reactGlobalHook) {
       console.log('traverse complete: ', documentObj);
 
       //send traverse docObj data to contentScriptJS
-      chrome.runtime.sendMessage('traverse-complete', { greeting: 'traverse-complete' }, (response) => {
-        console.log('response:', response)
-      });
-      //attempt 2 using window
-      var event = new CustomEvent(
-        'traverseComplete',
-        {
-          data: 'hi',
-          obj: documentObj
-        }
-      );
-      window.dispatchEvent(event);
-      //attempt 3 with window
-      window.postMessage('windowpostmessage', '*')
+      window.postMessage(JSON.parse(JSON.stringify(
+        { data: documentObj, type: 'reactTraverser'}
+      )), '*')
 
-      //get signal from contentScriptto traverse
-      window.addEventListener('traverse', () => {
-        traverse(nodeToTraverse);
-      });
-
+      // //get signal from contentScriptto traverse
+      // window.addEventListener('traverse', () => {
+      //   traverse(nodeToTraverse);
+      // });
+  
       return oCFR(...args);
     };
   })(reactGlobalHook.onCommitFiberRoot);
