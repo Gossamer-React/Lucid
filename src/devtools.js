@@ -10,25 +10,28 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      update: 'false',
       logs: []
     };
+
     chrome.devtools.panels.create(
       'Lucid',
       null,
       'devtools.html',
       () => {
         let state = this.state;
-        const port = chrome.runtime.connect({ name: 'lucid' });
+        const backgroundPort = chrome.runtime.connect({ name: 'devtool-background-port' });
 
-        console.log(port);
-
-        port.onMessage.addListener((req) => {
-          console.log('BACKGROUND SCRIPT: ', req.msg);
+        // *adds a listener to listen for any messages being sent by our background script
+        backgroundPort.onMessage.addListener((req) => {
+          // * checkes if the message it's receiving is about a request about an http request or a change in the DOM
           if (req.type === 'requestLogs') {
             console.log('state!!', state);
             console.log('Message from background script:', req.msg);
-            // const newLogs = req.msg;
-            // state.setState({ logs: newLogs });
+            const newLogs = req.msg;
+            state.setState({ update: 'true' });
+          } else if (req.type === 'appState') {
+            console.log('appState: ', req.msg);
           }
         });
       }
@@ -39,7 +42,7 @@ class App extends Component {
     return (
       <div id="app-container">
         <LogContainer />
-        <h1>Welcome to React-Lucid</h1>
+        <h1>Welcome to React-Lucid: {this.state.update}</h1>
         <Effects />
         <TreeDiagram />
       </div>
