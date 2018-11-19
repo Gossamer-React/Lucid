@@ -2,24 +2,26 @@ const reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
 if (reactGlobalHook) {
   let virtualdom;
-  
+
   reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
     return function (...args) {
       virtualdom = args[1];
       let nodeToTraverse = virtualdom.current.stateNode.current;
       traverse(nodeToTraverse);
       console.log('traverse complete: ', documentObj);
-      
+
       //send traverse docObj data to contentScriptJS
-      chrome.runtime.sendMessage('traverse-complete', {greeting: 'traverse-complete'}, (response) => {
+      chrome.runtime.sendMessage('traverse-complete', { greeting: 'traverse-complete' }, (response) => {
         console.log('response:', response)
       });
       //attempt 2 using window
       var event = new CustomEvent(
-        'traverseComplete', 
-        { data: 'hi', 
-          obj: documentObj }
-        );
+        'traverseComplete',
+        {
+          data: 'hi',
+          obj: documentObj
+        }
+      );
       window.dispatchEvent(event);
       //attempt 3 with window
       window.postMessage('windowpostmessage', '*')
@@ -28,14 +30,14 @@ if (reactGlobalHook) {
       window.addEventListener('traverse', () => {
         traverse(nodeToTraverse);
       });
-  
+
       return oCFR(...args);
     };
   })(reactGlobalHook.onCommitFiberRoot);
-  
+
   var documentObj = {};
-  const traverse = (node, childrenarr=documentObj, sib=false) => {
-  
+  const traverse = (node, childrenarr = documentObj, sib = false) => {
+
     if (node.type) {
       if (node.type.name) {
         //console.log('********',node.type.name)
@@ -49,13 +51,13 @@ if (reactGlobalHook) {
             try {
               let result = {};
               const props = node.memoizedProps;
-              if(typeof props === 'object') {
-                for(let prop in props) {
+              if (typeof props === 'object') {
+                for (let prop in props) {
                   const val = props[prop];
-                  if(typeof val === 'function') { 
+                  if (typeof val === 'function') {
                     //result[prop] = parseFuncName(val);
                     result[prop] = JSON.stringify(val);
-                  } else if(typeof val === 'object') {
+                  } else if (typeof val === 'object') {
                     result[prop] = JSON.stringify(val);
                   } else {
                     result[prop] = val;
@@ -83,18 +85,20 @@ if (reactGlobalHook) {
           }
           if (!sib) {
             childrenarr = obj['Children'];
-          } 
+          }
         }
       }
     }
-    
-    if (node.child!==null) {
+
+    if (node.child !== null) {
       traverse(node.child, childrenarr, false);
-    } 
+    }
     if (node.sibling) {
       traverse(node.sibling, childrenarr, true);
     }
-    return; 
-    
+    return;
+
   };
 }
+
+

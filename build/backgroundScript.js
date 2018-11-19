@@ -1,36 +1,50 @@
-console.log('Background script running');
+console.log("Background script running");
 const _Logs = [];
-
 var _DevtoolPort;
+var _ContentscriptPort;
 
 // * listens to ports being connected
-chrome.runtime.onConnect.addListener((port) => {
-  console.log('background script connected to devtools port', port);
-  _DevtoolPort = port;
+chrome.runtime.onConnect.addListener(port => {
+  console.log('PORT: ', port.name);
+  if (port.name === "devtool-background-port") {
+    console.log("background script connected to devtools port", port);
+    _DevtoolPort = port;
+  } else if (port.name === "contentscript-backgroundscript-port") {
+    console.log("connected to the content script", port);
+    contentscriptPort = port;
+
+    contentscriptPort.onMessage.addListener(content => {
+      console.log("FROM CONTENT SCRIPT: ", content);
+    });
+  }
 });
 
 // * Will listen to webrequest before they have been made
-chrome.webRequest.onBeforeRequest.addListener((e) => {
-  if (e.initiator !== "http://localhost:3000") {
-    return;
-  } else {
-    if (e.requestBody) {
-      console.log(e)
-      if (e.requestBody.raw) {
-        let raw = e.requestBody.raw;
-        let enc = new TextDecoder("utf-8");
-        let arr = new Uint8Array(raw[0].bytes);
-        let data = JSON.parse(enc.decode(arr));
+chrome.webRequest.onBeforeRequest.addListener(
+  e => {
+    if (e.initiator !== "http://localhost:3000") {
+      return;
+    } else {
+      if (e.requestBody) {
+        console.log(e);
+        if (e.requestBody.raw) {
+          let raw = e.requestBody.raw;
+          let enc = new TextDecoder("utf-8");
+          let arr = new Uint8Array(raw[0].bytes);
+          let data = JSON.parse(enc.decode(arr));
 
-        _Logs.push(data);
-        console.log(_Logs);
+          _Logs.push(data);
+          console.log(_Logs);
+        }
       }
     }
-  }
 
-  // * sending http requests log to devtools port
-  _DevtoolPort.postMessage({type:'requestLogs', msg: _Logs});
-}, {urls: ["<all_urls>"], types: ["xmlhttprequest"] }, ["requestBody"]);
+    // * sending http requests log to devtools port
+    _DevtoolPort.postMessage({ type: "requestLogs", msg: _Logs });
+  },
+  { urls: ["<all_urls>"], types: ["xmlhttprequest"] },
+  ["requestBody"]
+);
 
 // chrome.browserAction.onClicked.addListener(buttonClicked);
 

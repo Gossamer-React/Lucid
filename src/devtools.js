@@ -18,12 +18,10 @@ class App extends Component {
       'devtools.html',
       () => {
         let state = this.state;
-        const port = chrome.runtime.connect({ name: 'lucid' });
+        const backgroundPort = chrome.runtime.connect({ name: 'devtool-background-port' });
 
-        console.log(port);
-
-        port.onMessage.addListener((req) => {
-          console.log('BACKGROUND SCRIPT: ', req.msg);
+        // *adds a listener to listen for any messages being sent by our background script
+        backgroundPort.onMessage.addListener((req) => {
           if (req.type === 'requestLogs') {
             console.log('state!!', state);
             console.log('Message from background script:', req.msg);

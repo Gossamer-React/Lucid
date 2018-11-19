@@ -1,5 +1,10 @@
 console.log("content script running!")
 
+// * opens new port to connect to our backendscript
+const devtoolPort = chrome.runtime.connect({ name: 'contentscript-backgroundscript-port' });
+devtoolPort.postMessage({greeting: 'Hello from the content script'});
+
+
 //To access the DOM & reactDevToolsGlobalHook, inject the script into the document body:
 function injectScript(file) {
   //this adds <script type='text/javascript' src='reactTraverser.js'></script> to the DOM's body
@@ -10,17 +15,6 @@ function injectScript(file) {
   body.appendChild(scriptFile);
 }
 injectScript(chrome.extension.getURL('reactTraverser.js'));
-
-var _DevtoolPort;
-
-// * listens to ports being connected
-chrome.runtime.onConnect.addListener((port) => {
-  console.log('content script connected to devtool port');
-  _DevtoolPort = port;
-});
-
-console.log(_DevtoolPort);
-
 
 //listen for docObj data from reactTraverser
 // chrome.runtime.onMessage.addListener(
