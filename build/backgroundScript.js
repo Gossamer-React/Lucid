@@ -3,8 +3,9 @@ const _Logs = [];
 
 var _DevtoolPort;
 
+// * listens to ports being connected
 chrome.runtime.onConnect.addListener((port) => {
-  console.log('I got the port');
+  console.log('background script connected to devtools port', port);
   _DevtoolPort = port;
 });
 
@@ -27,7 +28,8 @@ chrome.webRequest.onBeforeRequest.addListener((e) => {
     }
   }
 
-  _DevtoolPort.postMessage({msg: _Logs});
+  // * sending http requests log to devtools port
+  _DevtoolPort.postMessage({type:'requestLogs', msg: _Logs});
 }, {urls: ["<all_urls>"], types: ["xmlhttprequest"] }, ["requestBody"]);
 
 // chrome.browserAction.onClicked.addListener(buttonClicked);

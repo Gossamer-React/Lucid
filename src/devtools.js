@@ -18,30 +18,24 @@ class App extends Component {
       'devtools.html',
       () => {
         let state = this.state;
-        const port = chrome.extension.connect({name: 'lucid'});
+        const port = chrome.runtime.connect({ name: 'lucid' });
 
         console.log(port);
 
         port.onMessage.addListener((req) => {
-          console.log('state!!', state);
-          console.log(req.msg);
-          const newLogs = req.msg;
-          state.setState({logs: newLogs});
+          console.log('BACKGROUND SCRIPT: ', req.msg);
+          if (req.type === 'requestLogs') {
+            console.log('state!!', state);
+            console.log('Message from background script:', req.msg);
+            // const newLogs = req.msg;
+            // state.setState({ logs: newLogs });
+          }
         });
-        
-        // chrome.runtime.onMessage.addlistener((msg, sender, sendResponse) => {
-        //   if(msg.types === 'logs'){
-        //     console.log(`Hey i got a from ${sender} it says ${msg}`);
-        //     console.log("-STATE-", this.state);
-        //     sendResponse({msg: 'Hello background script'});
-        //   }
-        // });
       }
     );
   }
 
   render() {
-    console.log(this.state.logs);
     return (
       <div id="app-container">
         <LogContainer />

@@ -73,7 +73,7 @@ export default class Effects extends Component {
     introspectURL('http://localhost:4000/graphql')
       .then(result => { 
         const schema = JSON.stringify(result, null, '  ');
-        console.log(schema);
+        // console.log(schema);
         this.setState({
           graphQLSchema: schema
         })
@@ -85,7 +85,7 @@ export default class Effects extends Component {
   }
 
   render() {
-    console.log('hello', this.state.graphQLSchema);
+    // console.log('hello', this.state.graphQLSchema);
 
     return (
       <div>
