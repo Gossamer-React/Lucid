@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react';
 
-export default class QueryResult extends Component {
-  render() {
-    return (
-      <div>
-        <div>QueryResult tab</div>
-      </div>
-    )
-  }
+const QueryResult = (props) => {
+  return (
+    <div>
+      <div>QueryResult tab</div>
+    </div>
+  )
 }
+
+export default QueryResult;
