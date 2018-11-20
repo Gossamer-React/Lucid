@@ -81,31 +81,6 @@ if (reactGlobalHook) {
           },
           children: [],
           state: node.memoizeState,
-          props: () => {
-            try {
-              let result = {};
-              const props = node.memoizedProps;
-              if (typeof props === 'object') {
-                for (let prop in props) {
-                  const val = props[prop];
-                  if (typeof val === 'function') {
-                    //result[prop] = parseFuncName(val);
-                    result[prop] = JSON.stringify(val);
-                    //grabbing functions on top and then styles on bottom in props
-                  } else if (typeof val === 'object') {
-                    result[prop] = JSON.stringify(val);
-                  } else {
-                    result[prop] = val;
-                  }
-                }
-              } else {
-                result = props;
-              }
-              return result;
-            } catch (e) {
-              return {};
-            }
-          }();
         }
 
         // if(node.memoizedProps) obj.props = getProps(node);      
