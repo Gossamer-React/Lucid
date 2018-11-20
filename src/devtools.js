@@ -48,16 +48,10 @@ class App extends Component {
       <div id="app-container">
         <LogContainer />
         <h1>Welcome to React-Lucid</h1>
-<<<<<<< HEAD
         <Effects />
         <TreeDiagram
           appState = {this.state.appState}
         />
-
-=======
-        <Effects logs={this.state.logs} />
-        <TreeDiagram />
->>>>>>> e183b2271389ba3cf0182ef6526dd4a3acf51974
       </div>
     )
   }
