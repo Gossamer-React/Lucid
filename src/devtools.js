@@ -20,9 +20,14 @@ class App extends Component {
       'devtools.html',
       () => {
         // this.state.setState({update: 'true'});
-        console.log(this);
         let state = this;
         const backgroundPort = chrome.runtime.connect({ name: 'devtool-background-port' });
+
+        // sends a 'connect' message to backgroundScript to trigger reactTraverse
+        backgroundPort.postMessage({
+          name: 'connect',
+          tabId: chrome.devtools.inspectedWindow.tabId
+        })
 
         // *adds a listener to listen for any messages being sent by our background script
         backgroundPort.onMessage.addListener((req) => {
