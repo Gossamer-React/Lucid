@@ -3,7 +3,19 @@
   padding: 10px;
   width: 20%;
 }
-.logs{
+#log-hr{
+  margin: 10px 0px;
+}
+#logs{
+  overflow-y: scroll;
+  max-height: 80%;
+}
+.log{
   padding: 5px;
+}
+.log:not(:last-child){
   border-bottom: 1px solid grey;
+}
+.log-p{
+  margin: 5px 0px;
 }
