@@ -1,79 +1,67 @@
+console.log('traverser activated')
 const reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
 if (reactGlobalHook) {
+  const reactInstance = reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]]; console.log('react instance:', reactInstance)
   let virtualdom;
-
-  reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
-    return function (...args) {
-      virtualdom = args[1];
-      let nodeToTraverse = virtualdom.current.stateNode.current;
-      traverse(nodeToTraverse);
-      console.log('traverse complete: ', documentObj);
-
-      //send traverse docObj data to contentScriptJS
-      window.postMessage(JSON.parse(JSON.stringify(
-        { data: documentObj, type: 'reactTraverser'}
-      )), '*')
-
-      // //get signal from contentScriptto traverse
-      // window.addEventListener('traverse', () => {
-      //   traverse(nodeToTraverse);
-      // });
+  var reactDOMArr = [];
   
-      return oCFR(...args);
-    };
-  })(reactGlobalHook.onCommitFiberRoot);
-
-  var documentObj = {};
-  const traverse = (node, childrenarr = documentObj, sib = false) => {
+  function setHook() {
+    //React 16+
+    if(reactInstance && reactInstance.version) {
+      reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
+        return function (...args) {
+          virtualdom = args[1];
+          let nodeToTraverse = virtualdom.current.stateNode.current;
+          traverse(nodeToTraverse);
+          console.log('traverse complete: ', reactDOMArr);
+          
+          //send DOM's react component tree to contentScriptJS
+          window.postMessage(JSON.parse(JSON.stringify(
+            { type: 'reactTraverser', data: reactDOMArr}
+          )), '*')
+            
+          reactDOMArr = [];
+          
+          return oCFR(...args);
+        };
+      })(reactGlobalHook.onCommitFiberRoot);
+    } else if (reactInstance && reactInstance.Reconciler) {
+      console.warn('React version 16+ (Fiber) is required to use React-Lucid');
+    } else {
+      console.warn('React not found- React is required to use React-Lucid');
+    }
+  }
+  setHook();
+      
+  window.addEventListener('run-traverser', () => {
+    console.log('run-traverser activated')
+    setHook();
+  })
+    
+  const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
+    console.log(node.memoizedProps, 'this is props memoized-------')
 
     if (node.type) {
       if (node.type.name) {
-        //console.log('********',node.type.name)
-        //if desired node, create obj and push into documentObj
+        //if desired node, create obj and push into reactDOMArr
         obj = {
-          Component: node.type.name,
+          name: node.type.name,
+          attributes: {
+            Id: node._debugID
+          },
           State: node.memoizedState,
-          Children: [],
-          Id: node._debugID,
-          Props: function () {
-            try {
-              let result = {};
-              const props = node.memoizedProps;
-              if (typeof props === 'object') {
-                for (let prop in props) {
-                  const val = props[prop];
-                  if (typeof val === 'function') {
-                    //result[prop] = parseFuncName(val);
-                    result[prop] = JSON.stringify(val);
-                  } else if (typeof val === 'object') {
-                    result[prop] = JSON.stringify(val);
-                  } else {
-                    result[prop] = val;
-                  }
-                }
-              } else {
-                result = props;
-              }
-              return result;
-            } catch (e) {
-              return {};
-            }
-          }()
+          children: [],
         }
-        //Create parent node in documentObj
-        if (Object.keys(documentObj).length === 0) {
-          documentObj[node.type.name] = obj;
-          childrenarr = documentObj[node.type.name]['Children'];
+        //Create parent node in reactDOMArr
+        if (reactDOMArr.length === 0) {
+          reactDOMArr.push(obj);
+          childrenarr = reactDOMArr[reactDOMArr.length-1]['children']
         } else {
-          //For all other nodes, push obj into children array
-          let childObj = {};
-          childObj[node.type.name] = obj;
-          if (Array.isArray(childrenarr)) {
-            childrenarr.push(childObj);
-          }
+
+          childrenarr.push(obj)
           if (!sib) {
-            childrenarr = obj['Children'];
+            childrenarr = obj['children']
           }
         }
       }
@@ -88,6 +76,35 @@ if (reactGlobalHook) {
     return;
 
   };
+} else {
+  console.warn('React devtool is required to use React-Lucid')
 }
-
+/*
+State: node.memoizedState,
+Id: node._debugID,
+Props: function () {
+              try {
+                let result = {};
+                const props = node.memoizedProps;
+                if (typeof props === 'object') {
+                  for (let prop in props) {
+                    const val = props[prop];
+                    if (typeof val === 'function') {
+                      //result[prop] = parseFuncName(val);
+                      result[prop] = JSON.stringify(val);
+                    } else if (typeof val === 'object') {
+                      result[prop] = JSON.stringify(val);
+                    } else {
+                      result[prop] = val;
+                    }
+                  }
+                } else {
+                  result = props;
+                }
+                return result;
+              } catch (e) {
+                return {};
+              }
+            }()
+*/
 

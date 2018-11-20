@@ -21,3 +21,12 @@ window.addEventListener('message', (e) => {
     devtoolPort.postMessage({type: 'content-script', message: reactDocObj});
   }
 });
+
+//listen for the signal and tell reactTraverser to run
+chrome.runtime.onMessage.addListener((message, sender, res) => {
+  if (message.name === 'connect') {
+    console.log('received message to run:', message)
+    const newEvent = new Event('run-traverser');
+    window.dispatchEvent(newEvent);
+  }
+});
