@@ -15,19 +15,20 @@ if (reactGlobalHook) {
       window.postMessage(JSON.parse(JSON.stringify(
         { type: 'reactTraverser', data: reactDOMArr}
       )), '*')
-      
+
       reactDOMArr = [];
 
       // //get signal from contentScriptto traverse
       // window.addEventListener('traverse', () => {
       //   traverse(nodeToTraverse);
       // });
-      
+
       return oCFR(...args);
     };
   })(reactGlobalHook.onCommitFiberRoot);
 
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
+    console.log(node.memoizedProps, 'this is props memoized-------')
 
     if (node.type) {
       if (node.type.name) {
@@ -35,33 +36,9 @@ if (reactGlobalHook) {
         obj = {
           name: node.type.name,
           attributes: {
-            State: node.memoizedState,
-            Id: node._debugID,
-            Props: function () {
-              try {
-                let result = {};
-                const props = node.memoizedProps;
-                if (typeof props === 'object') {
-                  for (let prop in props) {
-                    const val = props[prop];
-                    if (typeof val === 'function') {
-                      //result[prop] = parseFuncName(val);
-                      result[prop] = JSON.stringify(val);
-                    } else if (typeof val === 'object') {
-                      result[prop] = JSON.stringify(val);
-                    } else {
-                      result[prop] = val;
-                    }
-                  }
-                } else {
-                  result = props;
-                }
-                return result;
-              } catch (e) {
-                return {};
-              }
-            }()
+            Id: node._debugID
           },
+          State: node.memoizedState,
           children: [],
         }
         //Create parent node in reactDOMArr
@@ -88,5 +65,32 @@ if (reactGlobalHook) {
 
   };
 }
-
+/*
+State: node.memoizedState,
+Id: node._debugID,
+Props: function () {
+              try {
+                let result = {};
+                const props = node.memoizedProps;
+                if (typeof props === 'object') {
+                  for (let prop in props) {
+                    const val = props[prop];
+                    if (typeof val === 'function') {
+                      //result[prop] = parseFuncName(val);
+                      result[prop] = JSON.stringify(val);
+                    } else if (typeof val === 'object') {
+                      result[prop] = JSON.stringify(val);
+                    } else {
+                      result[prop] = val;
+                    }
+                  }
+                } else {
+                  result = props;
+                }
+                return result;
+              } catch (e) {
+                return {};
+              }
+            }()
+*/
 

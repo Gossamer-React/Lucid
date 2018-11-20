@@ -7,13 +7,13 @@ import TreeDiagram from './components/TreeDiagram.jsx';
 import { networkInterfaces } from 'os';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      logs: [], 
-      appState: {}
+      logs: [],
+      appState: [],
+      stateProps: []
     };
-
     chrome.devtools.panels.create(
       'Lucid',
       null,
@@ -33,9 +33,10 @@ class App extends Component {
             const newLogs = req.msg;
             state.setState({ logs: newLogs });
           } else if (req.type === 'appState') {
-            console.log('appState: ', req.msg);
+            console.log('appState:----------------- ', req.msg);
             const applicationState = req.msg;
             state.setState({ appState: applicationState});
+            console.log(this.state.appState, 'newly updated appState')
           }
         });
       }
@@ -47,8 +48,16 @@ class App extends Component {
       <div id="app-container">
         <LogContainer />
         <h1>Welcome to React-Lucid</h1>
+<<<<<<< HEAD
+        <Effects />
+        <TreeDiagram
+          appState = {this.state.appState}
+        />
+
+=======
         <Effects logs={this.state.logs} />
         <TreeDiagram />
+>>>>>>> e183b2271389ba3cf0182ef6526dd4a3acf51974
       </div>
     )
   }
