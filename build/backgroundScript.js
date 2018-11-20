@@ -60,7 +60,9 @@ chrome.webRequest.onBeforeRequest.addListener(
     }
 
     // * sending http requests log to devtools port
-    _DevtoolPort.postMessage({ type: 'requestLogs', msg: _Logs });
+    if (_DevtoolPort) {
+      _DevtoolPort.postMessage({ type: 'requestLogs', msg: _Logs });
+    }
   },
   { urls: ['<all_urls>'], types: ['xmlhttprequest'] },
   ['requestBody']
