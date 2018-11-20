@@ -85,9 +85,9 @@ function handleRequestFinished(request) {
   });
 }
 
-if (chrome.devtools.network) {
-  chrome.devtools.network.onRequestFinished.addListener(handleRequestFinished);
-}
+// if (chrome.devtools.network) {
+//   chrome.devtools.network.onRequestFinished.addListener(handleRequestFinished);
+// }
 
 
 // chrome.browserAction.onClicked.addListener(buttonClicked);

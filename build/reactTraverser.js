@@ -27,9 +27,9 @@ if (reactGlobalHook) {
         };
       })(reactGlobalHook.onCommitFiberRoot);
     } else if (reactInstance && reactInstance.Reconciler) {
-      console.warn('React version 16+ (Fiber) is required to use React-Lucid');
+      console.log('React version 16+ (Fiber) is required to use React-Lucid');
     } else {
-      console.warn('React not found- React is required to use React-Lucid');
+      console.log('React not found- React is required to use React-Lucid');
     }
   }
   setHook();
@@ -77,7 +77,7 @@ if (reactGlobalHook) {
 
   };
 } else {
-  console.warn('React devtool is required to use React-Lucid')
+  console.log('React devtool is required to use React-Lucid')
 }
 /*
 State: node.memoizedState,
