@@ -15,14 +15,14 @@ if (reactGlobalHook) {
       window.postMessage(JSON.parse(JSON.stringify(
         { type: 'reactTraverser', data: reactDOMArr}
       )), '*')
-      
+
       reactDOMArr = [];
 
       // //get signal from contentScriptto traverse
       // window.addEventListener('traverse', () => {
       //   traverse(nodeToTraverse);
       // });
-      
+
       return oCFR(...args);
     };
   })(reactGlobalHook.onCommitFiberRoot);
@@ -34,7 +34,36 @@ if (reactGlobalHook) {
         //if desired node, create obj and push into reactDOMArr
         obj = {
           name: node.type.name,
-          attributes: {
+          children: [],
+        }
+        //Create parent node in reactDOMArr
+        if (reactDOMArr.length === 0) {
+          reactDOMArr.push(obj);
+          childrenarr = reactDOMArr[reactDOMArr.length-1]['children']
+        } else {
+
+          childrenarr.push(obj)
+          if (!sib) {
+            childrenarr = obj['children']
+          }
+        }
+      }
+    }
+
+    if (node.child !== null) {
+      traverse(node.child, childrenarr, false);
+    }
+    if (node.sibling) {
+      traverse(node.sibling, childrenarr, true);
+    }
+    return;
+
+  };
+}
+
+
+/*
+attributes: {
             State: node.memoizedState,
             Id: node._debugID,
             Props: function () {
@@ -62,31 +91,13 @@ if (reactGlobalHook) {
               }
             }()
           },
-          children: [],
-        }
-        //Create parent node in reactDOMArr
-        if (reactDOMArr.length === 0) {
-          reactDOMArr.push(obj);
-          childrenarr = reactDOMArr[reactDOMArr.length-1]['children']
-        } else {
 
-          childrenarr.push(obj)
-          if (!sib) {
-            childrenarr = obj['children']
-          }
-        }
-      }
-    }
+*/
 
-    if (node.child !== null) {
-      traverse(node.child, childrenarr, false);
-    }
-    if (node.sibling) {
-      traverse(node.sibling, childrenarr, true);
-    }
-    return;
 
-  };
-}
+
+
+
+
 
 
