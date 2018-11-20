@@ -7,22 +7,27 @@ import TreeDiagram from './components/TreeDiagram.jsx';
 import { networkInterfaces } from 'os';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      logs: [], 
-      appState: {}
+      logs: [],
+      appState: [],
+      stateProps: []
     };
-
     chrome.devtools.panels.create(
       'Lucid',
       null,
       'devtools.html',
       () => {
         // this.state.setState({update: 'true'});
-        console.log(this);
         let state = this;
         const backgroundPort = chrome.runtime.connect({ name: 'devtool-background-port' });
+
+        // sends a 'connect' message to backgroundScript to trigger reactTraverse
+        backgroundPort.postMessage({
+          name: 'connect',
+          tabId: chrome.devtools.inspectedWindow.tabId
+        })
 
         // *adds a listener to listen for any messages being sent by our background script
         backgroundPort.onMessage.addListener((req) => {
@@ -33,9 +38,10 @@ class App extends Component {
             const newLogs = req.msg;
             state.setState({ logs: newLogs });
           } else if (req.type === 'appState') {
-            console.log('appState: ', req.msg);
+            console.log('appState:----------------- ', req.msg);
             const applicationState = req.msg;
-            state.setState({ appState: applicationState});
+            state.setState({ appState: applicationState });
+            console.log(this.state.appState, 'newly updated appState')
           }
         });
       }
@@ -45,13 +51,15 @@ class App extends Component {
   render() {
     return (
       <div id="app-container">
-        <LogContainer />
+        <LogContainer logs={this.state.logs} />
         <h1>Welcome to React-Lucid</h1>
         <Effects logs={this.state.logs} />
-        <TreeDiagram />
+        <TreeDiagram
+          appState={this.state.appState}
+        />
       </div>
-    )
+    );
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById("root"));

@@ -3,11 +3,26 @@ const _Logs = [];
 var _DevtoolPort;
 var _ContentscriptPort;
 
+const connections = {};
+
 // * listens to ports being connected
 chrome.runtime.onConnect.addListener(port => {
   if (port.name === 'devtool-background-port') {
     console.log('background script connected to devtools port', port);
     _DevtoolPort = port;
+
+    //receive message from devtools to trigger reactTraverse
+    let extensionListener = (message, sender, res) => {
+      if (message.name === 'connect' && message.tabId) {
+        console.log('backgroundscript received connect request from devtools; message.tabid:', message)
+        chrome.tabs.sendMessage(message.tabId, message);
+        connections[message.tabId] = port;
+        console.log('connections obj: ', connections)
+        return;
+      }
+    }
+    port.onMessage.addListener(extensionListener);
+
   } else if (port.name === 'contentscript-backgroundscript-port') {
     console.log('connected to the content script', port);
     contentscriptPort = port;
