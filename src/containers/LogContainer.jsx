@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 import Log from './../components/Log/Log.jsx';
 import styles from '../../public/log-container.css';
 
-class LogContainer extends Component {
-  constructor(props) { 
-    super(props);
-  }
+const LogContainer = (props) => {
+  let logs = props.logs.map((log, i) => {
+    return <Log key={i} operationName={log.operationName} query={log.query} variables={log.variables} logId={i} />
+  });
 
-  render() {
+  logs.reverse();
 
-    return (
-      <div id="log-container">
-        <h1>Log</h1>
-        <Log />;
+  return (
+    <div id='log-container'>
+      <h1>Log</h1>
+      <hr id='log-hr' />
+      <div id='logs'>
+        {logs}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default LogContainer;

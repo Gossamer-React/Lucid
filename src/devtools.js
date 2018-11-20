@@ -40,7 +40,7 @@ class App extends Component {
           } else if (req.type === 'appState') {
             console.log('appState:----------------- ', req.msg);
             const applicationState = req.msg;
-            state.setState({ appState: applicationState});
+            state.setState({ appState: applicationState });
             console.log(this.state.appState, 'newly updated appState')
           }
         });
@@ -51,21 +51,15 @@ class App extends Component {
   render() {
     return (
       <div id="app-container">
-        <LogContainer />
+        <LogContainer logs={this.state.logs} />
         <h1>Welcome to React-Lucid</h1>
-<<<<<<< HEAD
-        <Effects />
-        <TreeDiagram
-          appState = {this.state.appState}
-        />
-
-=======
         <Effects logs={this.state.logs} />
-        <TreeDiagram />
->>>>>>> e183b2271389ba3cf0182ef6526dd4a3acf51974
+        <TreeDiagram
+          appState={this.state.appState}
+        />
       </div>
-    )
+    );
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById("root"));
