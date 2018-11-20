@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
-import Effects from './containers/Effects';
+import Effects from './components/Effects';
 import TreeDiagram from './components/TreeDiagram.jsx';
 import { networkInterfaces } from 'os';
 
@@ -47,7 +47,7 @@ class App extends Component {
       <div id="app-container">
         <LogContainer />
         <h1>Welcome to React-Lucid</h1>
-        <Effects />
+        <Effects logs={this.state.logs} />
         <TreeDiagram />
       </div>
     )
