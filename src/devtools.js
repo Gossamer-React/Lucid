@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       logs: [],
       appState: [],
+      stateProps: []
     };
     chrome.devtools.panels.create(
       'Lucid',
@@ -43,9 +44,6 @@ class App extends Component {
   }
 
   render() {
-    if(this.state.appState.length !== 0) {
-      console.log(this.state.appState[this.state.appState.length-1], 'this is appState-----------$$')
-    }
     return (
       <div id="app-container">
         <LogContainer />

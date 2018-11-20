@@ -28,12 +28,17 @@ if (reactGlobalHook) {
   })(reactGlobalHook.onCommitFiberRoot);
 
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
+    console.log(node.memoizedProps, 'this is props memoized-------')
 
     if (node.type) {
       if (node.type.name) {
         //if desired node, create obj and push into reactDOMArr
         obj = {
           name: node.type.name,
+          attributes: {
+            Id: node._debugID
+          },
+          State: node.memoizedState,
           children: [],
         }
         //Create parent node in reactDOMArr
@@ -60,13 +65,10 @@ if (reactGlobalHook) {
 
   };
 }
-
-
 /*
-attributes: {
-            State: node.memoizedState,
-            Id: node._debugID,
-            Props: function () {
+State: node.memoizedState,
+Id: node._debugID,
+Props: function () {
               try {
                 let result = {};
                 const props = node.memoizedProps;
@@ -90,14 +92,5 @@ attributes: {
                 return {};
               }
             }()
-          },
-
 */
-
-
-
-
-
-
-
 
