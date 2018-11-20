@@ -53,6 +53,28 @@ chrome.webRequest.onBeforeRequest.addListener(
   ['requestBody']
 );
 
+// * Listen for response
+// if (chrome.devtools.network !== undefined) {
+//   chrome.devtools.network.onRequestFinished.addListener(
+//     (request) => {
+//       if (request.response) {
+//         console.log(request.response);
+//       }
+//     });
+// }
+
+function handleRequestFinished(request) {
+  console.log("Server IP: ", request.serverIPAddress);
+  request.getContent().then(content => {
+    console.log("Content: ", content);
+  });
+}
+
+if (chrome.devtools.network) {
+  chrome.devtools.network.onRequestFinished.addListener(handleRequestFinished);
+}
+
+
 // chrome.browserAction.onClicked.addListener(buttonClicked);
 
 // function buttonClicked(tab) {
