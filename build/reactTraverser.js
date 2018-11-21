@@ -39,36 +39,6 @@ if (reactGlobalHook) {
     setHook();
   })
 
-  //traverse through node.memoizeProps and store in result obj
-  // const getProps = (node) => {
-  //   try {
-  //     let result = {}; 
-  //     const props = node.memoizedProps; 
-  //     if(typeof props === 'object') {
-  //       for(let p in props) {
-  //         const val = props[p];
-  //         //store func in result obj
-  //         if(typeof val === 'function') {
-  //           result[p] = JSON.stringify(val); 
-  //           // store style objects in result obj
-  //         } else if (typeof val === 'object') {
-  //           result[p] = JSON.stringify(val); 
-  //         } else {
-  //           //else store vals that are not objs or funcs in result obj
-  //           result[p] = val; 
-  //         }
-  //       }
-  //       //else set props obj to result obj
-  //     } else {
-  //       result = props; 
-  //     }
-  //     //return 
-  //     return result; 
-  //     //catch error 
-  //   } catch(e) {
-  //     return {};
-  //   }
-  // };
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
     if (node.type) {
@@ -80,10 +50,33 @@ if (reactGlobalHook) {
             Id: node._debugID
           },
           children: [],
-          state: node.memoizeState,
-        }
-
-        // if(node.memoizedProps) obj.props = getProps(node);      
+          State: node.memoizedState,
+          Props: function() {
+            try {
+              let result = {};
+              const props = node.memoizedProps;
+              if (typeof props === 'object') {
+                for (let prop in props) {
+                  const val = props[prop];
+                  if (typeof val === 'function') {
+                    //result[prop] = parseFuncName(val);
+                    result[prop] = JSON.stringify(val);
+                    //grabbing functions on top and then styles on bottom in props
+                  } else if (typeof val === 'object') {
+                    result[prop] = JSON.stringify(val);
+                  } else {
+                    result[prop] = val;
+                  }
+                }
+              } else {
+                result = props;
+              }
+              return result;
+            } catch (e) {
+              return {};
+            }
+          }()
+        }   
 
         //Create parent node in reactDOMArr
         if (reactDOMArr.length === 0) {
@@ -112,29 +105,4 @@ if (reactGlobalHook) {
 }
 
 
-// State: node.memoizedState,
-          // Props: () => {
-          //     try {
-          //       let result = {};
-          //       const props = node.memoizedProps;
-          //       if (typeof props === 'object') {
-          //         for (let prop in props) {
-          //           const val = props[prop];
-          //           if (typeof val === 'function') {
-          //             //result[prop] = parseFuncName(val);
-          //             result[prop] = JSON.stringify(val);
-          //             //grabbing functions on top and then styles on bottom in props
-          //           } else if (typeof val === 'object') {
-          //             result[prop] = JSON.stringify(val);
-          //           } else {
-          //             result[prop] = val;
-          //           }
-          //         }
-          //       } else {
-          //         result = props;
-          //       }
-          //       return result;
-          //     } catch (e) {
-          //       return {};
-          //     }
-          //   }()
+ 

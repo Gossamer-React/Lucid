@@ -12,8 +12,11 @@ class App extends Component {
     this.state = {
       logs: [],
       appState: [],
-      stateProps: []
+      toggleTool: false,
+      clickData: []
     };
+    this.handleNodeClick = this.handleNodeClick.bind(this);
+
     chrome.devtools.panels.create(
       'Lucid',
       null,
@@ -48,6 +51,16 @@ class App extends Component {
     );
   }
 
+  
+  handleNodeClick(data, event) {
+    this.setState({
+      toggleTool: !this.state.toggleTool, 
+      clickData: data
+    })
+    console.log(this.state.toggleTool, 'after setState') //toggles true and false
+    // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
+  }
+
   render() {
     return (
       <div id="app-container">
@@ -55,7 +68,10 @@ class App extends Component {
         <h1>Welcome to React-Lucid</h1>
         <Effects logs={this.state.logs} />
         <TreeDiagram
+          handleNodeClick = {this.handleNodeClick}
           appState={this.state.appState}
+          toggleTool={this.state.toggleTool}
+          clickData={this.state.clickData}
         />
       </div>
     );

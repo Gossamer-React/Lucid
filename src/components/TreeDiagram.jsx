@@ -1,43 +1,11 @@
 import React from 'react';
 import Tree from 'react-d3-tree';
+import Tool from './Tool';
 
 
+ /*`#treeWrapper` in div points to reactD3Tree's css */
 
- /* <Tree /> will fill width/height of its container; in this case `#treeWrapper` */
-
-//  const myTreeData = [
-//   {
-//     name: 'Top Level',
-//     attributes: {
-//       keyA: 'val A',
-//       keyB: 'val B',
-//       keyC: 'val C',
-//     },
-//     children: [
-//       {
-//         name: 'A',
-//         attributes: {
-//           keyA: 'val A',
-//           keyB: 'val B',
-//           keyC: 'val C',
-//         },
-//         children: [{name: 'Level 3'}]
-//       },
-//       {
-//         name: 'B',
-//         children: [
-//         {
-//           name: 'level 3',
-//           children: [{name: 'Level 4'}],
-//         }],
-//       },
-//       {
-//         name: 'C'
-//       },
-//     ],
-//   },
-// ];
-
+//styles for the nodes in tree
 const styles = {
   nodes: {
     node: {
@@ -48,32 +16,46 @@ const styles = {
     },
     attributes: {
       fill: 'green',
-      fontSize: '20,'
+      fontSize: '20',
     },
     leafNode: {
       circle: {
-        fill:'red',
+        fill:'gray',
         fontSize:'20',
       },
       attributes: {
         fill: 'green',
-        fontSize: '20'
+        fontSize: '20',
       }
     }
   }
 };
 
 const TreeDiagram = (props) => {
-  console.log(props.appState, 'is props here?')
+  console.log(props.appState, 'props here in Tree Diagram?')
+  console.log(props.toggleTool, 'boolean status')
   return (
   <div id="treeWrapper" style={{width: '100%', height: '100vh'}}>
+  {/* when appState has a length we populate tree */}
   {(props.appState.length !== 0) ?
     <Tree
       data={props.appState}
-      nodeSize={{x:200, y:200}}
+      nodeSize={{x:150, y:150}}
       orientation={'vertical'}
       styles={styles}
-    /> : <p> Tree Loading ... </p>}
+      separation= {{siblings:.5, nonSiblings:.5}}
+      onClick={(nodeData) => {
+        props.handleNodeClick(nodeData)
+      }}
+    />  : <p> Tree Loading ... </p>}
+
+    {/* if toggle is true then load the tooltip, this is triggered by onClick in Tree */}
+  {(props.toggleTool === true) ? 
+    <Tool 
+    //pass props down to Tool
+    {...props}
+    /> : null
+  }
   </div>
   );
 }
