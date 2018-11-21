@@ -39,6 +39,7 @@ class App extends Component {
         }
       });
 
+      // chrome.devtools.network.onRequestFinished event provides an HTTP Archive format (HAR) entry as an argument to the event callback
       // * get request/response
       chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
         if (httpReq.request.url === "http://localhost:4000/graphql") {
@@ -65,11 +66,17 @@ class App extends Component {
   }
 
   render() {
+<<<<<<< HEAD
+    console.log('this is the state:', this.state)
+    //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
+    if (this.state.appState.length===0) {
+=======
     console.log('this is the states Appstate:', this.state.appState)
     //if this.state.appState has not been populated by the reactTraverser.js
 
     if (this.state.appState.length === 0) {
       //show a message that asks users to 'setState'
+>>>>>>> 372ed4d96f812a67086eb28dba57517f01849a96
       return (
         <div id='reactLoader'>
           <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
