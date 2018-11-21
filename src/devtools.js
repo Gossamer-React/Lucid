@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import LogContainer from './containers/LogContainer.jsx';
-import styles from './../public/app.css';
-import Effects from './containers/Effects';
-import TreeDiagram from './components/TreeDiagram.jsx';
-import { networkInterfaces } from 'os';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import LogContainer from "./containers/LogContainer.jsx";
+import styles from "./../public/app.css";
+import Effects from "./containers/Effects";
+import TreeDiagram from "./components/TreeDiagram.jsx";
+import { networkInterfaces } from "os";
 
 class App extends Component {
   constructor(props) {
@@ -12,40 +12,22 @@ class App extends Component {
     this.state = {
       logs: [],
       appState: [],
-<<<<<<< HEAD
       toggleTool: false,
       clickData: []
     };
     this.handleNodeClick = this.handleNodeClick.bind(this);
 
-    chrome.devtools.panels.create(
-      'Lucid',
-      null,
-      'devtools.html',
-      () => {
-        // this.state.setState({update: 'true'});
-        let state = this;
-        const backgroundPort = chrome.runtime.connect({ name: 'devtool-background-port' });
-=======
-      stateProps: [],
-      responses: []
-    };
-    chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
-      // * Save 'this' so that our listeners what 'this.state' and 'this.setState' is
+    chrome.devtools.panels.create("Lucid", null, "devtools.html", () => {
       let state = this;
-      
       const backgroundPort = chrome.runtime.connect({
         name: "devtool-background-port"
       });
-      
       // send a 'connect' message to backgroundScript to trigger reactTraverse with the tabId
       backgroundPort.postMessage({
-        name: 'connect',
+        name: "connect",
         tabId: chrome.devtools.inspectedWindow.tabId
-      })
->>>>>>> 8fda09f64331739eaf31bbba71bd2c7245d760e8
+      });
 
-      // *adds a listener to listen for any messages being sent by our background script
       backgroundPort.onMessage.addListener(req => {
         // * checks if the message it's receiving is about a request about an http request or a change in the DOM
         if (req.type === "requestLogs") {
@@ -67,7 +49,7 @@ class App extends Component {
               const parsedResponseBody = JSON.parse(responseBody);
               log.res = httpReq.request;
               console.log("---LOG---: ", log);
-              state.setState({logs: [...state.state.logs, log]})
+              state.setState({ logs: [...state.state.logs, log] });
             });
           }
         }
@@ -75,25 +57,23 @@ class App extends Component {
     });
   }
 
-  
   handleNodeClick(data, event) {
-    this.setState({
-      toggleTool: !this.state.toggleTool, 
-      clickData: data
-    })
-    console.log(this.state.toggleTool, 'after setState') //toggles true and false
+    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
+    console.log(this.state.toggleTool, 'after setState')
+    //toggles true and false
     // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
   }
 
   render() {
     console.log('this is the states Appstate:', this.state.appState)
     //if this.state.appState has not been populated by the reactTraverser.js
-    if (this.state.appState.length===0) {
+
+    if (this.state.appState.length === 0) {
       //show a message that asks users to 'setState'
       return (
         <div id='reactLoader'>
-        <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
-        <p>Note: Lucid works best on React v15/16</p>
+          <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
+          <p>Note: Lucid works best on React v15/16</p>
         </div>
       )
     } else {
@@ -103,16 +83,16 @@ class App extends Component {
           <h1>Welcome to React-Lucid</h1>
           {/* <Effects logs={this.state.logs} /> */}
           <TreeDiagram
-             handleNodeClick = {this.handleNodeClick}
-             appState={this.state.appState}
-             toggleTool={this.state.toggleTool}
-             clickData={this.state.clickData}
+            handleNodeClick={this.handleNodeClick}
+            appState={this.state.appState}
+            toggleTool={this.state.toggleTool}
+            clickData={this.state.clickData}
           />
         </div>
       );
     }
-      
   }
 }
+
 
 render(<App />, document.getElementById("root"));
