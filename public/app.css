@@ -10,3 +10,8 @@
   margin: 30px;
   text-align: center
 }
+#modal {
+  height: 50vh;
+  width: 100%;
+  border: 1px solid black;
+}
