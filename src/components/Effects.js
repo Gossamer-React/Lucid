@@ -4,7 +4,7 @@ import GraphQLData from './GraphQLData';
 
 const Effects = ({ logs }) => {
   
-  console.log('Effects', logs[logs.length - 1]);
+  // console.log('Effects', logs[logs.length - 1]);
 
   return (
     <div>

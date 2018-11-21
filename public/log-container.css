@@ -8,7 +8,7 @@
 }
 #logs{
   overflow-y: scroll;
-  max-height: 80%;
+  max-height: 90%;
 }
 .log{
   padding: 5px;
