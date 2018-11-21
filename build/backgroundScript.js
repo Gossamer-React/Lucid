@@ -3,6 +3,7 @@ const _Logs = [];
 var _DevtoolPort;
 var _ContentscriptPort;
 
+// * store tab-port connections from multiple open tabs to lucid panel in an array
 const connections = {};
 
 // * listens to ports being connected
@@ -12,10 +13,11 @@ chrome.runtime.onConnect.addListener(port => {
 
     _DevtoolPort = port;
 
-    //receive message from devtools to trigger reactTraverse
+    // * receive message from devtools to trigger reactTraverse
     let extensionListener = (message, sender, res) => {
       if (message.name === 'connect' && message.tabId) {
-        console.log('backgroundscript received connect request from devtools; message.tabid:', message)
+        // console.log('backgroundscript received connect request from devtools; message:', message)
+        // chrome.tabs.executeScript(message.tabId, { file: 'reactTraverser.js' });
         chrome.tabs.sendMessage(message.tabId, message);
         connections[message.tabId] = port;
         console.log('connections obj: ', connections)
