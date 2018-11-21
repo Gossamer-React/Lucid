@@ -45,6 +45,7 @@ class App extends Component {
         if (httpReq.request.url === "http://localhost:4000/graphql") {
           let log = {};
           log.req = httpReq.request;
+
           if (httpReq.response.content) {
             httpReq.getContent(responseBody => {
               const parsedResponseBody = JSON.parse(responseBody);
@@ -66,17 +67,9 @@ class App extends Component {
   }
 
   render() {
-<<<<<<< HEAD
     console.log('this is the state:', this.state)
     //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
     if (this.state.appState.length===0) {
-=======
-    console.log('this is the states Appstate:', this.state.appState)
-    //if this.state.appState has not been populated by the reactTraverser.js
-
-    if (this.state.appState.length === 0) {
-      //show a message that asks users to 'setState'
->>>>>>> 372ed4d96f812a67086eb28dba57517f01849a96
       return (
         <div id='reactLoader'>
           <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
@@ -86,7 +79,7 @@ class App extends Component {
     } else {
       return (
         <div id="app-container">
-          {/* <LogContainer logs={this.state.logs} /> */}
+          <LogContainer logs={this.state.logs} />
           <h1>Welcome to React-Lucid</h1>
           {/* <Effects logs={this.state.logs} /> */}
           <TreeDiagram
