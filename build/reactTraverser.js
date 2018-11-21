@@ -40,7 +40,6 @@ if (reactGlobalHook) {
   })
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
-    console.log(node.memoizedProps, 'this is props memoized-------')
 
     if (node.type) {
       if (node.type.name) {

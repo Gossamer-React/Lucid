@@ -9,6 +9,7 @@ const connections = {};
 chrome.runtime.onConnect.addListener(port => {
   if (port.name === 'devtool-background-port') {
     console.log('background script connected to devtools port', port);
+
     _DevtoolPort = port;
 
     //receive message from devtools to trigger reactTraverse
