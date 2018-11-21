@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import LogContainer from "./containers/LogContainer.jsx";
 import styles from "./../public/app.css";
-import Effects from "./components/Effects";
+import Effects from "./containers/Effects";
 import TreeDiagram from "./components/TreeDiagram.jsx";
 import { networkInterfaces } from "os";
 
@@ -12,24 +12,22 @@ class App extends Component {
     this.state = {
       logs: [],
       appState: [],
-      stateProps: [],
-      responses: []
+      toggleTool: false,
+      clickData: []
     };
-    chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
-      // * Save 'this' so that our listeners what 'this.state' and 'this.setState' is
+    this.handleNodeClick = this.handleNodeClick.bind(this);
+
+    chrome.devtools.panels.create("Lucid", null, "devtools.html", () => {
       let state = this;
-      
       const backgroundPort = chrome.runtime.connect({
         name: "devtool-background-port"
       });
-      
       // send a 'connect' message to backgroundScript to trigger reactTraverse with the tabId
       backgroundPort.postMessage({
-        name: 'connect',
+        name: "connect",
         tabId: chrome.devtools.inspectedWindow.tabId
-      })
+      });
 
-      // *adds a listener to listen for any messages being sent by our background script
       backgroundPort.onMessage.addListener(req => {
         // * checks if the message it's receiving is about a request about an http request or a change in the DOM
         if (req.type === "requestLogs") {
@@ -41,6 +39,7 @@ class App extends Component {
         }
       });
 
+      // chrome.devtools.network.onRequestFinished event provides an HTTP Archive format (HAR) entry as an argument to the event callback
       // * get request/response
       chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
         if (httpReq.request.url === "http://localhost:4000/graphql") {
@@ -50,9 +49,9 @@ class App extends Component {
           if (httpReq.response.content) {
             httpReq.getContent(responseBody => {
               const parsedResponseBody = JSON.parse(responseBody);
-              console.log('---RES---: ', parsedResponseBody);
-              log.res = parsedResponseBody;
-              state.setState({logs: [...state.state.logs, log]})
+              log.res = httpReq.request;
+              console.log("---LOG---: ", log);
+              state.setState({ logs: [...state.state.logs, log] });
             });
           }
         }
@@ -60,15 +59,21 @@ class App extends Component {
     });
   }
 
+  handleNodeClick(data, event) {
+    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
+    console.log(this.state.toggleTool, 'after setState')
+    //toggles true and false
+    // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
+  }
+
   render() {
-    console.log('this is the states Appstate:', this.state.appState)
-    //if this.state.appState has not been populated by the reactTraverser.js
+    console.log('this is the state:', this.state)
+    //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
     if (this.state.appState.length===0) {
-      //show a message that asks users to 'setState'
       return (
         <div id='reactLoader'>
-        <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
-        <p>Note: Lucid works best on React v15/16</p>
+          <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
+          <p>Note: Lucid works best on React v15/16</p>
         </div>
       )
     } else {
@@ -78,13 +83,16 @@ class App extends Component {
           <h1>Welcome to React-Lucid</h1>
           {/* <Effects logs={this.state.logs} /> */}
           <TreeDiagram
+            handleNodeClick={this.handleNodeClick}
             appState={this.state.appState}
+            toggleTool={this.state.toggleTool}
+            clickData={this.state.clickData}
           />
         </div>
       );
     }
-      
   }
 }
+
 
 render(<App />, document.getElementById("root"));
