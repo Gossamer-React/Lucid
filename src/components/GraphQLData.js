@@ -4,7 +4,7 @@ import QueryResult from './QueryResult';
 
 const GraphQLData = ({ logs }) => {
 
-  console.log('GraphQLData', logs[logs.length - 1]);
+  // console.log('GraphQLData', logs[logs.length - 1]);
   
   return (
     <div>
