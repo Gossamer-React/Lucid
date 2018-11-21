@@ -43,7 +43,7 @@ class App extends Component {
           if (httpReq.response.content) {
             httpReq.getContent(responseBody => {
               const parsedResponseBody = JSON.parse(responseBody);
-              log.res = httpReq.request;
+              log.res = parsedResponseBody;
               console.log("---LOG---: ", log);
               state.setState({logs: [...state.state.logs, log]})
             });
