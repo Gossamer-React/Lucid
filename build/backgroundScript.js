@@ -78,16 +78,16 @@ chrome.webRequest.onBeforeRequest.addListener(
 //     });
 // }
 
-function handleRequestFinished(request) {
-  console.log("Server IP: ", request.serverIPAddress);
-  request.getContent().then(content => {
-    console.log("Content: ", content);
-  });
-}
+// function handleRequestFinished(request) {
+//   console.log("Server IP: ", request.serverIPAddress);
+//   request.getContent().then(content => {
+//     console.log("Content: ", content);
+//   });
+// }
 
-if (chrome.devtools.network) {
-  chrome.devtools.network.onRequestFinished.addListener(handleRequestFinished);
-}
+// if (chrome.devtools.network) {
+//   chrome.devtools.network.onRequestFinished.addListener(handleRequestFinished);
+// }
 
 
 // chrome.browserAction.onClicked.addListener(buttonClicked);

@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       logs: [],
       appState: [],
-      stateProps: []
+      stateProps: [],
+      responses: []
     };
     chrome.devtools.panels.create(
       'Lucid',
@@ -31,7 +32,7 @@ class App extends Component {
 
         // *adds a listener to listen for any messages being sent by our background script
         backgroundPort.onMessage.addListener((req) => {
-          // * checkes if the message it's receiving is about a request about an http request or a change in the DOM
+          // * checks if the message it's receiving is about a request about an http request or a change in the DOM
           if (req.type === 'requestLogs') {
             console.log('state!!', state.state);
             console.log('Message from background script:', req.msg);
@@ -44,6 +45,30 @@ class App extends Component {
             console.log(this.state.appState, 'newly updated appState')
           }
         });
+
+        // * get request/response from HARlog
+        chrome.devtools.network.onRequestFinished.addListener(function (requestObj) {
+          if (requestObj.response) {
+            console.log('requestObj.response', requestObj.response);
+            console.log('requestObj', requestObj);
+            console.log('requestObj.request.url', requestObj.request.url);
+            console.log('requestObj.request.postData.text', requestObj.request.postData.text);
+            requestObj.getContent().then(content => {
+              console.log('requestObj.getContent', content);
+            });
+          }
+          // if (request.content) {
+          //   request.getContent().then(content => {
+          //     console.log('response.content', content);
+          //   });
+          // }
+        });
+
+        chrome.devtools.network.getHAR(function (harLog) {
+          if (harLog) {
+            console.log('harLog', harLog);
+          }
+        })
       }
     );
   }
