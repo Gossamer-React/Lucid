@@ -2,10 +2,6 @@ import React from 'react';
 import Tree from 'react-d3-tree';
 import Tool from './Tool';
 
-
- /*`#treeWrapper` in div points to reactD3Tree's css */
-
-//styles for the nodes in tree
 const styles = {
   nodes: {
     node: {

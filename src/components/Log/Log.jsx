@@ -1,7 +1,7 @@
 import React from "react";
 
 const Log = props => {
-  console.log("---LOG---", props);
+  // console.log("---LOG---", props);
 
   return (
     <div className="log">
@@ -15,7 +15,7 @@ const Log = props => {
         <b>Query:</b> {props.query}
       </p>
       <p className="log-p">
-        <b>Variable:</b> {JSON.stringify(props.variables)}
+        <b>Variables:</b> {JSON.stringify(props.variables)}
       </p>
     </div>
   );
