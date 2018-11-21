@@ -25,7 +25,7 @@ window.addEventListener('message', (e) => {
 //listen for the signal and tell reactTraverser to run
 chrome.runtime.onMessage.addListener((message, sender, res) => {
   if (message.name === 'connect') {
-    console.log('received message to run:', message)
+    // console.log('dispatched RT event to window:', message)
     const newEvent = new Event('run-traverser');
     window.dispatchEvent(newEvent);
   }

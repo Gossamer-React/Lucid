@@ -5,3 +5,8 @@
   display: flex;
   height: 100vh;
 }
+
+#reactLoader {
+  margin: 30px;
+  text-align: center
+}

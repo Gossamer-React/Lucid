@@ -1,31 +1,43 @@
-console.log('traverser activated')
+console.log('ran reacttraverser.js')
 const reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
 if (reactGlobalHook) {
-  const reactInstance = reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]]; console.log('react instance:', reactInstance)
-  let virtualdom;
+  
+  const reactInstance = reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]]; 
+  let virtualdom; 
   var reactDOMArr = [];
+  
+  window.addEventListener('run-traverser', () => {
+    // console.log('run the traverser!')
+    // setHook();
+    // reactGlobalHook.onCommitFiberRoot();
+  })
   
   function setHook() {
     //React 16+
-    if(reactInstance && reactInstance.version) {
+    if (reactInstance && reactInstance.version) {
+      console.log('Invoked setHook')
+      
       reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
         return function (...args) {
           virtualdom = args[1];
-          let nodeToTraverse = virtualdom.current.stateNode.current;
-          traverse(nodeToTraverse);
-          console.log('traverse complete: ', reactDOMArr);
-          
-          //send DOM's react component tree to contentScriptJS
-          window.postMessage(JSON.parse(JSON.stringify(
-            { type: 'reactTraverser', data: reactDOMArr}
-          )), '*')
+          if (virtualdom !== undefined) {
+            let nodeToTraverse = virtualdom.current.stateNode.current;
+            traverse(nodeToTraverse);
+            console.log('traverse complete: ', reactDOMArr);
             
-          reactDOMArr = [];
+            //send DOM's react component tree to contentScriptJS
+            window.postMessage(JSON.parse(JSON.stringify(
+              { type: 'reactTraverser', data: reactDOMArr}
+            )), '*')
+              
+            reactDOMArr = [];
+          }
           
           return oCFR(...args);
         };
       })(reactGlobalHook.onCommitFiberRoot);
+      
     } else if (reactInstance && reactInstance.Reconciler) {
       console.log('React version 16+ (Fiber) is required to use React-Lucid');
     } else {
@@ -34,10 +46,6 @@ if (reactGlobalHook) {
   }
   setHook();
       
-  window.addEventListener('run-traverser', () => {
-    console.log('run-traverser activated')
-    setHook();
-  })
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
 
@@ -57,7 +65,6 @@ if (reactGlobalHook) {
           reactDOMArr.push(obj);
           childrenarr = reactDOMArr[reactDOMArr.length-1]['children']
         } else {
-
           childrenarr.push(obj)
           if (!sib) {
             childrenarr = obj['children']
