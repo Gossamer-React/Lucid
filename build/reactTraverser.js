@@ -45,12 +45,7 @@ if (reactGlobalHook) {
     }
   }
   setHook();
-      
-<<<<<<< HEAD
-    
-  const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
 
-=======
   window.addEventListener('run-traverser', () => {
     console.log('run-traverser activated')
     setHook();
@@ -58,7 +53,6 @@ if (reactGlobalHook) {
 
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
->>>>>>> 68f10afc666bd736c1af1db963d5a6b56d8bb958
     if (node.type) {
       if (node.type.name) {
         //if desired node, create obj and push into reactDOMArr
