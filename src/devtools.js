@@ -45,6 +45,7 @@ class App extends Component {
         if (httpReq.request.url === "http://localhost:4000/graphql") {
           let log = {};
           log.req = httpReq.request;
+
           if (httpReq.response.content) {
             httpReq.getContent(responseBody => {
               const parsedResponseBody = JSON.parse(responseBody);
@@ -78,7 +79,7 @@ class App extends Component {
     } else {
       return (
         <div id="app-container">
-          {/* <LogContainer logs={this.state.logs} /> */}
+          <LogContainer logs={this.state.logs} />
           <h1>Welcome to React-Lucid</h1>
           {/* <Effects logs={this.state.logs} /> */}
           <TreeDiagram

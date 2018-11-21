@@ -1,7 +1,6 @@
 import React from "react";
 
 const Log = props => {
-  // console.log("---LOG---", props);
 
   return (
     <div className="log">
