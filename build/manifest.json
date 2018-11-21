@@ -8,8 +8,7 @@
     "tabs",
     "http://*/*",
     "https://*/*",
-    "file:///*",
-    "webRequest"
+    "file:///*"
   ],
   "devtools_page": "devtools.html",
   "homepage_url": "https://github.com/Gossamer-React/React-Lucid",

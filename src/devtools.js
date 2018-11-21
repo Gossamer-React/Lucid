@@ -41,13 +41,14 @@ class App extends Component {
 
       // chrome.devtools.network.onRequestFinished event provides an HTTP Archive format (HAR) entry as an argument to the event callback
       // * get request/response
-      chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
+      chrome.devtools.network.onRequestFinished.addListener(function(httpReq) {
         if (httpReq.request.url === "http://localhost:4000/graphql") {
           let log = {};
           log.req = httpReq.request;
 
           if (httpReq.response.content) {
             httpReq.getContent(responseBody => {
+              // TODO: account for the responses when they come in empty or if the response received is an error
               const parsedResponseBody = JSON.parse(responseBody);
               log.res = httpReq.request;
               console.log("---LOG---: ", log);
@@ -60,39 +61,41 @@ class App extends Component {
   }
 
   handleNodeClick(data, event) {
-    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
-    console.log(this.state.toggleTool, 'after setState')
     //toggles true and false
+    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
     // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
+    console.log(this.state.toggleTool, "after setState");
   }
 
   render() {
-    console.log('this is the state:', this.state)
+    console.log("this is the state:", this.state);
     //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
-    if (this.state.appState.length===0) {
-      return (
-        <div id='reactLoader'>
-          <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
-          <p>Note: Lucid works best on React v15/16</p>
-        </div>
-      )
-    } else {
-      return (
-        <div id="app-container">
-          <LogContainer logs={this.state.logs} />
-          <h1>Welcome to React-Lucid</h1>
-          {/* <Effects logs={this.state.logs} /> */}
-          <TreeDiagram
-            handleNodeClick={this.handleNodeClick}
-            appState={this.state.appState}
-            toggleTool={this.state.toggleTool}
-            clickData={this.state.clickData}
-          />
-        </div>
-      );
-    }
+    return (
+      <div>
+        {this.state.appState.length === 0 ? (
+          <div id="reactLoader">
+            <h1>
+              Please trigger a setState() to activate Lucid devtool.
+              <br />
+            </h1>
+            <p>Note: Lucid works best on React v15/16</p>
+          </div>
+        ) : (
+          <div id="app-container">
+            <LogContainer logs={this.state.logs} />
+            <h1>Welcome to React-Lucid</h1>
+            {/* <Effects logs={this.state.logs} /> */}
+            <TreeDiagram
+              handleNodeClick={this.handleNodeClick}
+              appState={this.state.appState}
+              toggleTool={this.state.toggleTool}
+              clickData={this.state.clickData}
+            />
+          </div>
+        )}
+      </div>
+    );
   }
 }
-
 
 render(<App />, document.getElementById("root"));
