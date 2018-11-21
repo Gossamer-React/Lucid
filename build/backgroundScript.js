@@ -92,8 +92,6 @@ chrome.webRequest.onBeforeRequest.addListener(
 //   chrome.devtools.network.onRequestFinished.addListener(handleRequestFinished);
 // }
 
-
-
 // chrome.browserAction.onClicked.addListener(buttonClicked);
 
 // function buttonClicked(tab) {

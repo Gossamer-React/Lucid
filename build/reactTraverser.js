@@ -46,9 +46,19 @@ if (reactGlobalHook) {
   }
   setHook();
       
+<<<<<<< HEAD
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
 
+=======
+  window.addEventListener('run-traverser', () => {
+    console.log('run-traverser activated')
+    setHook();
+  })
+
+    
+  const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
+>>>>>>> 68f10afc666bd736c1af1db963d5a6b56d8bb958
     if (node.type) {
       if (node.type.name) {
         //if desired node, create obj and push into reactDOMArr
@@ -57,9 +67,35 @@ if (reactGlobalHook) {
           attributes: {
             Id: node._debugID
           },
-          State: node.memoizedState,
           children: [],
-        }
+          State: node.memoizedState,
+          Props: function() {
+            try {
+              let result = {};
+              const props = node.memoizedProps;
+              if (typeof props === 'object') {
+                for (let prop in props) {
+                  const val = props[prop];
+                  if (typeof val === 'function') {
+                    //result[prop] = parseFuncName(val);
+                    result[prop] = JSON.stringify(val);
+                    //grabbing functions on top and then styles on bottom in props
+                  } else if (typeof val === 'object') {
+                    result[prop] = JSON.stringify(val);
+                  } else {
+                    result[prop] = val;
+                  }
+                }
+              } else {
+                result = props;
+              }
+              return result;
+            } catch (e) {
+              return {};
+            }
+          }()
+        }   
+
         //Create parent node in reactDOMArr
         if (reactDOMArr.length === 0) {
           reactDOMArr.push(obj);
@@ -85,32 +121,6 @@ if (reactGlobalHook) {
 } else {
   console.log('React devtool is required to use React-Lucid')
 }
-/*
-State: node.memoizedState,
-Id: node._debugID,
-Props: function () {
-              try {
-                let result = {};
-                const props = node.memoizedProps;
-                if (typeof props === 'object') {
-                  for (let prop in props) {
-                    const val = props[prop];
-                    if (typeof val === 'function') {
-                      //result[prop] = parseFuncName(val);
-                      result[prop] = JSON.stringify(val);
-                    } else if (typeof val === 'object') {
-                      result[prop] = JSON.stringify(val);
-                    } else {
-                      result[prop] = val;
-                    }
-                  }
-                } else {
-                  result = props;
-                }
-                return result;
-              } catch (e) {
-                return {};
-              }
-            }()
-*/
 
+
+ 
