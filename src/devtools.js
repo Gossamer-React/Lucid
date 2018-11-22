@@ -120,7 +120,7 @@ class App extends Component {
                   toggleTool={this.state.toggleTool}
                   clickData={this.state.clickData}
                 /> :
-                <h1>Here will be graphql</h1>
+                <Effects logs={this.state.logs} />
               }
             </div>
           </div>
