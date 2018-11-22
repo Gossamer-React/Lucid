@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
-import LogContainer from "./containers/LogContainer.jsx";
-import styles from "./../public/app.css";
-import Effects from "./containers/Effects";
-import TreeDiagram from "./components/TreeDiagram.jsx";
-import { networkInterfaces } from "os";
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import LogContainer from './containers/LogContainer.jsx';
+import styles from './../public/app.css';
+import Effects from './containers/Effects';
+import TreeDiagram from './components/TreeDiagram.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      window: 'Tree',
       logs: [],
       appState: [],
       toggleTool: false,
@@ -17,14 +17,14 @@ class App extends Component {
     };
     this.handleNodeClick = this.handleNodeClick.bind(this);
 
-    chrome.devtools.panels.create("Lucid", null, "devtools.html", () => {
+    chrome.devtools.panels.create('Lucid', null, 'devtools.html', () => {
       let state = this;
       const backgroundPort = chrome.runtime.connect({
-        name: "devtool-background-port"
+        name: 'devtool-background-port'
       });
       // send a 'connect' message to backgroundScript to trigger reactTraverse with the tabId
       backgroundPort.postMessage({
-        name: "connect",
+        name: 'connect',
         tabId: chrome.devtools.inspectedWindow.tabId
       });
 
@@ -41,8 +41,8 @@ class App extends Component {
 
       // chrome.devtools.network.onRequestFinished event provides an HTTP Archive format (HAR) entry as an argument to the event callback
       // * get request/response
-      chrome.devtools.network.onRequestFinished.addListener(function(httpReq) {
-        if (httpReq.request.url === "http://localhost:4000/graphql") {
+      chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
+        if (httpReq.request.url === 'http://localhost:4000/graphql') {
           let log = {};
           log.req = httpReq.request;
 
@@ -67,13 +67,24 @@ class App extends Component {
     console.log(this.state.toggleTool, "after setState");
   }
 
+  // * Handles the tab click for tree and req/res window
+  handleWindowChange() {
+    if (this.state.window === 'Tree') {
+      this.setState({ window: 'Graphql' });
+    } else {
+      this.setState({
+        window: 'Tree'
+      });
+    }
+  }
+
   render() {
     console.log("this is the state:", this.state);
     //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
     return (
       <div>
         {this.state.appState.length === 0 ? (
-          <div id="reactLoader">
+          <div id='reactLoader'>
             <h1>
               Please trigger a setState() to activate Lucid devtool.
               <br />
@@ -81,18 +92,27 @@ class App extends Component {
             <p>Note: Lucid works best on React v15/16</p>
           </div>
         ) : (
-          <div id="app-container">
-            <LogContainer logs={this.state.logs} />
-            <h1>Welcome to React-Lucid</h1>
-            {/* <Effects logs={this.state.logs} /> */}
-            <TreeDiagram
-              handleNodeClick={this.handleNodeClick}
-              appState={this.state.appState}
-              toggleTool={this.state.toggleTool}
-              clickData={this.state.clickData}
-            />
-          </div>
-        )}
+            <div id='app-container'>
+              <LogContainer logs={this.state.logs} />
+              <h1>Welcome to React-Lucid</h1>
+              <div id='window-nav'>
+                <button className="window-btn" onClick={() => this.handleWindowChange()}>Tree</button>
+                <button className="window-btn" onClick={() => this.handleWindowChange()}>Effects</button>
+              </div>
+              {/* This checks what window the user has click on. 
+              They can click to see the state tree or 
+              request/reponse from their httprequest */}
+              {this.state.window ?
+                {/* <Effects logs={this.state.logs} /> */ } :
+                < TreeDiagram
+                  handleNodeClick={this.handleNodeClick}
+                  appState={this.state.appState}
+                  toggleTool={this.state.toggleTool}
+                  clickData={this.state.clickData}
+                />
+              }
+            </div>
+          )}
       </div>
     );
   }

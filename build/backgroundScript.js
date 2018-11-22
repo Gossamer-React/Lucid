@@ -1,5 +1,4 @@
 console.log("Background script running");
-const _Logs = [];
 var _DevtoolPort;
 var _ContentscriptPort;
 
