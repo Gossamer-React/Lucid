@@ -83,36 +83,36 @@ class App extends Component {
     //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
     return (
       <div>
-        {this.state.appState.length === 0 ? (
+        {this.state.appState.length === 0 ?
           <div id='reactLoader'>
             <h1>
               Please trigger a setState() to activate Lucid devtool.
               <br />
             </h1>
             <p>Note: Lucid works best on React v15/16</p>
-          </div>
-        ) : (
-            <div id='app-container'>
-              <LogContainer logs={this.state.logs} />
-              <h1>Welcome to React-Lucid</h1>
+          </div> :
+          <div id='app-container'>
+            <LogContainer logs={this.state.logs} />
+            <div id='window'>
               <div id='window-nav'>
-                <button className="window-btn" onClick={() => this.handleWindowChange()}>Tree</button>
-                <button className="window-btn" onClick={() => this.handleWindowChange()}>Effects</button>
+                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>Tree</button>
+                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>Effects</button>
               </div>
               {/* This checks what window the user has click on. 
               They can click to see the state tree or 
               request/reponse from their httprequest */}
-              {this.state.window ?
-                {/* <Effects logs={this.state.logs} /> */ } :
+              {this.state.window === 'Tree' ?
                 < TreeDiagram
                   handleNodeClick={this.handleNodeClick}
                   appState={this.state.appState}
                   toggleTool={this.state.toggleTool}
                   clickData={this.state.clickData}
-                />
+                /> :
+                <h1>Here will be graphql</h1>
               }
             </div>
-          )}
+          </div>
+        }
       </div>
     );
   }
