@@ -49,7 +49,7 @@ if (reactGlobalHook) {
   window.addEventListener('run-traverser', () => {
     console.log('run-traverser activated')
     setHook();
-  })
+  });
 
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
