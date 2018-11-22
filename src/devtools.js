@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-import { render } from "react-dom";
-import LogContainer from "./containers/LogContainer.jsx";
-import styles from "./../public/app.css";
-import Effects from "./containers/Effects";
-import TreeDiagram from "./components/TreeDiagram.jsx";
-=======
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 import Effects from './containers/Effects';
 import TreeDiagram from './components/TreeDiagram.jsx';
->>>>>>> aa5685e6fc62053494c455e4e63d282d724c110e
 
 class App extends Component {
   constructor() {
@@ -71,7 +62,7 @@ class App extends Component {
             httpReq.getContent(responseBody => {
               // TODO: account for the responses when they come in empty or if the response received is an error
               const parsedResponseBody = JSON.parse(responseBody);
-              log.res = httpReq.request;
+              log.res = parsedResponseBody;
               console.log("---LOG---: ", log);
               state.setState({ logs: [...state.state.logs, log] });
             });
@@ -129,7 +120,7 @@ class App extends Component {
                   toggleTool={this.state.toggleTool}
                   clickData={this.state.clickData}
                 /> :
-                <h1>Here will be graphql</h1>
+                <Effects logs={this.state.logs} />
               }
             </div>
           </div>
