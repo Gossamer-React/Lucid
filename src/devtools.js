@@ -6,8 +6,8 @@ import Effects from './containers/Effects';
 import TreeDiagram from './components/TreeDiagram.jsx';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       window: 'Tree',
       logs: [],
