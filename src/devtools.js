@@ -1,9 +1,18 @@
+<<<<<<< HEAD
+import React, { Component } from "react";
+import { render } from "react-dom";
+import LogContainer from "./containers/LogContainer.jsx";
+import styles from "./../public/app.css";
+import Effects from "./containers/Effects";
+import TreeDiagram from "./components/TreeDiagram.jsx";
+=======
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 import Effects from './containers/Effects';
 import TreeDiagram from './components/TreeDiagram.jsx';
+>>>>>>> aa5685e6fc62053494c455e4e63d282d724c110e
 
 class App extends Component {
   constructor() {
@@ -11,31 +20,43 @@ class App extends Component {
     this.state = {
       window: 'Tree',
       logs: [],
+      appReactDOM: [],
       appState: [],
       toggleTool: false,
       clickData: []
     };
     this.handleNodeClick = this.handleNodeClick.bind(this);
 
-    chrome.devtools.panels.create('Lucid', null, 'devtools.html', () => {
+    // initialize a timeout variable to throttle setState()s on this.state.appState
+    let timeout;
+
+    chrome.devtools.panels.create("Lucid", null, "devtools.html", () => {
       let state = this;
-      const backgroundPort = chrome.runtime.connect({
-        name: 'devtool-background-port'
+      // create a port called 'devtool-background-port'
+      const devToolPort = chrome.runtime.connect({
+        name: "devtool-background-port"
       });
-      // send a 'connect' message to backgroundScript to trigger reactTraverse with the tabId
-      backgroundPort.postMessage({
-        name: 'connect',
+       
+      devToolPort.postMessage({
+        name: "connect",
         tabId: chrome.devtools.inspectedWindow.tabId
       });
 
-      backgroundPort.onMessage.addListener(req => {
+      devToolPort.onMessage.addListener(req => {
         // * checks if the message it's receiving is about a request about an http request or a change in the DOM
         if (req.type === "requestLogs") {
           const newLogs = req.msg;
           // state.setState({ logs: newLogs });
         } else if (req.type === "appState") {
-          const applicationState = req.msg;
-          state.setState({ appState: applicationState });
+          state.setState({ appReactDOM: req.msg });
+
+          //if there is an active setTimeout, clear it
+          clearTimeout(timeout);
+
+          timeout = setTimeout(() => {
+              state.setState({ appState: req.msg })
+              alert('state was updated')
+          }, 2000);
         }
       });
 
