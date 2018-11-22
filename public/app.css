@@ -15,3 +15,24 @@
   width: 100%;
   border: 1px solid black;
 }
+
+/* For window  */
+#window{
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+}
+.window-btn{
+  width: 50%;
+  border: solid 1px black;
+  border-radius: 0px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.window-btn:focus{
+  outline: none;
+}
+
