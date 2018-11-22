@@ -7,8 +7,8 @@ import TreeDiagram from "./components/TreeDiagram.jsx";
 import { networkInterfaces } from "os";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       logs: [],
       appState: [],
