@@ -27,7 +27,7 @@ class App extends Component {
       const devToolPort = chrome.runtime.connect({
         name: "devtool-background-port"
       });
-       
+
       devToolPort.postMessage({
         name: "connect",
         tabId: chrome.devtools.inspectedWindow.tabId
@@ -45,8 +45,7 @@ class App extends Component {
           clearTimeout(timeout);
 
           timeout = setTimeout(() => {
-              state.setState({ appState: req.msg })
-              alert('state was updated')
+            state.setState({ appState: req.msg })
           }, 2000);
         }
       });
