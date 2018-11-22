@@ -2,14 +2,12 @@ import React from 'react';
 
 const QueryString = ({ logs }) => {
   
-  // if (logs.length !== 0) {
-  //   console.log('QueryString', logs[logs.length - 1].query);
-  // }
+  let query = JSON.parse(logs[logs.length - 1].req.postData.text).query;
   
   return (
     <div>
       <div>QueryString tab</div>
-      { logs.length !== 0 ? <div>{logs[logs.length - 1].query}</div> : null }
+      { logs.length !== 0 ? <div>{query}</div> : null }
     </div>
   )
 }

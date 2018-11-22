@@ -49,7 +49,7 @@ class App extends Component {
           if (httpReq.response.content) {
             httpReq.getContent(responseBody => {
               const parsedResponseBody = JSON.parse(responseBody);
-              log.res = httpReq.request;
+              log.res = parsedResponseBody;
               console.log("---LOG---: ", log);
               state.setState({ logs: [...state.state.logs, log] });
             });
@@ -81,7 +81,7 @@ class App extends Component {
         <div id="app-container">
           <LogContainer logs={this.state.logs} />
           <h1>Welcome to React-Lucid</h1>
-          {/* <Effects logs={this.state.logs} /> */}
+          <Effects logs={this.state.logs} />
           <TreeDiagram
             handleNodeClick={this.handleNodeClick}
             appState={this.state.appState}
