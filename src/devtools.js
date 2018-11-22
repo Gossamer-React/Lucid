@@ -4,38 +4,49 @@ import LogContainer from "./containers/LogContainer.jsx";
 import styles from "./../public/app.css";
 import Effects from "./containers/Effects";
 import TreeDiagram from "./components/TreeDiagram.jsx";
-import { networkInterfaces } from "os";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       logs: [],
+      appReactDOM: [],
       appState: [],
       toggleTool: false,
       clickData: []
     };
     this.handleNodeClick = this.handleNodeClick.bind(this);
 
+    // initialize a timeout variable to throttle setState()s on this.state.appState
+    let timeout;
+
     chrome.devtools.panels.create("Lucid", null, "devtools.html", () => {
       let state = this;
-      const backgroundPort = chrome.runtime.connect({
+      // create a port called 'devtool-background-port'
+      const devToolPort = chrome.runtime.connect({
         name: "devtool-background-port"
       });
-      // send a 'connect' message to backgroundScript to trigger reactTraverse with the tabId
-      backgroundPort.postMessage({
+       
+      devToolPort.postMessage({
         name: "connect",
         tabId: chrome.devtools.inspectedWindow.tabId
       });
 
-      backgroundPort.onMessage.addListener(req => {
+      devToolPort.onMessage.addListener(req => {
         // * checks if the message it's receiving is about a request about an http request or a change in the DOM
         if (req.type === "requestLogs") {
           const newLogs = req.msg;
           // state.setState({ logs: newLogs });
         } else if (req.type === "appState") {
-          const applicationState = req.msg;
-          state.setState({ appState: applicationState });
+          state.setState({ appReactDOM: req.msg });
+
+          //if there is an active setTimeout, clear it
+          clearTimeout(timeout);
+
+          timeout = setTimeout(() => {
+              state.setState({ appState: req.msg })
+              alert('state was updated')
+          }, 2000);
         }
       });
 
@@ -82,6 +93,7 @@ class App extends Component {
           <LogContainer logs={this.state.logs} />
           <h1>Welcome to React-Lucid</h1>
           {/* <Effects logs={this.state.logs} /> */}
+
           <TreeDiagram
             handleNodeClick={this.handleNodeClick}
             appState={this.state.appState}
