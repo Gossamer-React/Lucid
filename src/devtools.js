@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-import { render } from "react-dom";
-import LogContainer from "./containers/LogContainer.jsx";
-import styles from "./../public/app.css";
-import Effects from "./containers/Effects";
-import TreeDiagram from "./components/TreeDiagram.jsx";
-=======
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 import Effects from './containers/Effects';
 import TreeDiagram from './components/TreeDiagram.jsx';
->>>>>>> aa5685e6fc62053494c455e4e63d282d724c110e
 
 class App extends Component {
   constructor() {
