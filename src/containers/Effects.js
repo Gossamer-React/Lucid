@@ -1,5 +1,4 @@
 import React from 'react';
-import GraphQLServer from '../components/GraphQLServer';
 import GraphQLData from '../components/GraphQLData';
 
 const Effects = ({ logs }) => {
@@ -8,7 +7,6 @@ const Effects = ({ logs }) => {
 
   return (
     <div>
-      <GraphQLServer />
       <GraphQLData logs={ logs } />
     </div>
   )
