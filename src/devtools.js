@@ -45,9 +45,8 @@ class App extends Component {
           clearTimeout(timeout);
 
           timeout = setTimeout(() => {
-              state.setState({ appState: req.msg })
-              alert('state was updated')
-          }, 2000);
+            state.setState({ appState: req.msg })
+          }, 1000);
         }
       });
 

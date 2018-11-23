@@ -7,11 +7,11 @@ if (reactGlobalHook) {
   let virtualdom; 
   var reactDOMArr = [];
   
-  window.addEventListener('run-traverser', () => {
+  // window.addEventListener('run-traverser', () => {
     // console.log('run the traverser!')
     // setHook();
     // reactGlobalHook.onCommitFiberRoot();
-  })
+  // })
   
   function setHook() {
     //React 16+
@@ -45,12 +45,6 @@ if (reactGlobalHook) {
     }
   }
   setHook();
-
-  window.addEventListener('run-traverser', () => {
-    console.log('run-traverser activated')
-    setHook();
-  });
-
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
     if (node.type) {
@@ -68,16 +62,12 @@ if (reactGlobalHook) {
               let result = {};
               const props = node.memoizedProps;
               if (typeof props === 'object') {
-                for (let prop in props) {
-                  const val = props[prop];
-                  if (typeof val === 'function') {
-                    //result[prop] = parseFuncName(val);
-                    result[prop] = JSON.stringify(val);
-                    //grabbing functions on top and then styles on bottom in props
-                  } else if (typeof val === 'object') {
-                    result[prop] = JSON.stringify(val);
+                for (let key in props) {
+                  const val = props[key];
+                  if (typeof val === 'function' || typeof val === 'object') {
+                    result[key] = JSON.stringify(val);
                   } else {
-                    result[prop] = val;
+                    result[key] = val;
                   }
                 }
               } else {
@@ -88,7 +78,7 @@ if (reactGlobalHook) {
               return {};
             }
           }()
-        }   
+        }
 
         //Create parent node in reactDOMArr
         if (reactDOMArr.length === 0) {
