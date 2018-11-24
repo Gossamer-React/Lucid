@@ -1,9 +1,20 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import { render } from "react-dom";
 import LogContainer from "./containers/LogContainer.jsx";
 import styles from "./../public/app.css";
 import Effects from "./containers/Effects";
 import TreeDiagram from "./components/TreeDiagram.jsx";
+=======
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import fetch from 'node-fetch';
+import { introspectionQuery } from 'graphql';
+import LogContainer from './containers/LogContainer.jsx';
+import styles from './../public/app.css';
+import GraphQL from './containers/GraphQL';
+import TreeDiagram from './components/TreeDiagram.jsx';
+>>>>>>> 453f8ab33938e9cac770d52b1454f5daccefa74c
 
 class App extends Component {
   constructor() {
@@ -12,7 +23,8 @@ class App extends Component {
       window: "Tree",
       logs: [],
       appReactDOM: [],
-      appState: []
+      appState: [],
+      schema: ''
     };
     // initialize a timeout variable to throttle setState()s on this.state.appState
     let timeout;
@@ -73,6 +85,34 @@ class App extends Component {
     });
   }
 
+<<<<<<< HEAD
+=======
+  fetchSchemaFromGraphQLServer() {
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: introspectionQuery })
+    })
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          schema: JSON.stringify(json.data)
+        })
+      );
+  }
+
+  componentDidMount() {
+    this.fetchSchemaFromGraphQLServer();
+  }
+
+  handleNodeClick(data, event) {
+    //toggles true and false
+    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
+    // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
+    console.log(this.state.toggleTool, "after setState");
+  }
+
+>>>>>>> 453f8ab33938e9cac770d52b1454f5daccefa74c
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
     if (this.state.window === "Tree") {
@@ -100,6 +140,7 @@ class App extends Component {
         ) : (
           <div id="app-container">
             <LogContainer logs={this.state.logs} />
+<<<<<<< HEAD
             <div id="window">
               <div id="window-nav">
                 <button
@@ -118,15 +159,30 @@ class App extends Component {
                 >
                   Effects
                 </button>
+=======
+            <div id='window'>
+              <div id='window-nav'>
+                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>React</button>
+                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>GraphQL</button>
+>>>>>>> 453f8ab33938e9cac770d52b1454f5daccefa74c
               </div>
               {/* This checks what window the user has click on. 
               They can click to see the state tree or 
               request/reponse from their httprequest */}
+<<<<<<< HEAD
               {this.state.window === "Tree" ? (
                 <TreeDiagram appState={this.state.appState} />
               ) : (
                 <Effects logs={this.state.logs} />
               )}
+=======
+              {this.state.window === 'Tree' ?
+                < TreeDiagram
+                  appState={this.state.appState}
+                /> :
+                <GraphQL logs={this.state.logs} schema={this.state.schema} />
+              }
+>>>>>>> 453f8ab33938e9cac770d52b1454f5daccefa74c
             </div>
           </div>
         )}
