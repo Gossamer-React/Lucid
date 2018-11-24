@@ -40,7 +40,7 @@ class App extends Component {
       console.log('componentDidMount!', this);
       // * checks if the message it's receiving is about a change in the DOM
 
-      if (req.type === "appState") {
+      if (req.type === 'appState') {
         console.log("This is state!!", appState);
         appState.setState({ appReactDOM: req.msg });
 
@@ -159,13 +159,15 @@ class App extends Component {
               They can click to see the state tree or 
               request/reponse from their httprequest */}
               {this.state.window === 'React' ?
-                < TreeDiagram
-                  appState={this.state.appState}
-                /> :
+                // < TreeDiagram
+                //   appState={this.state.appState}
+                // /> 
+                null:
                 <GraphQL logs={this.state.logs} schema={this.state.schema} />
               }
             </div>
-            }
+          </div>
+        }
       </div>
     );
   }
