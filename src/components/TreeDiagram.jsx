@@ -7,13 +7,8 @@ class TreeDiagram extends React.Component {
     super(props);
     this.state = {
       transition: null,
-      toggleTool: false,
-      hoverData: [],
-      hoverCoordinates: { x: null, y: null }
+      toggle: false
     };
-    this.handleMouseHover = this.handleMouseHover.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-    let timeout;
   }
 
   componentDidMount() {
@@ -28,6 +23,8 @@ class TreeDiagram extends React.Component {
     });
   }
 
+<<<<<<< HEAD
+=======
   handleMouseHover(data, e) {
     //toggles true and false and grabs event coordinates/data
     // console.log(e, 'this is the event that happened')
@@ -61,6 +58,7 @@ class TreeDiagram extends React.Component {
     });
   }
 
+>>>>>>> cc8d15fb6a81634fc8b7094510aaf0f2a1dddff6
   render() {
     const styles = {
       nodes: {
@@ -106,22 +104,24 @@ class TreeDiagram extends React.Component {
             styles={styles}
             translate={this.state.translate}
             separation={{ siblings: 1, nonSiblings: 1 }}
-            onMouseOver={(nodeData, e) => {
-              this.handleMouseHover(nodeData, e);
-            }}
-            onMouseOut={() => {
-              this.handleMouseOut();
+            allowForeignObjects
+            nodeLabelComponent={{
+              render: <Tool className='myLabelComponentInSvg' />,
+              foreignObjectWrapper: {
+                y: -5,
+                x: 10
+              }
             }}
           />
         ) : (
             <p> Tree Loading ... </p>
           )}
 
-        {this.state.toggleTool === true ? 
+        {/* {this.state.toggleTool === true ? 
           //set a timeout for the hover at 500ms
-            <Tool hoverData={this.state.hoverData} />  
+            <Tool />  
             : null 
-        }
+        } */}
       </div>
     );
   }
