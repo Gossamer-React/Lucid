@@ -30,6 +30,7 @@ class TreeDiagram extends React.Component {
 
   handleMouseHover(data) {
     //toggles true and false and grabs event coordinates/data
+<<<<<<< HEAD
     console.log(e, 'this is the event that happened')
     this.setState(
       {
@@ -47,6 +48,31 @@ class TreeDiagram extends React.Component {
         }
       }
     );
+=======
+    // console.log(e, 'this is the event that happened')
+    // this.setState(
+    //   {
+    //     hoverCoordinates: { x: data.x, y: data.y },
+    //     hoverData: data,
+    //     toggleTool: !this.state.toggleTool
+    //   },
+    //   () => {
+    //     console.log(this.state.hoverData, 'this is hover data')
+    //     console.log(this.state.hoverData.attributes.Id, 
+    //       'id------')
+    //     const modal = document.getElementById(`${this.state.hoverData.attributes.Id}`);
+    //     console.log(modal, 'got modal?')
+    //     const dimensions = this.treeContainer.getBoundingClientRect();
+    //     console.log(dimensions, 'treecontainer dimension')
+    //     console.log(document.getElementById('treeWrapper'))
+
+    //     if(modal !== null) {
+    //       modal.style.top = data.y + "em";
+    //       modal.style.left = data.x + "em";
+    //     }
+    //   }
+    // );
+>>>>>>> cc8d15fb6a81634fc8b7094510aaf0f2a1dddff6
   }
 
   handleMouseOut() {

@@ -1,49 +1,43 @@
 import React from 'react';
+<<<<<<< HEAD
 import { buildClientSchema } from 'graphql';
+=======
+import { buildClientSchema, printSchema } from 'graphql';
+>>>>>>> cc8d15fb6a81634fc8b7094510aaf0f2a1dddff6
 
 const GraphQLSchema = ({ logs, schema }) => {
 
-  let response = JSON.stringify(logs[logs.length - 1].res);
-  let schemaObj = JSON.parse(schema);
+  // let response = JSON.stringify(logs[logs.length - 1].res);
 
-  console.log('schemaObj', schemaObj);
+  if (schema !== 'GraphQL schema not available.') {
 
-  let typesArray = schemaObj.__schema.types;
-  let schemaQueriesArray = typesArray[0].fields;
-  let schemaMutationsArray = typesArray[4].fields;
+    let schemaObj = JSON.parse(schema);
 
-  let schemaQueries = schemaQueriesArray.map((element, i) => {
+    console.log('--schemaObj:', schemaObj);
+    console.log('--schemaSDL:', printSchema(buildClientSchema(schemaObj)));
+
     return (
-      <Schema
-        key={i}
-        name={element.name}
-        element={element}
-        schemaObj={schemaObj}
-      />
-    );
-  });
+      <div id="graphql" >
+        <div className="graphql">
+          <p className="graphql-p">
+            <b>Schema:</b> {JSON.stringify(printSchema(buildClientSchema(schemaObj)))}
+          </p>
+        </div>
+      </div>
+    )
 
-  let schemaMutations = schemaMutationsArray.map((element, i) => {
+  } else {
+    
     return (
-      <Schema
-        key={i}
-        name={element.name}
-        element={element}
-        schemaObj={schemaObj}
-      />
-    );
-  });
-
-  return (
-    <div>
-      <p className="schema-p">
-        <b>Schema Queries:</b> {schemaQueries}
-      </p>
-      <p className="schema-p">
-        <b>Schema Mutations:</b> {schemaMutations}
-      </p>
-    </div>
-  )
+      <div id="graphql" >
+        <div className="graphql">
+          <p className="graphql-p">
+            No GraphQL data available.
+          </p>
+        </div>
+      </div>
+    )
+  }
 }
 
 export default GraphQLSchema;

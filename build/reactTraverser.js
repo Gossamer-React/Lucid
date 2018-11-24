@@ -46,7 +46,6 @@ if (reactGlobalHook) {
   }
   setHook();
 
-
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
     if (node.type) {
       if (node.type.name) {

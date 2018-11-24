@@ -11,31 +11,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      window: "Tree",
+      window: 'React',
       logs: [],
       appReactDOM: [],
       appState: [],
-      schema: "",
+      schema: 'GraphQL schema not available.'
     };
 
     chrome.devtools.panels.create("Lucid", null, "devtools.html", (panel) => {
       console.log('Connected to panel: ', panel);
     });
   }
-
-  // fetchSchemaFromGraphQLServer() {
-  //   fetch("http://localhost:4000/graphql", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ query: introspectionQuery })
-  //   })
-  //     .then(res => res.json())
-  //     .then(json =>
-  //       this.setState({
-  //         schema: JSON.stringify(json.data)
-  //       })
-  //     );
-  // }
 
   componentDidMount() {
     const appState = this;
@@ -89,8 +75,32 @@ class App extends Component {
         }
       }
     });
+  }
 
-    // this.fetchSchemaFromGraphQLServer();
+  fetchSchemaFromGraphQLServer() {
+    if (this.state.logs.length !== 0) {
+
+      let url = this.state.logs[this.state.logs.length - 1].req.url;
+      console.log('URL', url);
+
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: introspectionQuery })
+      })
+        .then(res => res.json())
+        .then(json =>
+          this.setState({
+            schema: JSON.stringify(json.data)
+          })
+        );
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.schema === 'GraphQL schema not available.') {
+      this.fetchSchemaFromGraphQLServer();
+    }
   }
 
   handleNodeClick(data, event) {
@@ -102,11 +112,11 @@ class App extends Component {
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
-    if (this.state.window === "Tree") {
-      this.setState({ window: "Graphql" });
+    if (this.state.window === 'React') {
+      this.setState({ window: 'GraphQL' });
     } else {
       this.setState({
-        window: "Tree"
+        window: 'React'
       });
     }
   }
@@ -116,51 +126,51 @@ class App extends Component {
     //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
     return (
       <div>
-        {this.state.appState.length === 0 ? (
+        {this.state.appState.length === 0 ?
           <div id="reactLoader">
             <h1>
               Please trigger a setState() to activate Lucid devtool.
               <br />
             </h1>
             <p>Note: Lucid works best on React v15/16</p>
-          </div>
-        ) : (
-            <div id="app-container">
-              <LogContainer logs={this.state.logs} />
-              <div id="window">
-                <div id="window-nav">
-                  <button
-                    className="window-btn"
-                    onClick={() => {
-                      this.handleWindowChange();
-                    }}
-                  >
-                    React
+          </div> :
+          <div id="app-container">
+            <LogContainer logs={this.state.logs} />
+            <div id="window">
+              <div id="window-nav">
+                <button
+                  className="window-btn"
+                  onClick={() => {
+                    this.handleWindowChange();
+                  }}
+                >
+                  React
                 </button>
-                  <button
-                    className="window-btn"
-                    onClick={() => {
-                      this.handleWindowChange();
-                    }}
-                  >
-                    GraphQL
+                <button
+                  className="window-btn"
+                  onClick={() => {
+                    this.handleWindowChange();
+                  }}
+                >
+                  GraphQL
                 </button>
-                </div>
-                {/* This checks what window the user has click on. 
+              </div>
+              {/* This checks what window the user has click on. 
               They can click to see the state tree or 
               request/reponse from their httprequest */}
-                {/* {this.state.window === "Tree" ? (
-                  // < TreeDiagram
-                  //   appState={this.state.appState}
-                  // />
-                  <GraphQL logs={this.state.logs} schema={this.state.schema} />
-                ) : null} */}
-              </div>
+              {this.state.window === 'React' ?
+                < TreeDiagram
+                  appState={this.state.appState}
+                /> :
+                <GraphQL logs={this.state.logs} schema={this.state.schema} />
+              }
             </div>
-          )}
+            }
       </div>
     );
   }
 }
+
+
 
 render(<App />, document.getElementById("root"));
