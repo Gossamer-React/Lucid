@@ -8,9 +8,9 @@ const GraphQL = ({ logs, schema }) => {
   
   return (
     <div>
-      <GraphQLQuery logs={logs} />
+      {/* <GraphQLQuery logs={logs} /> */}
       <GraphQLResponse logs={logs} />
-      <GraphQLData logs={logs} />
+      {/* <GraphQLData logs={logs} /> */}
       <GraphQLSchema logs={logs} schema={schema} />
     </div>
   )

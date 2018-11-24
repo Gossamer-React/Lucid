@@ -1,6 +1,5 @@
 import React from 'react';
 import { buildClientSchema } from 'graphql';
-import Schema from './Schema';
 
 const GraphQLSchema = ({ logs, schema }) => {
 
