@@ -12,12 +12,8 @@ class App extends Component {
       window: 'Tree',
       logs: [],
       appReactDOM: [],
-      appState: [],
-      toggleTool: false,
-      clickData: []
+      appState: []
     };
-    this.handleNodeClick = this.handleNodeClick.bind(this);
-
     // initialize a timeout variable to throttle setState()s on this.state.appState
     let timeout;
 
@@ -72,12 +68,6 @@ class App extends Component {
     });
   }
 
-  handleNodeClick(data, event) {
-    //toggles true and false
-    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
-    // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
-    console.log(this.state.toggleTool, "after setState");
-  }
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
@@ -115,10 +105,7 @@ class App extends Component {
               request/reponse from their httprequest */}
               {this.state.window === 'Tree' ?
                 < TreeDiagram
-                  handleNodeClick={this.handleNodeClick}
                   appState={this.state.appState}
-                  toggleTool={this.state.toggleTool}
-                  clickData={this.state.clickData}
                 /> :
                 <Effects logs={this.state.logs} />
               }
