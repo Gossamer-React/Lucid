@@ -1,17 +1,34 @@
 import React from 'react';
-import QueryString from './QueryString';
-import QueryResult from './QueryResult';
-import QueryDetails from './QueryDetails';
-import GraphQLServer from './GraphQLServer';
 
 const GraphQLData = ({ logs }) => {
-  
+
+  let reqText = JSON.parse(logs[logs.length - 1].req.postData.text);
+  console.log('reqText', reqText);
+  let operationName = JSON.stringify(reqText.operationName);
+  let variables = JSON.stringify(reqText.variables);
+  let url = logs[logs.length - 1].req.url;
+  let method = logs[logs.length - 1].req.method;
+
   return (
     <div>
-      <QueryString logs={ logs } />
-      <QueryResult logs={ logs } />
-      <QueryDetails logs={ logs } />
-      <GraphQLServer logs={ logs } />
+      { logs.length !== 0 
+      ? 
+      <div className="details">
+        <p className="details-p">
+          <b>Operation Name:</b> {operationName}
+        </p>
+        <p className="details-p">
+          <b>URL:</b> {url}
+        </p>
+        <p className="details-p">
+          <b>Method:</b> {method}
+        </p>
+        <p className="details-p">
+          <b>Variables:</b> {JSON.stringify(variables)}
+        </p>
+      </div>
+      : 
+      null }
     </div>
   )
 }

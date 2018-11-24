@@ -1,24 +1,15 @@
-// import React from 'react';
+import React from 'react';
+import { buildClientSchema } from 'graphql';
 
-<<<<<<< HEAD
-// const Schema = ({  }) => {
-
-//   return (
-//     <div>
-//       <div>Schema component</div>
-//     </div>
-//   )
-// }
-=======
-const Schema = ({ key, name }) => {
+const Schema = ({ key, name, element, schemaObj }) => {
 
   return (
     <div>
-      <div>Schema component</div>
-      <div key={key} >{name}</div>
+      <p key={key} className="schema-p">
+        <b>{name}:</b> {JSON.stringify(buildClientSchema(schemaObj))}
+      </p>
     </div>
   )
 }
->>>>>>> 0baffc9ad4f5020ef5dc4e53fbb9cd6756583ed5
 
-// export default Schema;
+export default Schema;

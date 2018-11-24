@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import fetch from 'node-fetch';
+import { introspectionQuery } from 'graphql';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 import Effects from './containers/Effects';
@@ -12,7 +14,8 @@ class App extends Component {
       window: 'Tree',
       logs: [],
       appReactDOM: [],
-      appState: []
+      appState: [],
+      schema: ''
     };
     // initialize a timeout variable to throttle setState()s on this.state.appState
     let timeout;
@@ -68,6 +71,30 @@ class App extends Component {
     });
   }
 
+  fetchSchemaFromGraphQLServer() {
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: introspectionQuery })
+    })
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          schema: JSON.stringify(json.data)
+        })
+      );
+  }
+
+  componentDidMount() {
+    this.fetchSchemaFromGraphQLServer();
+  }
+
+  handleNodeClick(data, event) {
+    //toggles true and false
+    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
+    // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
+    console.log(this.state.toggleTool, "after setState");
+  }
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
@@ -107,7 +134,7 @@ class App extends Component {
                 < TreeDiagram
                   appState={this.state.appState}
                 /> :
-                <Effects logs={this.state.logs} />
+                <Effects logs={this.state.logs} schema={this.state.schema} />
               }
             </div>
           </div>
