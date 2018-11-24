@@ -3,8 +3,7 @@ import React from 'react';
 const GraphQLData = ({ logs }) => {
 
   let reqText = JSON.parse(logs[logs.length - 1].req.postData.text);
-  console.log('reqText', reqText);
-  let operationName = JSON.stringify(reqText.operationName);
+  console.log('--reqText:', reqText);
   let variables = JSON.stringify(reqText.variables);
   let url = logs[logs.length - 1].req.url;
   let method = logs[logs.length - 1].req.method;
@@ -14,9 +13,6 @@ const GraphQLData = ({ logs }) => {
       { logs.length !== 0 
       ? 
       <div className="details">
-        <p className="details-p">
-          <b>Operation Name:</b> {operationName}
-        </p>
         <p className="details-p">
           <b>URL:</b> {url}
         </p>

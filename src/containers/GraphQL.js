@@ -4,7 +4,7 @@ import GraphQLResponse from '../components/GraphQLResponse';
 import GraphQLData from '../components/GraphQLData';
 import GraphQLSchema from '../components/GraphQLSchema';
 
-const Effects = ({ logs, schema }) => {
+const GraphQL = ({ logs, schema }) => {
   
   return (
     <div>
@@ -16,4 +16,4 @@ const Effects = ({ logs, schema }) => {
   )
 }
 
-export default Effects;
+export default GraphQL;

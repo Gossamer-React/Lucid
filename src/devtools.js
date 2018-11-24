@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import { introspectionQuery } from 'graphql';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
-import Effects from './containers/Effects';
+import GraphQL from './containers/GraphQL';
 import TreeDiagram from './components/TreeDiagram.jsx';
 
 class App extends Component {
@@ -15,12 +15,8 @@ class App extends Component {
       logs: [],
       appReactDOM: [],
       appState: [],
-      toggleTool: false,
-      clickData: [],
       schema: ''
     };
-    this.handleNodeClick = this.handleNodeClick.bind(this);
-
     // initialize a timeout variable to throttle setState()s on this.state.appState
     let timeout;
 
@@ -128,20 +124,17 @@ class App extends Component {
             <LogContainer logs={this.state.logs} />
             <div id='window'>
               <div id='window-nav'>
-                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>Tree</button>
-                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>Effects</button>
+                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>React</button>
+                <button className="window-btn" onClick={() => { this.handleWindowChange(); }}>GraphQL</button>
               </div>
               {/* This checks what window the user has click on. 
               They can click to see the state tree or 
               request/reponse from their httprequest */}
               {this.state.window === 'Tree' ?
                 < TreeDiagram
-                  handleNodeClick={this.handleNodeClick}
                   appState={this.state.appState}
-                  toggleTool={this.state.toggleTool}
-                  clickData={this.state.clickData}
                 /> :
-                <Effects logs={this.state.logs} schema={this.state.schema} />
+                <GraphQL logs={this.state.logs} schema={this.state.schema} />
               }
             </div>
           </div>
