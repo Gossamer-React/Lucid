@@ -11,11 +11,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      window: 'Tree',
+      window: 'React',
       logs: [],
       appReactDOM: [],
       appState: [],
-      schema: ''
+      schema: 'GraphQL schema not available.'
     };
     // initialize a timeout variable to throttle setState()s on this.state.appState
     let timeout;
@@ -72,21 +72,29 @@ class App extends Component {
   }
 
   fetchSchemaFromGraphQLServer() {
-    fetch("http://localhost:4000/graphql", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: introspectionQuery })
-    })
-      .then(res => res.json())
-      .then(json =>
-        this.setState({
-          schema: JSON.stringify(json.data)
-        })
-      );
+    if (this.state.logs.length !== 0) {
+      
+      let url = this.state.logs[this.state.logs.length -1].req.url;
+      console.log('URL', url);
+
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: introspectionQuery })
+      })
+        .then(res => res.json())
+        .then(json =>
+          this.setState({
+            schema: JSON.stringify(json.data)
+          })
+        );
+    }
   }
 
-  componentDidMount() {
-    this.fetchSchemaFromGraphQLServer();
+  componentDidUpdate() {
+    if (this.state.schema === 'GraphQL schema not available.') {
+      this.fetchSchemaFromGraphQLServer();
+    }
   }
 
   handleNodeClick(data, event) {
@@ -98,11 +106,11 @@ class App extends Component {
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
-    if (this.state.window === 'Tree') {
-      this.setState({ window: 'Graphql' });
+    if (this.state.window === 'React') {
+      this.setState({ window: 'GraphQL' });
     } else {
       this.setState({
-        window: 'Tree'
+        window: 'React'
       });
     }
   }
@@ -130,10 +138,10 @@ class App extends Component {
               {/* This checks what window the user has click on. 
               They can click to see the state tree or 
               request/reponse from their httprequest */}
-              {this.state.window === 'Tree' ?
-                < TreeDiagram
-                  appState={this.state.appState}
-                /> :
+              {this.state.window === 'React' 
+                ?
+                null 
+                :
                 <GraphQL logs={this.state.logs} schema={this.state.schema} />
               }
             </div>
