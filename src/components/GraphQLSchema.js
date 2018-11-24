@@ -10,10 +10,12 @@ const GraphQLSchema = ({ logs, schema }) => {
   console.log('--schemaSDL:', printSchema(buildClientSchema(schemaObj)));
 
   return (
-    <div>
-      <p className="schema-p">
-        <b>Schema:</b> {JSON.stringify(printSchema(buildClientSchema(schemaObj)))}
-      </p>
+    <div id="graphql" >
+      <div className="graphql">
+        <p className="graphql-p">
+          <b>Schema:</b> {JSON.stringify(printSchema(buildClientSchema(schemaObj)))}
+        </p>
+      </div>
     </div>
   )
 }
