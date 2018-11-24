@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import fetch from 'node-fetch';
+import { introspectionQuery } from 'graphql';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 import Effects from './containers/Effects';
@@ -14,7 +16,8 @@ class App extends Component {
       appReactDOM: [],
       appState: [],
       toggleTool: false,
-      clickData: []
+      clickData: [],
+      schema: ''
     };
     this.handleNodeClick = this.handleNodeClick.bind(this);
 
@@ -46,7 +49,7 @@ class App extends Component {
 
           timeout = setTimeout(() => {
               state.setState({ appState: req.msg })
-              alert('state was updated')
+              // alert('state was updated')
           }, 2000);
         }
       });
@@ -70,6 +73,24 @@ class App extends Component {
         }
       });
     });
+  }
+
+  fetchSchemaFromGraphQLServer() {
+    fetch("http://localhost:4000/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: introspectionQuery })
+    })
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          schema: JSON.stringify(json.data)
+        })
+      );
+  }
+
+  componentDidMount() {
+    this.fetchSchemaFromGraphQLServer();
   }
 
   handleNodeClick(data, event) {
@@ -120,7 +141,7 @@ class App extends Component {
                   toggleTool={this.state.toggleTool}
                   clickData={this.state.clickData}
                 /> :
-                <Effects logs={this.state.logs} />
+                <Effects logs={this.state.logs} schema={this.state.schema} />
               }
             </div>
           </div>

@@ -1,13 +1,17 @@
 import React from 'react';
+import GraphQLQuery from '../components/GraphQLQuery';
+import GraphQLResponse from '../components/GraphQLResponse';
 import GraphQLData from '../components/GraphQLData';
+import GraphQLSchema from '../components/GraphQLSchema';
 
-const Effects = ({ logs }) => {
+const Effects = ({ logs, schema }) => {
   
-  // console.log('Effects', logs[logs.length - 1]);
-
   return (
     <div>
-      <GraphQLData logs={ logs } />
+      <GraphQLQuery logs={logs} />
+      <GraphQLResponse logs={logs} />
+      <GraphQLData logs={logs} />
+      <GraphQLSchema logs={logs} schema={schema} />
     </div>
   )
 }

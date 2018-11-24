@@ -1,10 +1,13 @@
 import React from 'react';
+import { buildClientSchema } from 'graphql';
 
-const Schema = ({  }) => {
+const Schema = ({ key, name, element, schemaObj }) => {
 
   return (
     <div>
-      <div>Schema component</div>
+      <p key={key} className="schema-p">
+        <b>{name}:</b> {JSON.stringify(buildClientSchema(schemaObj))}
+      </p>
     </div>
   )
 }
