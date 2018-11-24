@@ -1,12 +1,12 @@
-import React from 'react';
+// import React from 'react';
 
-const Schema = ({  }) => {
+// const Schema = ({  }) => {
 
-  return (
-    <div>
-      <div>Schema component</div>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <div>Schema component</div>
+//     </div>
+//   )
+// }
 
-export default Schema;
+// export default Schema;

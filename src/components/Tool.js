@@ -1,12 +1,12 @@
 import React from 'react'; 
 
 const Tool = (props) => {
-    console.log(props.clickData, 'click data from Tool')
+    console.log(props.hoverData, 'hover data from Tool')
     return (
-        <div id='modal'>
-        {(props.clickData.State || props.clickData.Props) ? 
-        <p> STATE:{JSON.stringify(props.clickData.State)} PROPS:{JSON.stringify(props.clickData.Props)}</p>
-        : <p> Node is empty </p>
+        <div id={props.hoverData.attributes.Id} className='modal'>
+        {(props.hoverData.State || props.hoverData.Props) ? 
+        <span> STATE:{JSON.stringify(props.hoverData.State)} PROPS:{JSON.stringify(props.hoverData.Props)}</span>
+        : <span classname='modaltext'> Node is empty </span>
         }
         </div>
     );
