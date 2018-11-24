@@ -25,7 +25,7 @@ chrome.runtime.onConnect.addListener(port => {
     }
     port.onMessage.addListener(extensionListener);
 
-  } else if (port.name === 'contentscript-backgroundscript-port') {
+  } else if (port.name === 'contentscript-backgroundscript-port' && _DevtoolPort) {
     console.log('connected to the content script', port);
     contentscriptPort = port;
 
