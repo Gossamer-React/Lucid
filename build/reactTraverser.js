@@ -50,7 +50,6 @@ if (reactGlobalHook) {
     console.log('run-traverser activated')
     setHook();
   });
-
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
     if (node.type) {
