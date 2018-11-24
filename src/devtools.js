@@ -12,12 +12,8 @@ class App extends Component {
       window: "Tree",
       logs: [],
       appReactDOM: [],
-      appState: [],
-      toggleTool: false,
-      clickData: []
+      appState: []
     };
-    this.handleNodeClick = this.handleNodeClick.bind(this);
-
     // initialize a timeout variable to throttle setState()s on this.state.appState
     let timeout;
 
@@ -45,14 +41,15 @@ class App extends Component {
           clearTimeout(timeout);
 
           timeout = setTimeout(() => {
-            state.setState({ appState: req.msg });
+            state.setState({ appState: req.msg })
+            // alert('state was updated')
           }, 2000);
         }
       });
 
       // chrome.devtools.network.onRequestFinished event provides an HTTP Archive format (HAR) entry as an argument to the event callback
       // * get request/response
-      chrome.devtools.network.onRequestFinished.addListener(function(httpReq) {
+      chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
         if (httpReq.request.url === "http://localhost:4000/graphql") {
           let log = {};
           log.req = httpReq.request;
@@ -76,12 +73,6 @@ class App extends Component {
     });
   }
 
-  handleNodeClick(data, event) {
-    //toggles true and false
-    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
-    // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
-    console.log(this.state.toggleTool, "after setState");
-  }
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
@@ -108,43 +99,39 @@ class App extends Component {
             <p>Note: Lucid works best on React v15/16</p>
           </div>
         ) : (
-          <div id="app-container">
-            <LogContainer logs={this.state.logs} />
-            <div id="window">
-              <div id="window-nav">
-                <button
-                  className="window-btn"
-                  onClick={() => {
-                    this.handleWindowChange();
-                  }}
-                >
-                  Tree
+            <div id="app-container">
+              <LogContainer logs={this.state.logs} />
+              <div id="window">
+                <div id="window-nav">
+                  <button
+                    className="window-btn"
+                    onClick={() => {
+                      this.handleWindowChange();
+                    }}
+                  >
+                    Tree
                 </button>
-                <button
-                  className="window-btn"
-                  onClick={() => {
-                    this.handleWindowChange();
-                  }}
-                >
-                  Effects
+                  <button
+                    className="window-btn"
+                    onClick={() => {
+                      this.handleWindowChange();
+                    }}
+                  >
+                    Effects
                 </button>
-              </div>
-              {/* This checks what window the user has click on. 
+                </div>
+                {/* This checks what window the user has click on. 
               They can click to see the state tree or 
               request/reponse from their httprequest */}
-              {this.state.window === "Tree" ? (
-                <TreeDiagram
-                  handleNodeClick={this.handleNodeClick}
-                  appState={this.state.appState}
-                  toggleTool={this.state.toggleTool}
-                  clickData={this.state.clickData}
-                />
-              ) : (
-                <Effects logs={this.state.logs} />
-              )}
+                {this.state.window === 'Tree' ?
+                  < TreeDiagram
+                    appState={this.state.appState}
+                  /> :
+                  <Effects logs={this.state.logs} />
+                }
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
