@@ -7,13 +7,8 @@ class TreeDiagram extends React.Component {
     super(props);
     this.state = {
       transition: null,
-      toggleTool: false,
-      hoverData: [],
-      hoverCoordinates: { x: null, y: null }
+      toggle: false
     };
-    this.handleMouseHover = this.handleMouseHover.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-    let timeout;
   }
 
   componentDidMount() {
@@ -25,39 +20,6 @@ class TreeDiagram extends React.Component {
         x: dimensions.width / 2,
         y: dimensions.height / 8
       },
-    });
-  }
-
-  handleMouseHover(data, e) {
-    //toggles true and false and grabs event coordinates/data
-    console.log(e, 'this is the event that happened')
-    this.setState(
-      {
-        hoverCoordinates: { x: data.x, y: data.y },
-        hoverData: data,
-        toggleTool: !this.state.toggleTool
-      },
-      () => {
-        console.log(this.state.hoverData, 'this is hover data')
-        console.log(this.state.hoverData.attributes.Id, 
-          'id------')
-        const modal = document.getElementById(`${this.state.hoverData.attributes.Id}`);
-        console.log(modal, 'got modal?')
-        const dimensions = this.treeContainer.getBoundingClientRect();
-        console.log(dimensions, 'treecontainer dimension')
-        console.log(document.getElementById('treeWrapper'))
-
-        if(modal !== null) {
-          modal.style.top = data.y + "em";
-          modal.style.left = data.x + "em";
-        }
-      }
-    );
-  }
-
-  handleMouseOut() {
-    this.setState({
-      toggleTool: !this.state.toggleTool
     });
   }
 
@@ -106,22 +68,24 @@ class TreeDiagram extends React.Component {
             styles={styles}
             translate={this.state.translate}
             separation={{ siblings: 1, nonSiblings: 1 }}
-            onMouseOver={(nodeData, e) => {
-              this.handleMouseHover(nodeData, e);
-            }}
-            onMouseOut={() => {
-              this.handleMouseOut();
+            allowForeignObjects
+            nodeLabelComponent={{
+              render: <Tool className='myLabelComponentInSvg' />,
+              foreignObjectWrapper: {
+                y: -5,
+                x: 10
+              }
             }}
           />
         ) : (
             <p> Tree Loading ... </p>
           )}
 
-        {this.state.toggleTool === true ? 
+        {/* {this.state.toggleTool === true ? 
           //set a timeout for the hover at 500ms
-            <Tool hoverData={this.state.hoverData} />  
+            <Tool />  
             : null 
-        }
+        } */}
       </div>
     );
   }
