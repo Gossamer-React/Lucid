@@ -9,20 +9,20 @@ const GraphQLData = ({ logs }) => {
   let method = logs[logs.length - 1].req.method;
 
   return (
-    <div>
+    <div id="graphql" >
       { logs.length !== 0 
       ? 
-      <div className="details">
-        <p className="details-p">
-          <b>URL:</b> {url}
-        </p>
-        <p className="details-p">
-          <b>Method:</b> {method}
-        </p>
-        <p className="details-p">
-          <b>Variables:</b> {JSON.stringify(variables)}
-        </p>
-      </div>
+        <div className="graphql">
+          <p className="graphql-p">
+            <b>URL:</b> {url}
+          </p>
+          <p className="graphql-p">
+            <b>Method:</b> {method}
+          </p>
+          <p className="graphql-p">
+            <b>Variables:</b> {JSON.stringify(variables)}
+          </p>
+        </div>
       : 
       null }
     </div>

@@ -7,11 +7,11 @@ if (reactGlobalHook) {
   let virtualdom; 
   var reactDOMArr = [];
   
-  window.addEventListener('run-traverser', () => {
-    // console.log('run the traverser!')
-    // setHook();
-    // reactGlobalHook.onCommitFiberRoot();
-  })
+  // window.addEventListener('run-traverser', () => {
+  //   // console.log('run the traverser!')
+  //   // setHook();
+  //   // reactGlobalHook.onCommitFiberRoot();
+  // })
   
   function setHook() {
     //React 16+
@@ -50,7 +50,6 @@ if (reactGlobalHook) {
     console.log('run-traverser activated')
     setHook();
   });
-
     
   const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
     if (node.type) {
