@@ -30,29 +30,29 @@ class TreeDiagram extends React.Component {
 
   handleMouseHover(data, e) {
     //toggles true and false and grabs event coordinates/data
-    console.log(e, 'this is the event that happened')
-    this.setState(
-      {
-        hoverCoordinates: { x: data.x, y: data.y },
-        hoverData: data,
-        toggleTool: !this.state.toggleTool
-      },
-      () => {
-        console.log(this.state.hoverData, 'this is hover data')
-        console.log(this.state.hoverData.attributes.Id, 
-          'id------')
-        const modal = document.getElementById(`${this.state.hoverData.attributes.Id}`);
-        console.log(modal, 'got modal?')
-        const dimensions = this.treeContainer.getBoundingClientRect();
-        console.log(dimensions, 'treecontainer dimension')
-        console.log(document.getElementById('treeWrapper'))
+    // console.log(e, 'this is the event that happened')
+    // this.setState(
+    //   {
+    //     hoverCoordinates: { x: data.x, y: data.y },
+    //     hoverData: data,
+    //     toggleTool: !this.state.toggleTool
+    //   },
+    //   () => {
+    //     console.log(this.state.hoverData, 'this is hover data')
+    //     console.log(this.state.hoverData.attributes.Id, 
+    //       'id------')
+    //     const modal = document.getElementById(`${this.state.hoverData.attributes.Id}`);
+    //     console.log(modal, 'got modal?')
+    //     const dimensions = this.treeContainer.getBoundingClientRect();
+    //     console.log(dimensions, 'treecontainer dimension')
+    //     console.log(document.getElementById('treeWrapper'))
 
-        if(modal !== null) {
-          modal.style.top = data.y + "em";
-          modal.style.left = data.x + "em";
-        }
-      }
-    );
+    //     if(modal !== null) {
+    //       modal.style.top = data.y + "em";
+    //       modal.style.left = data.x + "em";
+    //     }
+    //   }
+    // );
   }
 
   handleMouseOut() {

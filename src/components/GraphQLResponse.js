@@ -6,12 +6,14 @@ const GraphQLResponse = ({ logs }) => {
   console.log('--response:', response);
   
   return (
-    <div>
+    <div id="graphql" >
       {logs.length !== 0
         ?
-        <p className="query-p">
-          <b>Response:</b> {response}
-        </p>
+        <div className="graphql">
+          <p className="graphql-p">
+            <b>Response:</b> {response}
+          </p>
+        </div>
         :
         null}
     </div>
