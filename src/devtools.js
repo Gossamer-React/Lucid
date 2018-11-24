@@ -15,12 +15,8 @@ class App extends Component {
       logs: [],
       appReactDOM: [],
       appState: [],
-      toggleTool: false,
-      clickData: [],
       schema: ''
     };
-    this.handleNodeClick = this.handleNodeClick.bind(this);
-
     // initialize a timeout variable to throttle setState()s on this.state.appState
     let timeout;
 
@@ -136,10 +132,7 @@ class App extends Component {
               request/reponse from their httprequest */}
               {this.state.window === 'Tree' ?
                 < TreeDiagram
-                  handleNodeClick={this.handleNodeClick}
                   appState={this.state.appState}
-                  toggleTool={this.state.toggleTool}
-                  clickData={this.state.clickData}
                 /> :
                 <Effects logs={this.state.logs} schema={this.state.schema} />
               }
