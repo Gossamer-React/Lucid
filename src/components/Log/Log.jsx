@@ -10,12 +10,14 @@ const Log = props => {
       <p className="log-p">
         <b>Operation Name:</b> {props.operationName}
       </p>
-      <p className="log-p">
-        <b>Query:</b> {props.query}
-      </p>
-      <p className="log-p">
-        <b>Variables:</b> {JSON.stringify(props.variables)}
-      </p>
+      <b>Query:</b>
+      <pre className="log-p">
+        {props.query}
+      </pre>
+      <b>Variables:</b>
+      <pre className="log-p">
+        {JSON.stringify(props.variables, undefined, 2)}
+      </pre>
     </div>
   );
 };
