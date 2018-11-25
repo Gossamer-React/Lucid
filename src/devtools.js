@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 import { introspectionQuery } from "graphql";
 import LogContainer from "./containers/LogContainer.jsx";
 import styles from "./../public/app.css";
-import GraphQL from "./containers/GraphQL";
+import GraphQLContainer from "./containers/GraphQLContainer";
 import TreeDiagram from "./components/TreeDiagram.jsx";
 
 class App extends Component {
@@ -162,7 +162,7 @@ class App extends Component {
                 < TreeDiagram
                   appState={this.state.appState}
                 />:
-                <GraphQL logs={this.state.logs} schema={this.state.schema} />
+                <GraphQLContainer logs={this.state.logs} schema={this.state.schema} />
               }
             </div>
           </div>
