@@ -136,6 +136,7 @@ class App extends Component {
           </div> :
           <div id="app-container">
             <LogContainer logs={this.state.logs} />
+            <hr id='vr-log'/>
             <div id="window">
               <div id="window-nav">
                 <button

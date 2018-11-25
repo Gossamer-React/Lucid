@@ -19,11 +19,18 @@
 
 }
 
+#vr-log{
+  border-left: 1px solid #000;
+  height: 100vh;
+  margin: 0px;
+}
+
 /* For window  */
 #window{
   display: flex;
   flex-flow: column;
   width: 100%;
+  margin: 0px;
 }
 .window-btn{
   width: 50%;
