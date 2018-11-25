@@ -11,11 +11,12 @@
   text-align: center
 }
 
+
 .stateProp {
   border: 1px solid greenyellow;
   position: absolute;
   z-index: 1;
-  background-color: gray
+  background-color: ##FFB6C1;
 
 }
 
