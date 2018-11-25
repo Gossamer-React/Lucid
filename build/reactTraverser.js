@@ -33,9 +33,9 @@ if (reactGlobalHook) {
             })), '*')
 
             reactDOMArr = [];
+            
+            return oCFR(...args);
           }
-
-          return oCFR(...args);
         };
       })(reactGlobalHook.onCommitFiberRoot);
 

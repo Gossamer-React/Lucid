@@ -19,6 +19,11 @@
   z-index: 999;
 }
 
+#vr-log{
+  border-left: 1px solid #000;
+  height: 100vh;
+  margin: 0px;
+}
 /* .toolTip {
   position: relative;
 } */
@@ -28,6 +33,7 @@
   display: flex;
   flex-flow: column;
   width: 100%;
+  margin: 0px;
 }
 .window-btn{
   width: 50%;
