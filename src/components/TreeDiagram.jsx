@@ -7,7 +7,7 @@ class TreeDiagram extends React.Component {
     super(props);
     this.state = {
       transition: null,
-      toggle: false
+      orientation: 'verticle'
     };
   }
 
@@ -59,12 +59,13 @@ class TreeDiagram extends React.Component {
         style={{ width: "100%", height: "100vh" }}
         ref={tc => (this.treeContainer = tc)}
       >
+        <button>CHANGE</button>
         {/* when appState has a length we populate tree */}
         {this.props.appState.length !== 0 ? (
           <Tree
             data={this.props.appState}
             nodeSize={{ x: 75, y: 75 }}
-            orientation={"vertical"}
+            orientation={this.state.orientation}
             styles={styles}
             translate={this.state.translate}
             separation={{ siblings: 1, nonSiblings: 1 }}
@@ -81,11 +82,6 @@ class TreeDiagram extends React.Component {
           <p> Tree Loading ... </p>
         )}
 
-        {/* {this.state.toggleTool === true ? 
-          //set a timeout for the hover at 500ms
-            <Tool />  
-            : null 
-        } */}
       </div>
     );
   }

@@ -37,6 +37,7 @@ class Tool extends React.Component {
     
 
     render() {
+        console.log(this.props.nodeData, 'node data is here')
         const propObj = this.props.nodeData.Props;
         console.log(propObj, 'prop object');
         return (
@@ -44,7 +45,7 @@ class Tool extends React.Component {
                 <h4 onMouseOut={() => this.handleMouseOut()} onMouseOver={() => this.handleMouseOver()}>{this.props.nodeData.name}</h4>
                 {this.state.toggle ?
                     (this.props.nodeData.Props ? 
-                       <pre className=''> {JSON.stringify(propObj, undefined, 2)} </pre> 
+                       <pre className='stateProp'> {JSON.stringify(propObj, undefined, 2)} </pre> 
                        : 
                        <p> No Props </p>
                     )
