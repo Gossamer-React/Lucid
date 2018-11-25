@@ -1,0 +1,24 @@
+#graphql-container {
+  padding: 10px;
+}
+
+#graphql-hr {
+  margin: 10px 0px;
+}
+
+#graphql {
+  overflow-y: scroll;
+  max-height: 90%;
+}
+
+.graphql {
+  padding: 5px;
+}
+
+.graphql:not(:last-child) {
+  border-bottom: 1px solid grey;
+}
+
+.graphql-p {
+  margin: 5px 0px;
+}

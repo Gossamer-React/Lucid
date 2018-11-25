@@ -19,7 +19,7 @@ class TreeDiagram extends React.Component {
       translate: {
         x: dimensions.width / 2,
         y: dimensions.height / 8
-      },
+      }
     });
   }
 
@@ -78,8 +78,8 @@ class TreeDiagram extends React.Component {
             }}
           />
         ) : (
-            <p> Tree Loading ... </p>
-          )}
+          <p> Tree Loading ... </p>
+        )}
 
         {/* {this.state.toggleTool === true ? 
           //set a timeout for the hover at 500ms
