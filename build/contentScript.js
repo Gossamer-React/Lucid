@@ -1,7 +1,9 @@
 console.log("content script running!")
 
 // * opens new port to connect to our backendscript
-const contentScriptPort = chrome.runtime.connect({ name: 'contentscript-backgroundscript-port' });
+const contentScriptPort = chrome.runtime.connect({
+  name: 'contentscript-backgroundscript-port'
+});
 
 //To access the DOM & reactDevToolsGlobalHook, inject the script into the document body:
 function injectScript(file) {
@@ -16,9 +18,15 @@ injectScript(chrome.extension.getURL('reactTraverser.js'));
 
 //listen for messages from the reactTraverser
 window.addEventListener('message', (e) => {
-  if (e.data.type=='reactTraverser') {    
+  if (e.data.type === undefined) return;
+  if (e.data.type == 'reactTraverser') {
     reactDocObj = e.data.data;
-   contentScriptPort.postMessage({type: 'content-script', message: reactDocObj});
+    contentScriptPort.postMessage({
+      type: 'content-script',
+      message: reactDocObj
+    });
+  } else {
+    return;
   }
 });
 
