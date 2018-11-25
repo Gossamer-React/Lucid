@@ -2,7 +2,7 @@ import React from 'react';
 
 const GraphQLResponse = ({ logs }) => {
 
-  let response = JSON.stringify(logs[logs.length - 1].res);
+  let response = logs[logs.length - 1].res;
   console.log('--response:', response);
   
   return (
@@ -10,9 +10,10 @@ const GraphQLResponse = ({ logs }) => {
       {logs.length !== 0
         ?
         <div className="graphql">
-          <p className="graphql-p">
-            <b>Response:</b> {response}
-          </p>
+          <b>Response:</b> 
+          <pre className="graphql-p">
+            {JSON.stringify(response, undefined, 2)}
+          </pre>
         </div>
         :
         null}
