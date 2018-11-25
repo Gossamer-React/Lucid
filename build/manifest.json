@@ -13,6 +13,7 @@
   "devtools_page": "devtools.html",
   "homepage_url": "https://github.com/Gossamer-React/React-Lucid",
   "content_scripts": [{
+    "run_at": "document_end",
     "matches": ["<all_urls>"],
     "js": ["contentScript.js"]
   }],
