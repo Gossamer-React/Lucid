@@ -7,17 +7,18 @@ const GraphQLSchema = ({ logs, schema }) => {
 
   if (schema !== 'GraphQL schema not available.') {
 
-    let schemaObj = JSON.parse(schema);
-
+    let schemaObj = buildClientSchema(JSON.parse(schema));
+    let schemaSDL = printSchema(schemaObj);
     console.log('--schemaObj:', schemaObj);
-    console.log('--schemaSDL:', printSchema(buildClientSchema(schemaObj)));
+    console.log('--schemaSDL:', schemaSDL);
 
     return (
       <div id="graphql" >
         <div className="graphql">
-          <p className="graphql-p">
-            <b>Schema:</b> {JSON.stringify(printSchema(buildClientSchema(schemaObj)))}
-          </p>
+          <b>Schema:</b> 
+          <pre className="graphql-p">
+            {schemaSDL}
+          </pre>
         </div>
       </div>
     )
