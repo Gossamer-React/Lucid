@@ -11,13 +11,17 @@
   text-align: center
 }
 
-.stateProp {
+
+.state-prop {
   border: 1px solid greenyellow;
   position: absolute;
-  z-index: 1;
-  background-color: gray
-
+  background-color: #FFB6C1;
+  z-index: 999;
 }
+
+/* .toolTip {
+  position: relative;
+} */
 
 /* For window  */
 #window{
