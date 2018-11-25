@@ -21,33 +21,18 @@ class Tool extends React.Component {
         })
     }
 
-    filterState(){
-        this.props.nodeData.State    
-    }
-
-    filterProps(){
-        
-    }
-
-    componentDidMount() {
-        this.filterProps(); 
-        this.filterState();
-    }
-
-    
 
     render() {
-        console.log(this.props.nodeData, 'node data is here')
+        const stateObj = this.props.nodeData.State;
         const propObj = this.props.nodeData.Props;
-        console.log(propObj, 'prop object');
         return (
-            <div className={this.props.className}>
-                <h4 onMouseOut={() => this.handleMouseOut()} onMouseOver={() => this.handleMouseOver()}>{this.props.nodeData.name}</h4>
+            <div className='tooltip'>
+                <h4 className='tree-names' onMouseOut={() => this.handleMouseOut()} onMouseOver={() => this.handleMouseOver()}>{this.props.nodeData.name}</h4>
                 {this.state.toggle ?
-                    (this.props.nodeData.Props ? 
-                       <pre className='stateProp'> {JSON.stringify(propObj, undefined, 2)} </pre> 
+                    ((this.props.nodeData.Props.length !== 0 || this.props.nodeData.State.length !== 0) ? 
+                        <pre className='state-prop'>State:{JSON.stringify(stateObj, null, 2)} Props:{JSON.stringify(propObj, undefined, 2)} </pre> 
                        : 
-                       <p> No Props </p>
+                       <p> Empty </p>
                     )
                     
                 : null

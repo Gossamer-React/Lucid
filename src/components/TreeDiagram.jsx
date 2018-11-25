@@ -71,7 +71,7 @@ class TreeDiagram extends React.Component {
             separation={{ siblings: 1, nonSiblings: 1 }}
             allowForeignObjects
             nodeLabelComponent={{
-              render: <Tool className='myLabelComponentInSvg' />,
+              render: <Tool />,
               foreignObjectWrapper: {
                 y: -5,
                 x: 10
