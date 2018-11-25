@@ -159,10 +159,9 @@ class App extends Component {
               They can click to see the state tree or 
               request/reponse from their httprequest */}
               {this.state.window === 'React' ?
-                // < TreeDiagram
-                //   appState={this.state.appState}
-                // /> 
-                null:
+                < TreeDiagram
+                  appState={this.state.appState}
+                />:
                 <GraphQL logs={this.state.logs} schema={this.state.schema} />
               }
             </div>

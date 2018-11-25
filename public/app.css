@@ -11,12 +11,12 @@
   text-align: center
 }
 
-.modal {
-  height: 20em;
-  width: 30em;
-  border: 1px solid black;
-  background-color: yellowgreen;
+.stateProp {
+  border: 1px solid greenyellow;
   position: absolute;
+  z-index: 1;
+  background-color: gray
+
 }
 
 /* For window  */
