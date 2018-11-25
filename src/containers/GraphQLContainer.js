@@ -5,19 +5,19 @@ import GraphQLData from '../components/GraphQLData';
 import GraphQLSchema from '../components/GraphQLSchema';
 import styles from '../../public/graphql.css';
 
-const GraphQL = ({ logs, schema }) => {
+const GraphQLContainer = ({ logs, schema }) => {
   
   return (
     <div id="graphql-container">
-      <GraphQLQuery logs={logs} />
-      <hr id="graphql-hr" />
-      <GraphQLResponse logs={logs} />
+      <GraphQLSchema logs={logs} schema={schema} />
       <hr id="graphql-hr" />
       <GraphQLData logs={logs} />
       <hr id="graphql-hr" />
-      <GraphQLSchema logs={logs} schema={schema} />
+      <GraphQLQuery logs={logs} />
+      <hr id="graphql-hr" />
+      <GraphQLResponse logs={logs} />
     </div>
   )
 }
 
-export default GraphQL;
+export default GraphQLContainer;

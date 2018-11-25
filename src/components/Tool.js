@@ -8,16 +8,7 @@ class Tool extends React.Component {
         }
         this.handleMouseOver = this.handleMouseOver.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
-        // this.filterProps = this.filterProps.bind(this);
     }
-
-    // componentDidMount() {
-    //     this.filterProps(); 
-    // }
-
-    // componentDidUpdate() {
-    //     this.filterProps();
-    // }
 
     handleMouseOver() {
         this.setState({
@@ -30,29 +21,20 @@ class Tool extends React.Component {
         })
     }
 
-    // filterProps() {
-    //     if(this.props.nodeData.Props !== null) {
-    //         this.props.nodeData.Props.map((item) => {
-    //             return (
-    //                 <ul>
-    //                     <li>{item}</li>
-    //                 </ul>
-    //             )
-    //         })
-    //     }
-    // }
-    
 
     render() {
-        console.log(this.props.nodeData, 'using this')
+        const stateObj = this.props.nodeData.State;
+        const propObj = this.props.nodeData.Props;
         return (
-            <div className={this.props.className}>
-                <h4 onMouseOut={() => this.handleMouseOut()} onMouseOver={() => this.handleMouseOver()}>{this.props.nodeData.name}</h4>
+            <div className='tooltip'>
+                <h4 className='tree-names' onMouseOut={() => this.handleMouseOut()} onMouseOver={() => this.handleMouseOver()}>{this.props.nodeData.name}</h4>
                 {this.state.toggle ?
-                <ul>
-                    <li className='stateProp'>{JSON.stringify(this.props.nodeData.State)}</li>
-                    <li className='stateProp'>{JSON.stringify(this.props.nodeData.Props)}</li>
-                </ul> 
+                    ((this.props.nodeData.Props.length !== 0 || this.props.nodeData.State.length !== 0) ? 
+                        <pre className='state-prop'>State:{JSON.stringify(stateObj, null, 2)} Props:{JSON.stringify(propObj, undefined, 2)} </pre> 
+                       : 
+                       <p> Empty </p>
+                    )
+                    
                 : null
                 }
             </div>
