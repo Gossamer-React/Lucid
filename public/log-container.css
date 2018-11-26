@@ -1,6 +1,6 @@
 #log-container{
   padding: 10px;
-  width: 25%;
+  width: 40%;
 }
 /* #log-hr{
   margin: 10px 0px;
@@ -21,10 +21,4 @@
 } */
 .log-p{
   margin: 5px 0px;
-}
-.pre-json{
-  font-weight: 600;
-  font-size: 1.250em;
-  margin: 5px 0;
-  letter-spacing: 0.05em;
 }
