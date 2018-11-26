@@ -20,8 +20,6 @@ const LogContainer = props => {
   logs.reverse();
   return (
     <div id="log-container">
-      <h1>Log</h1>
-      <hr id="log-hr" />
       <div id="logs">{logs}</div>
     </div>
   );
