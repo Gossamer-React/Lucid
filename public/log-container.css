@@ -2,20 +2,22 @@
   padding: 10px;
   width: 25%;
 }
-#log-hr{
+/* #log-hr{
   margin: 10px 0px;
-}
+} */
 #logs{
   overflow-y: scroll;
   max-height: 95%;
 }
 .log{
   overflow-x: scroll;
-  padding: 5px;
+  padding: 20px;
+  background:rgba(255,255,255,0.5);
+  margin: 4px;
 }
-.log:not(:last-child){
+/* .log:not(:last-child){
   border-bottom: 1px solid grey;
-}
+} */
 .log-p{
   margin: 5px 0px;
 }

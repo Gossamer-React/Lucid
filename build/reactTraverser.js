@@ -20,8 +20,9 @@ if (reactGlobalHook) {
 
       reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
         return function (...args) {
-          virtualdom = args[1];
-          if (virtualdom !== undefined) {
+          
+          if (args[1] !== undefined) {
+            virtualdom = args[1];
             let nodeToTraverse = virtualdom.current.stateNode.current;
             traverse(nodeToTraverse);
             console.log('traverse complete: ', reactDOMArr);
