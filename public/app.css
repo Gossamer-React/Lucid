@@ -4,6 +4,9 @@
 #app-container{
   display: flex;
   height: 100vh;
+  background: #8e9eab;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
 }
 
 #reactLoader {
@@ -11,12 +14,13 @@
   text-align: center
 }
 
-
 .state-prop {
-  border: 1px solid greenyellow;
   position: absolute;
-  background-color: #FFB6C1;
+  background-color: #333;
+  color: white;
   z-index: 999;
+  padding: 10px;
+  max-width: 300px;
 }
 
 #vr-log{
@@ -24,6 +28,7 @@
   height: 100vh;
   margin: 0px;
 }
+
 /* .toolTip {
   position: relative;
 } */
@@ -35,21 +40,36 @@
   width: 100%;
   margin: 0px;
 }
-.window-btn{
+#window-nav {
+  margin-top: 40px;
+  text-align: center;
+}
+.window-btn-wrapper {
   width: 50%;
-  border: solid 1px black;
-  border-radius: 0px;
+  box-sizing: border-box;
+  padding: 30px;
+}
+.window-btn{
+  width: 30%;
+  box-sizing: border-box;
+  border: solid 1px white;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 5px;
+  background-color: Transparent;
   font-size: 15px;
-  font-weight: 600;
   padding: 5px 0;
   cursor: pointer;
+  font-family: 'Avenir';
 }
 .window-btn:focus{
   outline: none;
 }
-
-#treeWrapper {
-  background: #bdc3c7;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.window-btn:hover{
+  background-color: white;
+  color: black;
+}
+.active{
+  background-color: white;
+  color: black;
 }
