@@ -41,7 +41,7 @@ class App extends Component {
       // * checks if the message it's receiving is about a change in the DOM
 
       if (req.type === 'appState') {
-        console.log("This is state!!", appState);
+        let oldstate = this.state.appReactDOM;
         appState.setState({ appReactDOM: req.msg });
 
         //if there is an active setTimeout, clear it
@@ -49,8 +49,7 @@ class App extends Component {
 
         timeout = setTimeout(() => {
           appState.setState({ appState: req.msg });
-          // alert('state was updated')
-        }, 2000);
+        }, 1000);
       }
     });
 
@@ -122,21 +121,18 @@ class App extends Component {
   }
 
   render() {
-    console.log("this is the state:", this.state);
-    //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
+    console.log('devtoolsjs re-rendered; this.state:', this.state);
+    //if this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render App (Log, Tree, GraphQL)
     return (
       <div>
         {this.state.appState.length === 0 ?
           <div id="reactLoader">
-            <h1>
-              Please trigger a setState() to activate Lucid devtool.
-              <br />
-            </h1>
-            <p>Note: Lucid works best on React v15/16</p>
+            <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
+            <p>Lucid works best on React v15/16</p>
           </div> :
           <div id="app-container">
             <LogContainer logs={this.state.logs} />
-            <hr id='vr-log'/>
+            <hr id='vr-log' />
             <div id="window">
               <div id="window-nav">
                 <button
@@ -162,7 +158,7 @@ class App extends Component {
               {this.state.window === 'React' ?
                 < TreeDiagram
                   appState={this.state.appState}
-                />:
+                /> :
                 <GraphQLContainer logs={this.state.logs} schema={this.state.schema} />
               }
             </div>
