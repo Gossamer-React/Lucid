@@ -5,6 +5,7 @@ import { introspectionQuery } from 'graphql';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
 import GraphQLContainer from './containers/GraphQLContainer';
+import StateContainer from './containers/StateContainer.jsx';
 import TreeDiagram from './components/TreeDiagram.jsx';
 import recurseDiff from './stateDiff'
 
@@ -141,11 +142,9 @@ class App extends Component {
           <div id='reactLoader'>
             <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
             <p>Lucid works best on React v15/16</p>
-          </div> :
+          </div>
+          :
           <div id='app-container'>
-
-            <LogContainer logs={this.state.logs} />
-
             <div id='window'>
               <div id='window-nav'>
                 <span class='window-btn-wrapper'>
@@ -160,12 +159,15 @@ class App extends Component {
               They can click to see the state tree or 
               request/reponse from their httprequest */}
               {this.state.window === 'Graphql' ? (
-                <GraphQLContainer
-                  logs={this.state.logs}
-                  schema={this.state.schema}
-                />
+                <div class='graphQLTab'>
+                  <LogContainer logs={this.state.logs} />
+                  <GraphQLContainer logs={this.state.logs} schema={this.state.schema} />
+                </div>
               ) : (
-                  <TreeDiagram appState={this.state.appState} />
+                  <div class='reactTab'>
+                    <StateContainer stateDiffs={this.state.stateDiff} />
+                    <TreeDiagram appState={this.state.appState} />
+                  </div>
                 )}
             </div>
           </div>
