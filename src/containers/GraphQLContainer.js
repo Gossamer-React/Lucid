@@ -6,16 +6,22 @@ import GraphQLSchema from '../components/GraphQLSchema';
 import styles from '../../public/graphql.css';
 
 const GraphQLContainer = ({ logs, schema }) => {
-  
+
   return (
     <div id="graphql-container">
-      <GraphQLSchema logs={logs} schema={schema} />
-      <hr id="graphql-hr" />
-      <GraphQLData logs={logs} />
-      <hr id="graphql-hr" />
-      <GraphQLQuery logs={logs} />
-      <hr id="graphql-hr" />
-      <GraphQLResponse logs={logs} />
+      {
+        logs.length !== 0 ?
+          <div>
+            <GraphQLSchema logs={logs} schema={schema} />
+            <hr id="graphql-hr" />
+            <GraphQLData logs={logs} />
+            <hr id="graphql-hr" />
+            <GraphQLQuery logs={logs} />
+            <hr id="graphql-hr" />
+            <GraphQLResponse logs={logs} />
+          </div> :
+          <h1>No requests have been made yet.</h1>
+      }
     </div>
   )
 }

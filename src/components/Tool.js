@@ -1,7 +1,7 @@
 import React from "react";
 
 class Tool extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             toggle: false,
@@ -41,13 +41,15 @@ class Tool extends React.Component {
             <div className='tool-tip' onMouseOut={() => this.handleMouseOut()} onMouseOver={() => this.handleMouseOver()}>
                 <h4 className='tree-names'>{this.props.nodeData.name}</h4>
                 {this.state.toggle ?
-                    ((this.props.nodeData.Props.length !== 0 || this.props.nodeData.State.length !== 0) ? 
-                        <pre className='state-prop'>State:{JSON.stringify(stateObj, null, 1)} Props:{JSON.stringify(propObj, undefined, 1)} </pre> 
-                       : 
-                       <p> Empty </p>
+                    ((this.props.nodeData.Props.length !== 0 || this.props.nodeData.State.length !== 0) ?
+                        <div className='state-prop'>
+                            <pre>State:{JSON.stringify(stateObj, null, 2)} </pre>
+                            <pre>Props:{JSON.stringify(propObj, undefined, 2)}</pre>
+                        </div>
+                        :
+                        <p> Empty </p>
                     )
-                    
-                : null
+                    : null
                 }
             </div>
         );
