@@ -1,6 +1,7 @@
 *{
   margin: 0px;
 }
+
 #app-container{
   display: flex;
   height: 100vh;
@@ -13,7 +14,14 @@
   margin: 30px;
   text-align: center
 }
-
+.reactTab {
+  display: flex;
+  flex-direction: row;
+}
+.graphQLTab {
+  display: flex;
+  flex-direction: row;
+}
 .state-prop {
   position: absolute;
   background-color: #333;
