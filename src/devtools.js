@@ -11,15 +11,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      window: 'React',
+      window: 'Graphql',
       logs: [],
       appReactDOM: [],
       appState: [],
       schema: 'GraphQL schema not available.'
     };
 
-    chrome.devtools.panels.create("Lucid", null, "devtools.html", (panel) => {
-      console.log('Connected to panel: ', panel);
+    chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
+      console.log("Connected to panel: ", panel);
+      panel.onShown.addListener((e) => {
+        console.log(e);
+      });
     });
   }
 
@@ -37,10 +40,10 @@ class App extends Component {
 
     let timeout;
     chromePort.onMessage.addListener(req => {
-      console.log('componentDidMount!', this);
+      console.log("componentDidMount!", this);
       // * checks if the message it's receiving is about a change in the DOM
 
-      if (req.type === 'appState') {
+      if (req.type === "appState") {
         console.log("This is state!!", appState);
         appState.setState({ appReactDOM: req.msg });
 
@@ -55,23 +58,25 @@ class App extends Component {
     });
 
     chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
-      if (httpReq.request.url === "http://localhost:4000/graphql") {
-        let log = {};
-        log.req = httpReq.request;
+      if (httpReq.request.postData !== undefined) {
+        let reqBody = JSON.parse(httpReq.request.postData.text);
 
-        if (httpReq.response.content) {
-          httpReq.getContent(responseBody => {
-            // TODO: account for the responses when they come in empty or if the response received is an error
-            if (responseBody === '') {
-              console.log("---LogRequest---", log.req);
-              log.res = "No response received";
-            } else {
-              const parsedResponseBody = JSON.parse(responseBody);
-              log.res = parsedResponseBody;
-              appState.setState({ logs: [...appState.state.logs, log] });
-            }
-            console.log("---LOG---: ", log);
-          });
+        console.log('reqBody: ', reqBody);
+        if (reqBody.variables && reqBody.query) {
+          let log = {};
+          log.req = httpReq.request;
+
+          if (httpReq.response.content) {
+            httpReq.getContent(responseBody => {
+              if (responseBody === "") {
+                log.res = "No response received";
+              } else {
+                const parsedResponseBody = JSON.parse(responseBody);
+                log.res = parsedResponseBody;
+                appState.setState({ logs: [...appState.state.logs, log] });
+              }
+            });
+          }
         }
       }
     });
@@ -79,9 +84,8 @@ class App extends Component {
 
   fetchSchemaFromGraphQLServer() {
     if (this.state.logs.length !== 0) {
-
       let url = this.state.logs[this.state.logs.length - 1].req.url;
-      console.log('URL', url);
+      console.log("URL", url);
 
       fetch(url, {
         method: "POST",
@@ -98,7 +102,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.schema === 'GraphQL schema not available.') {
+    if (this.state.schema === "GraphQL schema not available.") {
       this.fetchSchemaFromGraphQLServer();
     }
   }
@@ -112,12 +116,10 @@ class App extends Component {
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
-    if (this.state.window === 'React') {
-      this.setState({ window: 'GraphQL' });
+    if (this.state.window === 'Graphql') {
+      this.setState({ window: 'React' });
     } else {
-      this.setState({
-        window: 'React'
-      });
+      this.setState({ window: 'Graphql' });
     }
   }
 
@@ -126,53 +128,54 @@ class App extends Component {
     //if this.state.appState has not been populated by the reactTraverser.js, show a message that asks users to 'setState' else render our App (Tree, Log, Effects)
     return (
       <div>
-        {this.state.appState.length === 0 ?
+        {this.state.appState.length === 0 ? (
           <div id="reactLoader">
             <h1>
               Please trigger a setState() to activate Lucid devtool.
               <br />
             </h1>
             <p>Note: Lucid works best on React v15/16</p>
-          </div> :
-          <div id="app-container">
-            <LogContainer logs={this.state.logs} />
-            <hr id='vr-log'/>
-            <div id="window">
-              <div id="window-nav">
-                <button
-                  className="window-btn"
-                  onClick={() => {
-                    this.handleWindowChange();
-                  }}
-                >
-                  React
+          </div>
+        ) : (
+            <div id="app-container">
+              <LogContainer logs={this.state.logs} />
+              <hr id="vr-log" />
+              <div id="window">
+                <div id="window-nav">
+                  <button
+                    className="window-btn"
+                    onClick={() => {
+                      this.handleWindowChange();
+                    }}
+                  >
+                    GraphQL
                 </button>
-                <button
-                  className="window-btn"
-                  onClick={() => {
-                    this.handleWindowChange();
-                  }}
-                >
-                  GraphQL
+                  <button
+                    className="window-btn"
+                    onClick={() => {
+                      this.handleWindowChange();
+                    }}
+                  >
+                    React Tree
                 </button>
-              </div>
-              {/* This checks what window the user has click on. 
+                </div>
+                {/* This checks what window the user has click on. 
               They can click to see the state tree or 
               request/reponse from their httprequest */}
-              {this.state.window === 'React' ?
-                < TreeDiagram
-                  appState={this.state.appState}
-                />:
-                <GraphQLContainer logs={this.state.logs} schema={this.state.schema} />
-              }
+                {this.state.window === 'Graphql' ? (
+                  <GraphQLContainer
+                    logs={this.state.logs}
+                    schema={this.state.schema}
+                  />
+                ) : (
+                    <TreeDiagram appState={this.state.appState} />
+                  )}
+              </div>
             </div>
-          </div>
-        }
+          )}
       </div>
     );
   }
 }
-
-
 
 render(<App />, document.getElementById("root"));

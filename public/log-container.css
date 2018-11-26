@@ -10,8 +10,7 @@
   max-height: 95%;
 }
 .log{
-  display: flex;
-  flex-flow: column wrap;
+  overflow-x: scroll;
   padding: 5px;
 }
 .log:not(:last-child){
