@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import { render } from "react-dom";
-import fetch from "node-fetch";
-import { introspectionQuery } from "graphql";
-import LogContainer from "./containers/LogContainer.jsx";
-import styles from "./../public/app.css";
-import GraphQLContainer from "./containers/GraphQLContainer";
-import TreeDiagram from "./components/TreeDiagram.jsx";
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import fetch from 'node-fetch';
+import { introspectionQuery } from 'graphql';
+import LogContainer from './containers/LogContainer.jsx';
+import styles from './../public/app.css';
+import GraphQLContainer from './containers/GraphQLContainer';
+import TreeDiagram from './components/TreeDiagram.jsx';
+import recurseDiff from './stateDiff'
 
 class App extends Component {
   constructor() {
@@ -15,7 +16,8 @@ class App extends Component {
       logs: [],
       appReactDOM: [],
       appState: [],
-      schema: 'GraphQL schema not available.'
+      schema: 'GraphQL schema not available.',
+      stateDiff: []
     };
 
     chrome.devtools.panels.create("Lucid", null, "devtools.html", (panel) => {
@@ -43,6 +45,11 @@ class App extends Component {
       if (req.type === 'appState') {
         let oldstate = this.state.appReactDOM;
         appState.setState({ appReactDOM: req.msg });
+
+        if (oldstate.length > 0) {
+          let diff = recurseDiff(oldstate, this.state.appReactDOM);
+          appState.setState({ stateDiff: diff });
+        }
 
         //if there is an active setTimeout, clear it
         clearTimeout(timeout);
