@@ -11,12 +11,20 @@
   text-align: center
 }
 
-
+.tree-names {
+  position: relative;
+  z-index: 50
+}
 .state-prop {
   border: 1px solid greenyellow;
-  position: absolute;
+  position: relative;
   background-color: #FFB6C1;
-  z-index: 999;
+  z-index: 100;
+}
+
+.tool-tip {
+  position: relative; 
+  z-index: 1;
 }
 
 #vr-log{
