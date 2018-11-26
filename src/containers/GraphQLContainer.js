@@ -20,7 +20,7 @@ const GraphQLContainer = ({ logs, schema }) => {
             <hr id="graphql-hr" />
             <GraphQLResponse logs={logs} />
           </div> :
-          <h1>Start by making a graphql request</h1>
+          <h1>No requests have been made yet.</h1>
       }
     </div>
   )
