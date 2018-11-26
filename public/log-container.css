@@ -10,8 +10,7 @@
   max-height: 95%;
 }
 .log{
-  display: flex;
-  flex-flow: column wrap;
+  overflow-x: scroll;
   padding: 20px;
   background:rgba(255,255,255,0.5);
   margin: 4px;
