@@ -21,7 +21,6 @@ class App extends Component {
     };
 
     chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
-      console.log("Connected to panel: ", panel);
       panel.onShown.addListener((e) => {
         console.log(e);
       });
@@ -42,10 +41,10 @@ class App extends Component {
 
     let timeout;
     chromePort.onMessage.addListener(req => {
-      console.log("componentDidMount!", this);
       // * checks if the message it's receiving is about a change in the DOM
-
+      console.log('req')
       if (req.type === 'appState') {
+        console.log('appSTATE!')
         let oldstate = this.state.appReactDOM;
         appState.setState({ appReactDOM: req.msg });
 
@@ -150,10 +149,10 @@ class App extends Component {
             <div id='window'>
               <div id='window-nav'>
                 <span class='window-btn-wrapper'>
-                  <button className='window-btn active' id='reactbtn' onClick={() => { this.handleWindowChange(); }}>React</button>
+                  <button className='window-btn active' id='reactbtn' onClick={() => { this.handleWindowChange(); }}>GraphQL</button>
                 </span>
                 <span class='window-btn-wrapper'>
-                  <button className='window-btn' id='graphqlbtn' onClick={() => { this.handleWindowChange(); }}>GraphQL</button>
+                  <button className='window-btn' id='graphqlbtn' onClick={() => { this.handleWindowChange(); }}>Component Tree</button>
                 </span>
               </div>
 
