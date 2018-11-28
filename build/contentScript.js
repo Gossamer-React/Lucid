@@ -35,20 +35,28 @@ window.addEventListener("message", e => {
   if (e.data.type === undefined) return;
   if (e.data.type == "reactTraverser") {
     reactDocObj = e.data.data;
-    // * creates a new content script port if one doesn't exist
-    if (!contentScriptPort) {
-      contentScriptPort = chrome.runtime.connect({
-        name: "contentscript-backgroundscript-port"
-      });
-      console.log("Im reaching!", contentScriptPort);
-    }
+    // // * creates a new content script port if one doesn't exist
+    // if (!contentScriptPort) {
+    //   contentScriptPort = chrome.runtime.connect({
+    //     name: "contentscript-backgroundscript-port"
+    //   });
+    //   console.log("Im reaching!", contentScriptPort);
+    // }
 
-    console.log("Im reaching!!!", contentScriptPort);
-    // * Send message from traverser to background script
-    contentScriptPort.postMessage({
-      type: "content-script",
-      message: reactDocObj
-    });
+    // console.log("Im reaching!!!", contentScriptPort);
+    // // * Send message from traverser to background script
+    // contentScriptPort.postMessage({
+    //   type: "content-script",
+    //   message: reactDocObj
+    // });
+
+    chrome.runtime.sendMessage(
+      {
+        type: "content-script",
+        message: reactDocObj
+      }, 
+      () => {console.log('send the reactDocObj from contentScript to chrome.extension.sendMessage')}
+    )
   } else {
     return;
   }
