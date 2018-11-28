@@ -34,7 +34,7 @@ export default function recurseDiff(olds, news, path = '') {
             newState: news
           };
 
-          diff.push(obj)
+          diff.unshift(obj)
         }
 
       }
