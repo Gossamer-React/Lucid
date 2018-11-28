@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
 import styles from '../../public/stateContainer.css';
 
 const StateContainer = ({ stateDiffs }) => {

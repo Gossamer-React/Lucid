@@ -114,12 +114,6 @@ class App extends Component {
     }
   }
 
-  handleNodeClick(data, event) {
-    //toggles true and false
-    this.setState({ toggleTool: !this.state.toggleTool, clickData: data });
-    // console.log(this.state.clickData, 'this is clickData after setState') //grabs entire node data
-    console.log(this.state.toggleTool, 'after setState');
-  }
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange() {
