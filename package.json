@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "graphql": "^14.0.2",
+    "graphql-syntax-highlighter-react": "^0.3.5",
     "node-fetch": "^2.3.0",
     "path": "^0.12.7",
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-d3-tree": "^1.12.0",
     "react-dom": "^16.6.3",
