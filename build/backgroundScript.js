@@ -51,6 +51,7 @@ chrome.tabs.onRemoved.addListener(function(tabId) {
 
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+  if(!connections[tabId]){return;}
   if(changeInfo.status === 'complete' && _DevtoolPort){
     console.log('changeInfo', changeInfo, tabId);
     chrome.tabs.sendMessage(tabId, {type: 'tabChange'});
