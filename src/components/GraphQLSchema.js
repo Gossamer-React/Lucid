@@ -1,5 +1,6 @@
 import React from 'react';
 import { buildClientSchema, printSchema } from 'graphql';
+import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
 
 const GraphQLSchema = ({ logs, schema }) => {
 
@@ -16,9 +17,13 @@ const GraphQLSchema = ({ logs, schema }) => {
       <div id="graphql" >
         <div className="graphql">
           <b>Schema:</b> 
-          <pre className="graphql-p">
+          {/* <pre className="graphql-p">
             {schemaSDL}
-          </pre>
+          </pre> */}
+          <GraphqlCodeBlock
+            className="GraphqlCodeBlock"
+            queryBody={schemaSDL}
+          />
         </div>
       </div>
     )

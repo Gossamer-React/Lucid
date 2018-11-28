@@ -1,4 +1,5 @@
 import React from 'react';
+import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
 
 const GraphQLQuery = ({ logs }) => {
   
@@ -11,9 +12,13 @@ const GraphQLQuery = ({ logs }) => {
       ? 
         <div className="graphql">
           <b>Query:</b> 
-          <pre className="graphql-p">
+          {/* <pre className="graphql-p">
             {query}
-          </pre>
+          </pre> */}
+          <GraphqlCodeBlock
+            className="GraphqlCodeBlock"
+            queryBody={query}
+          />
         </div>
       : 
       null }
