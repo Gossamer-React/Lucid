@@ -1,7 +1,6 @@
 #state-container{
-  padding: 30px;
-  width: 40%;
-  height: 100vh;
+  padding: 10px;
+  width: 30%;
   overflow-y: scroll;
   background:rgba(255,255,255,0.5);
   margin: 4px;
