@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
 
 const GraphQLQuery = ({ logs }) => {
   
@@ -14,6 +15,7 @@ const GraphQLQuery = ({ logs }) => {
           <pre className="graphql-p">
             {query}
           </pre>
+          {/* <ReactJson src={query} /> */}
         </div>
       : 
       null }
