@@ -31,7 +31,7 @@ chrome.runtime.onConnect.addListener(port => {
 
     // * adds a listener to listen for messages from the content script
     contentscriptPort.onMessage.addListener(content => {
-      if(content.type === 'content-script'){
+      if (content.type === 'content-script' && _DevtoolPort) {
         console.log('Devtool Port: ', _DevtoolPort);
         // * sends the message received from the content script to the devtools
         _DevtoolPort.postMessage({ type: 'appState', msg: content.message });

@@ -1,5 +1,5 @@
 console.log('ran reacttraverser.js')
-const reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+let reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
 if (reactGlobalHook) {
 
