@@ -37,12 +37,6 @@ body{
   max-width: 300px;
 }
 
-#vr-log{
-  border-left: 1px solid #000;
-  height: 100%;
-  margin: 0px;
-}
-
 /* For window  */
 #window{
   display: flex;
