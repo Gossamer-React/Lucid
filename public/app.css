@@ -21,10 +21,7 @@ body{
   text-align: center
 }
 
-<<<<<<< HEAD
 /* component-tree tab */
-=======
->>>>>>> 010505f2b3580be1c3ca6f482ea447354dbde081
 .reactTab {
   width: 100%;
   height: auto;
@@ -51,20 +48,8 @@ body{
   flex-direction: row;
 }
 
-<<<<<<< HEAD
-/* tree diagram component */
-#treeWrapper{
-  grid-area: tree;
-  width: 50vw;
-}
-
- /* state props box */
-.state-prop-display {
-  /* position: absolute;  */
-=======
 .state-prop {
   position: absolute;
->>>>>>> 010505f2b3580be1c3ca6f482ea447354dbde081
   background-color: #333;
   color: white;
   width: 50vw;
@@ -77,12 +62,6 @@ body{
   white-space: pre-wrap;
 }
 
-<<<<<<< HEAD
-/* tool component */
-/* .tool-tip { 
-  position: absolute;
-} */
-
 #vr-log{
   border-left: 1px solid #000;
   height: 100vh;
@@ -90,8 +69,6 @@ body{
 }
 
 
-=======
->>>>>>> 010505f2b3580be1c3ca6f482ea447354dbde081
 /* For window  */
 #window{
   display: flex;
