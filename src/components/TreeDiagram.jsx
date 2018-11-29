@@ -9,7 +9,7 @@ class TreeDiagram extends React.Component {
     super(props);
     this.state = {
       transition: null,
-      orientation: 'Vertical',
+      orientation: 'vertical',
       foreignObjectWrapper: {y: -5, x: 10},
       nodeSize: {x: 75, y: 75},
       componentsToFilter: []
@@ -32,15 +32,15 @@ class TreeDiagram extends React.Component {
   }
 
   handleFlip() {
-    if(this.state.orientation === 'Vertical') {
+    if(this.state.orientation === 'vertical') {
       this.setState({
-        orientation: 'Horizontal',
+        orientation: 'horizontal',
         foreignObjectWrapper: {y: 10, x: 10},
         nodeSize:{y:85, x:90}
       })
     } else {
       this.setState({
-        orientation: 'Vertical',
+        orientation: 'vertical',
         foreignObjectWrapper: {y: -5, x: 10}
       })
     }
