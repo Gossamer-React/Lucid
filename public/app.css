@@ -1,3 +1,5 @@
+@import './stateContainer.css';
+
 *{
   margin: 0px;
 }
@@ -19,24 +21,77 @@ body{
   text-align: center
 }
 
+<<<<<<< HEAD
+/* component-tree tab */
+=======
+>>>>>>> 010505f2b3580be1c3ca6f482ea447354dbde081
 .reactTab {
-  display: flex;
-  flex-direction: row;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  display: grid;
+  grid-template-rows: '1fr 1fr';
+  grid-template-columns: '1fr 1fr';
+  grid-template-areas:
+    'sp-box tree'
+    'diff tree';
 }
+
+#state-container {
+  width: 50vw;
+  height: 70vh;
+  overflow: scroll;
+  background:rgba(255,255,255,0.5);
+  grid-area: diff;
+}
+
+/* graph tab */
 .graphQLTab {
   display: flex;
   flex-direction: row;
 }
 
-.state-prop {
-  position: absolute;
-  background-color: #333;
-  color: white;
-  z-index: 999;
-  padding: 10px;
-  max-width: 300px;
+<<<<<<< HEAD
+/* tree diagram component */
+#treeWrapper{
+  grid-area: tree;
+  width: 50vw;
 }
 
+ /* state props box */
+.state-prop-display {
+  /* position: absolute;  */
+=======
+.state-prop {
+  position: absolute;
+>>>>>>> 010505f2b3580be1c3ca6f482ea447354dbde081
+  background-color: #333;
+  color: white;
+  width: 50vw;
+  height: 30vh;
+  overflow-y: scroll;
+  grid-area: sp-box;
+}
+
+.pre-tag {
+  white-space: pre-wrap;
+}
+
+<<<<<<< HEAD
+/* tool component */
+/* .tool-tip { 
+  position: absolute;
+} */
+
+#vr-log{
+  border-left: 1px solid #000;
+  height: 100vh;
+  margin: 0px;
+}
+
+
+=======
+>>>>>>> 010505f2b3580be1c3ca6f482ea447354dbde081
 /* For window  */
 #window{
   display: flex;

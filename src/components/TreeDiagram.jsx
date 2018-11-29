@@ -9,7 +9,9 @@ class TreeDiagram extends React.Component {
     super(props);
     this.state = {
       transition: null,
-      orientation: 'verticle',
+      orientation: 'Vertical',
+      foreignObjectWrapper: {y: -5, x: 10},
+      nodeSize: {x: 75, y: 75},
       componentsToFilter: []
     };
     this.handleFlip = this.handleFlip.bind(this);
@@ -25,17 +27,24 @@ class TreeDiagram extends React.Component {
       translate: {
         x: dimensions.width / 2,
         y: dimensions.height / 8
-      }
+      },
     });
   }
 
   handleFlip() {
-    if (this.state.orientation === 'verticle') {
-      this.setState({ orientation: 'horizontal' })
+    if(this.state.orientation === 'Vertical') {
+      this.setState({
+        orientation: 'Horizontal',
+        foreignObjectWrapper: {y: 10, x: 10},
+        nodeSize:{y:85, x:90}
+      })
     } else {
-      this.setState({ orientation: 'verticle' })
+      this.setState({
+        orientation: 'Vertical',
+        foreignObjectWrapper: {y: -5, x: 10}
+      })
     }
-  }
+  }  
 
   handleFilter(arr) {
     if (!this.state.componentsToFilter.includes(arr[0])) {
@@ -56,6 +65,7 @@ class TreeDiagram extends React.Component {
     }
   }
 
+
   render() {
     const styles = {
       nodes: {
@@ -63,7 +73,7 @@ class TreeDiagram extends React.Component {
           circle: {
             fill: "black",
             fontSize: "0.1",
-            strokeWidth: 0.5,
+            strokeWidth: 0.5
           }
         },
         attributes: {
@@ -97,13 +107,16 @@ class TreeDiagram extends React.Component {
     return (
       <div
         id="treeWrapper"
-        style={{ width: "100%", height: "100vh" }}
         ref={tc => (this.treeContainer = tc)}
       >
-        <button onClick={() => { this.handleFlip() }}>CHANGE</button>
+        <button onClick={() => {this.handleFlip()}}> {this.state.orientation} </button>
+        {/* when appState has a length we populate tree */}
+        {this.props.appState.length !== 0 ? (
+
         <button onClick={() => { this.handleFilter(filterComponents.reduxComponents) }}>Filter Redux</button>
         <button onClick={() => { this.handleFilter(filterComponents.reactRouterComponents) }}>Filter React-Router</button>
         <button onClick={() => { this.handleFilter(filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
+        
         {/* when appState has a length we populate tree */}
         {this.props.appState.length !== 0 ? (
           <Tree
@@ -115,17 +128,13 @@ class TreeDiagram extends React.Component {
             separation={{ siblings: 1, nonSiblings: 1 }}
             allowForeignObjects
             nodeLabelComponent={{
-              render: <Tool />,
-              foreignObjectWrapper: {
-                y: -5,
-                x: 10
-              },
+              render: <Tool handleMouseOver = {this.props.handleMouseOver} />,
+              foreignObjectWrapper: this.state.foreignObjectWrapper
             }}
           />
         ) : (
-            <p> Tree Loading ... </p>
-          )}
-
+          <p> Tree Loading ... </p>
+        )}
       </div>
     );
   }
