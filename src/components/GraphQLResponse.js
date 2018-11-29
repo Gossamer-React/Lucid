@@ -10,17 +10,17 @@ const GraphQLResponse = ({ logs }) => {
     <div id='graphql-res' >
       {logs.length !== 0
         ?
-        <div className='graphql'>
-          <b>Response:</b>
-          <p>
-            <ReactJson
-              src={response}
-              name={null}
-              iconStyle='triangle'
-              indentWidth={2}
-              enableClipboard={false}
-            />
-          </p>
+        <div className="graphql">
+          <b>Response:</b> 
+          <ReactJson
+            src={response}
+            name={null}
+            iconStyle='triangle'
+            indentWidth={1}
+            enableClipboard={false}
+            displayDataTypes={false}
+            displayObjectSize={false}
+          />
         </div>
         :
         null}
