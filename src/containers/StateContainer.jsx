@@ -14,11 +14,12 @@ const StateContainer = ({ stateDiffs }) => {
             src={el}
             name={null}
             iconStyle='triangle'
-            indentWidth={2}
+            indentWidth={1}
             groupArraysAfterLength={20}
             enableClipboard={false}
-            collapsed={1}
-            collapseStringsAfterLength={10}
+            collapsed={2}
+            displayDataTypes={false}
+            displayObjectSize={false}
           />
         )
       })}
