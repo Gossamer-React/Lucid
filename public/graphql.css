@@ -1,5 +1,10 @@
 #graphql-container {
   padding: 10px;
+  width: 75%;
+  background-color: rgba(214, 214, 214, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin-left: 20px;
 }
 
 #graphql-hr {
