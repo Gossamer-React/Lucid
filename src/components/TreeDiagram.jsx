@@ -105,18 +105,12 @@ class TreeDiagram extends React.Component {
     }
 
     return (
-      <div
-        id="treeWrapper"
-        ref={tc => (this.treeContainer = tc)}
-      >
+      <div id="treeWrapper" ref={tc => (this.treeContainer = tc)}>
         <button onClick={() => {this.handleFlip()}}> {this.state.orientation} </button>
-        {/* when appState has a length we populate tree */}
-        {this.props.appState.length !== 0 ? (
-
         <button onClick={() => { this.handleFilter(filterComponents.reduxComponents) }}>Filter Redux</button>
         <button onClick={() => { this.handleFilter(filterComponents.reactRouterComponents) }}>Filter React-Router</button>
         <button onClick={() => { this.handleFilter(filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
-        
+     
         {/* when appState has a length we populate tree */}
         {this.props.appState.length !== 0 ? (
           <Tree
