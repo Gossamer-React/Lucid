@@ -23,7 +23,14 @@ const GraphQLData = ({ logs }) => {
           <p className="graphql-p">
             <b>Variables:</b> 
             {/* {JSON.stringify(variables)} */}
-            <ReactJson src={variables} />
+            <ReactJson
+              src={variables}
+              name={null}
+              iconStyle='triangle'
+              indentWidth={2}
+              collapseStringsAfterLength={5}
+              enableClipboard={false}
+            />
           </p>
         </div>
       : 
