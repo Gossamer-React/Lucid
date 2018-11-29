@@ -1,13 +1,13 @@
-@import './stateContainer.css';
+/* @import './stateContainer.css'; */
 
 *{
   margin: 0px;
 }
 body{
   background-color: rgb(255, 255, 255);
-  /* background: #8e9eab;  fallback for old browsers */
-  /* background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  Chrome 10-25, Safari 5.1-6 */
-  /* background: linear-gradient(to right, #eef2f3, #8e9eab); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+   */
+  /* background: #8e9eab;  fallback for old browsers;
+  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  Chrome 10-25, Safari 5.1-6; 
+  background: linear-gradient(to right, #eef2f3, #8e9eab); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+;   */
 }
 
 #app-container{
@@ -21,10 +21,7 @@ body{
   text-align: center
 }
 
-<<<<<<< HEAD
 /* component-tree tab */
-=======
->>>>>>> 4854852cf3f0513617e4d2914e62cf0a5bbe8317
 .reactTab {
   width: 100%;
   height: auto;
@@ -37,7 +34,7 @@ body{
     'diff tree';
 }
 
-#state-container {
+#stateDiff-container {
   width: 50vw;
   height: 70vh;
   overflow: scroll;
@@ -45,13 +42,12 @@ body{
   grid-area: diff;
 }
 
-/* graph tab */
-.graphQLTab {
-  display: flex;
-  flex-direction: row;
+#treeWrapper{
+  grid-area: tree;
+  width: 50vw;
 }
 
-.state-prop {
+.state-prop-display {
   position: absolute;
   background-color: #333;
   color: white;
@@ -64,6 +60,13 @@ body{
 .pre-tag {
   white-space: pre-wrap;
 }  
+
+/* graph tab */
+.graphQLTab {
+  display: flex;
+  flex-direction: row;
+}
+
 
 /* For window  */
 #window{
