@@ -17,6 +17,7 @@ class App extends Component {
       window: 'Graphql',
       logs: [],
       appReactDOM: [],
+      appFilteredDOM: [],
       appState: [],
       nodeData: [], 
       schema: 'GraphQL schema not available.',
@@ -145,7 +146,7 @@ class App extends Component {
     return (
       <div>
         {this.state.appState.length === 0 ?
-          <div id='reactLoader'>
+          <div id='devToolsLoader'>
             <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
             <p>Lucid works best on React v15/16</p>
           </div>

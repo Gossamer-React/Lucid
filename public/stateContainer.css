@@ -1,9 +1,8 @@
-/* #state-container{
-  padding: 30px;
-  width: 40%;
-  height: 100vh;
-  overflow-y: scroll;
-  background:rgba(255,255,255,0.5);
+#state-container{
+  padding: 10px;
+  width: 300px;
+  overflow: scroll;
+  background:rgba(214, 214, 214, 0.4);
   margin: 4px;
   grid-area: diff;
 } */

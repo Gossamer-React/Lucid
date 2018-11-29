@@ -1,23 +1,34 @@
 #log-container{
   padding: 10px;
-  width: 40%;
+  width: 250px;
+  background-color: rgba(214, 214, 214, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  max-height: 600px;
 }
-/* #log-hr{
-  margin: 10px 0px;
-} */
+
+#log-title{
+  text-align: center;
+}
+
 #logs{
   overflow-y: scroll;
   max-height: 95%;
 }
 .log{
   overflow-x: scroll;
-  padding: 20px;
+  padding: 15px;
   background:rgba(255,255,255,0.5);
-  margin: 4px;
+  margin: 8px;
 }
-/* .log:not(:last-child){
-  border-bottom: 1px solid grey;
-} */
+
 .log-p{
+  margin: 5px 0px;
+}
+
+.log-span{
+  font-size: 1.2em;
+  font-weight: 500;
+  letter-spacing: 0.50px;
   margin: 5px 0px;
 }

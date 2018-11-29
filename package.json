@@ -4,18 +4,21 @@
   "description": "A devtool for react developers",
   "main": "devtools.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --devtool source-map",
     "client": "webpack-dev-server --mode development"
   },
   "author": "Gossamer",
   "license": "ISC",
   "dependencies": {
     "graphql": "^14.0.2",
+    "graphql-syntax-highlighter-react": "^0.3.5",
     "node-fetch": "^2.3.0",
     "path": "^0.12.7",
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-d3-tree": "^1.12.0",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "react-json-view": "^1.19.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.1.10",
