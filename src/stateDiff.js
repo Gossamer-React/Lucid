@@ -23,7 +23,7 @@ export default function recurseDiff(olds, news, path = '') {
           let breadcrumb;
           (olds.name === undefined && news.name === undefined) ?
             breadcrumb = '' :
-            breadcrumb = olds.name + '/' + key + '>>';
+            breadcrumb = olds.name + '>>';
           // recurse on the item
           recurseDiff(olds[key], news[key], path += breadcrumb)
         } else {
