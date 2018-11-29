@@ -1,14 +1,7 @@
-#stateDiff-container{
+#state-container{
   padding: 10px;
-  width: 40%;
+  width: 300px;
   overflow-y: scroll;
-  height: 100vh;
-  max-height: 95%;
-}
-
-.stateDiff-div{
-  overflow-x: scroll;
-  padding: 20px;
-  background:rgba(255,255,255,0.5);
+  background:rgba(214, 214, 214, 0.4);
   margin: 4px;
 }

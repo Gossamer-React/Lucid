@@ -8,17 +8,17 @@ import styles from '../../public/graphql.css';
 const GraphQLContainer = ({ logs, schema }) => {
 
   return (
-    <div id="graphql-container">
+    <div id='graphql-container'>
       {
         logs.length !== 0 ?
           <div>
+            <div id='req-res'>
+              <GraphQLQuery logs={logs} />
+              <GraphQLResponse logs={logs} />
+            </div>
+            <hr />
             <GraphQLSchema logs={logs} schema={schema} />
-            <hr id="graphql-hr" />
             <GraphQLData logs={logs} />
-            <hr id="graphql-hr" />
-            <GraphQLQuery logs={logs} />
-            <hr id="graphql-hr" />
-            <GraphQLResponse logs={logs} />
           </div> :
           <h1>No requests have been made yet.</h1>
       }

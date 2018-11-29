@@ -10,7 +10,7 @@ const GraphQLData = ({ logs }) => {
   let method = logs[logs.length - 1].req.method;
 
   return (
-    <div id="graphql" >
+    <div id="graphql-details" >
       { logs.length !== 0 
       ? 
         <div className="graphql">

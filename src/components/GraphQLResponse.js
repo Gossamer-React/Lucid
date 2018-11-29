@@ -5,9 +5,9 @@ const GraphQLResponse = ({ logs }) => {
 
   let response = logs[logs.length - 1].res;
   console.log('--response:', response);
-  
+
   return (
-    <div id="graphql" >
+    <div id='graphql-res' >
       {logs.length !== 0
         ?
         <div className="graphql">
