@@ -21,6 +21,10 @@ body{
   text-align: center
 }
 
+<<<<<<< HEAD
+/* component-tree tab */
+=======
+>>>>>>> 4854852cf3f0513617e4d2914e62cf0a5bbe8317
 .reactTab {
   width: 100%;
   height: auto;
@@ -59,7 +63,7 @@ body{
 
 .pre-tag {
   white-space: pre-wrap;
-}
+}  
 
 /* For window  */
 #window{
