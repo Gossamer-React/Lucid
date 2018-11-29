@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
 
 const GraphQLData = ({ logs }) => {
 
   let reqText = JSON.parse(logs[logs.length - 1].req.postData.text);
   console.log('--reqText:', reqText);
-  let variables = JSON.stringify(reqText.variables);
+  let variables = reqText.variables;
   let url = logs[logs.length - 1].req.url;
   let method = logs[logs.length - 1].req.method;
 
@@ -20,7 +21,16 @@ const GraphQLData = ({ logs }) => {
             <b>Method:</b> {method}
           </p>
           <p className="graphql-p">
-            <b>Variables:</b> {JSON.stringify(variables)}
+            <b>Variables:</b> 
+            {/* {JSON.stringify(variables)} */}
+            <ReactJson
+              src={variables}
+              name={null}
+              iconStyle='triangle'
+              indentWidth={2}
+              collapseStringsAfterLength={5}
+              enableClipboard={false}
+            />
           </p>
         </div>
       : 

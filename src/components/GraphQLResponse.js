@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactJson from 'react-json-view';
 
 const GraphQLResponse = ({ logs }) => {
 
@@ -11,9 +12,16 @@ const GraphQLResponse = ({ logs }) => {
         ?
         <div className="graphql">
           <b>Response:</b> 
-          <pre className="graphql-p">
+          {/* <pre className="graphql-p">
             {JSON.stringify(response, undefined, 2)}
-          </pre>
+          </pre> */}
+          <ReactJson
+            src={response}
+            name={null}
+            iconStyle='triangle'
+            indentWidth={2}
+            enableClipboard={false}
+          />
         </div>
         :
         null}

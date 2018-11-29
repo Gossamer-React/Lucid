@@ -10,10 +10,11 @@
   background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
 }
 
-#reactLoader {
+#devToolsLoader {
   margin: 30px;
   text-align: center
 }
+
 .reactTab {
   display: flex;
   flex-direction: row;
@@ -22,6 +23,7 @@
   display: flex;
   flex-direction: row;
 }
+
 .state-prop {
   position: absolute;
   background-color: #333;
@@ -29,12 +31,6 @@
   z-index: 999;
   padding: 10px;
   max-width: 300px;
-}
-
-#vr-log{
-  border-left: 1px solid #000;
-  height: 100vh;
-  margin: 0px;
 }
 
 /* .toolTip {
@@ -69,6 +65,7 @@
   padding: 5px 0;
   cursor: pointer;
   font-family: 'Avenir';
+  transition: all .4s ease;
 }
 .window-btn:focus{
   outline: none;
@@ -78,6 +75,7 @@
   color: black;
 }
 .active{
+  /* this is for the window-btn */
   background-color: white;
   color: black;
 }
