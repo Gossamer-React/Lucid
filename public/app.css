@@ -24,7 +24,7 @@ body{
 /* component-tree tab */
 .reactTab {
   width: 100%;
-  height: auto;
+  height: 100%;
   margin-top: 10px;
   display: grid;
   grid-template-rows: '1fr 1fr';
@@ -34,28 +34,39 @@ body{
     'diff tree';
 }
 
+.state-prop-display {
+  background-color: #333;
+  color: white;
+  width: 40vw;
+  height: 25vh;
+  overflow-y: scroll;
+  grid-area: sp-box;
+  border: 1px solid black; 
+  border-radius: 5px;
+  padding: 5px 5px; 
+}
+
 #stateDiff-container {
-  width: 50vw;
-  height: 70vh;
-  overflow: scroll;
+  width: 40vw;
+  height: 75vh;
+  overflow-y: scroll;
   background:rgba(255,255,255,0.5);
   grid-area: diff;
+  border: 1px solid black; 
+  border-radius: 5px; 
+  padding: 5px 5px; 
+  margin-top: 10px;
 }
 
 #treeWrapper{
   grid-area: tree;
-  width: 50vw;
+  width: 60vw;
+  border: 1px solid black;
+  border-radius: 5px; 
+  margin-right: 5px; 
+  margin-left: 5px;
 }
 
-.state-prop-display {
-  position: absolute;
-  background-color: #333;
-  color: white;
-  width: 50vw;
-  height: 30vh;
-  overflow-y: scroll;
-  grid-area: sp-box;
-}
 
 .pre-tag {
   white-space: pre-wrap;
