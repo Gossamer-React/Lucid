@@ -21,27 +21,17 @@
 }
 
 #graphql {
-  overflow-y: scroll;
-  max-height: 90%;
   border-right: 1px solid black;
   width: 50%;
   padding: 10px;
 }
 
 #graphql-res {
-  overflow-y: scroll;
-  max-height: 90%;
   width: 50%;
   padding: 10px;
 }
 
 #graphql-schema {
-  overflow-y: scroll;
-  max-height: 90%;
-  padding: 10px;
-}
-
-#graphql-details {
   overflow-y: scroll;
   max-height: 90%;
   padding: 10px;
@@ -56,5 +46,13 @@
 }
 
 .graphql-p {
-  margin: 5px 0px;
+  margin-top: 10px; 
+}
+
+.graphql-span {
+  margin: 6px;
+  font-size: 1.3em;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  line-height: 15px;
 }
