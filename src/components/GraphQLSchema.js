@@ -14,21 +14,23 @@ const GraphQLSchema = ({ logs, schema }) => {
     console.log('--schemaSDL:', schemaSDL);
 
     return (
-      <div id='graphql-schema' >
+      <div id='graphql-schema'>
         <div className='graphql'>
-          <b>Schema:</b> 
-          <GraphqlCodeBlock
-            className='GraphqlCodeBlock'
-            queryBody={schemaSDL}
-          />
+          <p className='graphql-p'><b>Schema:</b></p>
+          <span className='graphql-span'>
+            <GraphqlCodeBlock
+              className='GraphqlCodeBlock'
+              queryBody={schemaSDL}
+            />
+          </span>
         </div>
       </div>
     )
 
   } else {
-    
+
     return (
-      <div id='graphql' >
+      <div id='graphql'>
         <div className='graphql'>
           <p className='graphql-p'>
             No GraphQL data available.
