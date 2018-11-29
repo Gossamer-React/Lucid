@@ -30,6 +30,7 @@ const GraphQLData = ({ logs }) => {
               indentWidth={2}
               collapseStringsAfterLength={5}
               enableClipboard={false}
+              displayDataTypes={false}
             />
           </p>
         </div>
