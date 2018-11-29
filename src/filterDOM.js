@@ -1,7 +1,6 @@
-let result = [];
-const filter = (node, componentsArr, childrenArr = result) => {
+const filter = (node, componentsArr, childrenArr) => {
   if (node.name === undefined) {
-    filter(node[0], componentsArr)
+    filter(node[0], componentsArr, childrenArr)
   } else {
     if (componentsArr.includes(node.name)) {
       if (node.children && node.children.length) {
@@ -22,6 +21,6 @@ const filter = (node, componentsArr, childrenArr = result) => {
       }
     }
   }
-  return result;
+  return;
 }
 export default filter;

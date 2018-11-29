@@ -1,16 +1,19 @@
 import React from 'react';
 import Tree from 'react-d3-tree';
 import Tool from './Tool';
+import filterComponents from '../filterComponents';
+import filter from '../filterDOM';
 
 class TreeDiagram extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       transition: null,
-      orientation: 'verticle'
+      orientation: 'verticle',
+      componentsToFilter: []
     };
     this.handleFlip = this.handleFlip.bind(this);
-    
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
 
@@ -27,10 +30,29 @@ class TreeDiagram extends React.Component {
   }
 
   handleFlip() {
-    if(this.state.orientation === 'verticle') {
-      this.setState({orientation: 'horizontal'})
+    if (this.state.orientation === 'verticle') {
+      this.setState({ orientation: 'horizontal' })
     } else {
-      this.setState({orientation: 'verticle'})
+      this.setState({ orientation: 'verticle' })
+    }
+  }
+
+  handleFilter(arr) {
+    if (!this.state.componentsToFilter.includes(arr[0])) {
+      let componentsArr = this.state.componentsToFilter.concat(arr);
+      this.setState({
+        componentsToFilter: componentsArr
+      })
+    } else {
+      let list = this.state.componentsToFilter;
+      for (let i = 0; i < list.length; i++) {
+        if (arr.includes(list[i])) {
+          list.splice(i, 1);
+        }
+      }
+      this.setState({
+        componentsToFilter: list
+      })
     }
   }
 
@@ -63,18 +85,29 @@ class TreeDiagram extends React.Component {
         }
       }
     };
-    
+
+    let data = this.props.appState;
+
+    if (this.state.componentsToFilter.length) {
+      let result = [];
+      filter(data, this.state.componentsToFilter, result);
+      data = result;
+    }
+
     return (
       <div
         id="treeWrapper"
         style={{ width: "100%", height: "100vh" }}
         ref={tc => (this.treeContainer = tc)}
       >
-        <button onClick={() => {this.handleFlip()}}>CHANGE</button>
+        <button onClick={() => { this.handleFlip() }}>CHANGE</button>
+        <button onClick={() => { this.handleFilter(filterComponents.reduxComponents) }}>Filter Redux</button>
+        <button onClick={() => { this.handleFilter(filterComponents.reactRouterComponents) }}>Filter React-Router</button>
+        <button onClick={() => { this.handleFilter(filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
         {/* when appState has a length we populate tree */}
         {this.props.appState.length !== 0 ? (
           <Tree
-            data={this.props.appState}
+            data={data}
             nodeSize={{ x: 75, y: 75 }}
             orientation={this.state.orientation}
             styles={styles}
@@ -90,8 +123,8 @@ class TreeDiagram extends React.Component {
             }}
           />
         ) : (
-          <p> Tree Loading ... </p>
-        )}
+            <p> Tree Loading ... </p>
+          )}
 
       </div>
     );
