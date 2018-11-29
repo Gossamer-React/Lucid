@@ -14,10 +14,11 @@ body{
   max-height: 95%;
 }
 
-#reactLoader {
+#devToolsLoader {
   margin: 30px;
   text-align: center
 }
+
 .reactTab {
   display: flex;
   flex-direction: row;
@@ -26,6 +27,7 @@ body{
   display: flex;
   flex-direction: row;
 }
+
 .state-prop {
   position: absolute;
   background-color: #333;
@@ -69,6 +71,7 @@ body{
   padding: 5px 0;
   cursor: pointer;
   font-family: 'Avenir';
+  transition: all .4s ease;
 }
 .window-btn:focus{
   outline: none;

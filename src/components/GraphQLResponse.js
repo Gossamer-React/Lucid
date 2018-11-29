@@ -15,7 +15,13 @@ const GraphQLResponse = ({ logs }) => {
           {/* <pre className="graphql-p">
             {JSON.stringify(response, undefined, 2)}
           </pre> */}
-          <ReactJson src={response} />
+          <ReactJson
+            src={response}
+            name={null}
+            iconStyle='triangle'
+            indentWidth={2}
+            enableClipboard={false}
+          />
         </div>
         :
         null}
