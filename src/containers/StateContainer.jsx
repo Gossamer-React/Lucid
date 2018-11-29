@@ -8,7 +8,19 @@ const StateContainer = ({ stateDiffs }) => {
     <div id='stateDiff-container'>
       {stateDiffs.map((el, i) => {
         return (
-          <div class='stateDiff-div' key={i}><pre>{JSON.stringify(el, null, 2)}</pre></div>
+          <ReactJson
+            className='stateDiff-div'
+            key={i}
+            src={el}
+            name={null}
+            iconStyle='triangle'
+            indentWidth={1}
+            groupArraysAfterLength={20}
+            enableClipboard={false}
+            collapsed={2}
+            displayDataTypes={false}
+            displayObjectSize={false}
+          />
         )
       })}
     </div>

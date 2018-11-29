@@ -22,8 +22,14 @@ const Log = props => {
       </p>
       <p className="log-p">
         <b>Variables:</b> 
-        {/* <pre className='pre-json'>{JSON.stringify(props.variables, null, 2)}</pre> */}
-        <ReactJson src={props.variables} />
+        <ReactJson 
+          src={props.variables} 
+          name={null}
+          iconStyle='triangle' 
+          indentWidth={1} 
+          enableClipboard={false}
+          displayDataTypes={false}
+        />
       </p>
     </div>
   );
