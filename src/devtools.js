@@ -7,7 +7,8 @@ import styles from './../public/app.css';
 import GraphQLContainer from './containers/GraphQLContainer';
 import StateContainer from './containers/StateContainer.jsx';
 import TreeDiagram from './components/TreeDiagram.jsx';
-import recurseDiff from './stateDiff'
+import recurseDiff from './stateDiff';
+import StatePropsBox from './components/StatePropsBox';
 
 class App extends Component {
   constructor() {
@@ -17,9 +18,12 @@ class App extends Component {
       logs: [],
       appReactDOM: [],
       appState: [],
+      nodeData: [], 
       schema: 'GraphQL schema not available.',
       stateDiff: []
     };
+
+    this.handleMouseOver = this.handleMouseOver.bind(this);
 
     chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
       panel.onShown.addListener((e) => {
@@ -127,6 +131,14 @@ class App extends Component {
     }
   }
 
+  //handle data coming back from mouse hover in tree diagram
+  handleMouseOver(data) {
+    this.setState({
+      nodeData: data
+    })
+    console.log(data, 'data came thru from mouse hover')
+  }
+
   render() {
     console.log('devtoolsjs re-rendered; this.state:', this.state);
     //if this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render App (Log, Tree, GraphQL)
@@ -159,8 +171,9 @@ class App extends Component {
                 </div>
               ) : (
                   <div class='reactTab'>
-                    <StateContainer stateDiffs={this.state.stateDiff} />
-                    <TreeDiagram appState={this.state.appState} />
+                    <StateContainer stateDiffs={this.state.stateDiff}/>
+                    <TreeDiagram appState={this.state.appState} handleMouseOver = {this.handleMouseOver}/>
+                    <StatePropsBox nodeData = {this.state.nodeData}/>
                   </div>
                 )}
             </div>
