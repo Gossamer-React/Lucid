@@ -4,7 +4,7 @@
   "description": "A devtool for react developers",
   "main": "devtools.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --devtool source-map",
     "client": "webpack-dev-server --mode development"
   },
   "author": "Gossamer",
