@@ -21,6 +21,8 @@ const GraphQLResponse = ({ logs }) => {
             iconStyle='triangle'
             indentWidth={2}
             enableClipboard={false}
+            displayDataTypes={false}
+            displayObjectSize={false}
           />
         </div>
         :

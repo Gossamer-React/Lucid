@@ -17,8 +17,9 @@ const StateContainer = ({ stateDiffs }) => {
             indentWidth={2}
             groupArraysAfterLength={20}
             enableClipboard={false}
-            collapsed={1}
-            collapseStringsAfterLength={10}
+            collapsed={2}
+            displayDataTypes={false}
+            displayObjectSize={false}
           />
         )
       })}

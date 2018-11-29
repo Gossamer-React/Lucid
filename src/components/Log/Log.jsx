@@ -30,6 +30,7 @@ const Log = props => {
           indentWidth={2} 
           collapseStringsAfterLength={5} 
           enableClipboard={false}
+          displayDataTypes={false}
         />
       </p>
     </div>
