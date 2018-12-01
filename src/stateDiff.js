@@ -18,14 +18,14 @@ export default function recurseDiff(olds, news, path = '') {
           (Object.keys(olds).length > 0 || olds.length > 0) &&
           (Object.keys(news).length > 0 || news.length > 0)
         ) {
-          //console.log('*no match, recurse objects!', olds[key], news[key])
-          // keep track of which component we're in
-          let breadcrumb;
-          (olds.name === undefined && news.name === undefined) ?
-            breadcrumb = '' :
-            breadcrumb = olds.name + '>>';
+          // // keep track of which component we're in
+          // let breadcrumb;
+          // (olds.name === undefined && news.name === undefined) ?
+          //   breadcrumb = '' :
+          //   breadcrumb = olds.name + '>>';
           // recurse on the item
-          recurseDiff(olds[key], news[key], path += breadcrumb)
+          // recurseDiff(olds[key], news[key], path += breadcrumb)
+          recurseDiff(olds[key], news[key], olds.name)
         } else {
           // push the old vs new items into the diff array
           let obj = {
