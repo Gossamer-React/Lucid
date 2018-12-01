@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import fetch from 'node-fetch';
 import { introspectionQuery } from 'graphql';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
