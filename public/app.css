@@ -36,7 +36,7 @@ body{
 .state-prop-display {
   background-color: #333;
   color: white;
-  width: 40vw;
+  width: 30vw;
   height: 25vh;
   overflow-y: scroll;
   grid-area: sp-box;
@@ -46,7 +46,7 @@ body{
 }
 
 #stateDiff-container {
-  width: 40vw;
+  width: 30vw;
   height: 75vh;
   overflow-y: scroll;
   background:rgba(255,255,255,0.5);
@@ -66,15 +66,6 @@ body{
   margin-left: 5px;
 }
 
-.state-prop-display {
-  position: absolute;
-  background-color: #333;
-  color: white;
-  width: 50vw;
-  height: 30vh;
-  overflow-y: scroll;
-  grid-area: sp-box;
-}
 
 .pre-tag {
   white-space: pre-wrap;
