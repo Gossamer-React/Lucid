@@ -1,8 +1,8 @@
-#state-container{
+#state-container {
   padding: 10px;
   width: 300px;
   overflow-y: scroll;
   background:rgba(214, 214, 214, 0.4);
   margin: 4px;
   grid-area: diff;
-} 
+}
