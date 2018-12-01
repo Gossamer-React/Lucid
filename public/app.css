@@ -1,13 +1,13 @@
-@import './stateContainer.css';
+/* @import './stateContainer.css'; */
 
 *{
   margin: 0px;
 }
 body{
   background-color: rgb(255, 255, 255);
-  /* background: #8e9eab;  fallback for old browsers */
-  /* background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  Chrome 10-25, Safari 5.1-6 */
-  /* background: linear-gradient(to right, #eef2f3, #8e9eab); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+   */
+  /* background: #8e9eab;  fallback for old browsers;
+  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  Chrome 10-25, Safari 5.1-6; 
+  background: linear-gradient(to right, #eef2f3, #8e9eab); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+;   */
 }
 
 #app-container{
@@ -21,13 +21,9 @@ body{
   text-align: center
 }
 
-<<<<<<< HEAD
-/* component-tree tab */
-=======
->>>>>>> 4854852cf3f0513617e4d2914e62cf0a5bbe8317
 .reactTab {
   width: 100%;
-  height: auto;
+  height: 100%;
   margin-top: 10px;
   display: grid;
   grid-template-rows: '1fr 1fr';
@@ -37,21 +33,40 @@ body{
     'diff tree';
 }
 
-#state-container {
-  width: 50vw;
-  height: 70vh;
-  overflow: scroll;
+.state-prop-display {
+  background-color: #333;
+  color: white;
+  width: 40vw;
+  height: 25vh;
+  overflow-y: scroll;
+  grid-area: sp-box;
+  border: 1px solid black; 
+  border-radius: 5px;
+  padding: 5px 5px; 
+}
+
+#stateDiff-container {
+  width: 40vw;
+  height: 75vh;
+  overflow-y: scroll;
   background:rgba(255,255,255,0.5);
   grid-area: diff;
+  border: 1px solid black; 
+  border-radius: 5px; 
+  padding: 5px 5px; 
+  margin-top: 10px;
 }
 
-/* graph tab */
-.graphQLTab {
-  display: flex;
-  flex-direction: row;
+#treeWrapper{
+  grid-area: tree;
+  width: 60vw;
+  border: 1px solid black;
+  border-radius: 5px; 
+  margin-right: 5px; 
+  margin-left: 5px;
 }
 
-.state-prop {
+.state-prop-display {
   position: absolute;
   background-color: #333;
   color: white;
@@ -64,6 +79,13 @@ body{
 .pre-tag {
   white-space: pre-wrap;
 }  
+
+/* graph tab */
+.graphQLTab {
+  display: flex;
+  flex-direction: row;
+}
+
 
 /* For window  */
 #window{

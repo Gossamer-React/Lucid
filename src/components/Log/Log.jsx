@@ -18,16 +18,18 @@ const Log = props => {
           queryBody={props.query}
         />
       </p>
-      <p className="log-p">
-        <b>Variables:</b> 
-        <ReactJson 
-          src={props.variables} 
-          name={null}
-          iconStyle='triangle' 
-          indentWidth={1} 
-          enableClipboard={false}
-          displayDataTypes={false}
-        />
+      <p className='log-p'>
+        <b>Variables:</b>
+        <span className='log-span'>
+          <ReactJson
+            src={props.variables}
+            name={null}
+            iconStyle='triangle'
+            indentWidth={1}
+            enableClipboard={false}
+            displayDataTypes={false}
+          />
+        </span>
       </p>
     </div>
   );
