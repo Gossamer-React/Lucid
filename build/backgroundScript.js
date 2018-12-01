@@ -16,13 +16,13 @@ chrome.runtime.onConnect.addListener(port => {
     let extensionListener = (message, sender, res) => {
       if (message.name === 'connect' && message.tabId) {
         // console.log('backgroundscript received connect request from devtools; message:', message)
-        // chrome.tabs.executeScript(message.tabId, { file: 'reactTraverser.js' });
         chrome.tabs.sendMessage(message.tabId, message);
         connections[message.tabId] = port;
         console.log('connections obj: ', connections)
         return;
       }
     }
+
     port.onMessage.addListener(extensionListener);
   } 
 });
@@ -49,7 +49,7 @@ chrome.tabs.onRemoved.addListener(function(tabId) {
   delete connections[tabId];     
 });
 
-
+//* When react router is invoked a tab change happens and the traverser is lost. This sends a message to the content script so it can check if the traverser needs to be reinjected.
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if(!connections[tabId]){return;}
   if(changeInfo.status === 'complete' && _DevtoolPort){

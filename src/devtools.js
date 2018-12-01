@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import fetch from 'node-fetch';
 import { introspectionQuery } from 'graphql';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
@@ -26,11 +25,7 @@ class App extends Component {
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
 
-    chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
-      panel.onShown.addListener((e) => {
-        console.log(e);
-      });
-    });
+    chrome.devtools.panels.create("Lucid", null, "devtools.html");
   }
 
   componentDidMount() {
@@ -50,7 +45,7 @@ class App extends Component {
       // * checks if the message it's receiving is about a change in the DOM
       console.log('req')
       if (req.type === 'appState') {
-        console.log('appSTATE!')
+
         let oldstate = this.state.appReactDOM;
         appState.setState({ appReactDOM: req.msg });
 
@@ -68,6 +63,7 @@ class App extends Component {
       }
     });
 
+    //* Leverage Javascript API for WebExtensions to access browser network tab and log req/res objects in state log array
     chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
       if (httpReq.request.postData !== undefined) {
         let reqBody = JSON.parse(httpReq.request.postData.text);
@@ -93,6 +89,7 @@ class App extends Component {
     });
   }
 
+  //* function to dynamically grab url for backend, and fetch GraphQL schema from Apollo Server and add to state
   fetchSchemaFromGraphQLServer() {
     if (this.state.logs.length !== 0) {
       let url = this.state.logs[this.state.logs.length - 1].req.url;
@@ -112,6 +109,7 @@ class App extends Component {
     }
   }
 
+  //* invoke schema fetch only after a log object from a previous response is available
   componentDidUpdate() {
     if (this.state.schema === "GraphQL schema not available.") {
       this.fetchSchemaFromGraphQLServer();
