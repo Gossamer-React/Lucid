@@ -2,9 +2,7 @@ import React from 'react';
 import { buildClientSchema, printSchema } from 'graphql';
 import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
 
-const GraphQLSchema = ({ logs, schema }) => {
-
-  // let response = JSON.stringify(logs[logs.length - 1].res);
+const GraphQLSchema = ({ schema }) => {
 
   if (schema !== 'GraphQL schema not available.') {
 

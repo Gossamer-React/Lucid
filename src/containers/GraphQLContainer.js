@@ -14,7 +14,7 @@ const GraphQLContainer = ({ logs, schema }) => {
             <GraphQLResponse logs={logs} />
           </div>
           <hr />
-          <GraphQLSchema logs={logs} schema={schema} />
+          <GraphQLSchema schema={schema} />
         </div>
       ) : (
         <h1>No requests have been made yet.</h1>
