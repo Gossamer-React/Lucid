@@ -65,4 +65,6 @@ src/devtools/.DS_Store
 src/devtools/.DS_Store
 
 build/webpack-bundle.js
+webpack-bundle.js
 build/webpack-bundle.js.map
+webpack-bundle.js.map
