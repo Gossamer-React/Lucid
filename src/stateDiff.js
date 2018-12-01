@@ -29,7 +29,7 @@ export default function recurseDiff(olds, news, path = '') {
         } else {
           // push the old vs new items into the diff array
           let obj = {
-            component: path + '>>' + key,
+            component: path,
             oldState: olds,
             newState: news
           };
