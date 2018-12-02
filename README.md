@@ -34,18 +34,17 @@ React-Lucid is a React / GraphQl DevTool designed for helping developers debug t
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 ## Usage
+**Note:**  The current version of React-Lucid works best for local projects. 
 
 ### GraphQL View
 
 ### Component Tree View
 
-**Note:**  The current version of React-Lucid works best for local projects. We are currently working on adding more tests to our test suite.
+## Contributing
 
-## Testing
-Run current unit tests or build new ones and execute test suite:
+Please feel free to fork this repo and submit pull requests. Also, if you have any requests od suggestions for features, please contact us.
 
-  ```npm run test```
-## Authors
+## Our Team
 
 Yong-Nicholas Kim (https://github.com/yongnicholaskim)
 
@@ -55,7 +54,5 @@ Eterna Tsai (https://github.com/eternalee)
 
 Neyser Zana (https://github.com/neyser95)
 
-## Contact
-
-Like what you see or have any suggestions?
-Feel free to contact to us!
+## License
+MIT
