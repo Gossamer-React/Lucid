@@ -31,8 +31,6 @@ React-Lucid is a React / GraphQl DevTool designed for helping developers debug t
 
 5. Have fun!
 
------------------------------------------------------------------------------------------------------------------------------------------
-
 ## Usage
 **Note:**  The current version of React-Lucid works best for local projects. 
 
