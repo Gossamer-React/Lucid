@@ -9,6 +9,8 @@ import StateContainer from './containers/StateContainer.jsx';
 import TreeDiagram from './components/TreeDiagram.jsx';
 import recurseDiff from './stateDiff';
 import StatePropsBox from './components/StatePropsBox';
+import filter from './filterDOM';
+import filterComponents from './filterComponents.js';
 
 class App extends Component {
   constructor() {
@@ -17,14 +19,21 @@ class App extends Component {
       window: 'Graphql',
       logs: [],
       appReactDOM: [],
-      appFilteredDOM: [],
+      // appFilteredDOM: [],
       appState: [],
       nodeData: [], 
       schema: 'GraphQL schema not available.',
-      stateDiff: []
+      stateDiff: [],
+      componentsToFilter: [],
+      toggleRouter: false, 
+      toggleRedux: false,
+      toggleApollo: false
     };
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleApolloFilter = this.handleApolloFilter.bind(this);
+    this.handleReduxFilter = this.handleReduxFilter.bind(this);
+    this.handleRouterFilter = this.handleRouterFilter.bind(this);
 
     chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
       panel.onShown.addListener((e) => {
@@ -113,6 +122,11 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    console.log(this.state.componentsToFilter, 
+      'did componentsToFilter update?')
+    if(this.state.toggleRedux === 'true' || this.state.toggleApollo === 'true' || this.state.toggleRouter === 'true') {
+      this.filterOutComponents(); 
+    }
     if (this.state.schema === "GraphQL schema not available.") {
       this.fetchSchemaFromGraphQLServer();
     }
@@ -137,7 +151,101 @@ class App extends Component {
     this.setState({
       nodeData: data
     })
-    console.log(data, 'data came thru from mouse hover')
+  }
+
+  filterOutComponents() {
+    let data = this.state.appState; 
+    if(this.state.componentsToFilter.length) {
+      let result = []; 
+      let output = filter(data, this.state.componentsToFilter, result);
+      this.setState({
+        appState: output
+      });
+    }
+  }
+
+  handleApolloFilter(arr) {
+    //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
+    if(!this.state.componentsToFilter.includes(arr[0]) && arr[0] === 'ApolloProvider') {
+      console.log('did i hit apollo?')
+      let componentsArr = this.state.componentsToFilter.concat(arr);
+      this.setState({
+        componentsToFilter: componentsArr, 
+        toggleApollo: true
+      })  
+    }
+    else {
+      console.log('did i hit else?')
+      //* if componentsToFilter is not empty iterate through 
+      let list = this.state.componentsToFilter;
+      let output = [];
+      for (let i = 0; i < list.length; i++) {
+        if (!arr.includes(list[i])) {
+          output.push(list[i]);
+          console.log(output, 'this is final list-------------')
+        }
+      }
+      console.log(this.state.componentsToFilter, 'THIS IS AFTER CLICKS')
+      this.setState({
+        componentsToFilter: output
+      })
+    }
+  }
+
+  handleReduxFilter(arr) {
+    //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
+    if(!this.state.componentsToFilter.includes(arr[0]) && arr[0] === 'Provider') {
+      console.log('did i hit redux?')
+      let componentsArr = this.state.componentsToFilter.concat(arr);
+      this.setState({
+        componentsToFilter: componentsArr, 
+        toggleApollo: true
+      })  
+    }
+    else {
+      console.log('did i hit else?')
+      //* if componentsToFilter is not empty iterate through 
+      let list = this.state.componentsToFilter;
+      let output = [];
+      for (let i = 0; i < list.length; i++) {
+        if (!arr.includes(list[i])) {
+          output.push(list[i]);
+          console.log(output, 'this is final list-------------')
+        }
+      }
+      console.log(this.state.componentsToFilter, 'THIS IS AFTER CLICKS')
+      this.setState({
+        componentsToFilter: output
+      })
+    }
+  }
+
+  handleRouterFilter(arr) {
+    //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
+    if(!this.state.componentsToFilter.includes(arr[0]) && arr[0] === 'BrowserRouter') {
+      console.log('did i hit router?')
+      let componentsArr = this.state.componentsToFilter.concat(arr);
+      this.setState({
+        componentsToFilter: componentsArr, 
+        toggleApollo: true
+      })  
+    }
+    else {
+      console.log('did i hit else?')
+      //* if componentsToFilter is not empty iterate through 
+      let list = this.state.componentsToFilter;
+      let output = [];
+      for (let i = 0; i < list.length; i++) {
+        if (!arr.includes(list[i])) {
+          output.push(list[i]);
+          console.log(output, 'this is final list-------------')
+        }
+      }
+      console.log(this.state.componentsToFilter, 'THIS IS AFTER CLICKS')
+      this.setState({
+        componentsToFilter: output
+      })
+    }
   }
 
   render() {
@@ -173,7 +281,7 @@ class App extends Component {
               ) : (
                   <div class='reactTab'>
                     <StateContainer stateDiffs={this.state.stateDiff}/>
-                    <TreeDiagram appState={this.state.appState} handleMouseOver = {this.handleMouseOver}/>
+                    <TreeDiagram appState={this.state.appState} handleMouseOver={this.handleMouseOver} handleApolloFilter={this.handleApolloFilter} handleReduxFilter={this.handleReduxFilter} handleRouterFilter={this.handleRouterFilter}/>
                     <StatePropsBox nodeData = {this.state.nodeData}/>
                   </div>
                 )}

@@ -2,7 +2,6 @@ import React from 'react';
 import Tree from 'react-d3-tree';
 import Tool from './Tool';
 import filterComponents from '../filterComponents';
-import filter from '../filterDOM';
 
 class TreeDiagram extends React.Component {
   constructor(props) {
@@ -12,10 +11,8 @@ class TreeDiagram extends React.Component {
       orientation: 'vertical',
       foreignObjectWrapper: {y: -5, x: 10},
       nodeSize: {x: 75, y: 75},
-      componentsToFilter: []
     };
     this.handleFlip = this.handleFlip.bind(this);
-    this.handleFilter = this.handleFilter.bind(this);
   }
 
 
@@ -45,25 +42,6 @@ class TreeDiagram extends React.Component {
       })
     }
   }  
-
-  handleFilter(arr) {
-    if (!this.state.componentsToFilter.includes(arr[0])) {
-      let componentsArr = this.state.componentsToFilter.concat(arr);
-      this.setState({
-        componentsToFilter: componentsArr
-      })
-    } else {
-      let list = this.state.componentsToFilter;
-      for (let i = 0; i < list.length; i++) {
-        if (arr.includes(list[i])) {
-          list.splice(i, 1);
-        }
-      }
-      this.setState({
-        componentsToFilter: list
-      })
-    }
-  }
 
 
   render() {
@@ -96,25 +74,18 @@ class TreeDiagram extends React.Component {
       }
     };
 
-    let data = this.props.appState;
-
-    if (this.state.componentsToFilter.length) {
-      let result = [];
-      filter(data, this.state.componentsToFilter, result);
-      data = result;
-    }
 
     return (
       <div id="treeWrapper" ref={tc => (this.treeContainer = tc)}>
         <button onClick={() => {this.handleFlip()}}> {this.state.orientation[0].toUpperCase() + this.state.orientation.slice(1)} </button>
-        <button onClick={() => { this.handleFilter(filterComponents.reduxComponents) }}>Filter Redux</button>
-        <button onClick={() => { this.handleFilter(filterComponents.reactRouterComponents) }}>Filter React-Router</button>
-        <button onClick={() => { this.handleFilter(filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
+        <button onClick={() => { this.props.handleReduxFilter(filterComponents.reduxComponents) }}>Filter Redux</button>
+        <button onClick={() => { this.props.handleRouterFilter(filterComponents.reactRouterComponents) }}>Filter React-Router</button>
+        <button onClick={() => { this.props.handleApolloFilter(filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
      
         {/* when appState has a length we populate tree */}
         {this.props.appState.length !== 0 ? (
           <Tree
-            data={data}
+            data={this.props.appState}
             nodeSize={{ x: 75, y: 75 }}
             orientation={this.state.orientation}
             styles={styles}
