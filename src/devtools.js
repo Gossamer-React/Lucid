@@ -18,24 +18,17 @@ class App extends Component {
       window: 'Graphql',
       logs: [],
       appReactDOM: [],
-      // appFilteredDOM: [],
       appState: [],
       nodeData: [],
       schema: 'GraphQL schema not available.',
       stateDiff: [],
       componentsToFilter: [],
-      toggleRouter: false, 
-      toggleRedux: false,
-      toggleApollo: false,
-      // filteredData: [] 
+      filteredData: [], 
       logView: null
     };
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleApolloFilter = this.handleApolloFilter.bind(this);
-    this.handleReduxFilter = this.handleReduxFilter.bind(this);
-    this.handleRouterFilter = this.handleRouterFilter.bind(this);
-    this.filterOutComponents = this.filterOutComponents.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
 
     chrome.devtools.panels.create("Lucid", null, "devtools.html");
   }
@@ -65,10 +58,9 @@ class App extends Component {
           let diff = recurseDiff(oldstate, this.state.appReactDOM);
           appState.setState({ stateDiff: diff });
         }
-
+      
         //if there is an active setTimeout, clear it
         clearTimeout(timeout);
-
         timeout = setTimeout(() => {
           appState.setState({ appState: req.msg });
         }, 1000);
@@ -112,22 +104,64 @@ class App extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: introspectionQuery })
       })
-        .then(res => res.json())
-        .then(json =>
-          this.setState({
-            schema: JSON.stringify(json.data)
-          })
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          schema: JSON.stringify(json.data)
+        })
         );
+      }
     }
-  }
+    
+    // filterOutComponents() {
+    //   let data = this.state.appState; 
+    //   if(this.state.componentsToFilter.length) {
+    //     let result = []; 
+    //     filter(data, this.state.componentsToFilter, result);
+    //     data = result; 
+    //     this.setState({
+    //       appState: data
+    //     });
+    //   }
+    // }
+    
+    handleFilter(arr) {
+      //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
+      let result = []; 
+      if(!this.state.componentsToFilter.includes(arr[0])) {
+        let componentsArr = this.state.componentsToFilter.concat(arr);
+        filter(this.state.appState, componentsArr, result);
+        this.setState({
+          componentsToFilter: componentsArr,
+          filteredData: result
+        });
+      }
+      else {
+        //* if componentsToFilter is not empty iterate through 
+        let list = this.state.componentsToFilter;
+        for (let i = 0; i < list.length; i++) {
+          if (arr.includes(list[i])) {
+            // output.push(list[i]);
+            list.splice(i--, 1); 
+          }
+        }
+        filter(this.state.appState, list, result);
+        this.setState({
+          componentsToFilter: list,
+          filteredData: result
+        });
+      }
+    }
 
-  //* invoke schema fetch only after a log object from a previous response is available
-  componentDidUpdate() {
-    console.log(this.state.componentsToFilter, 
-      'componentsToFilter updated after filter button click --- componentDidUpdate line 128 devtools.js')
-    if(this.state.toggleRedux === true || this.state.toggleApollo === true || this.state.toggleRouter === true) {
-      this.filterOutComponents();
+    //* invoke schema fetch only after a log object from a previous response is available
+    componentDidUpdate(prevProps, prevState) {
+    if(prevState.appState !== this.state.appState) {
+      if(this.state.componentsToFilter.length) {
+        let result = [];
+        filter(this.state.appState, this.state.componentsToFilter, result);
+      }
     }
+      console.log(this.state.componentsToFilter, 'components filter on update -line 124 devtools.js')
     if (this.state.schema === "GraphQL schema not available.") {
       this.fetchSchemaFromGraphQLServer();
     }
@@ -154,105 +188,7 @@ class App extends Component {
     })
   }
 
-  filterOutComponents() {
-    let data = this.state.appState; 
-    if(this.state.componentsToFilter.length) {
-      let result = []; 
-      filter(data, this.state.componentsToFilter, result);
-      data = result; 
-      //*whether i use filteredData or actual appState we run into a recursive breakage. For now instead of seprating the data, we will try to manipulate appState directly, since same breakage occurs in both situations. 
-      //* I suspect the appState and the changed data are in constant conflict with one another, and we might need to make changes in traverse when a toggle button is clicked. so all freshly new DOM data will have everything filtered upon arrival.
-      //* else newly arrived DOM data information on user's app will setState, then on update in our dev tool we'll rerun and change state.
-      //* best to have a toggle change a set of conditions in traverser, where if toggle is set to false, traverse and leave out these set of words apoloProvider etc. 
-      //* filtering data after its already arrived with two traverse functions seem constly, and is the cause of our glitch.
-      //* throwing the filtering to dev and resetting appState is causing breakage, if cant find solution, go to the source of the issue, the traverser and set toggling conditions there. 
-      // this.setState({
-      //   filteredData: data
-      // });
-      this.setState({
-        appState: data
-      });
-      console.log(data, 'filterOutComponents function ran successfully, filteredData is set to this object --coming from devtools line 169')
-    }
-  }
 
-  handleApolloFilter(arr) {
-    //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
-    if(!this.state.componentsToFilter.includes(arr[0]) && arr[0] === 'ApolloProvider') {
-      console.log('did i hit apollo?')
-      let componentsArr = this.state.componentsToFilter.concat(arr);
-      this.setState({
-        componentsToFilter: componentsArr, 
-        toggleApollo: true
-      })  
-    }
-    else {
-      //* if componentsToFilter is not empty iterate through 
-      let list = this.state.componentsToFilter;
-      let output = []; 
-      for (let i = 0; i < list.length; i++) {
-        if (!arr.includes(list[i])) {
-          output.push(list[i]);
-        }
-      }
-      this.setState({
-        componentsToFilter: output,
-        toggleApollo: false
-      })
-    }
-  }
-
-  handleReduxFilter(arr) {
-    //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
-    if(!this.state.componentsToFilter.includes(arr[0]) && arr[0] === 'Provider') {
-      console.log('did i hit redux?')
-      let componentsArr = this.state.componentsToFilter.concat(arr);
-      this.setState({
-        componentsToFilter: componentsArr, 
-        toggleRedux: true
-      })  
-    }
-    else {
-      //* if componentsToFilter is not empty iterate through 
-      let list = this.state.componentsToFilter;
-      let output = []; 
-      for (let i = 0; i < list.length; i++) {
-        if (!arr.includes(list[i])) {
-          output.push(list[i]);
-        }
-      }
-      this.setState({
-        componentsToFilter: output,
-        toggleRedux: false
-      })
-    }
-  }
-
-  handleRouterFilter(arr) {
-    //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
-    if(!this.state.componentsToFilter.includes(arr[0]) && arr[0] === 'BrowserRouter') {
-      console.log('did i hit router?')
-      let componentsArr = this.state.componentsToFilter.concat(arr);
-      this.setState({
-        componentsToFilter: componentsArr, 
-        toggleRouter: true
-      })  
-    }
-    else {
-      //* if componentsToFilter is not empty iterate through 
-      let list = this.state.componentsToFilter;
-      let output = []; 
-      for (let i = 0; i < list.length; i++) {
-        if (!arr.includes(list[i])) {
-          output.push(list[i]);
-        }
-      }
-      this.setState({
-        componentsToFilter: output,
-        toggleRouter: false
-      })
-    }
-  }
 
   // * handles the clearing of both the  request log and diff log
   handleClearLog(e) {
@@ -305,17 +241,10 @@ class App extends Component {
                   <div class='reactTab'>
                     <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
                     <TreeDiagram 
-                      appState = {this.state.appState} 
+                      appState = {this.state.filteredData} 
                       handleMouseOver = {this.handleMouseOver} 
-                      handleApolloFilter = {this.handleApolloFilter} 
-                      handleReduxFilter = {this.handleReduxFilter} 
-                      handleRouterFilter = {this.handleRouterFilter}
-                      // filteredData = {this.state.filteredData} 
-                      // toggleRedux = {this.state.toggleRedux}
-                      // toggleRouter = {this.state.toggleRouter}
-                      // toggleApolo = {this.state.toggleApollo}
+                      handleFilter = {this.handleFilter}
                     />
-                    <TreeDiagram appState={this.state.appState} handleMouseOver={this.handleMouseOver} />
                     <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
