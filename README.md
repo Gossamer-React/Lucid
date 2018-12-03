@@ -26,7 +26,7 @@ React-Lucid is a React / GraphQL DevTool designed for helping developers debug t
 
 2. Build React-Lucid to be used in Chrome Dev Tools: 
 
-    ```npm run build ``` or ```npm run watch```
+    ```npm run build ```
 
 3. In Chrome Browser, open more tools and Extensions tab and click 'Load Unpacked' 
 
