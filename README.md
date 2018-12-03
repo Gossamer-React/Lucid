@@ -1,11 +1,14 @@
 # React-Lucid
-A devtool for React-GraphQl developers.
+A React-GraphQL developer tool.
 
-React-Lucid is a React / GraphQl DevTool designed for helping developers debug their React applications that depend on GraphQL resources more efficiently. React-Lucid allows you to visualize the component hierarchy of your React application and your GraphQL schema, queries, and mutations side by side, making development a breeze.
+React-Lucid is a React / GraphQL DevTool designed for helping developers debug their React applications that depend on GraphQL resources more efficiently. React-Lucid allows you to visualize the component hierarchy of your React application and your GraphQL schema, queries, and mutations side by side, making development a breeze.
+
+### Usage
+**Note:**  The current version of React-Lucid works best for local projects using React 16+. 
 
 ### --Set Up | Install From Chrome Extension Store--
 
-1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React DevTools</a>. 
+1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools</a>. 
 
 2. Install <a href="https://chrome.google.com/webstore/detail/debux/ooihnkghpifccalpfakdnlolfaiidfjp?authuser=1">React-Lucid</a> to your chrome://extensions from the <a href="https://chrome.google.com/webstore/category/extensions">Chrome Web Store</a>.
 
@@ -31,16 +34,13 @@ React-Lucid is a React / GraphQl DevTool designed for helping developers debug t
 
 5. Have fun!
 
-## Usage
-**Note:**  The current version of React-Lucid works best for local projects. 
-
 ### GraphQL View
 
 ### Component Tree View
 
 ## Contributing
 
-Please feel free to fork this repo and submit pull requests. Also, if you have any requests od suggestions for features, please contact us.
+Please feel free to fork this repo and submit pull requests. Also, if you have any requests or suggestions for features, please contact us.
 
 ## Our Team
 
