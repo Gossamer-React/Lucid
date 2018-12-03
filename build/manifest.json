@@ -27,5 +27,8 @@
   ],
   "externally_connectable": {
     "ids": ["*"]
+  },
+  "icons": {
+    "128": "logo.png"
   }
 }
