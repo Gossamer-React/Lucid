@@ -20,7 +20,8 @@ class App extends Component {
       appState: [],
       nodeData: [],
       schema: 'GraphQL schema not available.',
-      stateDiff: []
+      stateDiff: [],
+      logView: null
     };
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -148,6 +149,13 @@ class App extends Component {
     }
   }
 
+  // * handles the change of a log
+  handleLogChange(reqId){
+    console.log(reqId);
+    let req = this.state.logs[reqId];
+    this.setState({logView: req})
+  }
+
   render() {
     console.log('devtoolsjs re-rendered; this.state:', this.state);
     //if this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render App (Log, Tree, GraphQL)
@@ -175,8 +183,8 @@ class App extends Component {
               request/reponse from their httprequest */}
               {this.state.window === 'Graphql' ? (
                 <div class='graphQLTab'>
-                  <LogContainer logs={this.state.logs} clearLog={this.handleClearLog.bind(this)} />
-                  <GraphQLContainer logs={this.state.logs} schema={this.state.schema} />
+                  <LogContainer logs={this.state.logs} clearLog={this.handleClearLog.bind(this)} logChange = {this.handleLogChange.bind(this)}/>
+                  <GraphQLContainer logs={this.state.logs} schema={this.state.schema} log={this.state.logView}/>
                 </div>
               ) : (
                   <div class='reactTab'>

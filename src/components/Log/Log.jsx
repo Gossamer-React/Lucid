@@ -5,6 +5,7 @@ import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
 const Log = props => {
   return (
     <div className='log'>
+      <button onClick={() => {props.logChange(props.logId)}}>view</button>
       <p className='log-p'>
         <b>Request:</b> {props.logId}
       </p>

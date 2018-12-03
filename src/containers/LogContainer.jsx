@@ -13,6 +13,7 @@ const LogContainer = props => {
         query={text.query}
         variables={text.variables}
         logId={i}
+        logChange={props.logChange}
       />
     );
   });
