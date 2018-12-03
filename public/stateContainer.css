@@ -1,8 +1,26 @@
-#state-container{
-  padding: 10px;
-  width: 300px;
-  overflow-y: scroll;
-  background:rgba(214, 214, 214, 0.4);
-  margin: 4px;
+#stateDiff-container {
   grid-area: diff;
-} 
+  max-height: 450px;
+  overflow-y: scroll;
+  background-color: rgba(214, 214, 214, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 10px; 
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.stateDiff-div {
+  overflow-x: scroll;
+  padding: 15px;
+  background:rgba(255,255,255,0.5);
+  margin: 8px 0px;
+}
+
+.state-span{
+  margin: 6px;
+  font-size: 1.1em;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  line-height: 15px;
+}

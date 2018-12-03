@@ -8,19 +8,22 @@ const StateContainer = ({ stateDiffs }) => {
     <div id='stateDiff-container'>
       {stateDiffs.map((el, i) => {
         return (
-          <ReactJson
-            className='stateDiff-div'
-            key={i}
-            src={el}
-            name={null}
-            iconStyle='triangle'
-            indentWidth={1}
-            groupArraysAfterLength={20}
-            enableClipboard={false}
-            collapsed={2}
-            displayDataTypes={false}
-            displayObjectSize={false}
-          />
+          <div className='stateDiff-div'>
+            <span className='state-span'>
+              <ReactJson
+                key={i}
+                src={el}
+                name={null}
+                iconStyle='triangle'
+                indentWidth={1}
+                groupArraysAfterLength={20}
+                enableClipboard={false}
+                collapsed={2}
+                displayDataTypes={false}
+                displayObjectSize={false}
+              />
+            </span>
+          </div>
         )
       })}
     </div>

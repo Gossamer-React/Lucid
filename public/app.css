@@ -40,18 +40,6 @@ body{
   margin-right: 10px;
 }
 
-#stateDiff-container {
-  grid-area: diff;
-  max-height: 450px;
-  overflow-y: scroll;
-  background:rgba(255,255,255,0.5);
-  border: 1px solid black; 
-  border-radius: 5px; 
-  padding: 5px 5px; 
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
 #treeWrapper{
   grid-area: tree;
   height: 700px;
