@@ -3,7 +3,6 @@ import React from 'react';
 const StatePropsBox = (props) => {
     const stateObj = props.nodeData.State; 
     const propObj = props.nodeData.Props
-    console.log(stateObj, propObj, 'state and props objects')
     return (
         <div className='state-prop-display'>
          {(props.nodeData.Props !== null || props.nodeData.State !== null) ?
