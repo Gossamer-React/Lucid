@@ -8,6 +8,7 @@ import StateContainer from './containers/StateContainer.jsx';
 import TreeDiagram from './components/TreeDiagram.jsx';
 import recurseDiff from './stateDiff';
 import StatePropsBox from './components/StatePropsBox';
+import filter from './filterDOM';
 
 class App extends Component {
   constructor() {
@@ -21,7 +22,8 @@ class App extends Component {
       nodeData: [],
       schema: 'GraphQL schema not available.',
       stateDiff: [],
-      logView: null
+      logView: null,
+      componentsToFilter: [],
     };
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -44,7 +46,6 @@ class App extends Component {
     let timeout;
     chromePort.onMessage.addListener(req => {
       // * checks if the message it's receiving is about a change in the DOM
-      console.log('req')
       if (req.type === 'appState') {
 
         let oldstate = this.state.appReactDOM;
@@ -69,7 +70,6 @@ class App extends Component {
       if (httpReq.request.postData !== undefined) {
         let reqBody = JSON.parse(httpReq.request.postData.text);
 
-        console.log('reqBody: ', reqBody);
         if (reqBody.variables && reqBody.query) {
           let log = {};
           log.req = httpReq.request;
@@ -94,7 +94,6 @@ class App extends Component {
   fetchSchemaFromGraphQLServer() {
     if (this.state.logs.length !== 0) {
       let url = this.state.logs[this.state.logs.length - 1].req.url;
-      console.log("URL", url);
 
       fetch(url, {
         method: 'POST',
@@ -111,9 +110,16 @@ class App extends Component {
   }
 
   //* invoke schema fetch only after a log object from a previous response is available
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.schema === "GraphQL schema not available.") {
       this.fetchSchemaFromGraphQLServer();
+    }
+    if (prevState.appReactDOM !== this.state.appReactDOM) {
+      if (this.state.componentsToFilter.length) {
+        let result = [];
+        filter(this.state.appReactDOM, this.state.componentsToFilter, result);
+        this.setState({appFilteredDOM: result});
+      }
     }
   }
 
@@ -131,12 +137,36 @@ class App extends Component {
     }
   }
 
-  //handle data coming back from mouse hover in tree diagram
+  // * Handles the filter for the component tree
+  handleFilter(arr) {
+    let result = [];
+    if (!this.state.componentsToFilter.includes(arr[0])) {
+      let componentsArr = this.state.componentsToFilter.concat(arr);
+      filter(this.state.appReactDOM, this.state.componentsToFilter, result);
+      this.setState({
+        componentsToFilter: componentsArr,
+        appFilteredDOM: result
+      });
+    } else {
+      let list = this.state.componentsToFilter;
+      for (let i = 0; i < list.length; i++) {
+        if (arr.includes(list[i])) {
+          list.splice(i--, 1);
+        }
+      }
+      filter(this.state.appReactDOM, this.state.componentsToFilter, result);
+      this.setState({
+        componentsToFilter: list,
+        appFilteredDOM: result
+      });
+    }
+  }
+
+  //* handle data coming back from mouse hover in tree diagram
   handleMouseOver(data) {
     this.setState({
       nodeData: data
     })
-    console.log(data, 'data came thru from mouse hover')
   }
 
   // * handles the clearing of both the  request log and diff log
@@ -150,14 +180,12 @@ class App extends Component {
   }
 
   // * handles the change of a log
-  handleLogChange(reqId){
-    console.log(reqId);
+  handleLogChange(reqId) {
     let req = this.state.logs[reqId];
-    this.setState({logView: req})
+    this.setState({ logView: req })
   }
 
   render() {
-    console.log('devtoolsjs re-rendered; this.state:', this.state);
     //if this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render App (Log, Tree, GraphQL)
     return (
       <div>
@@ -183,13 +211,13 @@ class App extends Component {
               request/reponse from their httprequest */}
               {this.state.window === 'Graphql' ? (
                 <div class='graphQLTab'>
-                  <LogContainer logs={this.state.logs} clearLog={this.handleClearLog.bind(this)} logChange = {this.handleLogChange.bind(this)}/>
-                  <GraphQLContainer logs={this.state.logs} schema={this.state.schema} log={this.state.logView}/>
+                  <LogContainer logs={this.state.logs} clearLog={this.handleClearLog.bind(this)} logChange={this.handleLogChange.bind(this)} />
+                  <GraphQLContainer logs={this.state.logs} schema={this.state.schema} log={this.state.logView} />
                 </div>
               ) : (
                   <div class='reactTab'>
                     <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
-                    <TreeDiagram appState={this.state.appState} handleMouseOver={this.handleMouseOver} />
+                    <TreeDiagram appState={this.state.appFilteredDOM} handleMouseOver={this.handleMouseOver} handleFilter={this.handleFilter.bind(this)} />
                     <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}

@@ -4,7 +4,6 @@ import ReactJson from 'react-json-view';
 const GraphQLResponse = ({ logs, log }) => {
 
   let response = log === null ? logs[logs.length - 1].res : log.res;
-  console.log('--response:', response);
 
   return (
     <div id='graphql-res' >

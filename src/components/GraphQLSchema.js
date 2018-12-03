@@ -8,8 +8,6 @@ const GraphQLSchema = ({ schema }) => {
 
     let schemaObj = buildClientSchema(JSON.parse(schema));
     let schemaSDL = printSchema(schemaObj);
-    console.log('--schemaObj:', schemaObj);
-    console.log('--schemaSDL:', schemaSDL);
 
     return (
       <div id='graphql-schema'>
