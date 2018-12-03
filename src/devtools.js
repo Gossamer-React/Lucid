@@ -21,14 +21,6 @@ class App extends Component {
       nodeData: [],
       schema: 'GraphQL schema not available.',
       stateDiff: [],
-<<<<<<< HEAD
-      componentsToFilter: [],
-      toggleRouter: false, 
-      toggleRedux: false,
-      toggleApollo: false,
-      filteredData: [],
-=======
->>>>>>> b4a5dad52039ea3cf331740192a49899892e06f2
       logView: null
     };
 
@@ -197,21 +189,7 @@ class App extends Component {
               ) : (
                   <div class='reactTab'>
                     <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
-<<<<<<< HEAD
-                    <TreeDiagram 
-                      appState = {this.state.appState} 
-                      handleMouseOver = {this.handleMouseOver} 
-                      handleApolloFilter = {this.handleApolloFilter} 
-                      handleReduxFilter = {this.handleReduxFilter} 
-                      handleRouterFilter = {this.handleRouterFilter}
-                      filteredData = {this.state.filteredData} 
-                      toggleRedux = {this.state.toggleRedux}
-                      toggleRouter = {this.state.toggleRouter}
-                      toggleApolo = {this.state.toggleApollo}
-                    />
-=======
                     <TreeDiagram appState={this.state.appState} handleMouseOver={this.handleMouseOver} />
->>>>>>> b4a5dad52039ea3cf331740192a49899892e06f2
                     <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
