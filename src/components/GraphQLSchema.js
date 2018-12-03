@@ -2,9 +2,7 @@ import React from 'react';
 import { buildClientSchema, printSchema } from 'graphql';
 import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
 
-const GraphQLSchema = ({ logs, schema }) => {
-
-  // let response = JSON.stringify(logs[logs.length - 1].res);
+const GraphQLSchema = ({ schema }) => {
 
   if (schema !== 'GraphQL schema not available.') {
 
@@ -14,26 +12,25 @@ const GraphQLSchema = ({ logs, schema }) => {
     console.log('--schemaSDL:', schemaSDL);
 
     return (
-      <div id="graphql" >
-        <div className="graphql">
-          <b>Schema:</b> 
-          {/* <pre className="graphql-p">
-            {schemaSDL}
-          </pre> */}
-          <GraphqlCodeBlock
-            className="GraphqlCodeBlock"
-            queryBody={schemaSDL}
-          />
+      <div id='graphql-schema'>
+        <div className='graphql'>
+          <p className='graphql-p'><b>Schema:</b></p>
+          <span className='graphql-span'>
+            <GraphqlCodeBlock
+              className='GraphqlCodeBlock'
+              queryBody={schemaSDL}
+            />
+          </span>
         </div>
       </div>
     )
 
   } else {
-    
+
     return (
-      <div id="graphql" >
-        <div className="graphql">
-          <p className="graphql-p">
+      <div id='graphql'>
+        <div className='graphql'>
+          <p className='graphql-p'>
             No GraphQL data available.
           </p>
         </div>

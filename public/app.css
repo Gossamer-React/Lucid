@@ -1,13 +1,17 @@
 *{
   margin: 0px;
 }
+body{
+  background-color: rgb(255, 255, 255);
+  /* background: #8e9eab;  fallback for old browsers;
+  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  Chrome 10-25, Safari 5.1-6; 
+  background: linear-gradient(to right, #eef2f3, #8e9eab); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+;   */
+}
 
 #app-container{
   display: flex;
-  height: 100vh;
-  background: #8e9eab;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  padding: 10px 25px;
+  max-height: 95%;
 }
 
 #devToolsLoader {
@@ -16,26 +20,52 @@
 }
 
 .reactTab {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    'sp-box tree'
+    'diff tree';
 }
+
+.state-prop-display {
+  grid-area: sp-box;
+  background-color: #333;
+  color: white;
+  max-height: 150px;
+  overflow-y: scroll;
+  border: 1px solid black; 
+  border-radius: 5px;
+  padding: 5px 5px; 
+  margin-right: 10px;
+}
+
+#treeWrapper{
+  grid-area: tree;
+  height: 700px;
+  background-color: rgba(214, 214, 214, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px; 
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.rd3t-tree-container{
+  margin-top: 15px;
+  height: 90%!important;
+}
+
+.pre-tag {
+  white-space: pre-wrap;
+}  
+
+/* graph tab */
 .graphQLTab {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
-.state-prop {
-  position: absolute;
-  background-color: #333;
-  color: white;
-  z-index: 999;
-  padding: 10px;
-  max-width: 300px;
-}
-
-/* .toolTip {
-  position: relative;
-} */
 
 /* For window  */
 #window{
@@ -45,7 +75,7 @@
   margin: 0px;
 }
 #window-nav {
-  margin-top: 40px;
+  margin: 5px 0px 20px 0px;
   text-align: center;
 }
 .window-btn-wrapper {
@@ -56,8 +86,8 @@
 .window-btn{
   width: 30%;
   box-sizing: border-box;
-  border: solid 1px white;
-  color: white;
+  border: solid 1px rgba(214, 214, 214);
+  color: rgba(214, 214, 214, 0.8);
   text-transform: uppercase;
   border-radius: 5px;
   background-color: Transparent;
@@ -71,11 +101,10 @@
   outline: none;
 }
 .window-btn:hover{
-  background-color: white;
+  background-color: rgba(214, 214, 214, 0.8);
   color: black;
 }
 .active{
-  /* this is for the window-btn */
-  background-color: white;
+  background-color: rgba(214, 214, 214, 0.8);
   color: black;
 }
