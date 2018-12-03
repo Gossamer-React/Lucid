@@ -2,10 +2,20 @@ import React from 'react';
 import ReactJson from 'react-json-view';
 import styles from '../../public/stateContainer.css';
 
-const StateContainer = ({ stateDiffs }) => {
-
+const StateContainer = ({ stateDiffs, clearLog }) => {
   return (
     <div id='stateDiff-container'>
+      <div id='state-header'>
+        <h2>State Changes</h2>
+        <button
+          data-log='state-log'
+          onClick={e => {
+            clearLog(e);
+          }}
+        >
+          Clear All
+        </button>
+      </div>
       {stateDiffs.map((el, i) => {
         return (
           <div className='stateDiff-div'>
@@ -24,10 +34,10 @@ const StateContainer = ({ stateDiffs }) => {
               />
             </span>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
 export default StateContainer;

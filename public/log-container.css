@@ -5,10 +5,13 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   max-height: 600px;
+  height: 600px;
 }
 
-#log-title{
-  text-align: center;
+#log-header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 #logs{

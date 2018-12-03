@@ -18,7 +18,7 @@ class App extends Component {
       appReactDOM: [],
       appFilteredDOM: [],
       appState: [],
-      nodeData: [], 
+      nodeData: [],
       schema: 'GraphQL schema not available.',
       stateDiff: []
     };
@@ -138,6 +138,16 @@ class App extends Component {
     console.log(data, 'data came thru from mouse hover')
   }
 
+  // * handles the clearing of both the  request log and diff log
+  handleClearLog(e) {
+    const data = e.target.dataset.log;
+    if (data === 'req-log') {
+      this.setState({ logs: [] });
+    } else {
+      this.setState({ stateDiff: [] });
+    }
+  }
+
   render() {
     console.log('devtoolsjs re-rendered; this.state:', this.state);
     //if this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render App (Log, Tree, GraphQL)
@@ -165,14 +175,14 @@ class App extends Component {
               request/reponse from their httprequest */}
               {this.state.window === 'Graphql' ? (
                 <div class='graphQLTab'>
-                  <LogContainer logs={this.state.logs} />
+                  <LogContainer logs={this.state.logs} clearLog={this.handleClearLog.bind(this)} />
                   <GraphQLContainer logs={this.state.logs} schema={this.state.schema} />
                 </div>
               ) : (
                   <div class='reactTab'>
-                    <StateContainer stateDiffs={this.state.stateDiff}/>
-                    <TreeDiagram appState={this.state.appState} handleMouseOver = {this.handleMouseOver}/>
-                    <StatePropsBox nodeData = {this.state.nodeData}/>
+                    <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
+                    <TreeDiagram appState={this.state.appState} handleMouseOver={this.handleMouseOver} />
+                    <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
             </div>
