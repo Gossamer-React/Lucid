@@ -1,5 +1,4 @@
 const filter = (node, componentsArr, childrenArr) => {
-  console.log(node.name, 'name from filterDOM.js is it there?')
   if (node.name === undefined) {
     filter(node[0], componentsArr, childrenArr)
   } else {
