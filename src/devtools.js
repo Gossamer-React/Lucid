@@ -27,7 +27,7 @@ class App extends Component {
       toggleRouter: false, 
       toggleRedux: false,
       toggleApollo: false,
-      // filteredData: [] 
+      filteredData: [],
       logView: null
     };
 
@@ -166,12 +166,12 @@ class App extends Component {
       //* best to have a toggle change a set of conditions in traverser, where if toggle is set to false, traverse and leave out these set of words apoloProvider etc. 
       //* filtering data after its already arrived with two traverse functions seem constly, and is the cause of our glitch.
       //* throwing the filtering to dev and resetting appState is causing breakage, if cant find solution, go to the source of the issue, the traverser and set toggling conditions there. 
-      // this.setState({
-      //   filteredData: data
-      // });
       this.setState({
-        appState: data
+        filteredData: data
       });
+      // this.setState({
+      //   appState: data
+      // });
       console.log(data, 'filterOutComponents function ran successfully, filteredData is set to this object --coming from devtools line 169')
     }
   }
@@ -310,12 +310,11 @@ class App extends Component {
                       handleApolloFilter = {this.handleApolloFilter} 
                       handleReduxFilter = {this.handleReduxFilter} 
                       handleRouterFilter = {this.handleRouterFilter}
-                      // filteredData = {this.state.filteredData} 
-                      // toggleRedux = {this.state.toggleRedux}
-                      // toggleRouter = {this.state.toggleRouter}
-                      // toggleApolo = {this.state.toggleApollo}
+                      filteredData = {this.state.filteredData} 
+                      toggleRedux = {this.state.toggleRedux}
+                      toggleRouter = {this.state.toggleRouter}
+                      toggleApolo = {this.state.toggleApollo}
                     />
-                    <TreeDiagram appState={this.state.appState} handleMouseOver={this.handleMouseOver} />
                     <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}

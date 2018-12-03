@@ -11,7 +11,7 @@ class TreeDiagram extends React.Component {
       orientation: 'vertical',
       foreignObjectWrapper: {y: -5, x: 10},
       nodeSize: {x: 75, y: 75},
-      // domData: []
+      domData: []
     };
     this.handleFlip = this.handleFlip.bind(this);
   }
@@ -26,36 +26,36 @@ class TreeDiagram extends React.Component {
         x: dimensions.width / 2,
         y: dimensions.height / 8
       },
-      // domData: this.props.appState,
+      domData: this.props.appState,
     });
   }
 
   //* when theres a change in any of the toggles, filteredDdata stores the filtered components
   //* check for any toggles to be true, and filteredData to be not empty, if so setState. 
   //* issue is we keep running into a repetitive recursive loop and app breaks/ 
-  // componentDidUpdate() {
-  //   if(this.props.filteredData.length !== 0 && this.props.toggleRedux === true || this.props.toggleRouter === true || this.props.toggleApollo === true) {
-  //     this.setState({
-  //       domData: this.props.filteredData
-  //     });
-  //   }
-  // }
+  componentDidUpdate() {
+    if(this.props.filteredData.length !== 0 && this.props.toggleRedux === true || this.props.toggleRouter === true || this.props.toggleApollo === true) {
+      this.setState({
+        domData: this.props.filteredData
+      });
+    }
+  }
 
 //* before props are being passed, we want to compare the old props with the newly updated props.
 //* if they're not the same (comparing lengths after filter) then we set our state accordingly.
 //* wanted to see diff from this and update. 
 
-  // componentWillReceiveProps(nextProps) {
-  //   if(this.props.filteredData.length !== nextProps.filteredData.length) {
-  //     this.setState({
-  //       domData: this.props.filteredData
-  //     })
-  //   } else {
-  //     this.setState({
-  //       domData: this.props.appState
-  //     })
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if(this.props.filteredData.length !== nextProps.filteredData.length) {
+      this.setState({
+        domData: this.props.filteredData
+      })
+    } else {
+      this.setState({
+        domData: this.props.appState
+      })
+    }
+  }
 
 
   handleFlip() {
