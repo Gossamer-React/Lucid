@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
 
-const GraphQLResponse = ({ logs }) => {
+const GraphQLResponse = ({ logs, log  }) => {
 
-  let response = logs[logs.length - 1].res;
+  let response = log=== null ? logs[logs.length - 1].res : log.res; 
   console.log('--response:', response);
 
   return (

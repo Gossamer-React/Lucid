@@ -2,8 +2,9 @@ import React from 'react';
 import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
 import ReactJson from 'react-json-view';
 
-const GraphQLRequest = ({ logs }) => {
-  let req = JSON.parse(logs[logs.length - 1].req.postData.text);
+const GraphQLRequest = ({ logs, log } ) => {
+  console.log(log);
+  let req = log === null ? JSON.parse(logs[logs.length - 1].req.postData.text) : JSON.parse(log.req.postData.text);
   let query = req.query;
   let variables = req.variables;
   let operation = req.operationName;

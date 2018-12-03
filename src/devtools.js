@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import fetch from 'node-fetch';
 import { introspectionQuery } from 'graphql';
 import LogContainer from './containers/LogContainer.jsx';
 import styles from './../public/app.css';
@@ -21,7 +20,7 @@ class App extends Component {
       appReactDOM: [],
       // appFilteredDOM: [],
       appState: [],
-      nodeData: [], 
+      nodeData: [],
       schema: 'GraphQL schema not available.',
       stateDiff: [],
       componentsToFilter: [],
@@ -29,6 +28,7 @@ class App extends Component {
       toggleRedux: false,
       toggleApollo: false,
       // filteredData: [] 
+      logView: null
     };
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -37,11 +37,7 @@ class App extends Component {
     this.handleRouterFilter = this.handleRouterFilter.bind(this);
     this.filterOutComponents = this.filterOutComponents.bind(this);
 
-    chrome.devtools.panels.create("Lucid", null, "devtools.html", panel => {
-      panel.onShown.addListener((e) => {
-        console.log(e);
-      });
-    });
+    chrome.devtools.panels.create("Lucid", null, "devtools.html");
   }
 
   componentDidMount() {
@@ -61,7 +57,7 @@ class App extends Component {
       // * checks if the message it's receiving is about a change in the DOM
       console.log('req')
       if (req.type === 'appState') {
-        console.log('appSTATE!')
+
         let oldstate = this.state.appReactDOM;
         appState.setState({ appReactDOM: req.msg });
 
@@ -79,6 +75,7 @@ class App extends Component {
       }
     });
 
+    //* Leverage Javascript API for WebExtensions to access browser network tab and log req/res objects in state log array
     chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
       if (httpReq.request.postData !== undefined) {
         let reqBody = JSON.parse(httpReq.request.postData.text);
@@ -104,6 +101,7 @@ class App extends Component {
     });
   }
 
+  //* function to dynamically grab url for backend, and fetch GraphQL schema from Apollo Server and add to state
   fetchSchemaFromGraphQLServer() {
     if (this.state.logs.length !== 0) {
       let url = this.state.logs[this.state.logs.length - 1].req.url;
@@ -123,6 +121,7 @@ class App extends Component {
     }
   }
 
+  //* invoke schema fetch only after a log object from a previous response is available
   componentDidUpdate() {
     console.log(this.state.componentsToFilter, 
       'componentsToFilter updated after filter button click --- componentDidUpdate line 128 devtools.js')
@@ -255,6 +254,23 @@ class App extends Component {
     }
   }
 
+  // * handles the clearing of both the  request log and diff log
+  handleClearLog(e) {
+    const data = e.target.dataset.log;
+    if (data === 'req-log') {
+      this.setState({ logs: [] });
+    } else {
+      this.setState({ stateDiff: [] });
+    }
+  }
+
+  // * handles the change of a log
+  handleLogChange(reqId){
+    console.log(reqId);
+    let req = this.state.logs[reqId];
+    this.setState({logView: req})
+  }
+
   render() {
     console.log('devtoolsjs re-rendered; this.state:', this.state);
     //if this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render App (Log, Tree, GraphQL)
@@ -282,12 +298,12 @@ class App extends Component {
               request/reponse from their httprequest */}
               {this.state.window === 'Graphql' ? (
                 <div class='graphQLTab'>
-                  <LogContainer logs={this.state.logs} />
-                  <GraphQLContainer logs={this.state.logs} schema={this.state.schema} />
+                  <LogContainer logs={this.state.logs} clearLog={this.handleClearLog.bind(this)} logChange = {this.handleLogChange.bind(this)}/>
+                  <GraphQLContainer logs={this.state.logs} schema={this.state.schema} log={this.state.logView}/>
                 </div>
               ) : (
                   <div class='reactTab'>
-                    <StateContainer stateDiffs={this.state.stateDiff}/>
+                    <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
                     <TreeDiagram 
                       appState = {this.state.appState} 
                       handleMouseOver = {this.handleMouseOver} 
@@ -299,7 +315,8 @@ class App extends Component {
                       // toggleRouter = {this.state.toggleRouter}
                       // toggleApolo = {this.state.toggleApollo}
                     />
-                    <StatePropsBox nodeData = {this.state.nodeData}/>
+                    <TreeDiagram appState={this.state.appState} handleMouseOver={this.handleMouseOver} />
+                    <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
             </div>

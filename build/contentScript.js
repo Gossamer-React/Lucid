@@ -14,17 +14,15 @@ function injectScript(file) {
   body.appendChild(scriptFile);
 }
 
-//listen for the signal and tell reactTraverser to run
 chrome.runtime.onMessage.addListener((message, sender, res) => {
+  //* listen for message.name connect to inject the traverser
   if (message.name === 'connect') {
     if(!document.getElementById('traverser')){
       injectScript(chrome.extension.getURL('reactTraverser.js'));
     }
-    // console.log('dispatched RT event to window:', message)
-    // const newEvent = new Event('run-traverser');
-    // window.dispatchEvent(newEvent);
   }
   // * receives message about tab update
+  // TODO: change message.type to message.name 
   if(message.type && message.type === 'tabChange'){
     console.log('--MESSAGEUPDATE--', message);
     if(!document.getElementById('traverser')){
@@ -50,3 +48,7 @@ window.addEventListener('message', e => {
     return;
   }
 });
+
+ // * code below is in case we want to purposely invoke the traverser. May or may not be used.
+    // const newEvent = new Event('run-traverser');
+    // window.dispatchEvent(newEvent);

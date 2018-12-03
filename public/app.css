@@ -1,5 +1,3 @@
-/* @import './stateContainer.css'; */
-
 *{
   margin: 0px;
 }
@@ -22,50 +20,40 @@ body{
 }
 
 .reactTab {
-  width: 100%;
-  height: 100%;
-  margin-top: 10px;
   display: grid;
-  grid-template-rows: '1fr 1fr';
-  grid-template-columns: '1fr 1fr';
+  grid-template-rows: 1fr 3fr;
+  grid-template-columns: 1fr 3fr;
   grid-template-areas:
     'sp-box tree'
     'diff tree';
 }
 
 .state-prop-display {
+  grid-area: sp-box;
   background-color: #333;
   color: white;
-  width: 30vw;
-  height: 25vh;
+  max-height: 150px;
   overflow-y: scroll;
-  grid-area: sp-box;
   border: 1px solid black; 
   border-radius: 5px;
   padding: 5px 5px; 
-}
-
-#stateDiff-container {
-  width: 30vw;
-  height: 75vh;
-  overflow-y: scroll;
-  background:rgba(255,255,255,0.5);
-  grid-area: diff;
-  border: 1px solid black; 
-  border-radius: 5px; 
-  padding: 5px 5px; 
-  margin-top: 10px;
+  margin-right: 10px;
 }
 
 #treeWrapper{
   grid-area: tree;
-  width: 60vw;
-  border: 1px solid black;
+  height: 700px;
+  background-color: rgba(214, 214, 214, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px; 
-  margin-right: 5px; 
-  margin-left: 5px;
+  padding: 10px;
+  margin-left: 10px;
 }
 
+.rd3t-tree-container{
+  margin-top: 15px;
+  height: 90%!important;
+}
 
 .pre-tag {
   white-space: pre-wrap;
@@ -75,6 +63,7 @@ body{
 .graphQLTab {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 

@@ -13,6 +13,7 @@ const LogContainer = props => {
         query={text.query}
         variables={text.variables}
         logId={i}
+        logChange={props.logChange}
       />
     );
   });
@@ -20,8 +21,11 @@ const LogContainer = props => {
   logs.reverse();
   return (
     <div id='log-container'>
-      <h1 id='log-title'>Requests Log</h1>
-      <hr/>
+      <div id='log-header'>
+        <h2>Requests Log</h2>
+        <button data-log='req-log' onClick={(e) => { props.clearLog(e); }}>Clear All</button>
+      </div>
+      <hr />
       <div id='logs'>{logs}</div>
     </div>
   );
