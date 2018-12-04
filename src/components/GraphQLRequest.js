@@ -37,7 +37,6 @@ const GraphQLRequest = ({ logs, log } ) => {
               name={null}
               iconStyle='triangle'
               indentWidth={1}
-              collapseStringsAfterLength={5}
               enableClipboard={false}
               displayDataTypes={false}
             />
