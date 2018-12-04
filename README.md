@@ -1,4 +1,4 @@
-# *LUCID*
+# LUCID
 A React-GraphQL developer tool.
 
 ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
@@ -43,7 +43,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 5. Have fun!
 
-
+# How to Use
 ## GraphQL View 
 When opening Lucid devtool, users land on the GraphQL panel where a log of previous API requests is available, as well as their associated reponses. A GraphQL schema of all available types, queries, and mutations is also automatically fetched from the GraphQL server. 
 Note: Lucid devtool only listens for HTTP requests when it's open in the developer tool panel. To see any requests that were made upon initial page load, reload your page after opening Lucid devtool. 
@@ -63,14 +63,14 @@ Hovering over the Tree Chart renders state and props of each component in the __
 
 ![](public/TreeFilter.gif)
 
-## Contributing 
+# Contributing 
 
 Please feel free to fork this repo and submit pull requests! Lucid is currently in beta release. Also, if you have any requests or suggestions for features, please contact us at gossamer.lucid@gmail.com.
 
-## Coming Soon
+# Coming Soon
 
 
-## Our Team
+# Our Team
 
 Yong-Nicholas Kim (https://github.com/yongnicholaskim)
 
@@ -80,5 +80,5 @@ Eterna Tsai (https://github.com/eternalee)
 
 Neyser Zana (https://github.com/neyser95)
 
-## License
+# License
 MIT
