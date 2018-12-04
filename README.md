@@ -1,5 +1,5 @@
 ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
-![AppVeyor](https://img.shields.io/appveyor/ci/:gossamer/:build.svg)
+![AppVeyor](https://img.shields.io/appveyor/ci/:user/:repo.svg)
 # Lucid 
 *A React-GraphQL developer tool.*
 
