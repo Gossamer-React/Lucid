@@ -204,7 +204,7 @@ class App extends Component {
           <div id='app-container'>
             <div id='window'>
               <div id='window-nav'>
-                <img id='logo' src='./lucidlogo-card-transparent.png' alt='devtool logo' />
+                <img id='logo' src='./hexagonFAT.png' alt='devtool logo' />
                 <button className='window-btn active' id='graphqlbtn' data-btn='Graphql' onClick={(e) => { this.handleWindowChange(e.target); }}>GraphQL</button>
                 <button className='window-btn' id='reactbtn' data-btn='React' onClick={(e) => { this.handleWindowChange(e.target); }}>Component Tree</button>
               </div>
