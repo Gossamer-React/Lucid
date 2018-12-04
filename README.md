@@ -37,8 +37,24 @@ React-Lucid is a React / GraphQL DevTool designed for helping developers debug t
 5. Have fun!
 
 ### GraphQL View
+In the graphql panel of our devtool you'll be able to see all the previous request that you have made after you have open our devtool. If you want to see the request that are made when your page is loaded make sure you reload your page after you have open our devtool. 
+
+## Show GIF display the req and response and how the JSON viewer works
+
+You will have access to a request log on the left where you will all the previous request you've made, you can click on this logs to view previous responses. At the bottom of the panel you'll also have access to your app's schema.
+
+## Panel GIF showing previous request 
 
 ### Component Tree View
+In our component tree panel you will see a tree hierarchy of your application with options to filter out a few components fromm your tree.
+
+## GIF showing the how to fliter tree
+
+on the left of the panel you will see a box the shows the state and props of any component you hover over the tree and also what is different in your state when you make a setState.
+
+## GIF showing how the hover works and showing the diff panel
+
+## Panel GIF showing how the tree opens and 
 
 ## Contributing
 
