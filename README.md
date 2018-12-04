@@ -54,12 +54,15 @@ See a chronological log of GraphQL HTTP Requests on the left, and click on each 
 
 ### Component Tree View
 In the React panel, see a tree graph representing your React application's component hierarchy. In the top left box, you will see the state and props data of any tree graph component you hover over. Below, you will see a log of state diffs whenever you change trigger setState() in your app.
+![](StateDiff.mov.gif)
 
 You also have the option to filter out certain higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL and React Router).
 
 ## GIF showing the how to fliter tree
+![](TreeFilter.mov.gif)
 
 ## Panel GIF showing how the tree opens and GIF showing how the hover works and showing the diff panel
+![](TreeDisplay.mov.gif)
 
 ## Contributing 
 
