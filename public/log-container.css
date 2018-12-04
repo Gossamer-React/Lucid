@@ -5,7 +5,7 @@
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   max-height: 600px;
-  height: 600px;
+  height: 650px;
 }
 
 #log-header{
@@ -23,6 +23,7 @@
   padding: 15px;
   background:rgba(255,255,255,0.5);
   margin: 8px 0px;
+  cursor: pointer;
 }
 
 .log-p{

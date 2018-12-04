@@ -4,6 +4,8 @@ import ReactJson from 'react-json-view';
 
 const GraphQLRequest = ({ logs, log } ) => {
   let req = log === null ? JSON.parse(logs[logs.length - 1].req.postData.text) : JSON.parse(log.req.postData.text);
+  let id = log === null ? logs.length - 1 : log.id;
+  console.log('GRAPHQL: ', req)
   let query = req.query;
   let variables = req.variables;
   let operation = req.operationName;
@@ -15,7 +17,7 @@ const GraphQLRequest = ({ logs, log } ) => {
       {logs.length !== 0 ? (
         <div className='graphql'>
           <p className='graphql-p'>
-            <b>Request:</b>
+            <b>Request: {id} </b>
           </p>
           <p className='graphql-p'>
             <b>URL:</b> {url}
