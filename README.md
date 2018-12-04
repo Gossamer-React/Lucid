@@ -22,7 +22,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.
 
-4. Inspect (Cmd+Opt+I / Ctrl+Shift+I) or open Chrome Developer Tools, and click on the Lucid developer tool panel.
+4. Open Chrome Developer Tools (Inspect / Cmd+Opt+I / Ctrl+Shift+I), and click on the Lucid panel.
 
 5. Have fun! :)
 
