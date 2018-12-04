@@ -1,5 +1,3 @@
-console.log('content script running!');
-
 // * opens new port to connect to our backendscript
 let contentScriptPort;
 
@@ -24,7 +22,6 @@ chrome.runtime.onMessage.addListener((message, sender, res) => {
   // * receives message about tab update
   // TODO: change message.type to message.name 
   if(message.type && message.type === 'tabChange'){
-    console.log('--MESSAGEUPDATE--', message);
     if(!document.getElementById('traverser')){
       injectScript(chrome.extension.getURL('reactTraverser.js'));
     }
@@ -41,8 +38,7 @@ window.addEventListener('message', e => {
       {
         type: "content-script",
         message: reactDocObj
-      }, 
-      () => {console.log('send the reactDocObj from contentScript to chrome.extension.sendMessage')}
+      }
     )
   } else {
     return;
