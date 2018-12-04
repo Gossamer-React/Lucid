@@ -8,6 +8,69 @@ body{
   background: linear-gradient(to right, #eef2f3, #8e9eab); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+;   */
 }
 
+@media screen and (max-width: 600px) {
+  .reactTab {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'sp-box'
+      'diff'
+      'tree';
+  }
+  .state-prop-display {
+    grid-area: sp-box;
+    background-color: #333;
+    color: white;
+    overflow-y: scroll;
+    border: 1px solid black; 
+    border-radius: 5px;
+    padding: 5px 5px; 
+    margin-right: 10px;
+  }
+
+  #treeWrapper{
+    grid-area: tree;
+    background-color: rgba(214, 214, 214, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px; 
+    padding: 10px;
+    margin-left: 10px;
+  }
+
+  #stateDiff-container {
+    grid-area: diff;
+    overflow-y: scroll;
+    background-color: rgba(214, 214, 214, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 10px; 
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  #state-header{
+    display: flex;
+    /* justify-content: space-between; */
+    margin-bottom: 5px;
+  }
+  
+  .stateDiff-div {
+    overflow-x: scroll;
+    padding: 15px;
+    background:rgba(255,255,255,0.5);
+    margin: 8px 0px;
+  }
+  
+  .state-span{
+    margin: 6px;
+    font-size: 1.2em;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    line-height: 15px;
+  }
+}
+
 #app-container{
   display: flex;
   padding: 10px 25px;

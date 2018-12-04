@@ -26,8 +26,6 @@ class App extends Component {
       componentsToFilter: [],
     };
 
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-
     chrome.devtools.panels.create("Lucid", null, "devtools.html");
   }
 
@@ -107,39 +105,6 @@ class App extends Component {
         );
       }
     }
-    
-    handleFilter(e, arr) {
-      //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
-      if(e.target.classList.contains('toggleOn')) {
-        e.target.classList.remove('toggleOn')
-      } else {
-        e.target.classList.add('toggleOn');
-      }
-      let result = []; 
-      if(!this.state.componentsToFilter.includes(arr[0])) {
-        let componentsArr = this.state.componentsToFilter.concat(arr);
-        filter(this.state.appState, componentsArr, result);
-        this.setState({
-          componentsToFilter: componentsArr,
-          filteredData: result
-        });
-      }
-      else {
-        //* if componentsToFilter is not empty iterate through 
-        let list = this.state.componentsToFilter;
-        for (let i = 0; i < list.length; i++) {
-          if (arr.includes(list[i])) {
-            // output.push(list[i]);
-            list.splice(i--, 1); 
-          }
-        }
-        filter(this.state.appState, list, result);
-        this.setState({
-          componentsToFilter: list,
-          filteredData: result
-        });
-      }
-    }
 
   //* invoke schema fetch only after a log object from a previous response is available
   componentDidUpdate(prevProps, prevState) {
@@ -158,7 +123,6 @@ class App extends Component {
     }
   }
 
-
   // * Handles the tab click for tree and req/res window
   handleWindowChange(target) {
     console.log(target);
@@ -174,7 +138,12 @@ class App extends Component {
   }
 
   // * Handles the filter for the component tree
-  handleFilter(arr) {
+  handleFilter(e, arr) {
+    if(e.target.classList.contains('toggleOn')) {
+      e.target.classList.remove('toggleOn')
+    } else {
+      e.target.classList.add('toggleOn');
+    }
     let result = [];
     if (!this.state.componentsToFilter.includes(arr[0])) {
       let componentsArr = this.state.componentsToFilter.concat(arr);
@@ -253,7 +222,7 @@ class App extends Component {
               ) : (
                   <div class='reactTab'>
                     <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
-                    <TreeDiagram appState={this.state.appFilteredDOM.length === 0 ? this.state.appState : this.state.appFilteredDOM} handleMouseOver={this.handleMouseOver} handleFilter={this.handleFilter.bind(this)} />
+                    <TreeDiagram appState={this.state.appFilteredDOM.length === 0 ? this.state.appState : this.state.appFilteredDOM} handleMouseOver={this.handleMouseOver.bind(this)} handleFilter={this.handleFilter.bind(this)} />
                     <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
