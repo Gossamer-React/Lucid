@@ -196,7 +196,7 @@ class App extends Component {
         {this.state.appState.length === 0 ?
           <div id='devToolsLoader'>
             <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
-            <p>Lucid works best on React v15/16</p>
+            <p>Lucid works best on React 16+ apps running in development mode</p>
           </div>
           :
           <div id='app-container'>
