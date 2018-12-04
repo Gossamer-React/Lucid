@@ -113,20 +113,13 @@ class App extends Component {
       }
     }
     
-    // filterOutComponents() {
-    //   let data = this.state.appState; 
-    //   if(this.state.componentsToFilter.length) {
-    //     let result = []; 
-    //     filter(data, this.state.componentsToFilter, result);
-    //     data = result; 
-    //     this.setState({
-    //       appState: data
-    //     });
-    //   }
-    // }
-    
-    handleFilter(arr) {
+    handleFilter(e, arr) {
       //* if first index of arr is not in componentsToFilter arr, set incoming array to componentsToFilter
+      if(e.target.classList.contains('toggleOn')) {
+        e.target.classList.remove('toggleOn')
+      } else {
+        e.target.classList.add('toggleOn');
+      }
       let result = []; 
       if(!this.state.componentsToFilter.includes(arr[0])) {
         let componentsArr = this.state.componentsToFilter.concat(arr);

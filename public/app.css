@@ -40,6 +40,7 @@ body{
   margin-right: 10px;
 }
 
+
 #treeWrapper{
   grid-area: tree;
   height: 700px;
@@ -64,6 +65,11 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.toggleOn {
+  background-color: rgba(214, 214, 214, 0.8);
+  color: white;
 }
 
 
