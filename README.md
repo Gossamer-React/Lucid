@@ -1,4 +1,4 @@
-# Lucid
+# *LUCID*
 A React-GraphQL developer tool.
 
 ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
@@ -7,14 +7,15 @@ Lucid is a React / GraphQL Developer Tool designed to help developers debug thei
 
 **IMPORTANT:**  Lucid is in *BETA* mode and works best for React v16+ local projects in development environments. 
 
-## How It Works
-# *React-Lucid*
+# How It Works
+## React Tab
 Lucid parses through your React app to generate an interactive tree graph representing your React component hierarchy with node-specific state and props data. The tree updates upon each change to user app state and displays a log of state diffs on the left. This is done by creating a persistent data bridge to the user application via Chrome background and content scripts. Lucid injects scripts utilizing React DevTool's Global Hook to recursively traverse through the React DOM each time setState is called, resulting in a tree and log that display real-time feedback. Our app itself uses React internally so as the state of your live app changes, the Lucid tree graph will also provide visual feedback of data flow and state changes through the React components in real-time.
 
-# *GraphQL-Lucid*
+## GraphQL Tab
 Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema introspection to display a log of real-time Apollo client queries and mutations, along with GraphQL schema information and response objects. This allows full-stack developers to debug their app from the front-end through to the back-end, as requests are generated, flow through the server, and back to the DOM. 
 
-## Setup: Install from Chrome Extension Store
+# Setup
+## Install from Chrome Extension Store
 
 1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools</a>. 
 
@@ -26,7 +27,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 5. Have fun!
 
-### Setup: Build your own
+## Build your own extension
 
 1. Clone the repo and install dependendies: 
 
