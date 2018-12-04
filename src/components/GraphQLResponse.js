@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
 
-const GraphQLResponse = ({ logs, log  }) => {
+const GraphQLResponse = ({ logs, log }) => {
 
-  let response = log=== null ? logs[logs.length - 1].res : log.res; 
-  console.log('--response:', response);
+  let response = log === null ? logs[logs.length - 1].res : log.res;
 
   return (
     <div id='graphql-res' >
