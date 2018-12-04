@@ -132,12 +132,12 @@ class App extends Component {
     console.log(target);
     if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
-      document.querySelector('#reactbtn').classList.remove('active');
-      document.querySelector('#graphqlbtn').classList.add('active');
-    } else {
-      this.setState({ window: 'Graphql' });
       document.querySelector('#reactbtn').classList.add('active');
       document.querySelector('#graphqlbtn').classList.remove('active');
+    } else if(this.state.window === 'React' && target.dataset.btn === 'Graphql'){
+      this.setState({ window: 'Graphql' });
+      document.querySelector('#reactbtn').classList.remove('active');
+      document.querySelector('#graphqlbtn').classList.add('active');
     }
   }
 
