@@ -9,8 +9,13 @@ class TreeDiagram extends React.Component {
     this.state = {
       transition: null,
       orientation: 'vertical',
+<<<<<<< HEAD
       foreignObjectWrapper: {x: 10, y: 4},
       nodeSize: {x: 85, y: 85},
+=======
+      foreignObjectWrapper: {y: -5, x: 10},
+      nodeSize: {x: 75, y: 75},
+>>>>>>> 9609025ded6a6f44d16730207d255bd1cb9c8d90
     };
     this.handleFlip = this.handleFlip.bind(this);
   }
@@ -19,6 +24,7 @@ class TreeDiagram extends React.Component {
   componentDidMount() {
     //from reactD3 library *centering
     const dimensions = this.treeContainer.getBoundingClientRect();
+
     this.setState({
       translate: {
         x: dimensions.width / 2,
@@ -27,7 +33,10 @@ class TreeDiagram extends React.Component {
     });
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9609025ded6a6f44d16730207d255bd1cb9c8d90
   handleFlip() {
     const dimensions = this.treeContainer.getBoundingClientRect();
     if(this.state.orientation === 'vertical') {
@@ -52,7 +61,6 @@ class TreeDiagram extends React.Component {
       });
     }
   }  
-
 
   render() {
     const styles = {
@@ -84,6 +92,7 @@ class TreeDiagram extends React.Component {
       }
     };
 
+<<<<<<< HEAD
 
     return (
       <div id="treeWrapper" ref={tc => (this.treeContainer = tc)}>
@@ -96,12 +105,25 @@ class TreeDiagram extends React.Component {
           <Tree
             data={this.props.appState}
             nodeSize={this.state.nodeSize}
+=======
+    return (
+      <div id="treeWrapper" ref={tc => (this.treeContainer = tc)}>
+        <button onClick={() => {this.handleFlip()}}> {this.state.orientation[0].toUpperCase() + this.state.orientation.slice(1)} </button>
+        <button onClick={() => { this.props.handleFilter(filterComponents.reduxComponents) }}>Filter Redux</button>
+        <button onClick={() => { this.props.handleFilter(filterComponents.reactRouterComponents) }}>Filter React-Router</button>
+        <button onClick={() => { this.props.handleFilter(filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
+     
+        {/* when appState has a length we populate tree */}
+        {this.props.appState.length !== 0 ? (
+          <Tree
+            data={this.props.appState}
+            nodeSize={{ x: 75, y: 75 }}
+>>>>>>> 9609025ded6a6f44d16730207d255bd1cb9c8d90
             orientation={this.state.orientation}
             styles={styles}
             translate={this.state.translate}
             separation={{ siblings: 1, nonSiblings: 1 }}
             allowForeignObjects
-            //* Placing this tool component in the render property of "nodeLabelComponent", we are allowed access to each tree node's data.
             nodeLabelComponent={{
               render: <Tool handleMouseOver = {this.props.handleMouseOver} />,
               foreignObjectWrapper: this.state.foreignObjectWrapper

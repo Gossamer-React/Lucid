@@ -1,6 +1,6 @@
 #stateDiff-container {
   grid-area: diff;
-  max-height: 450px;
+  max-height: 500px;
   overflow-y: scroll;
   background-color: rgba(214, 214, 214, 0.4);
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -25,7 +25,7 @@
 
 .state-span{
   margin: 6px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   font-weight: 500;
   letter-spacing: 0.8px;
   line-height: 15px;
