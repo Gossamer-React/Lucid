@@ -9,16 +9,12 @@ const GraphQLContainer = ({ logs, schema, log }) => {
     <div id='graphql-container'>
       {logs.length !== 0 ? (
         <div>
-          <div id='req-res'>
-            <GraphQLRequest logs={logs} log ={log}/>
-            <GraphQLResponse logs={logs} log ={log}/>
-          </div>
-          <hr />
+          <GraphQLResponse logs={logs} log={log} />
           <GraphQLSchema schema={schema} />
         </div>
       ) : (
-        <h1>No requests have been made yet.</h1>
-      )}
+          <h1>No requests have been made yet.</h1>
+        )}
     </div>
   );
 };
