@@ -11,8 +11,8 @@ const GraphQLSchema = ({ schema }) => {
 
     return (
       <div id='graphql-schema'>
-        <div className='graphql'>
-          <p className='graphql-p'><b>Schema:</b></p>
+        <div>
+          <p className='graphql-p'><h2>Schema:</h2></p>
           <span className='graphql-span'>
             <GraphqlCodeBlock
               className='GraphqlCodeBlock'
@@ -27,7 +27,7 @@ const GraphQLSchema = ({ schema }) => {
 
     return (
       <div id='graphql'>
-        <div className='graphql'>
+        <div>
           <p className='graphql-p'>
             No GraphQL data available.
           </p>

@@ -18,7 +18,7 @@ h2{
 
 #app-container{
   display: flex;
-  padding: 10px 25px;
+  padding: 10px;
   max-height: 95%;
 }
 
@@ -31,7 +31,7 @@ h2{
   padding: 10px;
   display: grid;
   grid-template-rows: 1fr 3fr;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 3fr 7fr;
   grid-template-areas:
     'sp-box tree'
     'diff tree';
@@ -54,7 +54,6 @@ h2{
 }
 
 #treeWrapper{
-  text-align: center;
   grid-area: tree;
   height: 700px;
   padding: 10px;
@@ -62,6 +61,9 @@ h2{
   font-family: 'Roboto';
   font-size: .9em;
   letter-spacing: 1.5px;
+}
+#treeButtons{
+  text-align: center;
 }
 
 .rd3t-tree-container{
@@ -128,7 +130,6 @@ button:focus{
 }
 button:hover{
   background-color: #555;
-  border: none;
   color: white;
 }
 .active{

@@ -19,12 +19,16 @@ const LogContainer = props => {
 
   logs.reverse();
   return (
-    <div id='log-container'>
-      <div id='log-header'>
-        <h2>Request Log</h2>
-        <button className='appButton' data-log='req-log' onClick={(e) => { props.clearLog(e); }}>Clear</button>
-      </div>
-      <div id='logs'>{logs}</div>
+    <div>
+      {logs.length > 0 ? (
+        <div id='log-container'>
+          <div id='log-header'>
+            <h2>Request Log</h2>
+            <button className='appButton' data-log='req-log' onClick={(e) => { props.clearLog(e); }}>Clear</button>
+          </div>
+          <div id='logs'>{logs}</div>
+        </div>
+      ) : ('')}
     </div>
   );
 };

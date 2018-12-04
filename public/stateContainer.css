@@ -3,8 +3,6 @@
   max-height: 500px;
   overflow-y: scroll;
   padding: 10px; 
-  margin-top: 10px;
-  margin-right: 10px;
 }
 
 #state-header{
@@ -22,10 +20,11 @@
   box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
   0 5px 15px 0 rgba(0,0,0,0.08);
   margin-bottom: 15px;
-  padding: 10px;
+  padding: 0px 10px;
 }
 
 .state-span{
+  font-family: 'Roboto';
   margin: 6px;
   font-size: 1.2em;
   font-weight: 500;

@@ -14,10 +14,10 @@
 }
 
 #graphql-res {
-  background-color: rgba(214, 214, 214, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  padding: 10px;
+  background-color: white;;
+  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
+  0 5px 15px 0 rgba(0,0,0,0.08);
+  padding: 10px 25px;
   margin-bottom: 10px;
 }
 
@@ -28,10 +28,6 @@
   overflow-y: scroll;
   max-height: 600px;
   padding: 10px;
-}
-
-.graphql {
-  padding: 5px;
 }
 
 .graphql-p {
