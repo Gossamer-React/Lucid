@@ -60,11 +60,9 @@ In the React panel, see a tree graph representing your React application's compo
 On hover in the Tree Chart renders State and Props in State/Props Panel, State Diff Log tracks each event that is initated in user's application. 
 You also have the option to filter out certain higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL and React Router).
 
-
 ![](public/TreeDisplay.mov.gif)
 
 ![](public/TreeFilter.mov.gif)
-
 
 ## Contributing 
 
