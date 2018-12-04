@@ -196,7 +196,7 @@ class App extends Component {
       <div>
         {this.state.appState.length === 0 ?
           <div id='devToolsLoader'>
-            <img src='./logo.png' alt='devtool logo'/> 
+            <img src='./../public/assests/logo-card.png' alt='devtool logo'/> 
             <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
             <p>Lucid works best on apps using React v16+ in development mode</p>
           </div>
@@ -204,6 +204,7 @@ class App extends Component {
           <div id='app-container'>
             <div id='window'>
               <div id='window-nav'>
+                <img id='logo' src='./logo.png' alt='devtool logo'/>
                 <span class='window-btn-wrapper'>
                   <button className='window-btn active' id='graphqlbtn' data-btn='Graphql' onClick={(e) => { this.handleWindowChange(e.target); }}>GraphQL</button>
                 </span>
