@@ -1,5 +1,5 @@
 ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Make%20development%20easier%20with%20Lucid.&url=https://github.com/Gossamer-React/React-Lucid,react,graphql,apollographql,javascript,programming,developers,chrome)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Make%20development%20easier%20with%20Lucid.&url=https://github.com/Gossamer-React/React-Lucid&via=neyser_zana&hashtags=react,graphql,apollographql,javascript,programming,developers,chrome)
 ![AppVeyor](https://img.shields.io/badge/build-passing-green.svg)
 ![AppVeyor](https://img.shields.io/badge/License-MIT-blue.svg)
 ## Lucid 
