@@ -31,14 +31,6 @@
   border-radius: 5px;
 }
 
-.graphql {
-  padding: 5px;
-}
-
-.graphql:not(:last-child) {
-  border-bottom: 1px solid grey;
-}
-
 .graphql-p {
   margin-top: 10px; 
 }
