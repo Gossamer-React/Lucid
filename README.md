@@ -1,5 +1,5 @@
 
-https://img.shields.io/appveyor/ci/gruntjs/grunt.svg
+https://img.shields.io/appveyor/ci/:user/:repo.svg
 ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
 # Lucid 
 *A React-GraphQL developer tool.*
