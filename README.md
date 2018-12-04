@@ -18,7 +18,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools</a>. 
 
-2. Install <a href="https://chrome.google.com/webstore/detail/debux/ooihnkghpifccalpfakdnlolfaiidfjp?authuser=1">Lucid</a> to your chrome://extensions from the <a href="https://chrome.google.com/webstore/category/extensions">Chrome Web Store</a>.
+2. Install <a href="https://chrome.google.com/webstore/detail/debux/ooihnkghpifccalpfakdnlolfaiidfjp?authuser=1">Lucid</a> from the <a href="https://chrome.google.com/webstore/category/extensions">Chrome Web Store</a>.
 
 3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.
 
@@ -36,9 +36,9 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
     ```npm run build ```
 
-3. In Chrome Browser Settings, click on **More Tools** >> **Extensions** >> click **Load Unpacked**
+3. Navigate to chrome://extensions (or in your Chrome Browser Settings, click on **More Tools** >> **Extensions**). 
 
-4. Navigate to your local Lucid directory and select the folder './react-lucid/build'
+4. Click **Load Unpacked**. Navigate to your local Lucid directory and select the folder './react-lucid/build'
 
 5. Have fun!
 
