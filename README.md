@@ -1,5 +1,5 @@
 ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
-A React-GraphQL developer tool.
+Lucid - A React-GraphQL developer tool.
 
 Lucid is a React / GraphQL Developer Tool designed to help developers debug their React applications that depend on GraphQL resources. Lucid devtool allows you to visualize the component hierarchy of your React application and your GraphQL schema, queries, and mutations side by side, making debugging easier.
 
@@ -21,9 +21,9 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.
 
-4. Inspect or open Chrome Developer Tools, and open the Lucid developer tool panel.
+4. Inspect (Cmd+Opt+I / Ctrl+Shift+I) or open Chrome Developer Tools, and click on the Lucid developer tool panel.
 
-5. Have fun!
+5. Have fun! :)
 
 ## Build your own extension
 
