@@ -1,5 +1,6 @@
-console.log('ran reacttraverser.js')
+let timeout;
 let reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+console.log('ran reacttraverser.js', reactGlobalHook)
 
 if (reactGlobalHook) {
 
@@ -22,18 +23,21 @@ if (reactGlobalHook) {
         return function (...args) {
           
           if (args[1] !== undefined) {
-            virtualdom = args[1];
-            let nodeToTraverse = virtualdom.current.stateNode.current;
-            traverse(nodeToTraverse);
-            console.log('traverse complete: ', reactDOMArr);
-
-            //send DOM's react component tree to contentScriptJS
-            window.postMessage(JSON.parse(JSON.stringify({
-              type: 'reactTraverser',
-              data: reactDOMArr
-            })), '*')
-
-            reactDOMArr = [];
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+              virtualdom = args[1];
+              let nodeToTraverse = virtualdom.current.stateNode.current;
+              traverse(nodeToTraverse);
+              console.log('traverse complete: ', reactDOMArr);
+  
+              //send DOM's react component tree to contentScriptJS
+              window.postMessage(JSON.parse(JSON.stringify({
+                type: 'reactTraverser',
+                data: reactDOMArr
+              })), '*')
+  
+              reactDOMArr = [];
+            }, 750);
             
             return oCFR(...args);
           }
