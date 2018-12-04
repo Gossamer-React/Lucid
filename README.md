@@ -11,7 +11,7 @@ Lucid is a React / GraphQL Chrome Developer Tool designed to help developers deb
 
 ## How It Works
 ### React Tab
-Lucid parses through your React app to generate an interactive tree graph representing your React component hierarchy, with node-specific state and props data. The tree updates upon each change to the React app's state, and displays a log of state diffs on the left. This is done by creating a persistent data bridge to the user's React application via the Javascript API for WebExtensions' background and content scripts. Lucid injects scripts utilizing React DevTool's Global Hook to recursively traverse through the React DOM each time setState is called, resulting in a tree and log that display real-time feedback. Our app itself uses React internally so as the state of your live app changes, the Lucid tree graph will also provide visual feedback of data flow and state changes through the React components immediately.
+Lucid parses through your React app to generate an interactive tree graph representing your React component hierarchy, with node-specific state and props data. The tree updates upon each change to the React app's state, and displays a log of state diffs on the left. This is done by creating a persistent data bridge to the user's React application via the Javascript API for WebExtensions' background and content scripts. Lucid injects scripts utilizing React DevTool's Global Hook to recursively traverse through the React DOM each time setState is called, resulting in a tree and a log that each display real-time feedback. Our app itself uses React internally so as the state of your live app changes, the Lucid tree graph will also provide visual feedback of data flow and state changes through the React components immediately.
 
 ### GraphQL Tab
 Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of real-time Apollo client queries and mutations, along with associated response objects. Lucid also uses GraphQL schema introspection to display schema information from the server. This allows full-stack developers to debug their app from the front-end all the way through to the back-end, as requests are generated, responses come back from the server, data flows through React components, and render in the DOM. 
@@ -48,10 +48,10 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 ## How to Use
 ### GraphQL View 
 Upon opening Lucid, users first land on the GraphQL panel where a log of previous API requests is available, as well as their associated responses. A GraphQL schema of all available types, queries, and mutations is also automatically fetched from the GraphQL server when Lucid is initialized. 
-Note: Lucid only listens for HTTP requests when it is open in the Chrome Developer Tool panel. To see any requests that were made upon initial page load, reload your page after opening Lucid in your Chrome browser. 
-![](public/ReqResJson.gif)
 
-See a chronological log of GraphQL HTTP Requests on the left, and click on each log to view the HTTP response for that particular request. At the bottom of the panel, you'll find your React application's GraphQL schema.
+**NOTE:**  Lucid only listens for HTTP requests when it is open in the Chrome Developer Tool panel. To see any requests that were made upon initial page load, reload your React page after opening Lucid in your Chrome browser. See a chronological log of GraphQL HTTP Requests on the left, and click on each log to view the HTTP response for that particular request. At the bottom of the panel, you'll find your React application's GraphQL schema.
+
+![](public/ReqResJson.gif) 
 
 ### Component Tree View
 In the React Component Tree panel is a tree graph representing your loaded React application's component hierarchy. In the top left box, you will see the state and props data of any tree graph component you hover over. Below that, you will see a log of state diffs whenever you trigger setState() in your app.
