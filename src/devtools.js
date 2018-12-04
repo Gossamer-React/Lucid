@@ -196,8 +196,8 @@ class App extends Component {
       <div>
         {this.state.appState.length === 0 ?
           <div id='devToolsLoader'>
-            <img src='./logo.png' alt='devtool logo'/> 
-            <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
+            <img src='./logo-card.png' height='200px' alt='devtool logo'/> 
+            <h2>Please trigger a setState() to activate Lucid devtool.<br /></h2>
             <p>Lucid works best on apps using React v16+ in development mode</p>
           </div>
           :

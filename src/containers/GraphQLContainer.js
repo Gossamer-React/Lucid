@@ -5,14 +5,14 @@ import styles from '../../public/graphql.css';
 
 const GraphQLContainer = ({ logs, schema, log }) => {
   return (
-    <div id='graphql-container'>
+    <div>
       {logs.length !== 0 ? (
-        <div>
+        <div id='graphql-container'>
           <GraphQLResponse logs={logs} log={log} />
           <GraphQLSchema schema={schema} />
         </div>
       ) : (
-          <h1>No requests have been made yet.</h1>
+          <h2>No requests have been made yet.</h2>
         )}
     </div>
   );
