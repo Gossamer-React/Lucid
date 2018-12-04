@@ -47,22 +47,22 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 When opening the Lucid devtool users land on the GraphQL panel and they will receive the ability to see previous requests made as well as reponses and their schemas. 
 Note: The devtool only listens for HTTP requests when it's open in the developer tool panel. To see any requests that were made upon initial page load, reload your page after opening the devtool. 
 
-![](public/ezgif.com-video-to-gif.gif)
+![](public/ReqResJson.gif)
 
 See a chronological log of GraphQL HTTP Requests on the left, and click on each log to view the HTTP response to that particular request. At the bottom of the panel, you'll also see your application's GraphQL schema.
 
 ## Component Tree View
 In the React panel, see a tree graph representing your React application's component hierarchy. In the top left box, you will see the state and props data of any tree graph component you hover over. Below, you will see a log of state diffs whenever you change trigger setState() in your app.
 
-![](public/StateDiff.mov.gif)
+![](public/StateDiff.gif)
 
 ## Component Tree Panel displays Tree Chart, State/Props Panel and a State Diff Log 
 On hover in the Tree Chart renders State and Props in State/Props Panel, State Diff Log tracks each event that is initated in user's application. 
 You also have the option to filter out certain higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL and React Router).
 
-![](public/TreeDisplay.mov.gif)
+![](public/TreeDisplay.gif)
 
-![](public/TreeFilter.mov.gif)
+![](public/TreeFilter.gif)
 
 ## Contributing 
 
