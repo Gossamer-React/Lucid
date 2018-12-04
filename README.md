@@ -1,62 +1,72 @@
-# React-Lucid
+# Lucid
 A React-GraphQL developer tool.
 
 ![Alt text](public/assets/logo-text.png?raw=true "Title")
 
-React-Lucid is a React / GraphQL DevTool designed for helping developers debug their React applications that depend on GraphQL resources more efficiently. React-Lucid allows you to visualize the component hierarchy of your React application and your GraphQL schema, queries, and mutations side by side, making development a breeze.
+Lucid is a React / GraphQL Developer Tool designed for helping developers debug their React applications that depend on GraphQL resources. Lucid devtool allows you to visualize the component hierarchy of your React application and your GraphQL schema, queries, and mutations side by side, making debugging easier.
 
-### --Usage--
-**Note:**  The current version of React-Lucid works best for local projects using React v16+. 
+**IMPORTANT:**  Lucid is in *BETA* mode and works best for React v16+ local projects in development environments. 
 
-### --Set Up | Install From Chrome Extension Store--
+### How It Works
+*React-Lucid*
+Lucid parses through your React app to generate an interactive tree graph representing your React component hierarchy with node-specific state and props data. The tree updates with each change to user app state and displays a log of state diffs on the side. This is done by creating a persistent data bridge to the user application via Chrome background and content scripts. Lucid injects scripts utilizing React DevTool's Global Hook to recursively traverse through the React DOM each time setState is called, resulting in a tree and log that display real-time feedback. Our app itself uses React so as the state of your live app changes, the Lucid tree graph will also provide visual feedback of data flow and state changes through the React components.
+
+*GraphQL-Lucid*
+Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema introspection to display a log of real-time Apollo client/server queries and mutations, along with their GraphQL schema and response objects. This allows full-stack developers to debug their app from the front-end through to the back-end, as requests are generated, flow through the server and back to the DOM. 
+
+### Setup: Install from Chrome Extension Store
 
 1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools</a>. 
 
-2. Install <a href="https://chrome.google.com/webstore/detail/debux/ooihnkghpifccalpfakdnlolfaiidfjp?authuser=1">React-Lucid</a> to your chrome://extensions from the <a href="https://chrome.google.com/webstore/category/extensions">Chrome Web Store</a>.
+2. Install <a href="https://chrome.google.com/webstore/detail/debux/ooihnkghpifccalpfakdnlolfaiidfjp?authuser=1">Lucid</a> to your chrome://extensions from the <a href="https://chrome.google.com/webstore/category/extensions">Chrome Web Store</a>.
 
-3. Run your React-GraphQL application or open a site that uses React v16+.
+3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.
 
-4. Open Chrome Developer Tools, Click on the “>>” button and select React-Lucid.
+4. Inspect or open Chrome Developer Tools, and open the Lucid developer tool panel.
 
 5. Have fun!
 
-### --Set up | Build your own--
+### Setup: Build your own
 
 1. Clone the repo and install dependendies: 
 
     ```npm install```
 
-2. Build React-Lucid to be used in Chrome Dev Tools: 
+2. Build Lucid: 
 
     ```npm run build ```
 
-3. In Chrome Browser, open more tools and Extensions tab and click 'Load Unpacked' 
+3. In Chrome Browser Settings, click on **More Tools** >> **Extensions** >> click **Load Unpacked**
 
-4. Navigate to your local React-Lucid directory and select the folder './react-lucid/build'
+4. Navigate to your local Lucid directory and select the folder './react-lucid/build'
 
 5. Have fun!
 
 ### GraphQL View
-In the graphql panel of our devtool you'll be able to see all the previous request that you have made after you have open our devtool. If you want to see the request that are made when your page is loaded make sure you reload your page after you have open our devtool. 
+In the GraphQL panel, see all the previous request made after opening the Lucid devtool. Note: The devtool can only listen for HTTP requests when it's open in the developer tool panel. To see any requests that were made upon initial page load, reload your page after opening the devtool. 
 
 ## Show GIF display the req and response and how the JSON viewer works
 
-You will have access to a request log on the left where you will all the previous request you've made, you can click on this logs to view previous responses. At the bottom of the panel you'll also have access to your app's schema.
+See a chronological log of GraphQL HTTP Requests on the left, and click on each log to view the HTTP response to that request. At the bottom of the panel, you'll also see your app's GraphQL schema.
 
 ## Panel GIF showing previous request 
 
 ### Component Tree View
-In our component tree panel you will see a tree hierarchy of your application with options to filter out a few components fromm your tree.
+In the React panel, see a tree graph representing your React application's component hierarchy. In the top left box, you will see the state and props data of any tree graph component you hover over. Below, you will see a log of state diffs whenever you change trigger setState() in your app.
+
+You also have the option to filter out certain higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL and React Router).
 
 ## GIF showing the how to fliter tree
 
-on the left of the panel you will see a box the shows the state and props of any component you hover over the tree and also what is different in your state when you make a setState.
-
 ## Panel GIF showing how the tree opens and GIF showing how the hover works and showing the diff panel
 
-## Contributing
+## Contributing 
 
-Please feel free to fork this repo and submit pull requests. Also, if you have any requests or suggestions for features, please contact us.
+Please feel free to fork this repo and submit pull requests! Lucid is currently in beta release. Also, if you have any requests or suggestions for features, please contact us at gossamer.lucid@gmail.com.
+
+## Coming Soon
+
+
 
 ## Our Team
 
