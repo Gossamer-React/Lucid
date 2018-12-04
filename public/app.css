@@ -1,11 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
 *{
   margin: 0px;
 }
+
 body{
-  background-color: rgb(255, 255, 255);
-  /* background: #8e9eab;  fallback for old browsers;
-  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  Chrome 10-25, Safari 5.1-6; 
-  background: linear-gradient(to right, #eef2f3, #8e9eab); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+;   */
+  background: linear-gradient(to right, #ffffff, #e2ebf0); 
+} 
+
+h2{
+  font-family: 'Avenir';
+  letter-spacing: 1px;
+  font-weight: 100;
+  font-size: 1.5em;
+  padding: 5px;
+  text-transform: uppercase;
 }
 
 @media screen and (max-width: 600px) {
@@ -83,6 +91,7 @@ body{
 }
 
 .reactTab {
+  padding: 10px;
   display: grid;
   grid-template-rows: 1fr 3fr;
   grid-template-columns: 1fr 3fr;
@@ -98,20 +107,20 @@ body{
   max-height: 150px;
   overflow-y: scroll;
   border: 1px solid black; 
-  border-radius: 5px;
   padding: 5px 5px; 
   margin-right: 10px;
 }
 
 
 #treeWrapper{
+  text-align: center;
   grid-area: tree;
   height: 700px;
-  background-color: rgba(214, 214, 214, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 5px; 
   padding: 10px;
   margin-left: 10px;
+  font-family: 'Roboto';
+  font-size: .9em;
+  letter-spacing: 1.5px;
 }
 
 .rd3t-tree-container{
@@ -123,11 +132,24 @@ body{
   white-space: pre-wrap;
 }  
 
-/* graph tab */
 .graphQLTab {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+button{
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.15px;
+  border: solid 1px rgba(214, 214, 214);
+  border-radius: 4px;
+  padding: 0px 6px;
+  height: 20px;
+  cursor: pointer;
+  font-family: 'Avenir';
+  transition: all .4s ease;
+  margin: 5px;
 }
 
 .toggleOn {
@@ -153,26 +175,23 @@ body{
 }
 .window-btn{
   width: 30%;
+  height: 35px;
   box-sizing: border-box;
-  border: solid 1px rgba(214, 214, 214);
-  color: rgba(214, 214, 214, 0.8);
-  text-transform: uppercase;
-  border-radius: 5px;
+  color: #555;
   background-color: Transparent;
   font-size: 15px;
   padding: 5px 0;
-  cursor: pointer;
-  font-family: 'Avenir';
-  transition: all .4s ease;
 }
-.window-btn:focus{
+button:focus{
   outline: none;
 }
-.window-btn:hover{
-  background-color: rgba(214, 214, 214, 0.8);
-  color: black;
+button:hover{
+  background-color: #555;
+  border: none;
+  color: white;
 }
 .active{
-  background-color: rgba(214, 214, 214, 0.8);
-  color: black;
+  background-color: #555;
+  border: none;
+  color: white;
 }

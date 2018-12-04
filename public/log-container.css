@@ -1,11 +1,8 @@
 #log-container{
   padding: 10px;
   width: 250px;
-  background-color: rgba(214, 214, 214, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  max-height: 600px;
-  height: 650px;
+  max-height: 700px;
+  height: 700px;
 }
 
 #log-header{
@@ -21,9 +18,13 @@
 .log{
   overflow-x: scroll;
   padding: 15px;
-  background:rgba(255,255,255,0.5);
-  margin: 8px 0px;
+  margin: 15px;
+  background-color: rgba(255, 255, 255);
+  /* transition: box-shadow .1s; */
   cursor: pointer;
+  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
+  0 5px 15px 0 rgba(0,0,0,0.08);
+  margin-bottom: 15px;
 }
 
 .log-p{

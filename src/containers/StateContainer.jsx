@@ -8,15 +8,16 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
       <div id='state-header'>
         <h2>State Changes</h2>
         <button
+          className='appButton' 
           data-log='state-log'
           onClick={e => {
             clearLog(e);
           }}
         >
-          Clear All
+          Clear
         </button>
       </div>
-      <hr />
+      
       {stateDiffs.map((el, i) => {
         return (
           <div className='stateDiff-div'>
