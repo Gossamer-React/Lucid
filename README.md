@@ -38,7 +38,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 3. Navigate to chrome://extensions (or in your Chrome Browser Settings, click on **More Tools** >> **Extensions**). 
 
-4. Click **Load Unpacked**. Navigate to your local Lucid directory and select the folder './react-lucid/build'
+4. Click **Load Unpacked**. Select the './react-lucid/build' folder from your local Lucid directory.
 
 5. Have fun!
 
