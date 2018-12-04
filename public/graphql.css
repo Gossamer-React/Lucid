@@ -1,7 +1,5 @@
 #graphql-container {
   width: 75%;
-  /* border: 1px solid #f2f2f2; */
-  /* border-radius: 5px; */
   margin-left: 20px;
   min-height: 600px;
 }
@@ -16,8 +14,11 @@
 }
 
 #graphql-res {
-  width: 50%;
+  background-color: rgba(214, 214, 214, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 #graphql-schema {
