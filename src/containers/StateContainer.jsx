@@ -22,7 +22,20 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
         return (
           <div className='stateDiff-div'>
             <span className='state-span'>
-              <div key={i}>
+              
+            <ReactJson
+                  src={el}
+                  name={null}
+                  iconStyle='triangle'
+                  indentWidth={1}
+                  groupArraysAfterLength={20}
+                  enableClipboard={false}
+                  collapsed={1}
+                  displayDataTypes={false}
+                  displayObjectSize={false}
+                  />
+
+              {/* <div key={i}>
                 <div><b>{el.component}: </b>{Object.keys(el.oldState)[0]}</div>
                 <div><b>Old: </b>{el.oldState[Object.keys(el.oldState)[0]]}</div>
                   {/* <ReactJson
@@ -48,7 +61,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
                   displayDataTypes={false}
                   displayObjectSize={false}
                   /> */}
-              </div>
+              </div> */}
             </span>
           </div>
         );
