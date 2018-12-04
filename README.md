@@ -43,33 +43,31 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 5. Have fun!
 
 ### GraphQL View
-In the GraphQL panel, see all the previous request made after opening the Lucid devtool. Note: The devtool can only listen for HTTP requests when it's open in the developer tool panel. To see any requests that were made upon initial page load, reload your page after opening the devtool. 
+When opening the Lucid devtool users land on the GraphQL panel and they will receive the ability to see previous requests made as well as reponses and their schemas. 
+Note: The devtool only listens for HTTP requests when it's open in the developer tool panel. To see any requests that were made upon initial page load, reload your page after opening the devtool. 
+## Panel GIF showing previous request 
+## Show GIF display the req and response and how the JSON viewer works
 ![](public/ReqResJson.mov.gif)
 
-## Show GIF display the req and response and how the JSON viewer works
-
-See a chronological log of GraphQL HTTP Requests on the left, and click on each log to view the HTTP response to that request. At the bottom of the panel, you'll also see your app's GraphQL schema.
-
-## Panel GIF showing previous request 
+See a chronological log of GraphQL HTTP Requests on the left, and click on each log to view the HTTP response to that particular request. At the bottom of the panel, you'll also see your app's GraphQL schema.
 
 ### Component Tree View
 In the React panel, see a tree graph representing your React application's component hierarchy. In the top left box, you will see the state and props data of any tree graph component you hover over. Below, you will see a log of state diffs whenever you change trigger setState() in your app.
 ![](public/StateDiff.mov.gif)
 
-You also have the option to filter out certain higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL and React Router).
-
+## Panel GIF showing how the tree opens and GIF showing how the hover works and showing the diff panel
 ## GIF showing the how to fliter tree
+You also have the option to filter out certain higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL and React Router).
+![](public/TreeDisplay.mov.gif)
+
 ![](public/TreeFilter.mov.gif)
 
-## Panel GIF showing how the tree opens and GIF showing how the hover works and showing the diff panel
-![](public/TreeDisplay.mov.gif)
 
 ## Contributing 
 
 Please feel free to fork this repo and submit pull requests! Lucid is currently in beta release. Also, if you have any requests or suggestions for features, please contact us at gossamer.lucid@gmail.com.
 
 ## Coming Soon
-
 
 
 ## Our Team
