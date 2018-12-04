@@ -26,9 +26,7 @@ class App extends Component {
       componentsToFilter: [],
     };
 
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-
-    chrome.devtools.panels.create('Lucid', null, 'devtools.html');
+    chrome.devtools.panels.create("Lucid", null, "devtools.html");
   }
 
   componentDidMount() {
@@ -55,10 +53,9 @@ class App extends Component {
           let diff = recurseDiff(oldstate, this.state.appReactDOM);
           appState.setState({ stateDiff: diff });
         }
-
+      
         //if there is an active setTimeout, clear it
         clearTimeout(timeout);
-
         timeout = setTimeout(() => {
           appState.setState({ appState: req.msg });
         }, 1000);
@@ -100,14 +97,14 @@ class App extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: introspectionQuery })
       })
-        .then(res => res.json())
-        .then(json =>
-          this.setState({
-            schema: JSON.stringify(json.data)
-          })
+      .then(res => res.json())
+      .then(json =>
+        this.setState({
+          schema: JSON.stringify(json.data)
+        })
         );
+      }
     }
-  }
 
   //* invoke schema fetch only after a log object from a previous response is available
   componentDidUpdate(prevProps, prevState) {
@@ -124,7 +121,6 @@ class App extends Component {
     }
   }
 
-
   // * Handles the tab click for tree and req/res window
   handleWindowChange(target) {
     console.log(target);
@@ -140,7 +136,12 @@ class App extends Component {
   }
 
   // * Handles the filter for the component tree
-  handleFilter(arr) {
+  handleFilter(e, arr) {
+    if(e.target.classList.contains('toggleOn')) {
+      e.target.classList.remove('toggleOn')
+    } else {
+      e.target.classList.add('toggleOn');
+    }
     let result = [];
     if (!this.state.componentsToFilter.includes(arr[0])) {
       let componentsArr = this.state.componentsToFilter.concat(arr);
@@ -222,7 +223,7 @@ class App extends Component {
               ) : (
                   <div class='reactTab'>
                     <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
-                    <TreeDiagram appState={this.state.appFilteredDOM.length === 0 ? this.state.appState : this.state.appFilteredDOM} handleMouseOver={this.handleMouseOver} handleFilter={this.handleFilter.bind(this)} />
+                    <TreeDiagram appState={this.state.appFilteredDOM.length === 0 ? this.state.appState : this.state.appFilteredDOM} handleMouseOver={this.handleMouseOver.bind(this)} handleFilter={this.handleFilter.bind(this)} />
                     <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
