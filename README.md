@@ -38,7 +38,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 3. Navigate to chrome://extensions (or in your Chrome Browser Settings, click on **More Tools** >> **Extensions**). 
 
-4. Click **Load Unpacked**. Select the './react-lucid/build' folder from your local Lucid directory.
+4. Click **Load Unpacked**. Select the './react-lucid/build' folder from your local directory.
 
 5. Have fun!
 
@@ -64,7 +64,7 @@ Hovering over the Tree Chart renders state and props of each component in the __
 
 # Contributing 
 
-Please feel free to fork this repo and submit pull requests! Lucid is currently in beta release. Also, if you have any requests or suggestions for features, please contact us at gossamer.lucid@gmail.com.
+Please feel free to fork this repo and submit pull requests! Lucid is currently in beta release. Please let us know about bugs! Also, if you have any requests or suggestions for features, please contact us at gossamer.lucid@gmail.com.
 
 # Coming Soon
 
