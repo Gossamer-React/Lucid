@@ -16,6 +16,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
           Clear All
         </button>
       </div>
+      <hr />
       {stateDiffs.map((el, i) => {
         return (
           <div className='stateDiff-div'>
@@ -28,7 +29,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
                 indentWidth={1}
                 groupArraysAfterLength={20}
                 enableClipboard={false}
-                collapsed={2}
+                collapsed={1}
                 displayDataTypes={false}
                 displayObjectSize={false}
               />

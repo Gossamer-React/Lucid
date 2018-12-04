@@ -28,7 +28,7 @@ class App extends Component {
 
     this.handleMouseOver = this.handleMouseOver.bind(this);
 
-    chrome.devtools.panels.create("Lucid", null, "devtools.html");
+    chrome.devtools.panels.create('Lucid', null, 'devtools.html');
   }
 
   componentDidMount() {
@@ -76,8 +76,8 @@ class App extends Component {
 
           if (httpReq.response.content) {
             httpReq.getContent(responseBody => {
-              if (responseBody === "") {
-                log.res = "No response received";
+              if (responseBody === '') {
+                log.res = 'No response received';
               } else {
                 const parsedResponseBody = JSON.parse(responseBody);
                 log.res = parsedResponseBody;
@@ -111,13 +111,11 @@ class App extends Component {
 
   //* invoke schema fetch only after a log object from a previous response is available
   componentDidUpdate(prevProps, prevState) {
-    console.log('LENGTH: ', this.state.appFilteredDOM.length)
-    if (this.state.schema === "GraphQL schema not available.") {
+    if (this.state.schema === 'GraphQL schema not available.') {
       this.fetchSchemaFromGraphQLServer();
     }
 
     if (prevState.appState !== this.state.appState) {
-      console.log(this.state.componentsToFilter);
       if (this.state.componentsToFilter.length) {
         let result = [];
         filter(this.state.appState, this.state.componentsToFilter, result);
@@ -186,7 +184,9 @@ class App extends Component {
   // * handles the change of a log
   handleLogChange(reqId) {
     let req = this.state.logs[reqId];
-    this.setState({ logView: req })
+    req.id = reqId;
+    console.log('HandleChange: ', req)
+    this.setState({ logView: req });
   }
 
   render() {
@@ -195,6 +195,7 @@ class App extends Component {
       <div>
         {this.state.appState.length === 0 ?
           <div id='devToolsLoader'>
+            <img src='./logo.png' alt='devtool logo'/> 
             <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
             <p>Lucid works best on React v15/16</p>
           </div>
