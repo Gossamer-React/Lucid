@@ -1,5 +1,6 @@
 ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
 ![AppVeyor](https://img.shields.io/badge/build-passing-green.svg)
+![AppVeyor](https://img.shields.io/badge/License-MIT-blue.svg)
 # Lucid 
 *A React-GraphQL developer tool.*
 
