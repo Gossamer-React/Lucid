@@ -49,8 +49,8 @@ h2{
 }
 
 #logo{
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
 }
 
 #treeWrapper{
@@ -108,16 +108,16 @@ button{
   margin: 0px;
 }
 #window-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   margin: 5px 0px 20px 0px;
   text-align: center;
+  padding: 0px 15px;
 }
-.window-btn-wrapper {
-  width: 50%;
-  box-sizing: border-box;
-  padding: 30px;
-}
+
 .window-btn{
-  width: 30%;
+  width: 25%;
   height: 35px;
   box-sizing: border-box;
   color: #555;
