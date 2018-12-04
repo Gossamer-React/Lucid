@@ -9,8 +9,8 @@ class TreeDiagram extends React.Component {
     this.state = {
       transition: null,
       orientation: 'vertical',
-      foreignObjectWrapper: {x: 10, y: 5},
-      nodeSize: {x: 75, y: 75},
+      foreignObjectWrapper: {x: 10, y: 4},
+      nodeSize: {x: 85, y: 85},
     };
     this.handleFlip = this.handleFlip.bind(this);
   }
@@ -33,18 +33,18 @@ class TreeDiagram extends React.Component {
     if(this.state.orientation === 'vertical') {
       this.setState({
         orientation: 'horizontal',
-        foreignObjectWrapper: {x: 5, y: 10},
-        nodeSize: {x: 100, y:100},
+        foreignObjectWrapper: {x: 5, y: 8},
+        nodeSize: {x: 120, y:120},
         translate: {
           x: dimensions.width / 8,
-          y: dimensions.height / 8
+          y: dimensions.height / 2
         }
       })
     } else {
       this.setState({
         orientation: 'vertical',
-        foreignObjectWrapper: {x: 10, y: 5},
-        nodeSize: {x: 75, y: 75}
+        foreignObjectWrapper: {x: 10, y: 4},
+        nodeSize: {x: 85, y: 85},
         translate: {
           x: dimensions.width / 2,
           y: dimensions.height / 8
