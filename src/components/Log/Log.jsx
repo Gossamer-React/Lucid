@@ -10,6 +10,7 @@ const Log = props => {
       </p>
       <p className='log-p'>
         <b>Operation Name:</b> {props.operationName}
+        {/* {props.operationName !== null ? (<b>Operation Name:</b>props.operationName) : null} */}
       </p>
       <p className='log-p'>
         <b>Query:</b>

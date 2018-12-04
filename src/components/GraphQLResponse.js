@@ -10,7 +10,7 @@ const GraphQLResponse = ({ logs, log }) => {
       {logs.length !== 0
         ?
         <div className="graphql">
-          <p className='graphql-p'><b>Response:</b></p>
+          <p className='graphql-p'><h2>Response:</h2></p>
           <span className='graphql-span'>
             <ReactJson
               src={response}

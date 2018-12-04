@@ -86,10 +86,12 @@ class TreeDiagram extends React.Component {
 
     return (
       <div id="treeWrapper" ref={tc => (this.treeContainer = tc)}>
-        <button onClick={() => {this.handleFlip()}}> {this.state.orientation[0].toUpperCase() + this.state.orientation.slice(1)} </button>
-        <button onClick={(e) => { this.props.handleFilter(e, filterComponents.reduxComponents) }}>Filter Redux</button>
-        <button onClick={(e) => { this.props.handleFilter(e, filterComponents.reactRouterComponents) }}>Filter React-Router</button>
-        <button onClick={(e) => { this.props.handleFilter(e, filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
+        <div id='treeButtons'>
+          <button onClick={() => {this.handleFlip()}}> {this.state.orientation[0].toUpperCase() + this.state.orientation.slice(1)} </button>
+          <button onClick={(e) => { this.props.handleFilter(e, filterComponents.reduxComponents) }}>Filter Redux</button>
+          <button onClick={(e) => { this.props.handleFilter(e, filterComponents.reactRouterComponents) }}>Filter React-Router</button>
+          <button onClick={(e) => { this.props.handleFilter(e, filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
+        </div>
      
         {this.props.appState.length !== 0 ? (
           <Tree

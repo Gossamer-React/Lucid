@@ -6,7 +6,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
   return (
     <div id='stateDiff-container'>
       <div id='state-header'>
-        <h2>State Changes</h2>
+        <h2>State Log</h2>
         <button
           className='appButton' 
           data-log='state-log'
