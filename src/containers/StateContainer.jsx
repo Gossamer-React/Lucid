@@ -24,7 +24,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
             <span className='state-span'>
               
             <ReactJson
-                  src={el.oldState[Object.keys(el.oldState)[0]]}
+                  src={el}
                   name={null}
                   iconStyle='triangle'
                   indentWidth={1}
