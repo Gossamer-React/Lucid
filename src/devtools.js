@@ -53,7 +53,7 @@ class App extends Component {
           let diff = recurseDiff(oldstate, this.state.appReactDOM);
           appState.setState({ stateDiff: diff });
         }
-      
+
         //if there is an active setTimeout, clear it
         clearTimeout(timeout);
         timeout = setTimeout(() => {
@@ -97,14 +97,14 @@ class App extends Component {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: introspectionQuery })
       })
-      .then(res => res.json())
-      .then(json =>
-        this.setState({
-          schema: JSON.stringify(json.data)
-        })
+        .then(res => res.json())
+        .then(json =>
+          this.setState({
+            schema: JSON.stringify(json.data)
+          })
         );
-      }
     }
+  }
 
   //* invoke schema fetch only after a log object from a previous response is available
   componentDidUpdate(prevProps, prevState) {
@@ -128,7 +128,7 @@ class App extends Component {
       this.setState({ window: 'React' });
       document.querySelector('#reactbtn').classList.add('active');
       document.querySelector('#graphqlbtn').classList.remove('active');
-    } else if(this.state.window === 'React' && target.dataset.btn === 'Graphql'){
+    } else if (this.state.window === 'React' && target.dataset.btn === 'Graphql') {
       this.setState({ window: 'Graphql' });
       document.querySelector('#reactbtn').classList.remove('active');
       document.querySelector('#graphqlbtn').classList.add('active');
@@ -137,7 +137,7 @@ class App extends Component {
 
   // * Handles the filter for the component tree
   handleFilter(e, arr) {
-    if(e.target.classList.contains('toggleOn')) {
+    if (e.target.classList.contains('toggleOn')) {
       e.target.classList.remove('toggleOn')
     } else {
       e.target.classList.add('toggleOn');
@@ -196,20 +196,17 @@ class App extends Component {
       <div>
         {this.state.appState.length === 0 ?
           <div id='devToolsLoader'>
-            <img src='./logo-card.png' height='200px' alt='devtool logo'/> 
-            <h2>Please trigger a setState() to activate Lucid devtool.<br /></h2>
+            <img src='./lucidlogo-card-transparent.png' alt='devtool logo' />
+            <h1>Please trigger a setState() to activate Lucid devtool.<br /></h1>
             <p>Lucid works best on apps using React v16+ in development mode</p>
           </div>
           :
           <div id='app-container'>
             <div id='window'>
               <div id='window-nav'>
-                <span class='window-btn-wrapper'>
-                  <button className='window-btn active' id='graphqlbtn' data-btn='Graphql' onClick={(e) => { this.handleWindowChange(e.target); }}>GraphQL</button>
-                </span>
-                <span class='window-btn-wrapper'>
-                  <button className='window-btn' id='reactbtn' data-btn='React' onClick={(e) => { this.handleWindowChange(e.target); }}>Component Tree</button>
-                </span>
+                <img id='logo' src='./hexagonFAT.png' alt='devtool logo' />
+                <button className='window-btn active' id='graphqlbtn' data-btn='Graphql' onClick={(e) => { this.handleWindowChange(e.target); }}>GraphQL</button>
+                <button className='window-btn' id='reactbtn' data-btn='React' onClick={(e) => { this.handleWindowChange(e.target); }}>Component Tree</button>
               </div>
 
               {/* This checks what window the user has click on. 
