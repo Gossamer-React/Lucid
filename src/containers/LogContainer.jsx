@@ -21,10 +21,9 @@ const LogContainer = props => {
   return (
     <div id='log-container'>
       <div id='log-header'>
-        <h2>Requests Log</h2>
-        <button data-log='req-log' onClick={(e) => { props.clearLog(e); }}>Clear All</button>
+        <h2>Request Log</h2>
+        <button className='appButton' data-log='req-log' onClick={(e) => { props.clearLog(e); }}>Clear</button>
       </div>
-      <hr />
       <div id='logs'>{logs}</div>
     </div>
   );

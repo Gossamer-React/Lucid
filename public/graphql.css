@@ -1,28 +1,16 @@
 #graphql-container {
   width: 75%;
-  background-color: rgba(214, 214, 214, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
+  /* border: 1px solid #f2f2f2; */
+  /* border-radius: 5px; */
   margin-left: 20px;
   min-height: 600px;
-}
-
-#vr-log{
-  border-left: 1px solid #000;
-  height: 100%;
-  margin: 0px;
 }
 
 #req-res{
   display: flex;
 }
 
-#graphql-hr {
-  margin: 10px 0px;
-}
-
 #graphql {
-  border-right: 1px solid black;
   width: 50%;
   padding: 10px;
 }
@@ -40,10 +28,6 @@
 
 .graphql {
   padding: 5px;
-}
-
-.graphql:not(:last-child) {
-  border-bottom: 1px solid grey;
 }
 
 .graphql-p {

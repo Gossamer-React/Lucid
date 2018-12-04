@@ -2,9 +2,6 @@
   grid-area: diff;
   max-height: 500px;
   overflow-y: scroll;
-  background-color: rgba(214, 214, 214, 0.4);
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
   padding: 10px; 
   margin-top: 10px;
   margin-right: 10px;
@@ -18,9 +15,14 @@
 
 .stateDiff-div {
   overflow-x: scroll;
-  padding: 15px;
-  background:rgba(255,255,255,0.5);
-  margin: 8px 0px;
+  font-size: .9em;
+  line-height: .8em;
+  letter-spacing: 0.50px;
+  background-color: rgba(255, 255, 255);
+  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
+  0 5px 15px 0 rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+  padding: 10px;
 }
 
 .state-span{
