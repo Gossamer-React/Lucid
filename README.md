@@ -1,7 +1,7 @@
 # Lucid
 A React-GraphQL developer tool.
 
-![Alt text](public/logo-text.png?raw=true "Title")
+![Title](public/logo-text.png)
 
 Lucid is a React / GraphQL Developer Tool designed for helping developers debug their React applications that depend on GraphQL resources. Lucid devtool allows you to visualize the component hierarchy of your React application and your GraphQL schema, queries, and mutations side by side, making debugging easier.
 
@@ -47,11 +47,11 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 When opening the Lucid devtool users land on the GraphQL panel and they will receive the ability to see previous requests made as well as reponses and their schemas. 
 Note: The devtool only listens for HTTP requests when it's open in the developer tool panel. To see any requests that were made upon initial page load, reload your page after opening the devtool. 
 
-![](public/ReqResJson.mov.gif)
+![](public/ezgif.com-video-to-gif.gif)
 
 See a chronological log of GraphQL HTTP Requests on the left, and click on each log to view the HTTP response to that particular request. At the bottom of the panel, you'll also see your application's GraphQL schema.
 
-### Component Tree View
+## Component Tree View
 In the React panel, see a tree graph representing your React application's component hierarchy. In the top left box, you will see the state and props data of any tree graph component you hover over. Below, you will see a log of state diffs whenever you change trigger setState() in your app.
 
 ![](public/StateDiff.mov.gif)
