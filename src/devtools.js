@@ -111,22 +111,26 @@ class App extends Component {
 
   //* invoke schema fetch only after a log object from a previous response is available
   componentDidUpdate(prevProps, prevState) {
+    console.log('LENGTH: ', this.state.appFilteredDOM.length)
     if (this.state.schema === "GraphQL schema not available.") {
       this.fetchSchemaFromGraphQLServer();
     }
-    if (prevState.appReactDOM !== this.state.appReactDOM) {
+
+    if (prevState.appState !== this.state.appState) {
+      console.log(this.state.componentsToFilter);
       if (this.state.componentsToFilter.length) {
         let result = [];
-        filter(this.state.appReactDOM, this.state.componentsToFilter, result);
-        this.setState({appFilteredDOM: result});
+        filter(this.state.appState, this.state.componentsToFilter, result);
+        this.setState({ appFilteredDOM: result });
       }
     }
   }
 
 
   // * Handles the tab click for tree and req/res window
-  handleWindowChange() {
-    if (this.state.window === 'Graphql') {
+  handleWindowChange(target) {
+    console.log(target);
+    if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
       document.querySelector('#reactbtn').classList.remove('active');
       document.querySelector('#graphqlbtn').classList.add('active');
@@ -142,7 +146,7 @@ class App extends Component {
     let result = [];
     if (!this.state.componentsToFilter.includes(arr[0])) {
       let componentsArr = this.state.componentsToFilter.concat(arr);
-      filter(this.state.appReactDOM, this.state.componentsToFilter, result);
+      filter(this.state.appState, componentsArr, result);
       this.setState({
         componentsToFilter: componentsArr,
         appFilteredDOM: result
@@ -154,7 +158,7 @@ class App extends Component {
           list.splice(i--, 1);
         }
       }
-      filter(this.state.appReactDOM, this.state.componentsToFilter, result);
+      filter(this.state.appState, list, result);
       this.setState({
         componentsToFilter: list,
         appFilteredDOM: result
@@ -199,10 +203,10 @@ class App extends Component {
             <div id='window'>
               <div id='window-nav'>
                 <span class='window-btn-wrapper'>
-                  <button className='window-btn active' id='reactbtn' onClick={() => { this.handleWindowChange(); }}>GraphQL</button>
+                  <button className='window-btn active' id='graphqlbtn' data-btn='Graphql' onClick={(e) => { this.handleWindowChange(e.target); }}>GraphQL</button>
                 </span>
                 <span class='window-btn-wrapper'>
-                  <button className='window-btn' id='graphqlbtn' onClick={() => { this.handleWindowChange(); }}>Component Tree</button>
+                  <button className='window-btn' id='reactbtn' data-btn='React' onClick={(e) => { this.handleWindowChange(e.target); }}>Component Tree</button>
                 </span>
               </div>
 
@@ -217,7 +221,7 @@ class App extends Component {
               ) : (
                   <div class='reactTab'>
                     <StateContainer clearLog={this.handleClearLog.bind(this)} stateDiffs={this.state.stateDiff} />
-                    <TreeDiagram appState={this.state.appFilteredDOM} handleMouseOver={this.handleMouseOver} handleFilter={this.handleFilter.bind(this)} />
+                    <TreeDiagram appState={this.state.appFilteredDOM.length === 0 ? this.state.appState : this.state.appFilteredDOM} handleMouseOver={this.handleMouseOver} handleFilter={this.handleFilter.bind(this)} />
                     <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
