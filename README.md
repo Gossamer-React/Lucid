@@ -44,6 +44,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 ### GraphQL View
 In the GraphQL panel, see all the previous request made after opening the Lucid devtool. Note: The devtool can only listen for HTTP requests when it's open in the developer tool panel. To see any requests that were made upon initial page load, reload your page after opening the devtool. 
+![](ReqResJson.mov.gif)
 
 ## Show GIF display the req and response and how the JSON viewer works
 
