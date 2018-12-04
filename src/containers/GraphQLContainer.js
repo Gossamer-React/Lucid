@@ -1,5 +1,4 @@
 import React from 'react';
-import GraphQLRequest from '../components/GraphQLRequest';
 import GraphQLResponse from '../components/GraphQLResponse';
 import GraphQLSchema from '../components/GraphQLSchema';
 import styles from '../../public/graphql.css';

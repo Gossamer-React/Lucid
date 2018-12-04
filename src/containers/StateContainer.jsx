@@ -17,7 +17,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
           Clear
         </button>
       </div>
-      <hr />
+      
       {stateDiffs.map((el, i) => {
         return (
           <div className='stateDiff-div'>
