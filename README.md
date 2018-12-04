@@ -18,7 +18,7 @@ Lucid intercepts HTTP requests using Chrome devtool APIs and GraphQL's schema in
 
 1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools</a>. 
 
-2. Install <a href="https://chrome.google.com/webstore/detail/debux/ooihnkghpifccalpfakdnlolfaiidfjp?authuser=1">Lucid</a> from the <a href="https://chrome.google.com/webstore/category/extensions">Chrome Web Store</a>.
+2. Install <a href="https://chrome.google.com/webstore/detail/debux/ooihnkghpifccalpfakdnlolfaiidfjp?authuser=1">Lucid</a>.
 
 3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.
 
