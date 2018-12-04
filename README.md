@@ -52,9 +52,7 @@ In our component tree panel you will see a tree hierarchy of your application wi
 
 on the left of the panel you will see a box the shows the state and props of any component you hover over the tree and also what is different in your state when you make a setState.
 
-## GIF showing how the hover works and showing the diff panel
-
-## Panel GIF showing how the tree opens and 
+## Panel GIF showing how the tree opens and GIF showing how the hover works and showing the diff panel
 
 ## Contributing
 
