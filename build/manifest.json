@@ -1,14 +1,10 @@
 {
   "manifest_version": 2,
-  "name": "react-lucid",
-  "description": "A devtool for react developers.",
+  "name": "lucid",
+  "description": "A React-GraphQL developer tool.",
   "version": "1.0",
   "permissions": [
-    "*://*/*",
-    "tabs",
-    "http://*/*",
-    "https://*/*",
-    "file:///*"
+    "activeTab"
   ],
   "devtools_page": "devtools.html",
   "homepage_url": "https://github.com/Gossamer-React/React-Lucid",

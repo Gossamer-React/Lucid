@@ -123,7 +123,6 @@ class App extends Component {
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange(target) {
-    console.log(target);
     if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
       document.querySelector('#reactbtn').classList.add('active');
@@ -186,7 +185,6 @@ class App extends Component {
   handleLogChange(reqId) {
     let req = this.state.logs[reqId];
     req.id = reqId;
-    console.log('HandleChange: ', req)
     this.setState({ logView: req });
   }
 

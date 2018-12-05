@@ -1,4 +1,3 @@
-console.log("Background script running");
 var _DevtoolPort;
 var _ContentscriptPort;
 
@@ -8,17 +7,13 @@ const connections = {};
 // * listens to ports being connected
 chrome.runtime.onConnect.addListener(port => {
   if (port.name === 'devtool-background-port') {
-    console.log('background script connected to devtools port', port);
-
     _DevtoolPort = port;
 
     // * receive message from devtools to trigger reactTraverse
     let extensionListener = (message, sender, res) => {
       if (message.name === 'connect' && message.tabId) {
-        // console.log('backgroundscript received connect request from devtools; message:', message)
         chrome.tabs.sendMessage(message.tabId, message);
         connections[message.tabId] = port;
-        console.log('connections obj: ', connections)
         return;
       }
     }
@@ -45,7 +40,6 @@ chrome.runtime.onMessage.addListener(function (req, sender, res) {
 
 //Remove tabId/port from connection object after tab is closed. 
 chrome.tabs.onRemoved.addListener(function(tabId) {
-  console.log('Tab: ' + tabId + 'is closed');
   delete connections[tabId];     
 });
 
@@ -53,7 +47,6 @@ chrome.tabs.onRemoved.addListener(function(tabId) {
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   if(!connections[tabId]){return;}
   if(changeInfo.status === 'complete' && _DevtoolPort){
-    console.log('changeInfo', changeInfo, tabId);
     chrome.tabs.sendMessage(tabId, {type: 'tabChange'});
   }
 });
