@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "react-lucid",
+  "name": "lucid",
   "description": "A React-GraphQL developer tool.",
   "version": "1.0",
   "permissions": [

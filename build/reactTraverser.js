@@ -17,8 +17,6 @@ if (reactGlobalHook) {
   function setHook() {
     //React 16+
     if (reactInstance && reactInstance.version) {
-      console.log('Invoked setHook')
-
       reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
         return function (...args) {
           
@@ -28,7 +26,6 @@ if (reactGlobalHook) {
               virtualdom = args[1];
               let nodeToTraverse = virtualdom.current.stateNode.current;
               traverse(nodeToTraverse);
-              console.log('traverse complete: ', reactDOMArr);
   
               //send DOM's react component tree to contentScriptJS
               window.postMessage(JSON.parse(JSON.stringify({
