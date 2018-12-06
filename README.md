@@ -36,7 +36,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 
 ![](public/ReqResJson.gif) 
 
-### React View
+### React (Component Tree) View
 * In the React panel is a tree graph representing your application's __component hierarchy__. 
 * Hovering over any React Component in the tree displays the __state and props data__ of that component in the top left.
 * The __State Diff__ Log tracks changes in state whenever setState() is triggered.
