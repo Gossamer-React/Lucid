@@ -4,7 +4,6 @@
 ![AppVeyor](https://img.shields.io/badge/License-MIT-blue.svg)
 ## **Lucid**: *a React-GraphQL developer tool*
 
-
 Lucid is a Chrome Developer Tool designed to help developers debug their React-GraphQL applications. 
 - Visualize the component hierarchy, state/props data and state changes of your React application
 - See your GraphQL schema, queries, and mutations in real-time
@@ -22,7 +21,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 | 1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools</a>. | 1. Clone the repo and install dependendies:     ```npm install``` |
 | 2. Install <a href="https://chrome.google.com/webstore/category/extensions">Lucid</a> or __Build your own extension__. | 2. ```npm run build ```|
 |3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.|3. Navigate to chrome://extensions (or in your Chrome Browser Settings, click on **More Tools** >> **Extensions**). |
-|4. Open Chrome Developer Tools (Inspect / Cmd+Opt+I / Ctrl+Shift+I), and click on the Lucid panel.|4. Click **Load Unpacked**. Select the './react-lucid/build' folder from your local directory.|
+|4. Open Chrome Developer Tools (Inspect / Cmd+Opt+I / Ctrl+Shift+I) and click on the Lucid panel.|4. Click **Load Unpacked** and select the './react-lucid/build' folder from your local directory.|
 |5. Have fun!  |
 
 **IMPORTANT:**  Lucid is in *BETA* mode and works best for React v16+ local projects in development environments. 
@@ -51,7 +50,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 
 ## Contributing 
 
-Lucid is currently in beta release. Please let us know about bugs and suggestions. Feel free to fork this repo and submit pull requests! Contact us at gossamer.lucid@gmail.com.
+Lucid is currently in beta release. Please let us know about bugs and suggestions at gossamer.lucid@gmail.com. Feel free to fork this repo and submit pull requests! 
 
 ## Coming Soon
 
