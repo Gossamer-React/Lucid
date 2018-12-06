@@ -20,7 +20,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 | ------------- | ------------- |
 | 1. Install <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">React Developer Tools</a>. | 1. Clone the repo and install dependendies:     ```npm install``` |
 | 2. Install <a href="https://chrome.google.com/webstore/category/extensions">Lucid</a> or __Build your own extension__. | 2. ```npm run build ```|
-|3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.|3. Navigate to http://chrome://extensions (or in your Chrome Browser Settings, click on **More Tools** >> **Extensions**). |
+|3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.|3. Navigate to chrome/extensions (or in your Chrome Browser Settings, click on **More Tools** >> **Extensions**). |
 |4. Open Chrome Developer Tools (Inspect / Cmd+Opt+I / Ctrl+Shift+I) and click on the Lucid panel.|4. Click **Load Unpacked** and select the './react-lucid/build' folder from your local directory.|
 |5. Have fun!  |
 
