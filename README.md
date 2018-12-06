@@ -28,7 +28,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 
 ## How to Use
 ### GraphQL View 
-* In the GraphQL panel, a chronological log of previous API __requests__ is shown on the left. 
+* In the GraphQL panel, a chronological log of API __requests__ is shown on the left. 
 * A GraphQL __schema__ of all available types, queries, and mutations is also automatically fetched from the GraphQL server when Lucid is initialized and displayed on the bottom.
 * Click each request log to see its associated HTTP __response__. 
  
