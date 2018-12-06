@@ -6,10 +6,8 @@
 
 
 Lucid is a Chrome Developer Tool designed to help developers debug their React-GraphQL applications. 
-- Visualize the component hierarchy of your React application
-- See your GraphQL schema, queries, and mutations
-
-**IMPORTANT:**  Lucid is in *BETA* mode and works best for React v16+ local projects in development environments. 
+- Visualize the component hierarchy, state/props data and state changes of your React application
+- See your GraphQL schema, queries, and mutations in real-time
 
 ## Underlying Technology
 ### React Tab
@@ -26,7 +24,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 |3. Run your React-GraphQL application or open a site that uses React v16+ or GraphQL.|3. Navigate to chrome://extensions (or in your Chrome Browser Settings, click on **More Tools** >> **Extensions**). |
 |4. Open Chrome Developer Tools (Inspect / Cmd+Opt+I / Ctrl+Shift+I), and click on the Lucid panel.|4. Click **Load Unpacked**. Select the './react-lucid/build' folder from your local directory.|
 |5. Have fun! |5. Have fun! |
-
+**IMPORTANT:**  Lucid is in *BETA* mode and works best for React v16+ local projects in development environments. 
 
 ## How to Use
 ### GraphQL View 
