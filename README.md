@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="450" height="150" src="public/assets/lucidlogo-transparent.png?raw=true">
+  <img width="450" height="160" src="public/assets/lucidlogo-transparent.png?raw=true">
 </p>
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Make%20development%20easier%20with%20Lucid.&url=https://github.com/Gossamer-React/Lucid&hashtags=react,graphql,apollographql,javascript,programming,developers,chrome)
