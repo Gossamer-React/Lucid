@@ -1,4 +1,7 @@
-<center> ![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title") </center>
+![Alt text](public/assets/lucidlogo-transparent.png?raw=true "Title")
+<p align="center">
+  <img width="460" height="300" src="public/assets/lucidlogo-transparent.png?raw=true">
+</p>
 
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Make%20development%20easier%20with%20Lucid.&url=https://github.com/Gossamer-React/Lucid&hashtags=react,graphql,apollographql,javascript,programming,developers,chrome)
 ![AppVeyor](https://img.shields.io/badge/build-passing-green.svg)
