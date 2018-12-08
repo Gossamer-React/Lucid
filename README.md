@@ -31,7 +31,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 **IMPORTANT:**  Lucid is in *BETA* mode and works best for React v16+ local projects in development environments. 
 
 ## How to Use
-### GraphQL View 
+### GraphQL Tab 
 * In the GraphQL panel, a chronological log of API __requests__ is shown on the left. 
 * A GraphQL __schema__ of all available types, queries, and mutations is also automatically fetched from the GraphQL server when Lucid is initialized and displayed on the bottom.
 * Click each request log to see its associated HTTP __response__. 
@@ -40,7 +40,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 
 ![](public/ReqResJson.gif) 
 
-### React (Component Tree) View
+### React Tab
 * In the React panel is a tree graph representing your application's __component hierarchy__. 
 * Hovering over any React Component in the tree displays the __state and props data__ of that component in the top left.
 * The __State Diff__ Log tracks changes in state whenever setState() is triggered.
