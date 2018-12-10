@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "lucid",
   "description": "A React-GraphQL developer tool.",
-  "version": "1.0",
+  "version": "1.0.1",
   "permissions": [
     "activeTab"
   ],
