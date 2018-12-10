@@ -1,6 +1,5 @@
 import React from 'react';
 import Log from './../components/Log/Log.jsx';
-import styles from '../../public/log-container.css';
 
 const LogContainer = props => {
   let logs = props.logs.map((log, i) => {
