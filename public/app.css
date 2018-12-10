@@ -75,12 +75,6 @@ h2{
   white-space: pre-wrap;
 }  
 
-.graphQLTab {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
 button{
   font-size: 10px;
   text-transform: uppercase;
@@ -143,11 +137,12 @@ button:hover{
 @media screen and (max-width: 600px) {
   .reactTab {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 4fr 3fr 4fr;
     grid-template-columns: 1fr;
     grid-template-areas:
-      'sp-box'
       'diff'
+      'sp-box'
       'tree';
+    max-height: 1200px;
   }
 }

@@ -204,7 +204,7 @@ class App extends Component {
               <div id='window-nav'>
                 <img id='logo' src='./hexagonFAT.png' alt='devtool logo' />
                 <button className='window-btn active' id='graphqlbtn' data-btn='Graphql' onClick={(e) => { this.handleWindowChange(e.target); }}>GraphQL</button>
-                <button className='window-btn' id='reactbtn' data-btn='React' onClick={(e) => { this.handleWindowChange(e.target); }}>Component Tree</button>
+                <button className='window-btn' id='reactbtn' data-btn='React' onClick={(e) => { this.handleWindowChange(e.target); }}>React</button>
               </div>
 
               {/* This checks what window the user has click on. 

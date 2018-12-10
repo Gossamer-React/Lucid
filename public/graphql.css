@@ -1,4 +1,12 @@
+.graphQLTab{
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  grid-template-areas:
+    'log-container graphql'
+}
+
 #graphql-container {
+  grid-area: graphql;
   margin-right: 0px;
   min-height: 600px;
 }
@@ -13,7 +21,7 @@
 }
 
 #graphql-res {
-  background-color: white;;
+  background-color: white;
   box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
   0 5px 15px 0 rgba(0,0,0,0.08);
   padding: 10px 25px;
@@ -39,4 +47,86 @@
   font-weight: 500;
   letter-spacing: 0.8px;
   line-height: 15px;
+}
+
+/* *for log in the graphql tab */
+#log-container{
+  grid-area: log-container;
+  max-height: 400px;
+  height: 400px;
+  margin-bottom: 30px;
+} 
+
+#log-header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+#logs{
+  overflow-y: scroll;
+  max-height: 95%;
+}
+.log{
+  overflow-x: scroll;
+  padding: 15px;
+  margin: 15px;
+  background-color: rgba(255, 255, 255);
+  /* transition: box-shadow .1s; */
+  cursor: pointer;
+  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
+  0 5px 15px 0 rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+}
+
+.log-p{
+  margin: 5px 0px;
+}
+
+.log-span{
+  font-size: 1.2em;
+  font-weight: 500;
+  letter-spacing: 0.50px;
+  margin: 5px 0px;
+}
+
+/* *for responsive use */
+@media screen and (max-width: 760px) {
+  .graphQLTab{
+    padding: 10px;
+    display: grid;
+    grid-template-rows: 3fr 7fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'log-container'
+      'graphql';
+    max-height: 1200px;
+    overflow-y: scroll;
+  }
+  #log-container{
+    width: 100%;
+    max-height: 400px;
+    height: 400px;
+    margin: 0 auto 30px auto;
+  } 
+}
+
+/* * Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  .graphQLTab{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    grid-template-areas:
+      'log-container graphql';
+    max-height: 1200px;
+    overflow-y: scroll;
+  }
+  #graphql-container {
+    display: flex;
+  }
+  #graphql-res {
+    width: 40%;
+    margin-right: 10px;
+  }
 }
