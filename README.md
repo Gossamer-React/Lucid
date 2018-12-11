@@ -7,11 +7,8 @@
 ![AppVeyor](https://img.shields.io/badge/License-MIT-blue.svg)
 
 <p align="center">
-  <img src="build/lucid-demo.webm">
+  <img src="public/demo-gif.gif">
 </p>
-
-![](build/lucid-demo.webm)
-
 
 ## **Lucid**: *a React-GraphQL developer tool*
 
