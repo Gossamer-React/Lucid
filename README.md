@@ -6,6 +6,11 @@
 ![AppVeyor](https://img.shields.io/badge/build-passing-green.svg)
 ![AppVeyor](https://img.shields.io/badge/License-MIT-blue.svg)
 
+<p align="center">
+  <img width="460" height="150" src="build/lucid-demo.webm">
+  ![](build/lucid-demo.webm)
+</p>
+
 ## **Lucid**: *a React-GraphQL developer tool*
 
 Lucid is a Chrome Developer Tool designed to help developers debug their React-GraphQL applications. 
