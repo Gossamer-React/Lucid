@@ -7,8 +7,6 @@
 ![AppVeyor](https://img.shields.io/badge/License-MIT-blue.svg)
 
 <p align="center">
-  <img src="public/demo-photo-graphql.png">
-  <img src="public/demo-photo-react.png">
   <img src="public/demo-gif.gif">
 </p>
 
@@ -44,7 +42,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
  
 **NOTE:**  Lucid only listens for HTTP requests while it is open in the Chrome Developer Tool panel. To see any requests that were made upon initial page load, reload your React page after opening Lucid in your Chrome browser. 
 
-![](public/ReqResJson.gif) 
+![](public/demo-photo-graphql.png) 
 
 ### React Tab
 * In the React panel is a tree graph representing your application's __component hierarchy__. 
@@ -52,11 +50,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 * The __State Diff__ Log tracks changes in state whenever setState() is triggered.
 * Filter out specified higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL, and React Router) by clicking the buttons.
 
-![](public/StateDiff.gif)
-
-![](public/TreeDisplay.gif)
-
-![](public/TreeFilter.gif)
+![](public/public/demo-photo-react.png)
 
 ## Contributing 
 
