@@ -7,6 +7,8 @@
 ![AppVeyor](https://img.shields.io/badge/License-MIT-blue.svg)
 
 <p align="center">
+  <img src="public/demo-photo-graphql.png">
+  <img src="public/demo-photo-react.png">
   <img src="public/demo-gif.gif">
 </p>
 
