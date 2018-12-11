@@ -50,7 +50,7 @@ Lucid intercepts HTTP requests using Chrome Devtool APIs to display a log of rea
 * The __State Diff__ Log tracks changes in state whenever setState() is triggered.
 * Filter out specified higher-order components from your tree graph (e.g. Redux, Apollo-GraphQL, and React Router) by clicking the buttons.
 
-![](public/public/demo-photo-react.png)
+![](public/demo-photo-react.png)
 
 ## Contributing 
 
