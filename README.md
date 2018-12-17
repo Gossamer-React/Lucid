@@ -11,7 +11,7 @@
 
 ## **Lucid**: *a React-GraphQL developer tool*
 
-Lucid is a Chrome Developer Tool designed to help developers debug their React-GraphQL applications. 
+Lucid is a Chrome Developer Tool designed to help engineers debug their React-GraphQL applications. 
 - Visualize the component hierarchy, state/props data and state changes of your React application
 - See your GraphQL schema, queries, and mutations in real-time
 
