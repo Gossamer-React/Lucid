@@ -1,6 +1,5 @@
 let timeout;
 let reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-console.log('ran reacttraverser.js', reactGlobalHook)
 
 if (reactGlobalHook) {
 
@@ -13,7 +12,6 @@ if (reactGlobalHook) {
   // setHook();
   // reactGlobalHook.onCommitFiberRoot();
   // })
-
   function setHook() {
     //React 16+
     if (reactInstance && reactInstance.version) {
