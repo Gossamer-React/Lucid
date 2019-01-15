@@ -1,11 +1,12 @@
 {
-  "name": "Lucid",
+  "name": "lucid",
   "version": "1.0.0",
   "description": "A devtool for React and GraphQL developers",
   "main": "devtools.js",
   "scripts": {
     "build": "webpack --mode production --devtool source-map",
-    "client": "webpack-dev-server --mode development"
+    "client": "webpack-dev-server --mode development",
+    "test": ""
   },
   "author": "Gossamer",
   "license": "ISC",
