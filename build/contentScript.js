@@ -15,14 +15,14 @@ function injectScript(file) {
 chrome.runtime.onMessage.addListener((message, sender, res) => {
   //* listen for message.name connect to inject the traverser
   if (message.name === 'connect') {
-    if(!document.getElementById('traverser')){
+    if (!document.getElementById('traverser')) {
       injectScript(chrome.extension.getURL('reactTraverser.js'));
     }
   }
   // * receives message about tab update
   // TODO: change message.type to message.name 
-  if(message.type && message.type === 'tabChange'){
-    if(!document.getElementById('traverser')){
+  if (message.type && message.type === 'tabChange') {
+    if (!document.getElementById('traverser')) {
       injectScript(chrome.extension.getURL('reactTraverser.js'));
     }
   }
@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener((message, sender, res) => {
 
 //listen for messages from the reactTraverser
 window.addEventListener('message', e => {
-  if (e.data.type === undefined) return;
+  if (e.data === undefined) return;
   if (e.data.type == 'reactTraverser') {
     reactDocObj = e.data.data;
 
