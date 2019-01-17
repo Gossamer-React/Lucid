@@ -6,12 +6,12 @@
   "scripts": {
     "build": "webpack --mode production --devtool source-map",
     "client": "webpack-dev-server --mode development",
-    "test": ""
+    "test": "jest"
   },
   "author": "Gossamer",
   "license": "ISC",
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "testEnvironment": "node"
   },
   "dependencies": {
     "graphql": "^14.0.2",
