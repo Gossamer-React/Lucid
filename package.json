@@ -4,7 +4,8 @@
   "description": "A devtool for React and GraphQL developers",
   "main": "devtools.js",
   "scripts": {
-    "build": "webpack --mode production --devtool source-map",
+    "sourcemap": "webpack --mode production --devtool source-map",
+    "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development"
   },
   "author": "Gossamer",
