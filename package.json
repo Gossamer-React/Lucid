@@ -10,9 +10,6 @@
   },
   "author": "Gossamer",
   "license": "ISC",
-  "jest": {
-    "testEnvironment": "node"
-  },
   "dependencies": {
     "graphql": "^14.0.2",
     "graphql-syntax-highlighter-react": "^0.3.5",
