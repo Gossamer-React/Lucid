@@ -21,4 +21,7 @@ test('Log component displays proper information from Apollo server.', () => {
         logId= '0'
       />
   );
+
+  let logComponent = log.toJSON();
+  expect(logComponent).toMatchSnapshot();
 });
