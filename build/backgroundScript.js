@@ -9,11 +9,9 @@ chrome.runtime.onConnect.addListener(port => {
   if (port.name === 'devtool-background-port') {
     _DevtoolPort = port;
 
-    console.log('Background');
     // * receive message from devtools to trigger reactTraverse
     let extensionListener = (message, sender, res) => {
       if (message.name === 'connect' && message.tabId) {
-        console.log('Background Hello');
         chrome.tabs.sendMessage(message.tabId, message);
         connections[message.tabId] = port;
         return;
