@@ -22,9 +22,10 @@ if (reactGlobalHook) {
             timeout = setTimeout(() => {
               virtualdom = args[1];
               let nodeToTraverse = virtualdom.current.stateNode.current;
+              console.log(nodeToTraverse, reactDOMArr);
               traverse(nodeToTraverse);
 
-              console.log(virtualdom, reactDOMArr);
+              console.log(nodeToTraverse, 'ReactDOMArr:', reactDOMArr);
               //send DOM's react component tree to contentScriptJS
               window.postMessage(JSON.parse(JSON.stringify({
                 type: 'reactTraverser',
@@ -104,6 +105,7 @@ const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
   if (node.sibling) {
     traverse(node.sibling, childrenarr, true);
   }
+
   return;
 
 };
