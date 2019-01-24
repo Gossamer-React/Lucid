@@ -1,6 +1,6 @@
-export const stringifyObject = () => {
+export const stringifyObject = (reactDOMObject) => {
   var cache = [];
-  JSON.stringify(o, function (key, value) {
+  const result = JSON.stringify(reactDOMObject, function (key, value) {
     if (typeof value === 'object' && value !== null) {
       if (cache.indexOf(value) !== -1) {
         // Duplicate reference found
@@ -18,4 +18,6 @@ export const stringifyObject = () => {
     return value;
   });
   cache = null;
+
+  return result;
 }

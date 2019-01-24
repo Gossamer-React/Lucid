@@ -27,7 +27,7 @@ if (reactGlobalHook) {
 
               console.log(nodeToTraverse, 'ReactDOMArr:', reactDOMArr);
               //send DOM's react component tree to contentScriptJS
-              window.postMessage(JSON.parse(JSON.stringify({
+              window.postMessage(JSON.parse(stringifyObject({
                 type: 'reactTraverser',
                 data: reactDOMArr
               })), '*');
@@ -109,3 +109,29 @@ const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
   return;
 
 };
+
+// TODO: This can parse through a simple circular object but needs to be tested with larger reactDOM objects.
+// Function stringifies object even when circular
+const stringifyObject = (reactDOMObject) => {
+  var cache = [];
+  const result = JSON.stringify(reactDOMObject, function (key, value) {
+    if (typeof value === 'object' && value !== null) {
+      if (cache.indexOf(value) !== -1) {
+        // Duplicate reference found
+        try {
+          // If this value does not reference a parent it can be deduped
+          return JSON.parse(JSON.stringify(value));
+        } catch (error) {
+          // discard key if value cannot be deduped
+          return;
+        }
+      }
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  });
+  cache = null;
+
+  return result;
+}
