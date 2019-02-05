@@ -2,7 +2,8 @@ let timeout;
 let reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
 if (reactGlobalHook) {
-  const reactInstance = reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]];
+  const reactInstance =
+    reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]];
   let virtualdom;
   var reactDOMArr = [];
 
@@ -14,23 +15,34 @@ if (reactGlobalHook) {
   function setHook() {
     //React 16+
     if (reactInstance && reactInstance.version) {
-      reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
-        return function (...args) {
-
+      reactGlobalHook.onCommitFiberRoot = (function(oCFR) {
+        return function(...args) {
           if (args[1] !== undefined) {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
               virtualdom = args[1];
               let nodeToTraverse = virtualdom.current.stateNode.current;
-              console.log(nodeToTraverse, reactDOMArr);
               traverse(nodeToTraverse);
 
-              console.log(nodeToTraverse, 'ReactDOMArr:', reactDOMArr);
               //send DOM's react component tree to contentScriptJS
-              window.postMessage(JSON.parse(stringifyObject({
-                type: 'reactTraverser',
-                data: reactDOMArr
-              })), '*');
+              window.postMessage(
+                JSON.parse(
+                  JSON.stringify(
+                    {
+                      type: 'reactTraverser',
+                      data: reactDOMArr
+                    },
+                    (key, val) => {
+                      for (let prop in val) {
+                        if (typeof val[prop] === 'object') {
+                          return stringifyObject(val[prop]);
+                        }
+                      }
+                    }
+                  )
+                ),
+                '*'
+              );
 
               reactDOMArr = [];
             }, 750);
@@ -39,7 +51,6 @@ if (reactGlobalHook) {
           }
         };
       })(reactGlobalHook.onCommitFiberRoot);
-
     } else if (reactInstance && reactInstance.Reconciler) {
       console.log('React version 16+ (Fiber) is required to use React-Lucid');
     } else {
@@ -47,7 +58,6 @@ if (reactGlobalHook) {
     }
   }
   setHook();
-
 } else {
   console.log('React devtool is required to use React-Lucid');
 }
@@ -63,7 +73,7 @@ const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
         },
         children: [],
         State: node.memoizedState,
-        Props: function () {
+        Props: (function() {
           try {
             let result = {};
             const props = node.memoizedProps;
@@ -71,7 +81,13 @@ const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
               for (let key in props) {
                 const val = props[key];
                 if (typeof val === 'function' || typeof val === 'object') {
-                  result[key] = JSON.stringify(val);
+                  result[key] = JSON.stringify(val, (key, value) => {
+                    try {
+                      return JSON.parse(JSON.stringify(value));
+                    } catch (error) {
+                      return;
+                    }
+                  });
                 } else {
                   result[key] = val;
                 }
@@ -83,17 +99,17 @@ const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
           } catch (e) {
             return {};
           }
-        }()
-      }
+        })()
+      };
 
       //Create parent node in reactDOMArr
       if (reactDOMArr.length === 0) {
         reactDOMArr.push(obj);
-        childrenarr = reactDOMArr[reactDOMArr.length - 1]['children']
+        childrenarr = reactDOMArr[reactDOMArr.length - 1]['children'];
       } else {
-        childrenarr.push(obj)
+        childrenarr.push(obj);
         if (!sib) {
-          childrenarr = obj['children']
+          childrenarr = obj['children'];
         }
       }
     }
@@ -107,31 +123,23 @@ const traverse = (node, childrenarr = reactDOMArr, sib = false) => {
   }
 
   return;
-
 };
 
 // TODO: This can parse through a simple circular object but needs to be tested with larger reactDOM objects.
 // Function stringifies object even when circular
-const stringifyObject = (reactDOMObject) => {
-  var cache = [];
-  const result = JSON.stringify(reactDOMObject, function (key, value) {
-    if (typeof value === 'object' && value !== null) {
-      if (cache.indexOf(value) !== -1) {
-        // Duplicate reference found
+const stringifyObject = obj => {
+  for (let key in obj) {
+    let val = obj[key]
+    console.log(val);
+    if (typeof val === 'function' || typeof val === 'object') {
+      JSON.stringify(val, (prop, value) => {
         try {
-          // If this value does not reference a parent it can be deduped
           return JSON.parse(JSON.stringify(value));
         } catch (error) {
-          // discard key if value cannot be deduped
-          return;
+          console.log(error);
+          console.log(prop, value);
         }
-      }
-      // Store value in our collection
-      cache.push(value);
+      });
     }
-    return value;
-  });
-  cache = null;
-
-  return result;
-}
+  }
+};
