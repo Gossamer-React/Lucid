@@ -18,7 +18,7 @@ test('Log component displays proper information from Apollo server.', () => {
           }
         }`}
         variables={{"title": "laundry"}}
-        logId= '0'
+        logId='0'
       />
   );
 
