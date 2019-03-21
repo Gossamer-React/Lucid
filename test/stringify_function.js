@@ -1,23 +1,40 @@
-export const stringifyObject = (reactDOMObject) => {
-  var cache = [];
-  const result = JSON.stringify(reactDOMObject, function (key, value) {
-    if (typeof value === 'object' && value !== null) {
-      if (cache.indexOf(value) !== -1) {
-        // Duplicate reference found
-        try {
-          // If this value does not reference a parent it can be deduped
-          return JSON.parse(JSON.stringify(value));
-        } catch (error) {
-          // discard key if value cannot be deduped
-          return;
+export const stringifyReactDOM = (key, val) => {
+  // return JSON.stringify(reactDOMObject);
+  if (val instanceof Object) {
+    for (let prop in val) {
+      if (prop === 'data') {
+        try { 
+          JSON.stringify(stringifyReactObject(val[prop][0]));
+        } catch (err) {
+          return err;
         }
       }
-      // Store value in our collection
-      cache.push(value);
     }
-    return value;
-  });
-  cache = null;
+  }
 
-  return result;
+  return val;
+}
+
+const stringifyReactObject = (object) => {
+  for (let key in object) {
+    if (object[key].hasOwnProperty('children') || key === 'children') {
+      if (object[key].children instanceof Object && object[key].children.hasOwnProperty('_owner')) {
+        try {
+          object[key].children._owner = JSON.stringify(object[key].children._owner);
+        } catch (err) {
+          object[key].children._owner = 'circular ref';
+        }
+      } else if (Array.isArray(object[key])) {
+        stringifyReactArr(object[key]);
+      }
+    }
+  }
+
+  return object;
+}
+
+const stringifyReactArr = (array) => {
+  array.forEach(child => {
+    stringifyReactObject(child);
+  });
 }
