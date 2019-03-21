@@ -23,17 +23,10 @@ if (reactGlobalHook) {
               virtualdom = args[1];
               let nodeToTraverse = virtualdom.current.stateNode.current;
               traverse(nodeToTraverse);
-
-              console.log('OBJ',
-                JSON.parse(JSON.stringify({
-                  type: 'reactTraverser',
-                  data: reactDOMArr
-                }, stringifyReactDOM)));
-              //send DOM's react component tree to contentScriptJS
               window.postMessage(JSON.parse(JSON.stringify({
                 type: 'reactTraverser',
                 data: reactDOMArr
-              }, stringifyReactDOM)), '*')
+              })), '*')
 
               reactDOMArr = [];
             }, 750);
@@ -60,7 +53,33 @@ if (reactGlobalHook) {
             Id: node._debugID
           },
           children: [],
-          State: node.memoizedState,
+          State: (function () {
+            try {
+              let result = {};
+              const state = node.memoizedState;
+              if (typeof state === 'object') {
+                for (let key in state) {
+                  const val = state[key];
+                  if (typeof val === 'function' || typeof val === 'object') {
+                    result[key] = JSON.stringify(val, (key, value) => {
+                      try {
+                        return JSON.parse(JSON.stringify(value));
+                      } catch (error) {
+                        return error;
+                      }
+                    });
+                  } else {
+                    result[key] = val;
+                  }
+                }
+              } else {
+                result = state;
+              }
+              return result;
+            } catch (e) {
+              return {};
+            }
+          })(),
           Props: (function () {
             try {
               let result = {};
@@ -117,7 +136,7 @@ if (reactGlobalHook) {
 }
 
 
-// * Paring Functions
+// * Parsing Functions
 
 const stringifyReactDOM = (key, val) => {
   // console.log('VAL: ', val);
