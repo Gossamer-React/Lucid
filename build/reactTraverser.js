@@ -138,74 +138,74 @@ if (reactGlobalHook) {
 
 // * Parsing Functions
 
-const stringifyReactDOM = (key, val) => {
-  // console.log('VAL: ', val);
-  if (val instanceof Object) {
-    for (let prop in val) {
-      if (prop === 'data') {
-        try {
-          console.log(val[prop][0]);
-          JSON.stringify(stringifyReactObject(val[prop][0]));
-        } catch (err) {
-          // * catches error but something is still causing circular reference
-          console.log('ERROR', err);
-          return err;
-        }
-      }
-    }
-    return val;
-  }
+// const stringifyReactDOM = (key, val) => {
+//   // console.log('VAL: ', val);
+//   if (val instanceof Object) {
+//     for (let prop in val) {
+//       if (prop === 'data') {
+//         try {
+//           console.log(val[prop][0]);
+//           JSON.stringify(stringifyReactObject(val[prop][0]));
+//         } catch (err) {
+//           // * catches error but something is still causing circular reference
+//           console.log('ERROR', err);
+//           return err;
+//         }
+//       }
+//     }
+//     return val;
+//   }
 
-  return val;
-}
+//   return val;
+// }
 
 
-const stringifyReactObject = (object) => {
-  console.log('OBJECT: ', object)
-  for (let key in object) {
-    console.log('OBJ: ', object[key], key);
-    if (object[key] === null) return;
-    if(object[key] === 'Portal'){
-      console.log(object[key].children);
-      object.children = [];
-      return object;
-    }
-    if (object[key].hasOwnProperty('children') || key === 'children') {
-      if (object[key].children instanceof Object && object[key].children.hasOwnProperty('_owner')) {
-        console.log('CHILDREN!!!');
-        try {
-          object[key].children._owner = JSON.stringify(object[key].children._owner);
-        } catch (err) {
-          object[key].children._owner = 'circular ref';
-        }
-      } else if (Array.isArray(object[key])) {
-        stringifyReactArr(object[key]);
-      }
-    }
+// const stringifyReactObject = (object) => {
+//   console.log('OBJECT: ', object)
+//   for (let key in object) {
+//     console.log('OBJ: ', object[key], key);
+//     if (object[key] === null) return;
+//     if(object[key] === 'Portal'){
+//       console.log(object[key].children);
+//       object.children = [];
+//       return object;
+//     }
+//     if (object[key].hasOwnProperty('children') || key === 'children') {
+//       if (object[key].children instanceof Object && object[key].children.hasOwnProperty('_owner')) {
+//         console.log('CHILDREN!!!');
+//         try {
+//           object[key].children._owner = JSON.stringify(object[key].children._owner);
+//         } catch (err) {
+//           object[key].children._owner = 'circular ref';
+//         }
+//       } else if (Array.isArray(object[key])) {
+//         stringifyReactArr(object[key]);
+//       }
+//     }
 
-    if (object[key].hasOwnProperty('context')) {
-      console.log('CONTEXT: ', object[key], key);
-      if (object[key].context.hasOwnProperty('referenceNode')) {
-        try {
-          object[key].context.referenceNode = JSON.stringify(object[key].context.referenceNode);
-        } catch (err) {
-          object[key].context.referenceNode = 'circular ref';
-        }
-      }
-    }
-  }
+//     if (object[key].hasOwnProperty('context')) {
+//       console.log('CONTEXT: ', object[key], key);
+//       if (object[key].context.hasOwnProperty('referenceNode')) {
+//         try {
+//           object[key].context.referenceNode = JSON.stringify(object[key].context.referenceNode);
+//         } catch (err) {
+//           object[key].context.referenceNode = 'circular ref';
+//         }
+//       }
+//     }
+//   }
 
-  console.log('returnOBJ: ', object);
-  return object;
-}
+//   console.log('returnOBJ: ', object);
+//   return object;
+// }
 
-const stringifyReactArr = (array) => {
-  if (array.length === 0) return;
-  console.log('children: ', array);
-  let newArray = array.map(child => {
-    console.log('child:', child);
-    return stringifyReactObject(child);
-  });
+// const stringifyReactArr = (array) => {
+//   if (array.length === 0) return;
+//   console.log('children: ', array);
+//   let newArray = array.map(child => {
+//     console.log('child:', child);
+//     return stringifyReactObject(child);
+//   });
 
-  return newArray;
-}
+//   return newArray;
+// }
