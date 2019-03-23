@@ -30,7 +30,6 @@ chrome.runtime.onMessage.addListener((message, sender, res) => {
 
 //listen for messages from the reactTraverser
 window.addEventListener('message', e => {
-  console.log('MESSAGE: ', e.data);
   if (e.data === undefined) return;
   if (e.data.type == 'reactTraverser') {
     reactDocObj = e.data.data;
