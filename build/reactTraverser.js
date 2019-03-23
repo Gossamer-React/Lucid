@@ -53,60 +53,8 @@ if (reactGlobalHook) {
             Id: node._debugID
           },
           children: [],
-          State: (function () {
-            try {
-              let result = {};
-              const state = node.memoizedState;
-              if (typeof state === 'object') {
-                for (let key in state) {
-                  const val = state[key];
-                  if (typeof val === 'function' || typeof val === 'object') {
-                    result[key] = JSON.stringify(val, (key, value) => {
-                      try {
-                        return JSON.parse(JSON.stringify(value));
-                      } catch (error) {
-                        return error;
-                      }
-                    });
-                  } else {
-                    result[key] = val;
-                  }
-                }
-              } else {
-                result = state;
-              }
-              return result;
-            } catch (e) {
-              return {};
-            }
-          })(),
-          Props: (function () {
-            try {
-              let result = {};
-              const props = node.memoizedProps;
-              if (typeof props === 'object') {
-                for (let key in props) {
-                  const val = props[key];
-                  if (typeof val === 'function' || typeof val === 'object') {
-                    result[key] = JSON.stringify(val, (key, value) => {
-                      try {
-                        return JSON.parse(JSON.stringify(value));
-                      } catch (error) {
-                        return error;
-                      }
-                    });
-                  } else {
-                    result[key] = val;
-                  }
-                }
-              } else {
-                result = props;
-              }
-              return result;
-            } catch (e) {
-              return {};
-            }
-          })()
+          State: stateAndPropParser(node.memoizedState),
+          Props: stateAndPropParser(node.memoizedProps)
         }
 
         //Create parent node in reactDOMArr
@@ -138,74 +86,30 @@ if (reactGlobalHook) {
 
 // * Parsing Functions
 
-// const stringifyReactDOM = (key, val) => {
-//   // console.log('VAL: ', val);
-//   if (val instanceof Object) {
-//     for (let prop in val) {
-//       if (prop === 'data') {
-//         try {
-//           console.log(val[prop][0]);
-//           JSON.stringify(stringifyReactObject(val[prop][0]));
-//         } catch (err) {
-//           // * catches error but something is still causing circular reference
-//           console.log('ERROR', err);
-//           return err;
-//         }
-//       }
-//     }
-//     return val;
-//   }
-
-//   return val;
-// }
-
-
-// const stringifyReactObject = (object) => {
-//   console.log('OBJECT: ', object)
-//   for (let key in object) {
-//     console.log('OBJ: ', object[key], key);
-//     if (object[key] === null) return;
-//     if(object[key] === 'Portal'){
-//       console.log(object[key].children);
-//       object.children = [];
-//       return object;
-//     }
-//     if (object[key].hasOwnProperty('children') || key === 'children') {
-//       if (object[key].children instanceof Object && object[key].children.hasOwnProperty('_owner')) {
-//         console.log('CHILDREN!!!');
-//         try {
-//           object[key].children._owner = JSON.stringify(object[key].children._owner);
-//         } catch (err) {
-//           object[key].children._owner = 'circular ref';
-//         }
-//       } else if (Array.isArray(object[key])) {
-//         stringifyReactArr(object[key]);
-//       }
-//     }
-
-//     if (object[key].hasOwnProperty('context')) {
-//       console.log('CONTEXT: ', object[key], key);
-//       if (object[key].context.hasOwnProperty('referenceNode')) {
-//         try {
-//           object[key].context.referenceNode = JSON.stringify(object[key].context.referenceNode);
-//         } catch (err) {
-//           object[key].context.referenceNode = 'circular ref';
-//         }
-//       }
-//     }
-//   }
-
-//   console.log('returnOBJ: ', object);
-//   return object;
-// }
-
-// const stringifyReactArr = (array) => {
-//   if (array.length === 0) return;
-//   console.log('children: ', array);
-//   let newArray = array.map(child => {
-//     console.log('child:', child);
-//     return stringifyReactObject(child);
-//   });
-
-//   return newArray;
-// }
+// * This function will try to parser the state and props objects and catch any circular json errors
+const stateAndPropParser = (reactObj) => {
+  try {
+    let result = {};
+    if (typeof reactObj === 'object') {
+      for (let key in reactObj) {
+        const val = reactObj[key];
+        if (typeof val === 'function' || typeof val === 'object') {
+          result[key] = JSON.stringify(val, (key, value) => {
+            try {
+              return JSON.parse(JSON.stringify(value));
+            } catch (error) {
+              return error;
+            }
+          });
+        } else {
+          result[key] = val;
+        }
+      }
+    } else {
+      result = reactObj;
+    }
+    return result;
+  } catch (e) {
+    return {};
+  }
+}
