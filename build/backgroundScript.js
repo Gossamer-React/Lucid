@@ -16,37 +16,61 @@ chrome.runtime.onConnect.addListener(port => {
         connections[message.tabId] = port;
         return;
       }
-    }
+    };
 
     port.onMessage.addListener(extensionListener);
-  } 
+  }
 });
 
 // Receives message from content-script and checks for valid connections before posting to devtools
-chrome.runtime.onMessage.addListener(function (req, sender, res) {  
+chrome.runtime.onMessage.addListener(function(req, sender, res) {
   if (req.type === 'content-script') {
     if (sender.tab) {
       let tabId = sender.tab.id;
       if (tabId in connections) {
         //send the request to the specific port in the connections object associated to our tabId
-        connections[tabId].postMessage(
-          { type: 'appState', msg: req.message }
-        );
+        connections[tabId].postMessage({ type: 'appState', msg: req.message });
       } else console.log('ATTENTION:: Tab not found in connection list');
     } else console.log('ATTENTION:: sender.tab not defined');
     return true;
   }
 });
 
-//Remove tabId/port from connection object after tab is closed. 
+//Remove tabId/port from connection object after tab is closed.
 chrome.tabs.onRemoved.addListener(function(tabId) {
-  delete connections[tabId];     
+  delete connections[tabId];
 });
 
 //* When react router is invoked a tab change happens and the traverser is lost. This sends a message to the content script so it can check if the traverser needs to be reinjected.
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-  if(!connections[tabId]){return;}
-  if(changeInfo.status === 'complete' && _DevtoolPort){
-    chrome.tabs.sendMessage(tabId, {type: 'tabChange'});
+  if (!connections[tabId]) {
+    return;
+  }
+  if (changeInfo.status === 'complete' && _DevtoolPort) {
+    chrome.tabs.sendMessage(tabId, { type: 'tabChange' });
+  }
+});
+
+//* This will reload extension when it is first installed and when there is a new update.
+chrome.runtime.onInstalled.addListener(function(details) {
+  const currentVersion = chrome.runtime.getManifest().version;
+  if (details.reason === 'install') {
+    //* Alert is for debugging purposes, shows install message.
+    // alert('This is a first install!');
+    chrome.storage.local.set({ lastKnownVersion: currentVersion });
+    chrome.runtime.reload();
+  } else if (details.reason === 'update') {
+    alert('This is an update!');
+    chrome.storage.local.get('lastKnownVersion', function(result) {
+      if (result.lastKnownVersion) {
+        const lastVersion = result.lastKnownVersion;
+        if (lastVersion !== currentVersion) {
+          //* Alert is for debugging purposes, shows update message.
+          // alert('This is an update!');
+          chrome.storage.local.set({ lastKnownVersion: currentVersion });
+          chrome.runtime.reload();
+        }
+      }
+    });
   }
 });
