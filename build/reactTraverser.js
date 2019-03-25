@@ -133,8 +133,8 @@ const parserObject = propObj => {
           result[key] = JSON.stringify(val, (key, value) => {
             try {
               return JSON.parse(JSON.stringify(value));
-            } catch (error) {
-              return error;
+            } catch (err) {
+              return 'unable to parser circular reference';
             }
           });
         } else {
@@ -146,6 +146,6 @@ const parserObject = propObj => {
     }
     return result;
   } catch (err) {
-    return err;
+    return 'unable to parser circular reference';
   }
 };
