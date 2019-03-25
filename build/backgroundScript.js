@@ -23,7 +23,7 @@ chrome.runtime.onConnect.addListener(port => {
 });
 
 // Receives message from content-script and checks for valid connections before posting to devtools
-chrome.runtime.onMessage.addListener(function(req, sender, res) {
+chrome.runtime.onMessage.addListener(function (req, sender, res) {
   if (req.type === 'content-script') {
     if (sender.tab) {
       let tabId = sender.tab.id;
@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(function(req, sender, res) {
 });
 
 //Remove tabId/port from connection object after tab is closed.
-chrome.tabs.onRemoved.addListener(function(tabId) {
+chrome.tabs.onRemoved.addListener(function (tabId) {
   delete connections[tabId];
 });
 
@@ -51,26 +51,28 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
   }
 });
 
-//* This will reload extension when it is first installed and when there is a new update.
-chrome.runtime.onInstalled.addListener(function(details) {
+//* This will reload extension when it is first installed.
+chrome.runtime.onInstalled.addListener(details => {
   const currentVersion = chrome.runtime.getManifest().version;
   if (details.reason === 'install') {
     //* Alert is for debugging purposes, shows install message.
     // alert('This is a first install!');
     chrome.storage.local.set({ lastKnownVersion: currentVersion });
     chrome.runtime.reload();
-  } else if (details.reason === 'update') {
-    alert('This is an update!');
-    chrome.storage.local.get('lastKnownVersion', function(result) {
-      if (result.lastKnownVersion) {
-        const lastVersion = result.lastKnownVersion;
-        if (lastVersion !== currentVersion) {
-          //* Alert is for debugging purposes, shows update message.
-          // alert('This is an update!');
-          chrome.storage.local.set({ lastKnownVersion: currentVersion });
-          chrome.runtime.reload();
-        }
-      }
-    });
   }
+});
+//* This will reload extension when there is a new update.
+chrome.runtime.onUpdateAvailable.addListener(details => {
+  //* Alert is for debugging purposes, shows update message.
+  // alert('This is an update!');
+  const newVersion = details.version;
+  chrome.storage.local.get('lastKnownVersion', function (result) {
+    const currentVersion = result.version;
+    if (newVersion !== currentVersion) {
+      //* Alert is for debugging purposes, shows update message.
+      // alert('This is an update!');
+      chrome.storage.local.set({ lastKnownVersion: newVersion });
+      chrome.runtime.reload();
+    }
+  });
 });
