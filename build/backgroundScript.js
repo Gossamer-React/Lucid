@@ -56,7 +56,7 @@ chrome.runtime.onInstalled.addListener(details => {
   const currentVersion = chrome.runtime.getManifest().version;
   if (details.reason === 'install') {
     //* Alert is for debugging purposes, shows install message.
-    // alert('This is a first install!');
+    alert('This is a first install!');
     chrome.storage.local.set({ lastKnownVersion: currentVersion });
     chrome.runtime.reload();
   }
