@@ -8,26 +8,17 @@
   "content_scripts": [
     {
       "run_at": "document_end",
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "contentScript.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
     }
   ],
   "background": {
-    "scripts": [
-      "backgroundScript.js"
-    ]
+    "scripts": ["backgroundScript.js"]
   },
-  "web_accessible_resources": [
-    "reactTraverser.js"
-  ],
+  "permissions": ["storage"],
+  "web_accessible_resources": ["reactTraverser.js"],
   "externally_connectable": {
-    "ids": [
-      "*"
-    ]
+    "ids": ["*"]
   },
   "icons": {
     "128": "hexagonFAT.png"
