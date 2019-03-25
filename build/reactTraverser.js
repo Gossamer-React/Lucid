@@ -2,7 +2,8 @@ let timeout;
 let reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
 if (reactGlobalHook) {
-  const reactInstance = reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]];
+  const reactInstance =
+    reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]];
   let virtualdom;
   var reactDOMArr = [];
 
@@ -14,30 +15,31 @@ if (reactGlobalHook) {
   function setHook() {
     //React 16+
     if (reactInstance && reactInstance.version) {
-      reactGlobalHook.onCommitFiberRoot = (function (oCFR) {
-        return function (...args) {
-          
+      reactGlobalHook.onCommitFiberRoot = (function(oCFR) {
+        return function(...args) {
           if (args[1] !== undefined) {
             clearTimeout(timeout);
             timeout = setTimeout(() => {
               virtualdom = args[1];
               let nodeToTraverse = virtualdom.current.stateNode.current;
               traverse(nodeToTraverse);
-  
-              //send DOM's react component tree to contentScriptJS
-              window.postMessage(JSON.parse(JSON.stringify({
-                type: 'reactTraverser',
-                data: reactDOMArr
-              })), '*')
-  
+              window.postMessage(
+                JSON.parse(
+                  JSON.stringify({
+                    type: 'reactTraverser',
+                    data: reactDOMArr
+                  })
+                ),
+                '*'
+              );
+
               reactDOMArr = [];
             }, 750);
-            
+
             return oCFR(...args);
           }
         };
       })(reactGlobalHook.onCommitFiberRoot);
-
     } else if (reactInstance && reactInstance.Reconciler) {
       console.log('React version 16+ (Fiber) is required to use React-Lucid');
     } else {
@@ -55,38 +57,18 @@ if (reactGlobalHook) {
             Id: node._debugID
           },
           children: [],
-          State: node.memoizedState,
-          Props: function () {
-            try {
-              let result = {};
-              const props = node.memoizedProps;
-              if (typeof props === 'object') {
-                for (let key in props) {
-                  const val = props[key];
-                  if (typeof val === 'function' || typeof val === 'object') {
-                    result[key] = JSON.stringify(val);
-                  } else {
-                    result[key] = val;
-                  }
-                }
-              } else {
-                result = props;
-              }
-              return result;
-            } catch (e) {
-              return {};
-            }
-          }()
-        }
+          State: stateAndPropParser(node.memoizedState),
+          Props: stateAndPropParser(node.memoizedProps)
+        };
 
         //Create parent node in reactDOMArr
         if (reactDOMArr.length === 0) {
           reactDOMArr.push(obj);
-          childrenarr = reactDOMArr[reactDOMArr.length - 1]['children']
+          childrenarr = reactDOMArr[reactDOMArr.length - 1]['children'];
         } else {
-          childrenarr.push(obj)
+          childrenarr.push(obj);
           if (!sib) {
-            childrenarr = obj['children']
+            childrenarr = obj['children'];
           }
         }
       }
@@ -99,8 +81,71 @@ if (reactGlobalHook) {
       traverse(node.sibling, childrenarr, true);
     }
     return;
-
   };
 } else {
-  console.log('React devtool is required to use React-Lucid')
+  console.log('React devtool is required to use React-Lucid');
 }
+
+// * Parsing Functions
+
+//* This function will try to parser the state and props objects and catch any circular json errors.
+/**  @param reactObj - this will be the components state or prop object
+ *   @return object/error - this will return a parsered object or a catched error.
+ */
+const stateAndPropParser = reactObj => {
+  try {
+    let result = {};
+    if (typeof reactObj === 'object') {
+      for (let key in reactObj) {
+        const val = reactObj[key];
+        if (typeof val === 'function' || typeof val === 'object') {
+          result[key] = JSON.stringify(val, (key, value) => {
+            try {
+              return JSON.parse(JSON.stringify(parserObject(value)));
+            } catch (error) {
+              return error;
+            }
+          });
+        } else {
+          result[key] = val;
+        }
+      }
+    } else {
+      result = reactObj;
+    }
+    return result;
+  } catch (e) {
+    return {};
+  }
+};
+
+// * This function will try to parser an object inside a component state or props objecct and catch any circular json errors.
+/**  @param propObj - this will be an obj within a component state or prop object
+ *   @return object/error - this will return a parsered object or a catched error.
+ */
+const parserObject = propObj => {
+  try {
+    let result = {};
+    if (typeof propObj === 'object') {
+      for (let key in propObj) {
+        const val = propObj[key];
+        if (typeof val === 'function' || typeof val === 'object') {
+          result[key] = JSON.stringify(val, (key, value) => {
+            try {
+              return JSON.parse(JSON.stringify(value));
+            } catch (err) {
+              return 'unable to parser circular reference';
+            }
+          });
+        } else {
+          result[key] = val;
+        }
+      }
+    } else {
+      result = propObj;
+    }
+    return result;
+  } catch (err) {
+    return 'unable to parser circular reference';
+  }
+};
