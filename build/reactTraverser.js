@@ -99,13 +99,15 @@ const stateAndPropParser = reactObj => {
       for (let key in reactObj) {
         const val = reactObj[key];
         if (typeof val === 'function' || typeof val === 'object') {
-          result[key] = JSON.stringify(val, (key, value) => {
-            try {
-              return JSON.parse(JSON.stringify(parserObject(value)));
-            } catch (error) {
-              return error;
-            }
-          });
+          result[key] = JSON.parse(
+            JSON.stringify(val, (key, value) => {
+              try {
+                return JSON.parse(JSON.stringify(parserObject(value)));
+              } catch (error) {
+                return error;
+              }
+            })
+          );
         } else {
           result[key] = val;
         }
@@ -130,13 +132,15 @@ const parserObject = propObj => {
       for (let key in propObj) {
         const val = propObj[key];
         if (typeof val === 'function' || typeof val === 'object') {
-          result[key] = JSON.stringify(val, (key, value) => {
-            try {
-              return JSON.parse(JSON.stringify(value));
-            } catch (err) {
-              return 'unable to parser circular reference';
-            }
-          });
+          result[key] = JSON.parse(
+            JSON.stringify(val, (key, value) => {
+              try {
+                return JSON.parse(JSON.stringify(value));
+              } catch (err) {
+                return 'unable to parser circular reference';
+              }
+            })
+          );
         } else {
           result[key] = val;
         }
