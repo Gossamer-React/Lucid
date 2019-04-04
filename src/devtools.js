@@ -9,6 +9,7 @@ import TreeDiagram from './components/TreeDiagram.jsx';
 import recurseDiff from './stateDiff';
 import StatePropsBox from './components/StatePropsBox';
 import filter from './filterDOM';
+import AppNav from './components/AppNav';
 
 class App extends Component {
   constructor() {
@@ -121,7 +122,7 @@ class App extends Component {
   }
 
   // * Handles the tab click for tree and req/res window
-  handleWindowChange(target) {
+  handleWindowChange  = (target) => {
     if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
       document.querySelector('#reactbtn').classList.add('active');
@@ -192,82 +193,53 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        {
-          <div id='app-container'>
-            <div id='window'>
-              <div id='window-nav'>
-                <img id='logo' src='./hexagonFAT.png' alt='devtool logo' />
-                <button
-                  className='window-btn active'
-                  id='graphqlbtn'
-                  data-btn='Graphql'
-                  onClick={e => {
-                    this.handleWindowChange(e.target);
-                  }}
-                >
-                  GraphQL
-                </button>
-                <button
-                  className='window-btn'
-                  id='reactbtn'
-                  data-btn='React'
-                  onClick={e => {
-                    this.handleWindowChange(e.target);
-                  }}
-                >
-                  React
-                </button>
-              </div>
-
-              {/* This checks which window the user has click on. 
+      <div id='app-container'>
+        <AppNav handleWindowChange = {this.handleWindowChange}/>
+        {/* This checks which window the user has click on. 
               They can click either React Tab  (to see the state tree) or GraphQL tab (to see the 
               request/reponse from their httprequest) */}
-              {this.state.window === 'Graphql' ? (
-                <div class='graphQLTab'>
-                  <LogContainer
-                    logs={this.state.logs}
-                    clearLog={this.handleClearLog.bind(this)}
-                    logChange={this.handleLogChange.bind(this)}
-                  />
-                  <GraphQLContainer
-                    logs={this.state.logs}
-                    schema={this.state.schema}
-                    log={this.state.logView}
-                  />
+        {this.state.window === 'Graphql' ? (
+          <div class='graphQLTab'>
+            <LogContainer
+              logs={this.state.logs}
+              clearLog={this.handleClearLog.bind(this)}
+              logChange={this.handleLogChange.bind(this)}
+            />
+            <GraphQLContainer
+              logs={this.state.logs}
+              schema={this.state.schema}
+              log={this.state.logView}
+            />
+          </div>
+        ) : (
+            //* If this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render Tree
+            <div>
+              {this.state.appState.length === 0 ? (
+                <div id='reactLoader'>
+                  <img src='./lucidlogo-card-transparent.png' alt='devtool logo' />
+                  <h1>Please trigger a setState() to see the React Component Tree/State Log.</h1>
+                  <p>Note: Lucid requires React Devtools to run and works best on local apps using React v16+ in dev mode</p>
                 </div>
               ) : (
-                  //* If this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render Tree
-                  <div>
-                    {this.state.appState.length === 0 ? (
-                      <div id='reactLoader'>
-                        <img src='./lucidlogo-card-transparent.png' alt='devtool logo' />
-                        <h1>Please trigger a setState() to see the React Component Tree/State Log.</h1>
-                        <p>Note: Lucid requires React Devtools to run and works best on local apps using React v16+ in dev mode</p>
-                      </div>
-                    ) : (
-                        <div class='reactTab'>
-                          <StateContainer
-                            clearLog={this.handleClearLog.bind(this)}
-                            stateDiffs={this.state.stateDiff}
-                          />
-                          <TreeDiagram
-                            appState={
-                              this.state.appFilteredDOM.length === 0
-                                ? this.state.appState
-                                : this.state.appFilteredDOM
-                            }
-                            handleMouseOver={this.handleMouseOver.bind(this)}
-                            handleFilter={this.handleFilter.bind(this)}
-                          />
-                          <StatePropsBox nodeData={this.state.nodeData} />
-                        </div>
-                      )}
+                  <div class='reactTab'>
+                    <StateContainer
+                      clearLog={this.handleClearLog.bind(this)}
+                      stateDiffs={this.state.stateDiff}
+                    />
+                    <TreeDiagram
+                      appState={
+                        this.state.appFilteredDOM.length === 0
+                          ? this.state.appState
+                          : this.state.appFilteredDOM
+                      }
+                      handleMouseOver={this.handleMouseOver.bind(this)}
+                      handleFilter={this.handleFilter.bind(this)}
+                    />
+                    <StatePropsBox nodeData={this.state.nodeData} />
                   </div>
                 )}
             </div>
-          </div>
-        }
+          )}
       </div>
     );
   }
