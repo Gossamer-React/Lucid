@@ -4,6 +4,7 @@ import GraphQLSchema from '../components/GraphQLSchema';
 import styles from '../../public/graphql.css';
 
 const GraphQLContainer = ({ logs, schema, log }) => {
+  console.log('GraphQL Container');
   return (
     <div>
       {logs.length !== 0 ? (
