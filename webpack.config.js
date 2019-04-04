@@ -1,10 +1,14 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: './src/devtools.js',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'webpack-bundle.js'
+    filename: 'webpack-bundle.js',
+    publicPath: ''
   },
   module: {
     rules: [
@@ -15,7 +19,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/react', ['@babel/env', {modules: false}]]
+              presets: ['@babel/react', ['@babel/env', { modules: false }]]
             }
           }
         ]
@@ -29,9 +33,16 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, '.'),
-    port: 3001,
-    open: true,
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'devtools.html',
+      template: 'devtools.html',
+      chunksSortMode: 'dependency',
+      inject: 'head'
+    })
+  ],
+  optimization: {
+    minimizer: [new TerserPlugin()],
+    nodeEnv: 'production'
   }
 }
