@@ -6,7 +6,7 @@
   "author": "Gossamer",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --mode production --json > stats.json",
+    "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development",
     "test": "jest"
   },
