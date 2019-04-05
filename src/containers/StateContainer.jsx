@@ -2,6 +2,12 @@ import React from 'react';
 import ReactJson from 'react-json-view';
 import styles from '../../public/stateContainer.css';
 
+const lengthsAreEqual = (prevProps, nextProps) => {
+  if (prevProps.stateDiffs.length === nextProps.stateDiffs.length) return true;
+
+  return false;
+};
+
 const StateContainer = ({ stateDiffs, clearLog }) => {
   console.log('StateContainer');
   return (
@@ -44,4 +50,4 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
   );
 };
 
-export default StateContainer;
+export default React.memo(StateContainer, lengthsAreEqual);
