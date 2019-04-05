@@ -9,7 +9,6 @@ const lengthsAreEqual = (prevProps, nextProps) => {
 };
 
 const StateContainer = ({ stateDiffs, clearLog }) => {
-  console.log('StateContainer');
   return (
     <div id='stateDiff-container'>
       <div id='state-header'>
