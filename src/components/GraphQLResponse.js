@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
 
-const GraphQLResponse = ({ logs, log }) => {
-
-  let response = log === null ? logs[logs.length - 1].res : log.res;
+const GraphQLResponse = (props) => {
 
   return (
     <div id='graphql-res' >
-      {logs.length !== 0
+      {props.log
         ?
         <div className="graphql">
           <p className='graphql-p'><h2>Response:</h2></p>
           <span className='graphql-span'>
             <ReactJson
-              src={response}
+              src={props.log.res}
               name={null}
               iconStyle='triangle'
               indentWidth={1}

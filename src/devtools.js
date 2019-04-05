@@ -78,7 +78,7 @@ class App extends Component {
               } else {
                 const parsedResponseBody = JSON.parse(responseBody);
                 log.res = parsedResponseBody;
-                appState.setState({ logs: [...appState.state.logs, log] });
+                appState.setState({ logs: [...appState.state.logs, log], logView: log });
               }
             });
           }
@@ -122,7 +122,7 @@ class App extends Component {
   }
 
   // * Handles the tab click for tree and req/res window
-  handleWindowChange  = (target) => {
+  handleWindowChange = (target) => {
     if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
       document.querySelector('#reactbtn').classList.add('active');
@@ -194,7 +194,7 @@ class App extends Component {
   render() {
     return (
       <div id='app-container'>
-        <AppNav handleWindowChange = {this.handleWindowChange}/>
+        <AppNav handleWindowChange={this.handleWindowChange} />
         {/* This checks which window the user has click on. 
               They can click either React Tab  (to see the state tree) or GraphQL tab (to see the 
               request/reponse from their httprequest) */}
@@ -206,7 +206,6 @@ class App extends Component {
               logChange={this.handleLogChange.bind(this)}
             />
             <GraphQLContainer
-              logs={this.state.logs}
               schema={this.state.schema}
               log={this.state.logView}
             />

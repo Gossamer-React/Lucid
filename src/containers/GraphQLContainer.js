@@ -3,13 +3,12 @@ import GraphQLResponse from '../components/GraphQLResponse';
 import GraphQLSchema from '../components/GraphQLSchema';
 import styles from '../../public/graphql.css';
 
-const GraphQLContainer = ({ logs, schema, log }) => {
-  console.log('GraphQL Container');
+const GraphQLContainer = ({ schema, log }) => {
   return (
     <div>
-      {logs.length !== 0 ? (
+      {log ? (
         <div id='graphql-container'>
-          <GraphQLResponse logs={logs} log={log} />
+          <GraphQLResponse log={log} />
           <GraphQLSchema schema={schema} />
         </div>
       ) : (
