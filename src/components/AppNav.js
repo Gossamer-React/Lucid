@@ -1,7 +1,8 @@
 import React from 'react';
 import '../../public/app_nav.css';
 
-const appNav = () => {
+const appNav = (props) => {
+  console.log('appNav');
   return (
     <div id='window-nav'>
       <img id='logo' src='./hexagonFAT.png' alt='devtool logo' />
@@ -29,4 +30,4 @@ const appNav = () => {
   );
 };
 
-export default appNav;
+export default React.memo(appNav);

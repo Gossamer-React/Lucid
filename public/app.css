@@ -18,6 +18,7 @@ h2{
 
 #app-container{
   display: flex;
+  flex-flow: column;
   padding: 10px;
   max-height: 95%;
 }
