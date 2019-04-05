@@ -1,6 +1,12 @@
 import React from 'react';
 import Log from './../components/Log/Log.jsx';
 
+const lengthsAreEqual = (prevProps, nextProps) => {
+  if (prevProps.logs.length === nextProps.logs.length) return true;
+
+  return false;
+};
+
 const LogContainer = props => {
   let logs = props.logs.map((log, i) => {
     let text = JSON.parse(log.req.postData.text);
@@ -17,19 +23,28 @@ const LogContainer = props => {
   });
 
   logs.reverse();
+
   return (
-    <div>
+    <React.Fragment>
       {logs.length > 0 ? (
         <div id='log-container'>
           <div id='log-header'>
             <h2>Request Log</h2>
-            <button className='appButton' data-log='req-log' onClick={(e) => { props.clearLog(e); }}>Clear</button>
+            <button
+              className='appButton'
+              data-log='req-log'
+              onClick={e => {
+                props.clearLog(e);
+              }}
+            >
+              Clear
+            </button>
           </div>
           <div id='logs'>{logs}</div>
         </div>
-      ) : ('')}
-    </div>
+      ) : null}
+    </React.Fragment>
   );
 };
 
-export default LogContainer;
+export default React.memo(LogContainer, lengthsAreEqual);
