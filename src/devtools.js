@@ -1,15 +1,15 @@
+// * Dependencies
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { introspectionQuery } from 'graphql';
-import LogContainer from './containers/LogContainer.jsx';
-import styles from './../public/app.css';
-import GraphQLContainer from './containers/GraphQLContainer';
-import StateContainer from './containers/StateContainer.jsx';
-import TreeDiagram from './components/TreeDiagram.jsx';
 import recurseDiff from './stateDiff';
-import StatePropsBox from './components/StatePropsBox';
 import filter from './filterDOM';
+// * Components
 import AppNav from './components/AppNav';
+import GraphQLTab from './containers/GraphQLTab';
+import ReactTab from './containers/ReactTab';
+// * CSS
+import styles from './../public/app.css';
 
 class App extends Component {
   constructor() {
@@ -63,7 +63,7 @@ class App extends Component {
     });
 
     //* Leverage Javascript API for WebExtensions to access browser network tab and log req/res objects in state log array
-    chrome.devtools.network.onRequestFinished.addListener(function (httpReq) {
+    chrome.devtools.network.onRequestFinished.addListener(function(httpReq) {
       if (httpReq.request.postData !== undefined) {
         let reqBody = JSON.parse(httpReq.request.postData.text);
 
@@ -78,7 +78,10 @@ class App extends Component {
               } else {
                 const parsedResponseBody = JSON.parse(responseBody);
                 log.res = parsedResponseBody;
-                appState.setState({ logs: [...appState.state.logs, log], logView: log });
+                appState.setState({
+                  logs: [...appState.state.logs, log],
+                  logView: log
+                });
               }
             });
           }
@@ -122,7 +125,7 @@ class App extends Component {
   }
 
   // * Handles the tab click for tree and req/res window
-  handleWindowChange = (target) => {
+  handleWindowChange = target => {
     if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
       document.querySelector('#reactbtn').classList.add('active');
@@ -135,10 +138,10 @@ class App extends Component {
       document.querySelector('#reactbtn').classList.remove('active');
       document.querySelector('#graphqlbtn').classList.add('active');
     }
-  }
+  };
 
   // * Handles the filter for the component tree
-  handleFilter(e, arr) {
+  handleFilter = (e, arr) => {
     if (e.target.classList.contains('toggleOn')) {
       e.target.classList.remove('toggleOn');
     } else {
@@ -168,28 +171,28 @@ class App extends Component {
   }
 
   //* handle data coming back from mouse hover in tree diagram
-  handleMouseOver(data) {
+  handleMouseOver = (data) => {
     this.setState({
       nodeData: data
     });
   }
 
   // * handles the clearing of both the  request log and diff log
-  handleClearLog(e) {
+  handleClearLog = e => {
     const data = e.target.dataset.log;
     if (data === 'req-log') {
       this.setState({ logs: [] });
     } else {
       this.setState({ stateDiff: [] });
     }
-  }
+  };
 
   // * handles the change of a log
-  handleLogChange(reqId) {
+  handleLogChange = reqId => {
     let req = this.state.logs[reqId];
     req.id = reqId;
     this.setState({ logView: req });
-  }
+  };
 
   render() {
     return (
@@ -199,46 +202,30 @@ class App extends Component {
               They can click either React Tab  (to see the state tree) or GraphQL tab (to see the 
               request/reponse from their httprequest) */}
         {this.state.window === 'Graphql' ? (
-          <div class='graphQLTab'>
-            <LogContainer
-              logs={this.state.logs}
-              clearLog={this.handleClearLog.bind(this)}
-              logChange={this.handleLogChange.bind(this)}
-            />
-            <GraphQLContainer
-              schema={this.state.schema}
-              log={this.state.logView}
-            />
-          </div>
+          <GraphQLTab
+            logs={this.state.logs}
+            clearLog={this.handleClearLog}
+            logChange={this.handleLogChange}
+            schema={this.state.schema}
+            log={this.state.logView}
+            tab={this.state.window}
+          />
         ) : (
-            //* If this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render Tree
-            <div>
-              {this.state.appState.length === 0 ? (
-                <div id='reactLoader'>
-                  <img src='./lucidlogo-card-transparent.png' alt='devtool logo' />
-                  <h1>Please trigger a setState() to see the React Component Tree/State Log.</h1>
-                  <p>Note: Lucid requires React Devtools to run and works best on local apps using React v16+ in dev mode</p>
-                </div>
-              ) : (
-                  <div class='reactTab'>
-                    <StateContainer
-                      clearLog={this.handleClearLog.bind(this)}
-                      stateDiffs={this.state.stateDiff}
-                    />
-                    <TreeDiagram
-                      appState={
-                        this.state.appFilteredDOM.length === 0
-                          ? this.state.appState
-                          : this.state.appFilteredDOM
-                      }
-                      handleMouseOver={this.handleMouseOver.bind(this)}
-                      handleFilter={this.handleFilter.bind(this)}
-                    />
-                    <StatePropsBox nodeData={this.state.nodeData} />
-                  </div>
-                )}
-            </div>
-          )}
+          <ReactTab
+            appStateLength={this.state.appState.length}
+            clearLog={this.handleClearLog}
+            stateDiffs={this.state.stateDiff}
+            appState={
+              this.state.appFilteredDOM.length === 0
+                ? this.state.appState
+                : this.state.appFilteredDOM
+            }
+            handleMouseOver={this.handleMouseOver}
+            handleFilter={this.handleFilter}
+            nodeData={this.state.nodeData}
+            tab={this.state.window}
+          />
+        )}
       </div>
     );
   }

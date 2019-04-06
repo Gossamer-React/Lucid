@@ -95,6 +95,17 @@ button{
   color: white;
 }
 
+/* * for window */
+.show{
+  visibility: visible;
+  z-index: 1; 
+}
+
+.hide{
+  visibility: hidden;
+  z-index: -1; 
+}
+
 /* for different screen sizes */
 @media screen and (max-width: 600px) {
   .reactTab {
