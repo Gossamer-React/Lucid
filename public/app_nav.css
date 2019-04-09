@@ -1,10 +1,4 @@
 /* For window  */
-#window{
-  display: flex;
-  flex-flow: column;
-  width: 100%;
-  margin: 0px;
-}
 #window-nav {
   display: flex;
   justify-content: space-evenly;
