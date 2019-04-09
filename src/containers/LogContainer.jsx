@@ -1,5 +1,5 @@
 import React from 'react';
-import Log from './../components/Log/Log.jsx';
+import Log from './../components/LogComponent/Log.jsx';
 
 const lengthsAreEqual = (prevProps, nextProps) => {
   if (prevProps.logs.length === nextProps.logs.length) return true;
