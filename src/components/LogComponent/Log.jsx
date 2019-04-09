@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
 import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
+import styles from './Log.css';
 
 const Log = props => {
   return (

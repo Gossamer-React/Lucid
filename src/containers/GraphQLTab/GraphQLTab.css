@@ -19,48 +19,6 @@
   display: none!important;
 }
 
-/* * Checking what code isn't being used */
-/* *for log in the graphql tab */
-#log-container{
-  grid-area: log-container;
-  max-height: 400px;
-  height: 400px;
-  margin-bottom: 30px;
-} 
-
-#log-header{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-#logs{
-  overflow-y: scroll;
-  max-height: 95%;
-}
-.log{
-  overflow-x: scroll;
-  padding: 15px;
-  margin: 15px;
-  background-color: rgba(255, 255, 255);
-  /* transition: box-shadow .1s; */
-  cursor: pointer;
-  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
-  0 5px 15px 0 rgba(0,0,0,0.08);
-  margin-bottom: 15px;
-}
-
-.log-p{
-  margin: 5px 0px;
-}
-
-.log-span{
-  font-size: 1.2em;
-  font-weight: 500;
-  letter-spacing: 0.50px;
-  margin: 5px 0px;
-}
-
 /* *for responsive use */
 @media screen and (min-width: 760px) {
   #graphQLTab{
@@ -71,12 +29,6 @@
     max-height: 1200px;
     overflow-y: scroll;
   }
-  #log-container{
-    width: 100%;
-    max-height: 400px;
-    height: 400px;
-    margin: 0 auto 30px auto;
-  } 
 }
 
 
