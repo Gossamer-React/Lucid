@@ -6,7 +6,7 @@ import recurseDiff from './stateDiff';
 import filter from './filterDOM';
 // * Components
 import AppNav from './components/AppNav';
-import GraphQLTab from './containers/GraphQLTab';
+import GraphQLTab from './containers/GraphQLTab/GraphQLTab';
 import ReactTab from './containers/ReactTab';
 // * CSS
 import styles from './../public/app.css';
@@ -128,6 +128,8 @@ class App extends Component {
   handleWindowChange = target => {
     if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
+      document.querySelector('#react').classList.remove('hide');
+      document.querySelector('#graphQLTab').classList.add('hide');
       document.querySelector('#reactbtn').classList.add('active');
       document.querySelector('#graphqlbtn').classList.remove('active');
     } else if (
@@ -135,6 +137,8 @@ class App extends Component {
       target.dataset.btn === 'Graphql'
     ) {
       this.setState({ window: 'Graphql' });
+      document.querySelector('#react').classList.add('hide');
+      document.querySelector('#graphQLTab').classList.remove('hide');
       document.querySelector('#reactbtn').classList.remove('active');
       document.querySelector('#graphqlbtn').classList.add('active');
     }
@@ -168,14 +172,14 @@ class App extends Component {
         appFilteredDOM: result
       });
     }
-  }
+  };
 
   //* handle data coming back from mouse hover in tree diagram
-  handleMouseOver = (data) => {
+  handleMouseOver = data => {
     this.setState({
       nodeData: data
     });
-  }
+  };
 
   // * handles the clearing of both the  request log and diff log
   handleClearLog = e => {
@@ -198,34 +202,28 @@ class App extends Component {
     return (
       <div id='app-container'>
         <AppNav handleWindowChange={this.handleWindowChange} />
-        {/* This checks which window the user has click on. 
-              They can click either React Tab  (to see the state tree) or GraphQL tab (to see the 
-              request/reponse from their httprequest) */}
-        {this.state.window === 'Graphql' ? (
-          <GraphQLTab
-            logs={this.state.logs}
-            clearLog={this.handleClearLog}
-            logChange={this.handleLogChange}
-            schema={this.state.schema}
-            log={this.state.logView}
-            tab={this.state.window}
-          />
-        ) : (
-          <ReactTab
-            appStateLength={this.state.appState.length}
-            clearLog={this.handleClearLog}
-            stateDiffs={this.state.stateDiff}
-            appState={
-              this.state.appFilteredDOM.length === 0
-                ? this.state.appState
-                : this.state.appFilteredDOM
-            }
-            handleMouseOver={this.handleMouseOver}
-            handleFilter={this.handleFilter}
-            nodeData={this.state.nodeData}
-            tab={this.state.window}
-          />
-        )}
+        <GraphQLTab
+          clearLog={this.handleClearLog}
+          logs={this.state.logs}
+          logChange={this.handleLogChange}
+          log={this.state.logView}
+          schema={this.state.schema}
+          tab={this.state.window}
+        />
+        <ReactTab
+          appState={
+            this.state.appFilteredDOM.length === 0
+              ? this.state.appState
+              : this.state.appFilteredDOM
+          }
+          appStateLength={this.state.appState.length}
+          clearLog={this.handleClearLog}
+          handleMouseOver={this.handleMouseOver}
+          handleFilter={this.handleFilter}
+          nodeData={this.state.nodeData}
+          stateDiffs={this.state.stateDiff}
+          tab={this.state.window}
+        />
       </div>
     );
   }

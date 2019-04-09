@@ -6,17 +6,17 @@ import StateContainer from './StateContainer.jsx';
 import TreeDiagram from './../components/TreeDiagram.jsx';
 
 const tabChange = (prevProps, nextProps) => {
-  if (prevProps.tab === 'React') return false;
+  if (nextProps.tab !== 'React') return true;
 
-  return true;
+  return false;
 };
 
 const reactTab = (props) => {
   return (
     //* If this.state.appState has not been populated by reactTraverser.js, show a message asking users to setState(), else render Tree
-    <div>
+    <div id='react' className='hide'>
       {props.appStateLength === 0 ? (
-        <div id='reactLoader' class={props.tab === 'React' ? 'show' : 'hide'}>
+        <div id='reactLoader'>
           <img
             src='./lucidlogo-card-transparent.png'
             alt='devtool logo'
