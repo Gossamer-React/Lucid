@@ -23,6 +23,7 @@ h2{
   max-height: 95%;
 }
 
+/* * Sepreate */
 #reactLoader {
   margin: 30px;
   text-align: center
@@ -96,14 +97,8 @@ button{
 }
 
 /* * for window */
-.show{
-  visibility: visible;
-  z-index: 1; 
-}
-
 .hide{
-  visibility: hidden;
-  z-index: -1; 
+  display: none!important;
 }
 
 /* for different screen sizes */
