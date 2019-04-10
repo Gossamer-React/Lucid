@@ -1,6 +1,7 @@
 import React from 'react';
 import { buildClientSchema, printSchema } from 'graphql';
 import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
+import styles from './GraphQLSchema.css';
 
 const GraphQLSchema = ({ schema }) => {
 
@@ -12,7 +13,7 @@ const GraphQLSchema = ({ schema }) => {
     return (
       <div id='graphql-schema'>
         <div>
-          <p className='graphql-p'><h2>Schema:</h2></p>
+          <h2 className='graphql-heading'>Schema:</h2>
           <span className='graphql-span'>
             <GraphqlCodeBlock
               className='GraphqlCodeBlock'

@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Log from '../Log/Log.jsx';
+import Log from './../Log.jsx';
 
 // If query being made is from an Apollo server
 // Test to make sure that comopnent does not change unexpectdly.

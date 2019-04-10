@@ -7,11 +7,9 @@ class Tool extends React.Component {
             toggle: false,
             hoverNodeData: []
         }
-        this.handleMouseOver = this.handleMouseOver.bind(this);
-        this.handleMouseOut = this.handleMouseOut.bind(this);
     }
 
-    handleMouseOver(data) {
+    handleMouseOver = (data) => {
         let timeout; 
         timeout = setTimeout(() => {
             this.setState({
@@ -19,7 +17,7 @@ class Tool extends React.Component {
             // hoverNodeData: data
         })}, 500)
     }
-    handleMouseOut() {
+    handleMouseOut = () => {
         this.setState({
             toggle: false
         })
@@ -30,7 +28,7 @@ class Tool extends React.Component {
         const propObj = this.props.nodeData.Props;
         const nodeData = this.props.nodeData
         return (
-            <div className='tool-tip' onMouseOut={() => this.handleMouseOut()} onMouseOver={() => this.props.handleMouseOver(this.props.nodeData)} >
+            <div className='tool-tip' onMouseOut={this.handleMouseOut} onMouseOver={() => this.props.handleMouseOver(this.props.nodeData)} >
                 <h4 className='tree-names'>{this.props.nodeData.name}</h4>
             </div>
         );

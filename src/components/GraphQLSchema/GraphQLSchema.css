@@ -1,0 +1,13 @@
+#graphql-schema {
+  box-sizing: border-box;
+  background-color: white;
+  box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
+  0 5px 15px 0 rgba(0,0,0,0.08);
+  padding: 20px 25px;
+  overflow-y: scroll;
+  max-height: 600px;
+}
+
+.graphql-heading {
+  margin-bottom: 10px; 
+}

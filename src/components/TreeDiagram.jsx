@@ -12,7 +12,6 @@ class TreeDiagram extends React.Component {
       foreignObjectWrapper: {x: 8, y: 4},
       nodeSize: {x: 95, y: 85},
     };
-    this.handleFlip = this.handleFlip.bind(this);
   }
 
 
@@ -28,7 +27,7 @@ class TreeDiagram extends React.Component {
     });
   }
 
-  handleFlip() {
+  handleFlip = () => {
     const dimensions = this.treeContainer.getBoundingClientRect();
     if(this.state.orientation === 'vertical') {
       this.setState({
@@ -87,7 +86,7 @@ class TreeDiagram extends React.Component {
     return (
       <div id="treeWrapper" ref={tc => (this.treeContainer = tc)}>
         <div id='treeButtons'>
-          <button onClick={() => {this.handleFlip()}}> {this.state.orientation[0].toUpperCase() + this.state.orientation.slice(1)} </button>
+          <button onClick={this.handleFlip}> {this.state.orientation[0].toUpperCase() + this.state.orientation.slice(1)} </button>
           <button onClick={(e) => { this.props.handleFilter(e, filterComponents.reduxComponents) }}>Filter Redux</button>
           <button onClick={(e) => { this.props.handleFilter(e, filterComponents.reactRouterComponents) }}>Filter React-Router</button>
           <button onClick={(e) => { this.props.handleFilter(e, filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>

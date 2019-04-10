@@ -1,0 +1,25 @@
+/* *for log in the graphql tab */
+#log-container{
+  grid-area: log-container;
+  height: 500px;
+  margin-bottom: 30px;
+} 
+
+#log-header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+#logs{
+  overflow-y: scroll;
+  max-height: 95%;
+}
+
+/* *for responsive use */
+@media screen and (min-width: 760px) {
+  #log-container{
+    width: 100%;
+    margin: 0 auto 30px auto;
+  } 
+}

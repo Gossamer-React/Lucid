@@ -1,0 +1,31 @@
+/* For window  */
+#window-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 5px 0px 20px 0px;
+  text-align: center;
+  padding: 0px 15px;
+}
+
+.window-btn{
+  width: 25%;
+  height: 35px;
+  box-sizing: border-box;
+  color: #555;
+  background-color: Transparent;
+  font-size: 15px;
+  padding: 5px 0;
+}
+button:focus{
+  outline: none;
+}
+button:hover{
+  background-color: #555;
+  color: white;
+}
+.active{
+  background-color: #555;
+  border: none;
+  color: white;
+}

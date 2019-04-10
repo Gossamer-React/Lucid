@@ -1,0 +1,34 @@
+#graphQLTab{
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 3fr 7fr;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    'log-container'
+    'graphql';
+  padding: 10px;
+}
+
+#graphql-container {
+  grid-area: graphql;
+  margin-right: 0px;
+  min-height: 600px;
+}
+/* * To hide GraphQLTab */
+.hide{
+  display: none!important;
+}
+
+/* *for responsive use */
+@media screen and (min-width: 760px) {
+  #graphQLTab{
+    grid-template-rows: none;
+    grid-template-columns: 3fr 7fr;
+    grid-template-areas:
+      'log-container graphql';
+    max-height: 1200px;
+    overflow-y: scroll;
+  }
+}
+
+
