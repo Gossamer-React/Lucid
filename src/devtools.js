@@ -5,7 +5,7 @@ import { introspectionQuery } from 'graphql';
 import recurseDiff from './stateDiff';
 import filter from './filterDOM';
 // * Components
-import AppNav from './components/AppNav';
+import AppNav from './components/AppNav/AppNav';
 import GraphQLTab from './containers/GraphQLTab/GraphQLTab';
 import ReactTab from './containers/ReactTab';
 // * CSS
