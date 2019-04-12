@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../public/app_nav.css';
+import './app_nav.css';
 
 const appNav = (props) => {
   return (
