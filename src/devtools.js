@@ -128,7 +128,6 @@ class App extends Component {
   handleWindowChange = target => {
     if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
-      document.querySelector('#graphQLTab').classList.add('hide');
       document.querySelector('#reactbtn').classList.add('active');
       document.querySelector('#graphqlbtn').classList.remove('active');
     } else if (
@@ -136,7 +135,6 @@ class App extends Component {
       target.dataset.btn === 'Graphql'
     ) {
       this.setState({ window: 'Graphql' });
-      document.querySelector('#graphQLTab').classList.remove('hide');
       document.querySelector('#reactbtn').classList.remove('active');
       document.querySelector('#graphqlbtn').classList.add('active');
     }

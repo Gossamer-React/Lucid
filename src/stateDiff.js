@@ -43,7 +43,6 @@ function recurseDiff() {
 
         }
       }
-      console.log('trverse', diff);
       return diff;
     }
   }
