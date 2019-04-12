@@ -24,21 +24,6 @@ h2{
 }
 
 /* * Sepreate */
-#reactLoader {
-  margin: 30px;
-  text-align: center
-}
-
-.reactTab {
-  padding: 10px;
-  display: grid;
-  grid-template-rows: 1fr 3fr;
-  grid-template-columns: 3fr 7fr;
-  grid-template-areas:
-    'sp-box tree'
-    'diff tree';
-}
-
 .state-prop-display {
   grid-area: sp-box;
   background-color: #333;
@@ -99,18 +84,4 @@ button{
 /* * for window */
 .hide{
   display: none!important;
-}
-
-/* for different screen sizes */
-@media screen and (max-width: 600px) {
-  .reactTab {
-    display: grid;
-    grid-template-rows: 4fr 3fr 4fr;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'diff'
-      'sp-box'
-      'tree';
-    max-height: 1200px;
-  }
 }
