@@ -1,4 +1,5 @@
 import React from 'react'; 
+import style from './StatePropsBox.css';
 
 const StatePropsBox = (props) => {
     const stateObj = props.nodeData.State; 

@@ -6,7 +6,7 @@ const appNav = (props) => {
     <div id='window-nav'>
       <img id='logo' src='./hexagonFAT.png' alt='devtool logo' />
       <button
-        className='window-btn active'
+        className={props.tab === 'Graphql' ? 'window-btn active' : 'window-btn'}
         id='graphqlbtn'
         data-btn='Graphql'
         onClick={e => {
@@ -16,7 +16,7 @@ const appNav = (props) => {
         GraphQL
       </button>
       <button
-        className='window-btn'
+        className={props.tab === 'React' ? 'window-btn active' : 'window-btn'}
         id='reactbtn'
         data-btn='React'
         onClick={e => {

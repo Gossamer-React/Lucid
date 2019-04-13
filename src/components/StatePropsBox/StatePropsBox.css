@@ -1,0 +1,10 @@
+.state-prop-display {
+  grid-area: sp-box;
+  background-color: #333;
+  color: white;
+  max-height: 150px;
+  overflow-y: scroll;
+  border: 1px solid black; 
+  padding: 5px 5px; 
+  margin-right: 10px;
+}

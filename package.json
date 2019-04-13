@@ -6,7 +6,7 @@
   "author": "Gossamer",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack",
     "client": "webpack-dev-server --mode development",
     "test": "jest"
   },
@@ -37,7 +37,7 @@
     "@babel/register": "^7.0.0",
     "autoprefixer": "^9.5.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.7.1",
     "babel-loader": "^7.1.5",
     "css-loader": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
@@ -48,7 +48,7 @@
     "react-test-renderer": "^16.7.0",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.2.3",
-    "webpack": "^4.28.1",
+    "webpack": "^4.30.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
   }

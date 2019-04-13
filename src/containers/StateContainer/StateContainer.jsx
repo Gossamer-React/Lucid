@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactJson from 'react-json-view';
-import styles from '../../public/stateContainer.css';
+import styles from './stateContainer.css';
 
 const lengthsAreEqual = (prevProps, nextProps) => {
   if (prevProps.stateDiffs.length === nextProps.stateDiffs.length) return true;
@@ -44,7 +44,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
             </span>
           </div>
         );
-      })}
+      }).reverse()}
     </div>
   );
 };

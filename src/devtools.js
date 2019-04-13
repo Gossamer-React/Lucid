@@ -126,19 +126,10 @@ class App extends Component {
 
   // * Handles the tab click for tree and req/res window
   handleWindowChange = target => {
-    if (this.state.window === 'Graphql' && target.dataset.btn === 'React') {
+    if (target.dataset.btn === 'React') {
       this.setState({ window: 'React' });
-      document.querySelector('#graphQLTab').classList.add('hide');
-      document.querySelector('#reactbtn').classList.add('active');
-      document.querySelector('#graphqlbtn').classList.remove('active');
-    } else if (
-      this.state.window === 'React' &&
-      target.dataset.btn === 'Graphql'
-    ) {
+    } else {
       this.setState({ window: 'Graphql' });
-      document.querySelector('#graphQLTab').classList.remove('hide');
-      document.querySelector('#reactbtn').classList.remove('active');
-      document.querySelector('#graphqlbtn').classList.add('active');
     }
   };
 
@@ -182,7 +173,6 @@ class App extends Component {
     if (data === 'req-log') {
       this.setState({ logs: [] });
     } else {
-      console.log('APPREACT', this.state.appReactDOM);
       this.setState({ stateDiff: [] });
     }
   };
@@ -197,7 +187,10 @@ class App extends Component {
   render() {
     return (
       <div id='app-container'>
-        <AppNav handleWindowChange={this.handleWindowChange} />
+        <AppNav
+          handleWindowChange={this.handleWindowChange}
+          tab={this.state.window}
+        />
         <GraphQLTab
           clearLog={this.handleClearLog}
           logs={this.state.logs}

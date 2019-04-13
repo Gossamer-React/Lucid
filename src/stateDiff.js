@@ -4,6 +4,7 @@ function recurseDiff() {
 
   return function traverseDiff(olds, news, path = '') {
     let diff = intialDiff.slice();
+
     //if both old and new node are (real) objects/arrays with items to iterate over
     if (
       (typeof olds === 'object' && olds !== null) &&
@@ -29,6 +30,7 @@ function recurseDiff() {
             //   breadcrumb = olds.name + '>>';
             // recurse on the item
             // recurseDiff(olds[key], news[key], path += breadcrumb)
+    
             diff.push(...traverseDiff(olds[key], news[key], olds.name));
           } else {
             // push the old vs new items into the diff array
@@ -43,9 +45,8 @@ function recurseDiff() {
 
         }
       }
-      console.log('trverse', diff);
-      return diff;
     }
+    return diff;
   }
 }
 
