@@ -5,11 +5,11 @@ import GraphQLSchema from '../../components/GraphQLSchema/GraphQLSchema';
 import styles from './GraphQLTab.css';
 
 const tabChange = (prevProps, nextProps) => {
-  if (prevProps.tab === 'React' && nextProps.tab === 'Graphql'){
+  if (prevProps.tab === 'React' && nextProps.tab === 'Graphql') {
     return false;
-  }else if(prevProps.tab === 'React' && nextProps.tab === 'React'){
+  } else if (prevProps.tab === 'React' && nextProps.tab === 'React') {
     return true;
-  }else if (prevProps.tab === 'Graphql' && nextProps.tab === 'React'){
+  } else if (prevProps.tab === 'Graphql' && nextProps.tab === 'React') {
     return false;
   }
 };
@@ -22,16 +22,14 @@ const GraphQLTab = props => {
         clearLog={props.clearLog}
         logChange={props.logChange}
       />
-      
+
       {/* Checks to see it there was a request made. */}
       {props.log ? (
         <div id='graphql-container'>
           <GraphQLResponse log={props.log} />
           <GraphQLSchema schema={props.schema} />
         </div>
-      ) : (
-          <h2>No requests have been made yet.</h2>
-        )}
+      ) : null}
     </div>
   );
 };

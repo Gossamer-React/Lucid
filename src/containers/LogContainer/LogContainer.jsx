@@ -43,7 +43,7 @@ const LogContainer = props => {
           </div>
           <div id='logs'>{logs}</div>
         </div>
-      ) : null}
+      ) : <h2>No requests have been made yet.</h2>}
     </React.Fragment>
   );
 };
