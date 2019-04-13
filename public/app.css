@@ -24,22 +24,6 @@ h2{
 }
 
 /* * Sepreate */
-.state-prop-display {
-  grid-area: sp-box;
-  background-color: #333;
-  color: white;
-  max-height: 150px;
-  overflow-y: scroll;
-  border: 1px solid black; 
-  padding: 5px 5px; 
-  margin-right: 10px;
-}
-
-#logo{
-  width: 50px;
-  height: 50px;
-}
-
 #treeWrapper{
   grid-area: tree;
   height: 700px;
