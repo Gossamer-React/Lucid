@@ -44,7 +44,7 @@ const StateContainer = ({ stateDiffs, clearLog }) => {
             </span>
           </div>
         );
-      })}
+      }).reverse()}
     </div>
   );
 };

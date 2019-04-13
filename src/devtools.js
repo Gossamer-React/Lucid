@@ -180,7 +180,6 @@ class App extends Component {
     if (data === 'req-log') {
       this.setState({ logs: [] });
     } else {
-      console.log('APPREACT', this.state.appReactDOM);
       this.setState({ stateDiff: [] });
     }
   };

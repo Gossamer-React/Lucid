@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ReactTab.css';
 // * Components
 import StatePropsBox from './../../components/StatePropsBox';
-import StateContainer from './../StateContainer.jsx';
+import StateContainer from './../StateContainer/StateContainer';
 import TreeDiagram from './../../components/TreeDiagram.jsx';
 
 const tabChange = (prevProps, nextProps) => {
