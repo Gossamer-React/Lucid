@@ -1,7 +1,8 @@
 import React from 'react';
 import Tree from 'react-d3-tree';
-import Tool from './Tool';
-import filterComponents from '../filterComponents';
+import Tool from './../Tool/Tool';
+import filterComponents from '../../filterComponents';
+import styles from './TreeDiagram.css';
 
 class TreeDiagram extends React.Component {
   constructor(props) {
@@ -9,8 +10,8 @@ class TreeDiagram extends React.Component {
     this.state = {
       transition: null,
       orientation: 'vertical',
-      foreignObjectWrapper: {x: 8, y: 4},
-      nodeSize: {x: 95, y: 85},
+      foreignObjectWrapper: { x: 8, y: 4 },
+      nodeSize: { x: 95, y: 85 },
     };
   }
 
@@ -29,11 +30,11 @@ class TreeDiagram extends React.Component {
 
   handleFlip = () => {
     const dimensions = this.treeContainer.getBoundingClientRect();
-    if(this.state.orientation === 'vertical') {
+    if (this.state.orientation === 'vertical') {
       this.setState({
         orientation: 'horizontal',
-        foreignObjectWrapper: {x: 5, y: 8},
-        nodeSize: {x: 110, y:110},
+        foreignObjectWrapper: { x: 5, y: 8 },
+        nodeSize: { x: 110, y: 110 },
         translate: {
           x: dimensions.width / 8,
           y: dimensions.height / 2
@@ -42,15 +43,15 @@ class TreeDiagram extends React.Component {
     } else {
       this.setState({
         orientation: 'vertical',
-        foreignObjectWrapper: {x: 8, y: 4},
-        nodeSize: {x: 85, y: 85},
+        foreignObjectWrapper: { x: 8, y: 4 },
+        nodeSize: { x: 85, y: 85 },
         translate: {
           x: dimensions.width / 2,
           y: dimensions.height / 8
         }
       });
     }
-  }  
+  }
 
   render() {
     const styles = {
@@ -91,24 +92,20 @@ class TreeDiagram extends React.Component {
           <button onClick={(e) => { this.props.handleFilter(e, filterComponents.reactRouterComponents) }}>Filter React-Router</button>
           <button onClick={(e) => { this.props.handleFilter(e, filterComponents.apolloComponents) }}>Filter Apollo-GraphQL</button>
         </div>
-     
-        {this.props.appState.length !== 0 ? (
-          <Tree
-            data={this.props.appState}
-            nodeSize={this.state.nodeSize}
-            orientation={this.state.orientation}
-            styles={styles}
-            translate={this.state.translate}
-            separation={{ siblings: 1, nonSiblings: 1 }}
-            allowForeignObjects
-            nodeLabelComponent={{
-              render: <Tool handleMouseOver = {this.props.handleMouseOver} />,
-              foreignObjectWrapper: this.state.foreignObjectWrapper
-            }}
-          />
-        ) : (
-          <p> Tree Loading ... </p>
-        )}
+
+        <Tree
+          data={this.props.appState}
+          nodeSize={this.state.nodeSize}
+          orientation={this.state.orientation}
+          styles={styles}
+          translate={this.state.translate}
+          separation={{ siblings: 1, nonSiblings: 1 }}
+          allowForeignObjects
+          nodeLabelComponent={{
+            render: <Tool handleMouseOver={this.props.handleMouseOver} />,
+            foreignObjectWrapper: this.state.foreignObjectWrapper
+          }}
+        />
       </div>
     );
   }

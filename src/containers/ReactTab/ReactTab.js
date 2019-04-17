@@ -3,7 +3,7 @@ import styles from './ReactTab.css';
 // * Components
 import StatePropsBox from './../../components/StatePropsBox/StatePropsBox';
 import StateContainer from './../StateContainer/StateContainer.jsx';
-import TreeDiagram from './../../components/TreeDiagram.jsx';
+import TreeDiagram from './../../components/TreeDiagram/TreeDiagram.jsx';
 
 const tabChange = (prevProps, nextProps) => {
   if (prevProps.tab === 'Graphql' && nextProps.tab === 'React'){

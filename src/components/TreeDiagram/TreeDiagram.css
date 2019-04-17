@@ -1,0 +1,16 @@
+#treeWrapper{
+  grid-area: tree;
+  height: 700px;
+  padding: 10px;
+  margin-left: 10px;
+  font-family: 'Roboto';
+  font-size: .9em;
+  letter-spacing: 1.5px;
+}
+#treeButtons{
+  text-align: center;
+}
+.rd3t-tree-container{
+  margin-top: 15px;
+  height: 90%!important;
+}
