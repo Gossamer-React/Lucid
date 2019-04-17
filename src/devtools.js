@@ -9,7 +9,7 @@ import AppNav from './components/AppNav/AppNav';
 import GraphQLTab from './containers/GraphQLTab/GraphQLTab';
 import ReactTab from './containers/ReactTab/ReactTab';
 // * CSS
-import styles from './../public/app.css';
+import styles from './devtools.css';
 
 class App extends Component {
   constructor() {
