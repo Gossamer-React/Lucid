@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Log component displays proper information from Apollo server. 1`] = `
+exports[`<Log /> Log component displays proper information from Apollo server. 1`] = `
 <div
   className="log"
   onClick={[Function]}
