@@ -21,9 +21,7 @@ const LogContainer = props => {
         logChange={props.logChange}
       />
     );
-  });
-
-  logs.reverse();
+  }).reverse();
 
   return (
     <React.Fragment>

@@ -8,3 +8,6 @@
   padding: 5px 5px; 
   margin-right: 10px;
 }
+.pre-tag {
+  white-space: pre-wrap;
+}  

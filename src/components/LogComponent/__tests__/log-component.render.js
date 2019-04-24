@@ -4,9 +4,10 @@ import Log from './../Log.jsx';
 
 // If query being made is from an Apollo server
 // Test to make sure that comopnent does not change unexpectdly.
-test('Log component displays proper information from Apollo server.', () => {
-  const log = renderer.create(
-    <Log
+describe('<Log />', () => {
+  it('Log component displays proper information from Apollo server.', () => {
+    const log = renderer.create(
+      <Log
         key={0}
         operationName='Apollo-query'
         query={`mutation TodoMutation($title: string!) {
@@ -17,11 +18,12 @@ test('Log component displays proper information from Apollo server.', () => {
             __typename
           }
         }`}
-        variables={{"title": "laundry"}}
+        variables={{ title: 'laundry' }}
         logId='0'
       />
-  );
+    );
 
-  let logComponent = log.toJSON();
-  expect(logComponent).toMatchSnapshot();
+    let logComponent = log.toJSON();
+    expect(logComponent).toMatchSnapshot();
+  });
 });

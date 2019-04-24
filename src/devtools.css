@@ -23,29 +23,7 @@ h2{
   max-height: 95%;
 }
 
-/* * Sepreate */
-#treeWrapper{
-  grid-area: tree;
-  height: 700px;
-  padding: 10px;
-  margin-left: 10px;
-  font-family: 'Roboto';
-  font-size: .9em;
-  letter-spacing: 1.5px;
-}
-#treeButtons{
-  text-align: center;
-}
-
-.rd3t-tree-container{
-  margin-top: 15px;
-  height: 90%!important;
-}
-
-.pre-tag {
-  white-space: pre-wrap;
-}  
-
+/* *Buttons */
 button{
   font-size: 10px;
   text-transform: uppercase;

@@ -6,10 +6,10 @@ import getStateDiffs from './stateDiff';
 import filter from './filterDOM';
 // * Components
 import AppNav from './components/AppNav/AppNav';
-import GraphQLTab from './containers/GraphQLTab/GraphQLTab';
-import ReactTab from './containers/ReactTab/ReactTab';
+import GraphQLTab from './components/GraphQLTab/GraphQLTab';
+import ReactTab from './components/ReactTab/ReactTab';
 // * CSS
-import styles from './../public/app.css';
+import styles from './devtools.css';
 
 class App extends Component {
   constructor() {
