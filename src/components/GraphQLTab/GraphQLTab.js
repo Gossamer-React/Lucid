@@ -1,5 +1,5 @@
 import React from 'react';
-import LogContainer from './../LogContainer/LogContainer.jsx';
+import LogContainer from './../LogContainer/LogContainer';
 import GraphQLResponse from '../../components/GraphQLResponse/GraphQLResponse';
 import GraphQLSchema from '../../components/GraphQLSchema/GraphQLSchema';
 import styles from './GraphQLTab.css';
