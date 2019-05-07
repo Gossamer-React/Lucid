@@ -1,4 +1,3 @@
-// TODO: Keep working on diff. Make sure the initial diff array is empty on every call.
 function recurseDiff() {
   const intialDiff = [];
 
