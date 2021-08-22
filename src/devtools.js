@@ -1,7 +1,7 @@
 // * Dependencies
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { introspectionQuery } from 'graphql';
+import { getIntrospectionQuery } from 'graphql/utilities';
 import getStateDiffs from './stateDiff';
 import filter from './filterDOM';
 // * Components
@@ -98,7 +98,7 @@ class App extends Component {
       fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: introspectionQuery })
+        body: JSON.stringify({ query: getIntrospectionQuery })
       })
         .then(res => res.json())
         .then(json =>
