@@ -1,7 +1,7 @@
 // * Dependencies
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { buildClientSchema, getIntrospectionQuery, printSchema } from 'graphql/utilities';
+import { getIntrospectionQuery } from 'graphql/utilities';
 import getStateDiffs from './stateDiff';
 import filter from './filterDOM';
 // * Components

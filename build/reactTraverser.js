@@ -2,8 +2,7 @@ let timeout;
 let reactGlobalHook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 
 if (reactGlobalHook) {
-  const reactInstance =
-    reactGlobalHook._renderers[Object.keys(reactGlobalHook._renderers)[0]];
+  const reactInstance = reactGlobalHook.renderers.get(1);
   let virtualdom;
   var reactDOMArr = [];
 
