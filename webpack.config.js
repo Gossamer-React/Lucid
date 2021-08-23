@@ -39,7 +39,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'devtools.html',
       template: 'devtools.html',
-      chunksSortMode: 'dependency',
       inject: 'head'
     })
   ],

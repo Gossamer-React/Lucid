@@ -1,5 +1,5 @@
 import React from 'react';
-import { buildClientSchema, printSchema } from 'graphql';
+import { buildClientSchema, printSchema } from 'graphql/utilities';
 import { GraphqlCodeBlock } from 'graphql-syntax-highlighter-react';
 import styles from './GraphQLSchema.css';
 
