@@ -28,28 +28,28 @@
     "react-json-view": "^1.19.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
+    "@babel/core": "^7.15.8",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-env": "^7.15.8",
     "@babel/preset-flow": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@babel/register": "^7.15.3",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^9.8.8",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^27.0.6",
+    "babel-jest": "^27.2.5",
     "babel-loader": "^7.1.5",
     "css-loader": "^1.0.1",
     "html-webpack-plugin": "^5.3.2",
-    "jest": "^27.0.6",
+    "jest": "^27.2.5",
     "jest-css-modules-transform": "^2.5.0",
     "path": "^0.12.7",
     "postcss-loader": "^3.0.0",
     "react-test-renderer": "^16.14.0",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.2.3",
-    "webpack": "^5.51.1",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.0.0"
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.0",
+    "webpack-dev-server": "^4.3.1"
   }
 }
